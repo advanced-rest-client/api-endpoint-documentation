@@ -1,0 +1,597 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/elements/dom-if.html">
+<link rel="import" href="../polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../raml-aware/raml-aware.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../api-annotation-document/api-annotation-document.html">
+<link rel="import" href="../api-parameters-document/api-parameters-document.html">
+<link rel="import" href="../markdown-styles/markdown-styles.html">
+<link rel="import" href="../marked-element/marked-element.html">
+<dom-module id="api-endpoint-documentation">
+  <template>
+    <style include="markdown-styles"></style>
+    <style>
+    :host {
+      display: block;
+      @apply --arc-font-body1;
+      @apply --api-endpoint-documentation;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    h1 {
+      @apply --arc-font-headline;
+    }
+
+    marked-element {
+      margin: 12px 0;
+    }
+
+    .markdown-body {
+      margin-bottom: 28px;
+      color: rgba(0, 0, 0, 0.74);
+      @apply --arc-font-body1;
+    }
+
+    :host([narrow]) h1 {
+      font-size: 20px;
+      margin: 0;
+    }
+
+    .url-area {
+      @apply --arc-font-code1;
+      font-size: var(--api-endpoint-documentation-url-font-size, 16px);
+      margin-bottom: 40px;
+      background: var(--api-endpoint-documentation-url-background-color, #424242);
+      color: var(--api-endpoint-documentation-url-font-color, #fff);
+      padding: 8px;
+      border-radius: 2px;
+    }
+
+    .url-value {
+      word-break: break-all;
+    }
+
+    .extensions {
+      font-style: italic;
+      margin: 12px 0;
+    }
+    </style>
+    <template is="dom-if" if="[[aware]]">
+      <raml-aware raml="{{amfModel}}" scope="[[aware]]"></raml-aware>
+    </template>
+    <h1 class="title">[[endpointName]]</h1>
+    <template is="dom-if" if="[[hasExtension]]">
+      <section class="extensions">
+        <span>Extends </span>
+        <template is="dom-if" if="[[hasParentType]]">
+          <span class="resource-type-name" title="Resource type applied to this endpoint">[[parentTypeName]]</span>
+        </template>
+        <template is="dom-if" if="[[hasTraits]]">
+          <template is="dom-if" if="[[hasParentType]]">
+            <span class="ex-with">with</spane>
+          </template>
+          <template is="dom-repeat" items="[[traits]]">
+            <span class="trait-name" title="A trait applied to this endpoint">[[_computeTraitName(item)]]</span>
+          </template>
+        </template>
+      </section>
+    </template>
+    <template is="dom-if" if="[[hasCustomProperties]]">
+      <api-annotation-document shape="[[endpoint]]"></api-annotation-document>
+    </template>
+    <template is="dom-if" if="[[description]]">
+      <marked-element markdown="[[description]]">
+        <div slot="markdown-html" class="markdown-body"></div>
+      </marked-element>
+    </template>
+    <div class="url-area">
+      <div class="url-value">[[endpointUri]]</div>
+    </div>
+    <template is="dom-if" if="[[hasPathParameters]]">
+      <api-parameters-document amf-model="[[amfModel]]" query-opened base-uri-parameters="[[serverVariables]]" endpoint-parameters="[[endpointVariables]]"></api-parameters-document>
+    </template>
+  </template>
+  <script>
+  /**
+   * `api-endpoint-documentation`
+   *
+   * A component to generate documentation for an endpoint from AMF model
+   *
+   * This element works with [AMF](https://github.com/mulesoft/amf) data model.
+   * To properly compute all the information relevant to endpoint documentation
+   * set the following properties:
+   *
+   * - amfModel - as AMF's WebApi data model
+   * - endpoint - As AMF's EndPoint data model
+   *
+   * When set, this will automatically populate the wiew with data.
+   *
+   * ## Updating API's base URI
+   *
+   * By default the component render the documentation as it is defined
+   * in the AMF model. Sometimes, however, you may need to replace the base URI
+   * of the API with something else. It is useful when the API does not
+   * have base URI property defined (therefore this component render relative
+   * paths instead of URIs) or when you want to manage different environments.
+   *
+   * To update base URI value either update `baseUri` property or use
+   * `iron-meta` with key `ApiBaseUri`. First method is easier but the second
+   * gives much more flexibility since it use a [monostate pattern](http://wiki.c2.com/?MonostatePattern)
+   * to manage base URI property.
+   *
+   * When the component constructs the funal URI for the endpoint it does the following:
+   * - if `baseUri` is set it uses this value as a base uri for the endpoint
+   * - else if `iron-meta` with key `ApiBaseUri` exists and contains a value
+   * it uses it uses this value as a base uri for the endpoint
+   * - else if `amfModel` is set then it computes base uri value from main
+   * model document
+   * Then it concatenates computed base URI with `endpoint`'s path property.
+   *
+   * ### Example
+   *
+   * ```html
+   * <iron-meta key="ApiBaseUri" value="https://domain.com"></iron-meta>
+   * ```
+   *
+   * To update value of the `iron-meta`:
+   * ```javascript
+   * new Polymer.IronMeta({key: 'ApiBaseUri'}).value = 'https://other.domain';
+   * ```
+   *
+   * Note: The element will not get notified about the change in `iron-meta`.
+   * The change will be reflected whehn `amfModel` or `endpoint` property chnage.
+   *
+   * ## Styling
+   *
+   * `<api-endpoint-documentation>` provides the following custom properties and mixins for styling:
+   *
+   * Custom property | Description | Default
+   * ----------------|-------------|----------
+   * `--api-endpoint-documentation` | Mixin applied to this elment | `{}`
+   * `--arc-font-headline` | Theme mixin, Applied to h1 element (title) | `{}`
+   * `--arc-font-code1` | Theme mixin, applied to the URL area | `{}`
+   * `--api-endpoint-documentation-url-font-size` | Font size of endpoin URL | `16px`
+   * `--api-endpoint-documentation-url-background-color` | Background color of the URL section | `#424242`
+   * `--api-endpoint-documentation-url-font-color` | Font color of the URL area | `#fff`
+   *
+   * @customElement
+   * @polymer
+   * @demo demo/index.html
+   * @memberof ApiElements
+   */
+  class ApiEndpointDocumentation extends Polymer.Element {
+    static get is() { return 'api-endpoint-documentation'; }
+    static get properties() {
+      return {
+        /**
+         * `raml-aware` scope property to use.
+         */
+        aware: String,
+        /**
+         * Generated AMF json/ld model form the API spec.
+         * The element assumes the object of the first array item to be a
+         * type of `"http://raml.org/vocabularies/document#Document`
+         * on AMF vocabulary.
+         *
+         * It is only usefult for the element to resolve references.
+         *
+         * @type {Object|Array}
+         */
+        amfModel: Object,
+        /**
+         * Method's endpoint definition as a
+         * `http://raml.org/vocabularies/http#endpoint` of AMF model.
+         */
+        endpoint: Object,
+        /**
+         * A property to set to override AMF's model base URI information.
+         * When this property is set, the `endpointUri` property is recalculated.
+         */
+        baseUri: String,
+        /**
+         * Endpoint name.
+         * It should be either a "displayName" or endpoint's relative
+         * path.
+         */
+        endpointName: {
+          type: String,
+          computed: '_computeEndpointName(endpoint)'
+        },
+        /**
+         * Endpoint URI to display in main URL field.
+         * This value is computed when `amfModel`, `endpoint` or `baseUri` change.
+         */
+        endpointUri: {
+          type: String,
+          computed: '_computeEndpointUri(server, endpoint, baseUri)'
+        },
+        /**
+         * Computed value of method description from `method` property.
+         */
+        description: {
+          type: String,
+          computed: '_computeDescription(endpoint)'
+        },
+        /**
+         * Computed value from current `method`. True if the model contains
+         * custom properties (annotations in RAML).
+         */
+        hasCustomProperties: {
+          type: Boolean,
+          computed: '_computeHasCustomProperties(endpoint)'
+        },
+        /**
+         * Computed value of the `http://raml.org/vocabularies/http#server`
+         * from `amfModel`
+         */
+        server: {
+          type: Object,
+          computed: '_computeServer(amfModel)'
+        },
+        /**
+         * API base URI parameters defined in AMF api model
+         *
+         * @type {Array|undefined}
+         */
+        serverVariables: {
+          type: Array,
+          computed: '_computeServerVariables(server)'
+        },
+        /**
+         * Endpoint's path parameters.
+         *
+         * @type {Array|undefined}
+         */
+        endpointVariables: {
+          type: Array,
+          computed: '_computeEndpointVariables(endpoint)'
+        },
+        /**
+         * Computed value if server and endpoint definition of API model has
+         * defined any variables.
+         */
+        hasPathParameters: {
+          type: Boolean,
+          computed: '_computeHasPathParameters(serverVariables, endpointVariables)'
+        },
+        /**
+         * Computed value of AMF security definition from `method`
+         * property.
+         */
+        security: {
+          type: Object,
+          computed: '_computeSecurity(endpoint)'
+        },
+        /**
+         * Computed value, true if `security` has values.
+         */
+        hasSecurity: {
+          type: Boolean,
+          computed: '_computeHasSecurity(security)'
+        },
+        /**
+         * If set it will renders the view in the narrow layout.
+         */
+        narrow: {
+          type: Boolean,
+          reflectToAttribute: true
+        },
+        /**
+         * List of traits and resource types, if any.
+         *
+         * @type {Array<Object>}
+         */
+        extendsTypes: {
+          type: Array,
+          computed: '_computeExtendsTypes(endpoint)'
+        },
+        /**
+         * Computed value of a parent type.
+         * In RAML it is resource type that can be applied to a resource.
+         */
+        parentType: {
+          type: Object,
+          computed: '_computeParentType(extendsTypes)'
+        },
+        /**
+         * Computed value, true if `parentType` has a value.
+         */
+        hasParentType: {
+          type: Boolean,
+          computed: '_computeHasParentType(parentType)'
+        },
+        /**
+         * Computed value for parent type name.
+         */
+        parentTypeName: {
+          type: String,
+          computed: '_computeParentTypeName(parentType)'
+        },
+        /**
+         * List of traits appied to this endpoint
+         *
+         * @type {Array<Object>}
+         */
+        traits: {
+          type: Array,
+          computed: '_computeTraits(extendsTypes)'
+        },
+        /**
+         * Computed value, true if the endpoint has traits.
+         */
+        hasTraits: {
+          type: Boolean,
+          computed: '_computeHasTraits(traits)'
+        },
+        /**
+         * True if the endpoint is extended by either traits or resource type.
+         */
+        hasExtension: {
+          type: Boolean,
+          computed: '_computeHasExtension(hasTraits, hasParentType)'
+        }
+      };
+    }
+    /**
+     * Checks if property item has a type.
+     * @param {Object} model Model item.
+     * @param {String} type A type to lookup
+     * @return {Boolean}
+     */
+    _hasType(model, type) {
+      if (!model) {
+        return false;
+      }
+      const types = model['@type'] || [];
+      return types.findIndex((item) => item === type) !== -1;
+    }
+    /**
+     * Gets a signle scalar value from a model.
+     * @param {Object} model Amf model to extract the value from.
+     * @param {String} key Model key to search for the value
+     * @return {any} Value for key
+     */
+    _getValue(model, key) {
+      let data = (model && model[key]);
+      if (!data || !(data instanceof Array)) {
+        return;
+      }
+      data = data[0];
+      if (!data) {
+        return;
+      }
+      return data['@value'];
+    }
+    /**
+     * Computes method's endpoint name.
+     * It looks for `http://schema.org/name` in the endpoint definition and
+     * if not found it uses path as name.
+     *
+     * @param {Object} endpoint Endpoint model.
+     * @return {String} Endpoint name.
+     */
+    _computeEndpointName(endpoint) {
+      let name = this._getValue(endpoint, 'http://schema.org/name');
+      if (!name) {
+        name = this._getValue(endpoint, 'http://raml.org/vocabularies/http#path');
+      }
+      return name;
+    }
+    /**
+     * Computes endpoint's URI based on `amfModel` and `endpoint` models.
+     *
+     * @param {Object} server Server model of AMF API.
+     * @param {Object} endpoint Endpoint model
+     * @param {?String} baseUri Current value of `baseUri` property
+     * @return {String} Endpoint's URI
+     */
+    _computeEndpointUri(server, endpoint, baseUri) {
+      let base = this._getBaseUri(baseUri, server);
+      if (base && base[base.length - 1] === '/') {
+        base = base.substr(0, base.length - 1);
+      }
+      const path = this._getValue(endpoint, 'http://raml.org/vocabularies/http#path');
+      return base + (path || '');
+    }
+    /**
+     * Computes base URI value from either `baseUri`, `iron-meta` with
+     * `ApiBaseUri` key or `amfModel` value (in this order).
+     *
+     * @param {String} baseUri Value of `baseUri` property
+     * @param {Object} server AMF API model for Server.
+     * @return {String} Base uri value. Can be empty string.
+     */
+    _getBaseUri(baseUri, server) {
+      if (baseUri) {
+        return baseUri;
+      }
+      let value = new Polymer.IronMeta({key: 'ApiBaseUri'}).value;
+      if (value) {
+        return value;
+      }
+      return this._getAmfBaseUri(server) || '';
+    }
+    /**
+     * Computes base URI from AMF model.
+     *
+     * @param {Object} server AMF API model for Server.
+     * @return {String|undefined} Base uri value if exists.
+     */
+    _getAmfBaseUri(server) {
+      return this._getValue(server, 'http://raml.org/vocabularies/http#url');
+    }
+    /**
+     * Computes value for `server` property that is later used with other computations.
+     *
+     * @param {Array|Object} model AMF model for an API
+     * @return {Object} The server model
+     */
+    _computeServer(model) {
+      if (!model) {
+        return;
+      }
+      if (model instanceof Array) {
+        model = model[0];
+      }
+      const enc = model['http://raml.org/vocabularies/document#encodes'];
+      if (!enc) {
+        return;
+      }
+      const api = enc.find((item) => item['@type'] && item['@type'].indexOf('http://schema.org/WebAPI') !== -1);
+      if (!api) {
+        return;
+      }
+      const srv = api['http://raml.org/vocabularies/http#server'];
+      return srv ? srv[0] : undefined;
+    }
+    /**
+     * Computes value of `description` property.
+     *
+     * @param {Object} shape Shape of AMF model.
+     * @return {String|undefined} Description if defined.
+     */
+    _computeDescription(shape) {
+      return this._getValue(shape, 'http://schema.org/description');
+    }
+    /**
+     * Computes value for `hasCustomProperties` property.
+     *
+     * @param {Object} method AMF `supportedOperation` model
+     * @return {Boolean}
+     */
+    _computeHasCustomProperties(method) {
+      return (method && 'http://raml.org/vocabularies/document#customDomainProperties' in method);
+    }
+    /**
+     * Computes value for `hasPathParameters` property
+     *
+     * @param {?Array} sVars Current value of `serverVariables` property
+     * @param {?Array} eVars Current value of `endpointVariables` property
+     * @return {Boolean}
+     */
+    _computeHasPathParameters(sVars, eVars) {
+      return !!((sVars && sVars.length) || (eVars && eVars.length));
+    }
+    /**
+     * Computes value for `serverVariables` property.
+     *
+     * @param {Object} server AMF API model for Server.
+     * @return {Array<Object>|undefined} Variables if defined.
+     */
+    _computeServerVariables(server) {
+      return server && server['http://raml.org/vocabularies/http#variable'];
+    }
+    /**
+     * Computes value for `endpointVariables` property.
+     *
+     * @param {Object} endpoint Endpoint model
+     * @return {Array<Object>|undefined} Parameters if defined.
+     */
+    _computeEndpointVariables(endpoint) {
+      return endpoint && endpoint['http://raml.org/vocabularies/http#parameter'];
+    }
+    /**
+     * Computes value for `security` property
+     *
+     * @param {Object} shape AMF shape object
+     * @return {Array<Object>|undefined}
+     */
+    _computeSecurity(shape) {
+      return shape && shape['http://raml.org/vocabularies/security#security'];
+    }
+    /**
+     * Computes value for `hasSecurity` property.
+     *
+     * @param {?Array<Object>} security Current value of `security` property
+     * @return {Boolean}
+     */
+    _computeHasSecurity(security) {
+      return !!(security && security.length);
+    }
+    /**
+     * Computes `ectendsTypes`
+     *
+     * @param {Object} shape AMF shape to get `#extends` model
+     * @return {Array<Object>|undefined}
+     */
+    _computeExtendsTypes(shape) {
+      return shape && shape['http://raml.org/vocabularies/document#extends'];
+    }
+    /**
+     * Computes parent type as RAML's resource type.
+     *
+     * @param {Array<Object>} types Current value of `extendsTypes`
+     * @return {Object|undefined}
+     */
+    _computeParentType(types) {
+      if (!types || !types.length) {
+        return;
+      }
+      return types.find((item) => this._hasType(item, 'http://raml.org/vocabularies/document#ParametrizedResourceType'));
+    }
+    /**
+     * Computes value for `hasParentType` property
+     *
+     * @param {?Object} type Parent resource type.
+     * @return {Boolean}
+     */
+    _computeHasParentType(type) {
+      return !!type;
+    }
+    /**
+     * Computes vaolue for `parentTypeName`
+     *
+     * @param {?Object} type Parent type shape
+     * @return {String|undefined}
+     */
+    _computeParentTypeName(type) {
+      return this._getValue(type, 'http://schema.org/name');
+    }
+    /**
+     * Computes value for `traits` property
+     *
+     * @param {Array<Object>} types Current value of `extendsTypes`
+     * @return {Array<Object>|undefined}
+     */
+    _computeTraits(types) {
+      if (!types || !types.length) {
+        return;
+      }
+      const data = types.filter((item) => this._hasType(item, 'http://raml.org/vocabularies/document#ParametrizedTrait'));
+      return data.length ? data : undefined;
+    }
+    /**
+     * Computes value for `hasTraits` property.
+     *
+     * @param {?Array<Object>} traits Current value of `traits` property
+     * @return {Boolean}
+     */
+    _computeHasTraits(traits) {
+      return !!(traits && traits.length);
+    }
+    /**
+     * Computes name of a trait.
+     *
+     * @param {Object} trait AMF trait definition
+     * @return {String|undefined} Trait name if defined.
+     */
+    _computeTraitName(trait) {
+      return this._getValue(trait, 'http://schema.org/name');
+    }
+    /**
+     * Computes value for `hasExtension` property
+     *
+     * @param {Boolean} hasTraits
+     * @param {Boolean} hasParentType
+     * @return {Boolean}
+     */
+    _computeHasExtension(hasTraits, hasParentType) {
+      return !!(hasTraits || hasParentType);
+    }
+  }
+  window.customElements.define(ApiEndpointDocumentation.is, ApiEndpointDocumentation);
+  </script>
+</dom-module>
