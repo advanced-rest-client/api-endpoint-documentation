@@ -41,17 +41,24 @@
     }
 
     .url-area {
+      @apply --layout-horizontal;
       @apply --arc-font-code1;
       font-size: var(--api-endpoint-documentation-url-font-size, 16px);
       margin-bottom: 40px;
       background: var(--api-endpoint-documentation-url-background-color, #424242);
       color: var(--api-endpoint-documentation-url-font-color, #fff);
-      padding: 8px;
+      padding: 16px 8px;
       border-radius: 2px;
     }
 
     .url-value {
+      margin-left: 12px;
       word-break: break-all;
+    }
+
+    .method-value {
+      text-transform: uppercase;
+      white-space: nowrap;
     }
 
     .extensions {
