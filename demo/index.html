@@ -49,6 +49,17 @@
           word-break: break-all;
           overflow: auto;
         };
+
+        --method-label-get-background-color: rgb(0, 128, 0);
+        --method-label-get-color: #fff;
+        --method-label-post-background-color: rgb(33, 150, 243);
+        --method-label-post-color: #fff;
+        --method-label-put-background-color: rgb(255, 165, 0);
+        --method-label-put-color: #fff;
+        --method-label-patch-background-color: rgb(156, 39, 176);
+        --method-label-patch-color: #fff;
+        --method-label-delete-background-color: rgb(244, 67, 54);
+        --method-label-delete-color: #fff;
       }
 
       html,
@@ -83,6 +94,7 @@
           color: #3E2723;
         };
       }
+
       </style>
     </custom-style>
   </head>
@@ -103,12 +115,11 @@
           <raml-aware raml="{{amfModel}}" scope="model"></raml-aware>
           <api-navigation aware="model" endpoints-opened></api-navigation>
           <template is="dom-if" if="[[hasData]]">
-            <api-endpoint-documentation aware="model" endpoint="[[endpoint]]"></api-endpoint-documentation>
+            <api-endpoint-documentation aware="model" endpoint="[[endpoint]]" previous="[[previous]]" next="[[next]]"></api-endpoint-documentation>
           </template>
           <template is="dom-if" if="[[!hasData]]">
             <p>Select a HTTP method in the navigation to see the demo.</p>
           </template>
-
         </div>
       </template>
     </dom-bind>
@@ -141,8 +152,48 @@
       app.setData = function(id) {
         const enc = app.amfModel[0]['http://raml.org/vocabularies/document#encodes'][0];
         const endpoints = enc['http://raml.org/vocabularies/http#endpoint'];
-        const endpoint = endpoints.find((item) => item['@id'] === id);
-        app.endpoint = endpoint;
+        for (let i = 0, len = endpoints.length; i < len; i++) {
+          let item = endpoints[i];
+          if (item['@id'] !== id) {
+            continue;
+          }
+          app.endpoint = item;
+          app._setPrevious(endpoints[i - 1]);
+          app._setNext(endpoints[i + 1]);
+          break;
+        }
+      };
+      app._setPrevious = function(item) {
+        if (!item) {
+          app.previous = undefined;
+          return;
+        }
+        let name;
+        if ('http://schema.org/name' in item) {
+          name = item['http://schema.org/name'][0]['@value'];
+        } else {
+          name = item['http://raml.org/vocabularies/http#path'][0]['@value'];
+        }
+        app.previous = {
+          id: item['@id'],
+          label: name
+        };
+      };
+      app._setNext = function(item) {
+        if (!item) {
+          app.next = undefined;
+          return;
+        }
+        let name;
+        if ('http://schema.org/name' in item) {
+          name = item['http://schema.org/name'][0]['@value'];
+        } else {
+          name = item['http://raml.org/vocabularies/http#path'][0]['@value'];
+        }
+        app.next = {
+          id: item['@id'],
+          label: name
+        };
       };
       window.addEventListener('WebComponentsReady', () => app._load());
       window.addEventListener('api-navigation-selection-changed', app._navChanged);

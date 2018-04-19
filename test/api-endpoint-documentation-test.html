@@ -179,11 +179,6 @@
           assert.ok(node);
         });
 
-        test('api-parameters-document is rendered', () => {
-          const node = element.shadowRoot.querySelector('api-parameters-document');
-          assert.ok(node);
-        });
-
         test('Extensions are rendered', () => {
           const node = element.shadowRoot.querySelector('.extensions');
           assert.ok(node);
@@ -330,6 +325,91 @@
         });
       });
     });
+
+    suite('Bottom navigation', () => {
+      let element;
+      let prev = {'label': 'p', 'id': 'pp'};
+      let next = {'label': 'n', 'id': 'nn'};
+      test('hasPagination is undefined by default', () => {
+        element = fixture('Basic');
+        assert.isUndefined(element.hasPagination);
+      });
+      test('Does not render bottom navigation when nothing is set', (done) => {
+        element = fixture('Basic');
+        flush(() => {
+          const node = element.shadowRoot.querySelector('.bottom-nav');
+          assert.notOk(node);
+          done();
+        });
+      });
+      test('hasPreviousLink is computed for "previous" data', () => {
+        element = fixture('Basic');
+        element.previous = prev;
+        assert.isTrue(element.hasPreviousLink);
+      });
+      test('hasPagination is computed for "previous" data', () => {
+        element = fixture('Basic');
+        element.previous = prev;
+        assert.isTrue(element.hasPagination);
+      });
+      test('hasNextLink is computed for "next" data', () => {
+        element = fixture('Basic');
+        element.next = next;
+        assert.isTrue(element.hasNextLink);
+      });
+      test('hasPagination is computed for "next" data', () => {
+        element = fixture('Basic');
+        element.next = next;
+        assert.isTrue(element.hasPagination);
+      });
+      test('Renders bottom navigation', (done) => {
+        element = fixture('Basic');
+        element.next = next;
+        element.previous = prev;
+        flush(() => {
+          const node = element.shadowRoot.querySelector('.bottom-nav');
+          assert.ok(node);
+          done();
+        });
+      });
+      test('Renders previous buttons', (done) => {
+        element = fixture('Basic');
+        element.previous = prev;
+        flush(() => {
+          const node = element.shadowRoot.querySelector('.bottom-link.previous');
+          assert.ok(node);
+          done();
+        });
+      });
+      test('Renders next buttons', (done) => {
+        element = fixture('Basic');
+        element.next = next;
+        flush(() => {
+          const node = element.shadowRoot.querySelector('.bottom-link.next');
+          assert.ok(node);
+          done();
+        });
+      });
+      test('Does not render previous for next only', (done) => {
+        element = fixture('Basic');
+        element.next = next;
+        flush(() => {
+          const node = element.shadowRoot.querySelector('.bottom-link.previous');
+          assert.notOk(node);
+          done();
+        });
+      });
+      test('Does not render next for previous only', (done) => {
+        element = fixture('Basic');
+        element.previous = prev;
+        flush(() => {
+          const node = element.shadowRoot.querySelector('.bottom-link.next');
+          assert.notOk(node);
+          done();
+        });
+      });
+    });
+
   });
   </script>
 </body>

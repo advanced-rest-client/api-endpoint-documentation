@@ -5,6 +5,7 @@
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../api-annotation-document/api-annotation-document.html">
 <link rel="import" href="../api-parameters-document/api-parameters-document.html">
+<link rel="import" href="../api-method-documentation/api-method-documentation.html">
 <link rel="import" href="../markdown-styles/markdown-styles.html">
 <link rel="import" href="../marked-element/marked-element.html">
 <dom-module id="api-endpoint-documentation">
@@ -65,6 +66,33 @@
       font-style: italic;
       margin: 12px 0;
     }
+
+    api-method-documentation:not(:last-of-type) {
+      margin-bottom: 40px;
+      border-bottom: 2px var(--api-endpoint-document-method-border-color, #d4d1d1) solid;
+    }
+
+    .bottom-nav,
+    .bottom-link {
+      @apply --layout-horizontal;
+      @apply --layout-center;
+    }
+
+    .bottom-nav {
+      padding: 32px 0;
+      margin: 16px 0;
+      border-top: 1px var(--api-endpoint-documentation-bottom-navigation-border-color, #546E7A) solid;
+      color: var(--api-endpoint-documentation-bottom-navigation-color, #546E7A);
+      font-size: 18px;
+    }
+
+    .bottom-link {
+      cursor: pointer;
+    }
+
+    .nav-separator {
+      @apply --layout-flex;
+    }
     </style>
     <template is="dom-if" if="[[aware]]">
       <raml-aware raml="{{amfModel}}" scope="[[aware]]"></raml-aware>
@@ -94,12 +122,29 @@
         <div slot="markdown-html" class="markdown-body"></div>
       </marked-element>
     </template>
-    <div class="url-area">
-      <div class="url-value">[[endpointUri]]</div>
-    </div>
-    <template is="dom-if" if="[[hasPathParameters]]">
-      <api-parameters-document amf-model="[[amfModel]]" query-opened base-uri-parameters="[[serverVariables]]" endpoint-parameters="[[endpointVariables]]"></api-parameters-document>
+
+    <template is="dom-repeat" items="[[operations]]">
+      <api-method-documentation amf-model="[[amfModel]]" endpoint="[[endpoint]]" method="[[item]]"></api-method-documentation>
     </template>
+
+    <template is="dom-if" if="[[hasPagination]]">
+      <section class="bottom-nav">
+        <template is="dom-if" if="[[hasPreviousLink]]">
+          <div class="bottom-link previous" on-tap="_navigatePrevious">
+            <paper-icon-button icon="arc:chevron-left"></paper-icon-button>
+            <span class="nav-label">[[previous.label]]</span>
+          </div>
+        </template>
+        <div class="nav-separator"></div>
+        <template is="dom-if" if="[[hasNextLink]]">
+          <div class="bottom-link next" on-tap="_navigateNext">
+            <span class="nav-label">[[next.label]]</span>
+            <paper-icon-button icon="arc:chevron-right"></paper-icon-button>
+          </div>
+        </template>
+      </section>
+    </template>
+
   </template>
   <script>
   /**
@@ -163,6 +208,8 @@
    * `--api-endpoint-documentation-url-font-size` | Font size of endpoin URL | `16px`
    * `--api-endpoint-documentation-url-background-color` | Background color of the URL section | `#424242`
    * `--api-endpoint-documentation-url-font-color` | Font color of the URL area | `#fff`
+   * `--api-endpoint-documentation-bottom-navigation-border-color` | Color of the top border of the bottom navigartion | `#546E7A`
+   * `--api-endpoint-documentation-bottom-navigation-color` | Color of of the bottom navigartion (icon + text) | `#546E7A`
    *
    * @customElement
    * @polymer
@@ -339,6 +386,45 @@
         hasExtension: {
           type: Boolean,
           computed: '_computeHasExtension(hasTraits, hasParentType)'
+        },
+        /**
+         * A list of AMF's supported operations (HTTP methods) in this
+         * endpoint
+         */
+        operations: {
+          type: Array,
+          computed: '_computeOperations(endpoint)'
+        },
+        /**
+         * Model to generate a link to previous HTTP endpoint.
+         * It should contain `id` and `label` properties
+         */
+        previous: Object,
+        /**
+         * Computed value, true if `previous` is set
+         */
+        hasPreviousLink: {
+          type: Boolean,
+          computed: '_computeHasPreviousLink(previous)'
+        },
+        /**
+         * Model to generate a link to next HTTP endpoint.
+         * It should contain `id` and `label` properties
+         */
+        next: Object,
+        /**
+         * Computed value, true if `next` is set
+         */
+        hasNextLink: {
+          type: Boolean,
+          computed: '_computeHasNextLink(next)'
+        },
+        /**
+         * Computed value, true to render bottom navigation
+         */
+        hasPagination: {
+          type: Boolean,
+          computed: '_computeHasNavigation(hasPreviousLink, hasNextLink)'
         }
       };
     }
@@ -598,6 +684,76 @@
     _computeHasExtension(hasTraits, hasParentType) {
       return !!(hasTraits || hasParentType);
     }
+    /**
+     * Computes list of operations for the endpoint.
+     * @param {Object} endpoint Endpoint model
+     * @return {Array<Object>|undefined} Operations if defined.
+     */
+    _computeOperations(endpoint) {
+      return endpoint && endpoint['http://www.w3.org/ns/hydra/core#supportedOperation'];
+    }
+    /**
+     * Computes value for `hasPreviousLink` property
+     * @param {?Object} previous
+     * @return {Boolean}
+     */
+    _computeHasPreviousLink(previous) {
+      return !!previous;
+    }
+    /**
+     * Computes value for `hasNextLink` property
+     * @param {?Object} next
+     * @return {Boolean}
+     */
+    _computeHasNextLink(next) {
+      return !!next;
+    }
+    /**
+     * Computes value for `hasPagination` property
+     * @param {Boolean} previous
+     * @param {Boolean} next
+     * @return {Boolean}
+     */
+    _computeHasNavigation(previous, next) {
+      return !!(previous || next);
+    }
+    /**
+     * Navigates to next method. Calls `_navigate` with id of previous item.
+     */
+    _navigatePrevious() {
+      this._navigate(this.previous.id, 'endpoint');
+    }
+    /**
+     * Navigates to next method. Calls `_navigate` with id of next item.
+     */
+    _navigateNext() {
+      this._navigate(this.next.id, 'endpoint');
+    }
+    /**
+     * Dispatches `api-navigation-selection-changed` so other components
+     * can update their state.
+     *
+     * @param {String} id
+     * @param {String} type
+     */
+    _navigate(id, type) {
+      const e = new CustomEvent('api-navigation-selection-changed', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          selected: id,
+          type: type
+        }
+      });
+      this.dispatchEvent(e);
+    }
+    /**
+     * Dispatched when the user requested previous / next
+     *
+     * @event api-navigation-selection-changed
+     * @param {String} selected
+     * @param {String} type
+     */
   }
   window.customElements.define(ApiEndpointDocumentation.is, ApiEndpointDocumentation);
   </script>
