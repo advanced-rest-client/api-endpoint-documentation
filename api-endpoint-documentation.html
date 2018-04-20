@@ -124,7 +124,7 @@
     </template>
 
     <template is="dom-repeat" items="[[operations]]">
-      <api-method-documentation amf-model="[[amfModel]]" endpoint="[[endpoint]]" method="[[item]]"></api-method-documentation>
+      <api-method-documentation amf-model="[[amfModel]]" endpoint="[[endpoint]]" method="[[item]]" no-try-it="[[noTryIt]]"></api-method-documentation>
     </template>
 
     <template is="dom-if" if="[[hasPagination]]">
@@ -425,6 +425,14 @@
         hasPagination: {
           type: Boolean,
           computed: '_computeHasNavigation(hasPreviousLink, hasNextLink)'
+        },
+        /**
+         * Passing value of `noTryIt` to the method documentation.
+         * Hiddes "Try it" button.
+         */
+        noTryIt: {
+          type: Boolean,
+          value: false
         }
       };
     }
