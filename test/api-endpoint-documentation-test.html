@@ -102,6 +102,10 @@
           assert.equal(element.endpointName, 'People');
         });
 
+        test('path is computed', () => {
+          assert.equal(element.path, '/people');
+        });
+
         test('endpointUri is computed', () => {
           assert.equal(element.endpointUri, 'http://{instance}.domain.com/people');
         });

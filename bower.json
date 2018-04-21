@@ -20,7 +20,8 @@
     "api-annotation-document": "advanced-rest-client/api-annotation-document#2.0.0-preview",
     "api-parameters-document": "advanced-rest-client/api-parameters-document#2.0.0-preview",
     "api-method-documentation": "advanced-rest-client/api-method-documentation#2.0.0-preview",
-    "amf-helper-mixin": "advanced-rest-client/amf-helper-mixin#2.0.0-preview"
+    "amf-helper-mixin": "advanced-rest-client/amf-helper-mixin#2.0.0-preview",
+    "clipboard-copy": "advanced-rest-client/clipboard-copy#^2.0.1"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",

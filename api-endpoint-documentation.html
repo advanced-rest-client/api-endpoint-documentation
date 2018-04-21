@@ -9,6 +9,8 @@
 <link rel="import" href="../markdown-styles/markdown-styles.html">
 <link rel="import" href="../marked-element/marked-element.html">
 <link rel="import" href="../amf-helper-mixin/amf-helper-mixin.html">
+<link rel="import" href="../clipboard-copy/clipboard-copy.html">
+
 <dom-module id="api-endpoint-documentation">
   <template>
     <style include="markdown-styles"></style>
@@ -27,6 +29,20 @@
       @apply --arc-font-display1;
     }
 
+    h2 {
+      @apply --arc-font-title;
+      font-size: 22px;
+    }
+
+    :host([narrow]) h1 {
+      font-size: 20px;
+      margin: 0;
+    }
+
+    :host([narrow]) h2 {
+      font-size: 18px;
+    }
+
     marked-element {
       margin: 12px 0;
     }
@@ -35,27 +51,6 @@
       margin-bottom: 28px;
       color: rgba(0, 0, 0, 0.74);
       @apply --arc-font-body1;
-    }
-
-    :host([narrow]) h1 {
-      font-size: 20px;
-      margin: 0;
-    }
-
-    .url-area {
-      @apply --layout-horizontal;
-      @apply --arc-font-code1;
-      font-size: var(--api-endpoint-documentation-url-font-size, 16px);
-      margin-bottom: 40px;
-      background: var(--api-endpoint-documentation-url-background-color, #424242);
-      color: var(--api-endpoint-documentation-url-font-color, #fff);
-      padding: 16px 8px;
-      border-radius: 2px;
-    }
-
-    .url-value {
-      margin-left: 12px;
-      word-break: break-all;
     }
 
     .method-value {
@@ -94,6 +89,24 @@
     .nav-separator {
       @apply --layout-flex;
     }
+
+    .url-area {
+      @apply --layout-flex;
+      @apply --layout-horizontal;
+      @apply --layout-center;
+      @apply --arc-font-code1;
+      font-size: var(--api-endpoint-documentation-url-font-size, 16px);
+      margin-bottom: 40px;
+      background: var(--api-endpoint-documentation-url-background-color, #424242);
+      color: var(--api-endpoint-documentation-url-font-color, #fff);
+      padding: 8px;
+      border-radius: 2px;
+    }
+
+    .url-value {
+      @apply --layout-flex;
+      word-break: break-all;
+    }
     </style>
     <template is="dom-if" if="[[aware]]">
       <raml-aware raml="{{amfModel}}" scope="[[aware]]"></raml-aware>
@@ -124,8 +137,15 @@
       </marked-element>
     </template>
 
+    <h2>Path</h2>
+    <section class="url-area">
+      <div class="url-value">[[path]]</div>
+      <paper-icon-button class="action-icon copy-icon" icon="arc:content-copy" on-tap="_copyPathClipboard" title="Copy path to clipboard"></paper-icon-button>
+    </section>
+    <clipboard-copy id="pathCopy" content="[[path]]"></clipboard-copy>
+
     <template is="dom-repeat" items="[[operations]]">
-      <api-method-documentation amf-model="[[amfModel]]" endpoint="[[endpoint]]" method="[[item]]"></api-method-documentation>
+      <api-method-documentation amf-model="[[amfModel]]" endpoint="[[endpoint]]" method="[[item]]" base-uri="[[baseUri]]"></api-method-documentation>
     </template>
 
     <template is="dom-if" if="[[hasPagination]]">
@@ -257,19 +277,18 @@
           computed: '_computeEndpointName(endpoint)'
         },
         /**
-         * Endpoint URI to display in main URL field.
-         * This value is computed when `amfModel`, `endpoint` or `baseUri` change.
-         */
-        endpointUri: {
-          type: String,
-          computed: '_computeEndpointUri(server, endpoint, baseUri)'
-        },
-        /**
          * Computed value of method description from `method` property.
          */
         description: {
           type: String,
           computed: '_computeDescription(endpoint)'
+        },
+        /**
+         * Computed value of endpoint's path.
+         */
+        path: {
+          type: String,
+          computed: '_computePath(endpoint)'
         },
         /**
          * Computed value from current `method`. True if the model contains
@@ -446,14 +465,13 @@
       return name;
     }
     /**
-     * Computes value for `hasPathParameters` property
+     * Computes value of `path` property
      *
-     * @param {?Array} sVars Current value of `serverVariables` property
-     * @param {?Array} eVars Current value of `endpointVariables` property
-     * @return {Boolean}
+     * @param {Object} endpoint Endpoint model.
+     * @return {String}
      */
-    _computeHasPathParameters(sVars, eVars) {
-      return !!((sVars && sVars.length) || (eVars && eVars.length));
+    _computePath(endpoint) {
+      return this._getValue(endpoint, 'http://raml.org/vocabularies/http#path');
     }
     /**
      * Computes `ectendsTypes`
@@ -572,6 +590,18 @@
         }
       });
       this.dispatchEvent(e);
+    }
+
+    _copyPathClipboard(e) {
+      const button = e.localTarget || e.target;
+      if (this.$.pathCopy.copy()) {
+          button.icon = 'arc:done';
+        } else {
+          button.icon = 'arc:error';
+        }
+        setTimeout(() => {
+          button.icon = 'arc:content-copy';
+        }, 1000);
     }
     /**
      * Dispatched when the user requested previous / next
