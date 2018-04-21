@@ -11,12 +11,16 @@
 /// <reference path="../polymer/types/polymer-element.d.ts" />
 /// <reference path="../polymer/types/lib/elements/dom-if.d.ts" />
 /// <reference path="../polymer/types/lib/elements/dom-repeat.d.ts" />
+/// <reference path="../polymer/types/lib/utils/render-status.d.ts" />
 /// <reference path="../raml-aware/raml-aware.d.ts" />
 /// <reference path="../iron-flex-layout/iron-flex-layout.d.ts" />
 /// <reference path="../api-annotation-document/api-annotation-document.d.ts" />
 /// <reference path="../api-parameters-document/api-parameters-document.d.ts" />
+/// <reference path="../api-method-documentation/api-method-documentation.d.ts" />
 /// <reference path="../markdown-styles/markdown-styles.d.ts" />
 /// <reference path="../marked-element/marked-element.d.ts" />
+/// <reference path="../amf-helper-mixin/amf-helper-mixin.d.ts" />
+/// <reference path="../clipboard-copy/clipboard-copy.d.ts" />
 
 declare namespace ApiElements {
 
@@ -81,13 +85,12 @@ declare namespace ApiElements {
    * `--api-endpoint-documentation-url-font-size` | Font size of endpoin URL | `16px`
    * `--api-endpoint-documentation-url-background-color` | Background color of the URL section | `#424242`
    * `--api-endpoint-documentation-url-font-color` | Font color of the URL area | `#fff`
+   * `--api-endpoint-documentation-bottom-navigation-border-color` | Color of the top border of the bottom navigartion | `#546E7A`
+   * `--api-endpoint-documentation-bottom-navigation-color` | Color of of the bottom navigartion (icon + text) | `#546E7A`
    */
-  class ApiEndpointDocumentation extends Polymer.Element {
-
-    /**
-     * `raml-aware` scope property to use.
-     */
-    aware: string|null|undefined;
+  class ApiEndpointDocumentation extends
+    ApiElements.AmfHelperMixin(
+    Polymer.Element) {
 
     /**
      * Generated AMF json/ld model form the API spec.
@@ -98,6 +101,11 @@ declare namespace ApiElements {
      * It is only usefult for the element to resolve references.
      */
     amfModel: object|any[]|null;
+
+    /**
+     * `raml-aware` scope property to use.
+     */
+    aware: string|null|undefined;
 
     /**
      * Method's endpoint definition as a
@@ -119,43 +127,20 @@ declare namespace ApiElements {
     readonly endpointName: string|null|undefined;
 
     /**
-     * Endpoint URI to display in main URL field.
-     * This value is computed when `amfModel`, `endpoint` or `baseUri` change.
-     */
-    readonly endpointUri: string|null|undefined;
-
-    /**
      * Computed value of method description from `method` property.
      */
     readonly description: string|null|undefined;
+
+    /**
+     * Computed value of endpoint's path.
+     */
+    readonly path: string|null|undefined;
 
     /**
      * Computed value from current `method`. True if the model contains
      * custom properties (annotations in RAML).
      */
     readonly hasCustomProperties: boolean|null|undefined;
-
-    /**
-     * Computed value of the `http://raml.org/vocabularies/http#server`
-     * from `amfModel`
-     */
-    readonly server: object|null|undefined;
-
-    /**
-     * API base URI parameters defined in AMF api model
-     */
-    readonly serverVariables: any[]|null|undefined;
-
-    /**
-     * Endpoint's path parameters.
-     */
-    readonly endpointVariables: any[]|null|undefined;
-
-    /**
-     * Computed value if server and endpoint definition of API model has
-     * defined any variables.
-     */
-    readonly hasPathParameters: boolean|null|undefined;
 
     /**
      * Computed value of AMF security definition from `method`
@@ -210,21 +195,47 @@ declare namespace ApiElements {
     readonly hasExtension: boolean|null|undefined;
 
     /**
-     * Checks if property item has a type.
-     *
-     * @param model Model item.
-     * @param type A type to lookup
+     * A list of AMF's supported operations (HTTP methods) in this
+     * endpoint
      */
-    _hasType(model: object|null, type: String|null): Boolean|null;
+    readonly operations: any[]|null|undefined;
 
     /**
-     * Gets a signle scalar value from a model.
-     *
-     * @param model Amf model to extract the value from.
-     * @param key Model key to search for the value
-     * @returns Value for key
+     * Model to generate a link to previous HTTP endpoint.
+     * It should contain `id` and `label` properties
      */
-    _getValue(model: object|null, key: String|null): any|null;
+    previous: object|null|undefined;
+
+    /**
+     * Computed value, true if `previous` is set
+     */
+    readonly hasPreviousLink: boolean|null|undefined;
+
+    /**
+     * Model to generate a link to next HTTP endpoint.
+     * It should contain `id` and `label` properties
+     */
+    next: object|null|undefined;
+
+    /**
+     * Computed value, true if `next` is set
+     */
+    readonly hasNextLink: boolean|null|undefined;
+
+    /**
+     * Computed value, true to render bottom navigation
+     */
+    readonly hasPagination: boolean|null|undefined;
+
+    /**
+     * Scroll target used to observe `scroll` event.
+     * When set the element will observe scroll and inform other components
+     * about changes in navigation while scrolling through methods list.
+     * The navigation event contains `passive: true` property that
+     * determines that it's not user triggered navigation but rather
+     * context enforced.
+     */
+    scrollTarget: object|null|undefined;
 
     /**
      * Computes method's endpoint name.
@@ -237,93 +248,11 @@ declare namespace ApiElements {
     _computeEndpointName(endpoint: object|null): String|null;
 
     /**
-     * Computes endpoint's URI based on `amfModel` and `endpoint` models.
+     * Computes value of `path` property
      *
-     * @param server Server model of AMF API.
-     * @param endpoint Endpoint model
-     * @param baseUri Current value of `baseUri` property
-     * @returns Endpoint's URI
+     * @param endpoint Endpoint model.
      */
-    _computeEndpointUri(server: object|null, endpoint: object|null, baseUri: String|null): String|null;
-
-    /**
-     * Computes base URI value from either `baseUri`, `iron-meta` with
-     * `ApiBaseUri` key or `amfModel` value (in this order).
-     *
-     * @param baseUri Value of `baseUri` property
-     * @param server AMF API model for Server.
-     * @returns Base uri value. Can be empty string.
-     */
-    _getBaseUri(baseUri: String|null, server: object|null): String|null;
-
-    /**
-     * Computes base URI from AMF model.
-     *
-     * @param server AMF API model for Server.
-     * @returns Base uri value if exists.
-     */
-    _getAmfBaseUri(server: object|null): String|null|undefined;
-
-    /**
-     * Computes value for `server` property that is later used with other computations.
-     *
-     * @param model AMF model for an API
-     * @returns The server model
-     */
-    _computeServer(model: any[]|object|null): object|null;
-
-    /**
-     * Computes value of `description` property.
-     *
-     * @param shape Shape of AMF model.
-     * @returns Description if defined.
-     */
-    _computeDescription(shape: object|null): String|null|undefined;
-
-    /**
-     * Computes value for `hasCustomProperties` property.
-     *
-     * @param method AMF `supportedOperation` model
-     */
-    _computeHasCustomProperties(method: object|null): Boolean|null;
-
-    /**
-     * Computes value for `hasPathParameters` property
-     *
-     * @param sVars Current value of `serverVariables` property
-     * @param eVars Current value of `endpointVariables` property
-     */
-    _computeHasPathParameters(sVars: any[]|null, eVars: any[]|null): Boolean|null;
-
-    /**
-     * Computes value for `serverVariables` property.
-     *
-     * @param server AMF API model for Server.
-     * @returns Variables if defined.
-     */
-    _computeServerVariables(server: object|null): Array<object|null>|null|undefined;
-
-    /**
-     * Computes value for `endpointVariables` property.
-     *
-     * @param endpoint Endpoint model
-     * @returns Parameters if defined.
-     */
-    _computeEndpointVariables(endpoint: object|null): Array<object|null>|null|undefined;
-
-    /**
-     * Computes value for `security` property
-     *
-     * @param shape AMF shape object
-     */
-    _computeSecurity(shape: object|null): Array<object|null>|null|undefined;
-
-    /**
-     * Computes value for `hasSecurity` property.
-     *
-     * @param security Current value of `security` property
-     */
-    _computeHasSecurity(security: Array<object|null>|null): Boolean|null;
+    _computePath(endpoint: object|null): String|null;
 
     /**
      * Computes `ectendsTypes`
@@ -361,13 +290,6 @@ declare namespace ApiElements {
     _computeTraits(types: Array<object|null>|null): Array<object|null>|null|undefined;
 
     /**
-     * Computes value for `hasTraits` property.
-     *
-     * @param traits Current value of `traits` property
-     */
-    _computeHasTraits(traits: Array<object|null>|null): Boolean|null;
-
-    /**
      * Computes name of a trait.
      *
      * @param trait AMF trait definition
@@ -379,6 +301,75 @@ declare namespace ApiElements {
      * Computes value for `hasExtension` property
      */
     _computeHasExtension(hasTraits: Boolean|null, hasParentType: Boolean|null): Boolean|null;
+
+    /**
+     * Computes list of operations for the endpoint.
+     *
+     * @param endpoint Endpoint model
+     * @returns Operations if defined.
+     */
+    _computeOperations(endpoint: object|null): Array<object|null>|null|undefined;
+
+    /**
+     * Computes value for `hasPagination` property
+     */
+    _computeHasNavigation(previous: Boolean|null, next: Boolean|null): Boolean|null;
+
+    /**
+     * Navigates to next method. Calls `_navigate` with id of previous item.
+     */
+    _navigatePrevious(): void;
+
+    /**
+     * Navigates to next method. Calls `_navigate` with id of next item.
+     */
+    _navigateNext(): void;
+
+    /**
+     * Dispatches `api-navigation-selection-changed` so other components
+     * can update their state.
+     */
+    _navigate(id: String|null, type: String|null): void;
+    _copyPathClipboard(e: any): void;
+
+    /**
+     * Handles scroll target chane and adds scroll event.
+     *
+     * @param st The scroll target.
+     */
+    _scrollTargetChanged(st: Node|null): void;
+
+    /**
+     * Scroll handler for `scrollTarget`.
+     * It does not stall main thred by executing the action after nex render.
+     */
+    _scrollHandler(): void;
+
+    /**
+     * I hope this won't be required in final version :(
+     */
+    _checkMethodsPosition(): void;
+
+    /**
+     * Function that checks if an `element` is in the main scrolling area.
+     *
+     * @param heigth Height of the scroll target
+     * @param dir Direction where the scroll is going (up or down)
+     * @param element The node to test
+     * @returns True when it determines that the element is in the main
+     * scroll area,
+     */
+    _occupiesMainScrollArea(heigth: Number|null, dir: String|null, element: Node|null): Boolean|null;
+
+    /**
+     * Dispatches `api-navigation-selection-changed` custom event with
+     * `passive: true` set on the detail object.
+     * Listeners should not react on this event except for the ones that
+     * should reflect passive navigation change.
+     *
+     * @param selected Id of selected method as in AMF model.
+     */
+    _notifyPassiveNavigation(selected: String|null): void;
   }
 }
 
