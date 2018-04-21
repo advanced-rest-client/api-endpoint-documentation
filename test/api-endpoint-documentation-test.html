@@ -106,32 +106,12 @@
           assert.equal(element.path, '/people');
         });
 
-        test('endpointUri is computed', () => {
-          assert.equal(element.endpointUri, 'http://{instance}.domain.com/people');
-        });
-
         test('description is computed', () => {
           assert.typeOf(element.description, 'string');
         });
 
         test('hasCustomProperties is computed', () => {
           assert.isTrue(element.hasCustomProperties);
-        });
-
-        test('server is computed', () => {
-          assert.typeOf(element.server, 'object');
-        });
-
-        test('serverVariables is computed', () => {
-          assert.typeOf(element.serverVariables, 'array');
-        });
-
-        test('endpointVariables is not computed', () => {
-          assert.isUndefined(element.endpointVariables);
-        });
-
-        test('hasPathParameters is true', () => {
-          assert.isTrue(element.hasPathParameters);
         });
 
         test('extendsTypes is computed', () => {

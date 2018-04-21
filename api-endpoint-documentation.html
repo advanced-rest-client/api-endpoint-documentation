@@ -21,10 +21,6 @@
       @apply --api-endpoint-documentation;
     }
 
-    [hidden] {
-      display: none !important;
-    }
-
     h1 {
       @apply --arc-font-display1;
     }
@@ -51,11 +47,6 @@
       margin-bottom: 28px;
       color: rgba(0, 0, 0, 0.74);
       @apply --arc-font-body1;
-    }
-
-    .method-value {
-      text-transform: uppercase;
-      white-space: nowrap;
     }
 
     .extensions {
@@ -297,40 +288,6 @@
         hasCustomProperties: {
           type: Boolean,
           computed: '_computeHasCustomProperties(endpoint)'
-        },
-        /**
-         * Computed value of the `http://raml.org/vocabularies/http#server`
-         * from `amfModel`
-         */
-        server: {
-          type: Object,
-          computed: '_computeServer(amfModel)'
-        },
-        /**
-         * API base URI parameters defined in AMF api model
-         *
-         * @type {Array|undefined}
-         */
-        serverVariables: {
-          type: Array,
-          computed: '_computeServerVariables(server)'
-        },
-        /**
-         * Endpoint's path parameters.
-         *
-         * @type {Array|undefined}
-         */
-        endpointVariables: {
-          type: Array,
-          computed: '_computeEndpointVariables(endpoint)'
-        },
-        /**
-         * Computed value if server and endpoint definition of API model has
-         * defined any variables.
-         */
-        hasPathParameters: {
-          type: Boolean,
-          computed: '_computeHasPathParameters(serverVariables, endpointVariables)'
         },
         /**
          * Computed value of AMF security definition from `method`
