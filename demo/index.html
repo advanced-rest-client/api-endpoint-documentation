@@ -17,6 +17,7 @@
     <link rel="import" href="../../paper-item/paper-item.html">
     <link rel="import" href="../../paper-listbox/paper-listbox.html">
     <link rel="import" href="../../neon-animation/web-animations.html">
+    <link rel="import" href="../../paper-toast/paper-toast.html">
     <link rel="import" href="../api-endpoint-documentation.html">
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
@@ -115,7 +116,7 @@
           <raml-aware raml="{{amfModel}}" scope="model"></raml-aware>
           <api-navigation aware="model" endpoints-opened></api-navigation>
           <template is="dom-if" if="[[hasData]]">
-            <api-endpoint-documentation aware="model" endpoint="[[endpoint]]" previous="[[previous]]" next="[[next]]"></api-endpoint-documentation>
+            <api-endpoint-documentation aware="model" endpoint="[[endpoint]]" previous="[[previous]]" next="[[next]]" scroll-target="[[scrollTarget]]"></api-endpoint-documentation>
           </template>
           <template is="dom-if" if="[[!hasData]]">
             <p>Select a HTTP method in the navigation to see the demo.</p>
@@ -123,9 +124,11 @@
         </div>
       </template>
     </dom-bind>
+    <paper-toast id="navToast"></paper-toast>
     <script>
     (function(app) {
       app.hasData = false;
+      app.scrollTarget = window;
       app._load = function() {
         document.getElementById('enpointsList').selected = 0;
       };
@@ -141,6 +144,12 @@
         app._loadFile(file);
       };
       app._navChanged = function(e) {
+        if (e.detail.passive) {
+          const toast = document.getElementById('navToast');
+          toast.text = 'Passive navigation to: ' + e.detail.selected;
+          toast.opened = true;
+          return;
+        }
         const type = e.detail.type;
         if (type === 'endpoint') {
           app.setData(e.detail.selected);

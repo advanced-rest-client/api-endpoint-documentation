@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../polymer/lib/elements/dom-if.html">
 <link rel="import" href="../polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../polymer/lib/utils/render-status.html">
 <link rel="import" href="../raml-aware/raml-aware.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../api-annotation-document/api-annotation-document.html">
@@ -127,18 +128,17 @@
         <div slot="markdown-html" class="markdown-body"></div>
       </marked-element>
     </template>
-
     <h2>Path</h2>
     <section class="url-area">
       <div class="url-value">[[path]]</div>
       <paper-icon-button class="action-icon copy-icon" icon="arc:content-copy" on-tap="_copyPathClipboard" title="Copy path to clipboard"></paper-icon-button>
     </section>
     <clipboard-copy id="pathCopy" content="[[path]]"></clipboard-copy>
-
-    <template is="dom-repeat" items="[[operations]]">
-      <api-method-documentation amf-model="[[amfModel]]" endpoint="[[endpoint]]" method="[[item]]" base-uri="[[baseUri]]"></api-method-documentation>
-    </template>
-
+    <section class="methods">
+      <template is="dom-repeat" items="[[operations]]">
+        <api-method-documentation amf-model="[[amfModel]]" endpoint="[[endpoint]]" method="[[item]]" base-uri="[[baseUri]]"></api-method-documentation>
+      </template>
+    </section>
     <template is="dom-if" if="[[hasPagination]]">
       <section class="bottom-nav">
         <template is="dom-if" if="[[hasPreviousLink]]">
@@ -156,7 +156,6 @@
         </template>
       </section>
     </template>
-
   </template>
   <script>
   /**
@@ -403,8 +402,25 @@
         hasPagination: {
           type: Boolean,
           computed: '_computeHasNavigation(hasPreviousLink, hasNextLink)'
+        },
+        /**
+         * Scroll target used to observe `scroll` event.
+         * When set the element will observe scroll and inform other components
+         * about changes in navigation while scrolling through methods list.
+         * The navigation event contains `passive: true` property that
+         * determines that it's not user triggered navigation but rather
+         * context enforced.
+         */
+        scrollTarget: {
+          type: Object,
+          observer: '_scrollTargetChanged'
         }
       };
+    }
+
+    constructor() {
+      super();
+      this._scrollHandler = this._scrollHandler.bind(this);
     }
     /**
      * Computes method's endpoint name.
@@ -559,6 +575,112 @@
         setTimeout(() => {
           button.icon = 'arc:content-copy';
         }, 1000);
+    }
+    /**
+     * Handles scroll target chane and adds scroll event.
+     *
+     * @param {Node} st The scroll target.
+     */
+    _scrollTargetChanged(st) {
+      if (this._oldScrollTarget) {
+        this._oldScrollTarget.removeEventListener('scroll', this._scrollHandler);
+        this._oldScrollTarget = undefined;
+      }
+      if (st) {
+        st.addEventListener('scroll', this._scrollHandler);
+        this._oldScrollTarget = st;
+      }
+    }
+    /**
+     * Scroll handler for `scrollTarget`.
+     * It does not stall main thred by executing the action after nex render.
+     */
+    _scrollHandler() {
+      Polymer.RenderStatus.afterNextRender(this, this._checkMethodsPosition);
+    }
+    /**
+     * I hope this won't be required in final version :(
+     */
+    _checkMethodsPosition() {
+      const st = this._oldScrollTarget;
+      if (!st) {
+        return;
+      }
+      const scroll = st.scrollY;
+      const diff = (this._lastScrollPos || 0) - scroll;
+      this._lastScrollPos = scroll;
+      const dir = diff < 0 ? 'down' : 'up';
+      const heigth = st.scrollHeight || st.innerHeight;
+      if (!this._methodsList) {
+        const section = this.shadowRoot.querySelector('section.methods');
+        // This lis live node list so the reference has to be made only once.
+        this._methodsList = section.childNodes;
+      }
+      for (let i = 0, len = this._methodsList.length; i < len; i++) {
+        const node = this._methodsList[i];
+        if (node.nodeName !== 'API-METHOD-DOCUMENTATION') {
+          continue;
+        }
+        if (this._occupiesMainScrollArea(heigth, dir, node)) {
+          this._notifyPassiveNavigation(node.method['@id']);
+          return;
+        }
+      }
+    }
+    /**
+     * Function that checks if an `element` is in the main scrolling area.
+     *
+     * @param {Number} heigth Height of the scroll target
+     * @param {String} dir Direction where the scroll is going (up or down)
+     * @param {Node} element The node to test
+     * @return {Boolean} True when it determines that the element is in the main
+     * scroll area,
+     */
+    _occupiesMainScrollArea(heigth, dir, element) {
+      const rect = element.getBoundingClientRect();
+      const padding = 60;
+      if (rect.bottom < 0) {
+        return false;
+      }
+      if (rect.top > heigth) {
+        return false;
+      }
+      if (rect.y > 0 && rect.y < padding) {
+        if (dir === 'up') {
+          return false;
+        }
+        return true;
+      }
+      if (dir === 'up' && (rect.bottom + padding) > heigth && rect.bottom < heigth) {
+        return true;
+      }
+      return false;
+    }
+    /**
+     * Dispatches `api-navigation-selection-changed` custom event with
+     * `passive: true` set on the detail object.
+     * Listeners should not react on this event except for the ones that
+     * should reflect passive navigation change.
+     *
+     * @param {String} selected Id of selected method as in AMF model.
+     */
+    _notifyPassiveNavigation(selected) {
+      if (this.__notyfyingChange) {
+        return;
+      }
+      this.__notyfyingChange = true;
+      setTimeout(() => {
+        this.__notyfyingChange = false;
+        this.dispatchEvent(new CustomEvent('api-navigation-selection-changed', {
+          composed: true,
+          bubbles: true,
+          detail: {
+            selected,
+            type: 'method',
+            passive: true
+          }
+        }));
+      }, 200);
     }
     /**
      * Dispatched when the user requested previous / next
