@@ -22,12 +22,14 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Object"
+            }
           }
         },
         {
           "name": "aware",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "`raml-aware` scope property to use.",
           "privacy": "public",
           "sourceRange": {
@@ -41,12 +43,14 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "String"
+            }
           }
         },
         {
           "name": "endpoint",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "Method's endpoint definition as a\n`http://raml.org/vocabularies/http#endpoint` of AMF model.",
           "privacy": "public",
           "sourceRange": {
@@ -60,12 +64,14 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Object"
+            }
           }
         },
         {
           "name": "baseUri",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "A property to set to override AMF's model base URI information.\nWhen this property is set, the `endpointUri` property is recalculated.",
           "privacy": "public",
           "sourceRange": {
@@ -79,12 +85,14 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "String"
+            }
           }
         },
         {
           "name": "endpointName",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "Endpoint name.\nIt should be either a \"displayName\" or endpoint's relative\npath.",
           "privacy": "public",
           "sourceRange": {
@@ -99,13 +107,14 @@
           },
           "metadata": {
             "polymer": {
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "String"
             }
           }
         },
         {
           "name": "description",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "Computed value of method description from `method` property.",
           "privacy": "public",
           "sourceRange": {
@@ -120,13 +129,14 @@
           },
           "metadata": {
             "polymer": {
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "String"
             }
           }
         },
         {
           "name": "path",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "Computed value of endpoint's path.",
           "privacy": "public",
           "sourceRange": {
@@ -141,13 +151,14 @@
           },
           "metadata": {
             "polymer": {
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "String"
             }
           }
         },
         {
           "name": "hasCustomProperties",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Computed value from current `method`. True if the model contains\ncustom properties (annotations in RAML).",
           "privacy": "public",
           "sourceRange": {
@@ -162,13 +173,14 @@
           },
           "metadata": {
             "polymer": {
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "Boolean"
             }
           }
         },
         {
           "name": "security",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "Computed value of AMF security definition from `method`\nproperty.",
           "privacy": "public",
           "sourceRange": {
@@ -183,13 +195,14 @@
           },
           "metadata": {
             "polymer": {
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "Object"
             }
           }
         },
         {
           "name": "hasSecurity",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Computed value, true if `security` has values.",
           "privacy": "public",
           "sourceRange": {
@@ -204,13 +217,14 @@
           },
           "metadata": {
             "polymer": {
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "Boolean"
             }
           }
         },
         {
           "name": "narrow",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "If set it will renders the view in the narrow layout.",
           "privacy": "public",
           "sourceRange": {
@@ -224,7 +238,9 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           }
         },
         {
@@ -244,13 +260,14 @@
           },
           "metadata": {
             "polymer": {
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "Array"
             }
           }
         },
         {
           "name": "parentType",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "Computed value of a parent type.\nIn RAML it is resource type that can be applied to a resource.",
           "privacy": "public",
           "sourceRange": {
@@ -265,13 +282,14 @@
           },
           "metadata": {
             "polymer": {
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "Object"
             }
           }
         },
         {
           "name": "hasParentType",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Computed value, true if `parentType` has a value.",
           "privacy": "public",
           "sourceRange": {
@@ -286,13 +304,14 @@
           },
           "metadata": {
             "polymer": {
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "Boolean"
             }
           }
         },
         {
           "name": "parentTypeName",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "Computed value for parent type name.",
           "privacy": "public",
           "sourceRange": {
@@ -307,7 +326,8 @@
           },
           "metadata": {
             "polymer": {
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "String"
             }
           }
         },
@@ -328,13 +348,14 @@
           },
           "metadata": {
             "polymer": {
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "Array"
             }
           }
         },
         {
           "name": "hasTraits",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Computed value, true if the endpoint has traits.",
           "privacy": "public",
           "sourceRange": {
@@ -349,13 +370,14 @@
           },
           "metadata": {
             "polymer": {
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "Boolean"
             }
           }
         },
         {
           "name": "hasExtension",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "True if the endpoint is extended by either traits or resource type.",
           "privacy": "public",
           "sourceRange": {
@@ -370,13 +392,14 @@
           },
           "metadata": {
             "polymer": {
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "Boolean"
             }
           }
         },
         {
           "name": "operations",
-          "type": "Array",
+          "type": "Array | null | undefined",
           "description": "A list of AMF's supported operations (HTTP methods) in this\nendpoint",
           "privacy": "public",
           "sourceRange": {
@@ -391,13 +414,14 @@
           },
           "metadata": {
             "polymer": {
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "Array"
             }
           }
         },
         {
           "name": "previous",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "Model to generate a link to previous HTTP endpoint.\nIt should contain `id` and `label` properties",
           "privacy": "public",
           "sourceRange": {
@@ -411,12 +435,14 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Object"
+            }
           }
         },
         {
           "name": "hasPreviousLink",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Computed value, true if `previous` is set",
           "privacy": "public",
           "sourceRange": {
@@ -431,13 +457,14 @@
           },
           "metadata": {
             "polymer": {
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "Boolean"
             }
           }
         },
         {
           "name": "next",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "Model to generate a link to next HTTP endpoint.\nIt should contain `id` and `label` properties",
           "privacy": "public",
           "sourceRange": {
@@ -451,12 +478,14 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Object"
+            }
           }
         },
         {
           "name": "hasNextLink",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Computed value, true if `next` is set",
           "privacy": "public",
           "sourceRange": {
@@ -471,13 +500,14 @@
           },
           "metadata": {
             "polymer": {
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "Boolean"
             }
           }
         },
         {
           "name": "hasPagination",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Computed value, true to render bottom navigation",
           "privacy": "public",
           "sourceRange": {
@@ -492,13 +522,14 @@
           },
           "metadata": {
             "polymer": {
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "Boolean"
             }
           }
         },
         {
           "name": "scrollTarget",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "Scroll target used to observe `scroll` event.\nWhen set the element will observe scroll and inform other components\nabout changes in navigation while scrolling through methods list.\nThe navigation event contains `passive: true` property that\ndetermines that it's not user triggered navigation but rather\ncontext enforced.",
           "privacy": "public",
           "sourceRange": {
@@ -513,24 +544,54 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"_scrollTargetChanged\""
+              "observer": "\"_scrollTargetChanged\"",
+              "attributeType": "Object"
             }
           }
         }
       ],
       "methods": [
         {
-          "name": "_getValue",
-          "description": "Gets a signle scalar value from a model.",
+          "name": "_ensureAmfModel",
+          "description": "Ensures that the model is AMF object.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
               "line": 80,
               "column": 4
             },
             "end": {
               "line": 90,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "amf",
+              "type": "(Object | Array)",
+              "description": "AMF json/ld model"
+            }
+          ],
+          "return": {
+            "type": "(Object | undefined)",
+            "desc": "API spec"
+          },
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
+          "name": "_getValue",
+          "description": "Gets a signle scalar value from a model.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 97,
+              "column": 4
+            },
+            "end": {
+              "line": 107,
               "column": 5
             }
           },
@@ -558,13 +619,13 @@
           "description": "Gets values from a model as an array of `@value` properties.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 97,
+              "line": 114,
               "column": 4
             },
             "end": {
-              "line": 103,
+              "line": 120,
               "column": 5
             }
           },
@@ -592,13 +653,13 @@
           "description": "Checks if a model has a type.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 110,
+              "line": 127,
               "column": 4
             },
             "end": {
-              "line": 118,
+              "line": 135,
               "column": 5
             }
           },
@@ -626,13 +687,13 @@
           "description": "Checks if a shape has a property.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 125,
+              "line": 142,
               "column": 4
             },
             "end": {
-              "line": 127,
+              "line": 144,
               "column": 5
             }
           },
@@ -654,123 +715,153 @@
         },
         {
           "name": "_computePropertyArray",
-          "description": "",
+          "description": "Computes array value of a property in a model (shape).",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 129,
+              "line": 152,
               "column": 4
             },
             "end": {
-              "line": 138,
+              "line": 161,
               "column": 5
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "shape"
+              "name": "shape",
+              "type": "Object",
+              "description": "AMF shape object"
             },
             {
-              "name": "key"
+              "name": "key",
+              "type": "String",
+              "description": "Property name"
             }
           ],
+          "return": {
+            "type": "(Array.<any> | undefined)"
+          },
           "inheritedFrom": "ApiElements.AmfHelperMixin"
         },
         {
           "name": "_computePropertyObject",
-          "description": "",
+          "description": "Computes a value of a property in a model (shape).\nIt takes first value of a property, if exists.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 140,
+              "line": 170,
               "column": 4
             },
             "end": {
-              "line": 143,
+              "line": 173,
               "column": 5
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "shape"
+              "name": "shape",
+              "type": "Object",
+              "description": "AMF shape object"
             },
             {
-              "name": "key"
+              "name": "key",
+              "type": "String",
+              "description": "Property name"
             }
           ],
+          "return": {
+            "type": "(any | undefined)"
+          },
           "inheritedFrom": "ApiElements.AmfHelperMixin"
         },
         {
           "name": "_computeHasStringValue",
-          "description": "",
+          "description": "Tests if a passed argumet exists.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 145,
+              "line": 180,
               "column": 4
             },
             "end": {
-              "line": 147,
+              "line": 182,
               "column": 5
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "value"
+              "name": "value",
+              "type": "(String | Object | Number)",
+              "description": "A value to test"
             }
           ],
+          "return": {
+            "type": "Boolean"
+          },
           "inheritedFrom": "ApiElements.AmfHelperMixin"
         },
         {
           "name": "_computeHasArrayValue",
-          "description": "",
+          "description": "Computes if passed argument is an array and has a value.\nIt does not check for type or value of the array items.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 149,
+              "line": 189,
               "column": 4
             },
             "end": {
-              "line": 151,
+              "line": 191,
               "column": 5
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "value"
+              "name": "value",
+              "type": "Array",
+              "description": "Value to test"
             }
           ],
+          "return": {
+            "type": "Boolean"
+          },
           "inheritedFrom": "ApiElements.AmfHelperMixin"
         },
         {
           "name": "_computeDescription",
-          "description": "",
+          "description": "Computes description for a shape.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 153,
+              "line": 197,
               "column": 4
             },
             "end": {
-              "line": 155,
+              "line": 199,
               "column": 5
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "shape"
+              "name": "shape",
+              "type": "Object",
+              "description": "AMF shape"
             }
           ],
+          "return": {
+            "type": "String",
+            "desc": "Description value."
+          },
           "inheritedFrom": "ApiElements.AmfHelperMixin"
         },
         {
@@ -778,13 +869,13 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 157,
+              "line": 201,
               "column": 4
             },
             "end": {
-              "line": 159,
+              "line": 203,
               "column": 5
             }
           },
@@ -801,13 +892,13 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 161,
+              "line": 205,
               "column": 4
             },
             "end": {
-              "line": 163,
+              "line": 207,
               "column": 5
             }
           },
@@ -824,13 +915,13 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 165,
+              "line": 209,
               "column": 4
             },
             "end": {
-              "line": 167,
+              "line": 211,
               "column": 5
             }
           },
@@ -847,13 +938,13 @@
           "description": "Computes value for `serverVariables` property.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 175,
+              "line": 219,
               "column": 4
             },
             "end": {
-              "line": 177,
+              "line": 221,
               "column": 5
             }
           },
@@ -876,13 +967,13 @@
           "description": "Computes value for `endpointVariables` property.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 184,
+              "line": 228,
               "column": 4
             },
             "end": {
-              "line": 186,
+              "line": 230,
               "column": 5
             }
           },
@@ -905,13 +996,13 @@
           "description": "Computes value for the `payload` property",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 193,
+              "line": 237,
               "column": 4
             },
             "end": {
-              "line": 195,
+              "line": 239,
               "column": 5
             }
           },
@@ -934,13 +1025,13 @@
           "description": "Computes value for `returns` property",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 202,
+              "line": 246,
               "column": 4
             },
             "end": {
-              "line": 204,
+              "line": 248,
               "column": 5
             }
           },
@@ -962,13 +1053,13 @@
           "description": "Computes value for `security` property",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 211,
+              "line": 255,
               "column": 4
             },
             "end": {
-              "line": 213,
+              "line": 257,
               "column": 5
             }
           },
@@ -990,13 +1081,13 @@
           "description": "Computes value for `hasCustomProperties` property.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 220,
+              "line": 264,
               "column": 4
             },
             "end": {
-              "line": 222,
+              "line": 266,
               "column": 5
             }
           },
@@ -1014,17 +1105,133 @@
           "inheritedFrom": "ApiElements.AmfHelperMixin"
         },
         {
+          "name": "_computeEncodes",
+          "description": "Computes model's `encodes` property.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 273,
+              "column": 4
+            },
+            "end": {
+              "line": 282,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "model",
+              "type": "?Object",
+              "description": "AMF data model"
+            }
+          ],
+          "return": {
+            "type": "Array.<Object>",
+            "desc": "List of encodes"
+          },
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
+          "name": "_computeDeclares",
+          "description": "Computes list of declarations in the AMF api model.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 289,
+              "column": 4
+            },
+            "end": {
+              "line": 301,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "model",
+              "type": "(Array | Object)",
+              "description": "AMF json/ld model for an API"
+            }
+          ],
+          "return": {
+            "type": "Array.<Object>",
+            "desc": "List of declarations"
+          },
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
+          "name": "_computeReferences",
+          "description": "Computes list of references in the AMF api model.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 308,
+              "column": 4
+            },
+            "end": {
+              "line": 320,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "model",
+              "type": "(Array | Object)",
+              "description": "AMF json/ld model for an API"
+            }
+          ],
+          "return": {
+            "type": "Array.<Object>",
+            "desc": "List of declarations"
+          },
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
+          "name": "_computeWebApi",
+          "description": "Computes AMF's `http://schema.org/WebAPI` model",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 327,
+              "column": 4
+            },
+            "end": {
+              "line": 333,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "model",
+              "type": "(Array | Object)",
+              "description": "AMF json/ld model for an API"
+            }
+          ],
+          "return": {
+            "type": "Object",
+            "desc": "Web API declaration."
+          },
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
           "name": "_computeServer",
           "description": "Computes value for `server` property that is later used with other computations.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 229,
+              "line": 340,
               "column": 4
             },
             "end": {
-              "line": 246,
+              "line": 347,
               "column": 5
             }
           },
@@ -1047,13 +1254,13 @@
           "description": "Computes endpoint's URI based on `amfModel` and `endpoint` models.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 255,
+              "line": 356,
               "column": 4
             },
             "end": {
-              "line": 262,
+              "line": 364,
               "column": 5
             }
           },
@@ -1086,13 +1293,13 @@
           "description": "Computes base URI value from either `baseUri`, `iron-meta` with\n`ApiBaseUri` key or `amfModel` value (in this order).",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 271,
+              "line": 374,
               "column": 4
             },
             "end": {
-              "line": 282,
+              "line": 385,
               "column": 5
             }
           },
@@ -1107,6 +1314,11 @@
               "name": "server",
               "type": "Object",
               "description": "AMF API model for Server."
+            },
+            {
+              "name": "protocols",
+              "type": "?Array.<String>",
+              "description": "List of supported protocols"
             }
           ],
           "return": {
@@ -1120,13 +1332,13 @@
           "description": "Computes base URI from AMF model.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 289,
+              "line": 395,
               "column": 4
             },
             "end": {
-              "line": 291,
+              "line": 399,
               "column": 5
             }
           },
@@ -1136,6 +1348,11 @@
               "name": "server",
               "type": "Object",
               "description": "AMF API model for Server."
+            },
+            {
+              "name": "protocols",
+              "type": "?Array.<String>",
+              "description": "Listy of supporte dprotocols. If not\nprovided and required to compute the url it uses `amfModel` to compute\nprotocols"
             }
           ],
           "return": {
@@ -1145,17 +1362,79 @@
           "inheritedFrom": "ApiElements.AmfHelperMixin"
         },
         {
+          "name": "_ensureUrlScheme",
+          "description": "A function that makes sure that the URL has a scheme definition.\nIf no supported protocols information is available it assumes `http`.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 411,
+              "column": 4
+            },
+            "end": {
+              "line": 425,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "value",
+              "type": "String",
+              "description": "A url value"
+            },
+            {
+              "name": "protocols",
+              "type": "?Array.<String>",
+              "description": "List of supported by the API protocols\nAn array of string like: `['HTTP', 'HTTPS']`. It lowercase the value.\nIf not set it tries to read supported protocols value from `amfModel`\nproperty."
+            }
+          ],
+          "return": {
+            "type": "String",
+            "desc": "Url with scheme."
+          },
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
+          "name": "_computeProtocols",
+          "description": "Computes supported protocols by the API.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 432,
+              "column": 4
+            },
+            "end": {
+              "line": 442,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "model",
+              "type": "(Object | Array)",
+              "description": "AMF data model"
+            }
+          ],
+          "return": {
+            "type": "(Array.<String> | undefined)"
+          },
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
           "name": "_computeExpects",
           "description": "Computes value for the `expects` property.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 298,
+              "line": 449,
               "column": 4
             },
             "end": {
-              "line": 305,
+              "line": 456,
               "column": 5
             }
           },
@@ -1177,13 +1456,13 @@
           "description": "Tries to find an example value (whether it's default value or from an\nexample) to put it into snippet's values.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/amf-helper-mixin/amf-helper-mixin.html",
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 313,
+              "line": 464,
               "column": 4
             },
             "end": {
-              "line": 330,
+              "line": 481,
               "column": 5
             }
           },
@@ -1197,6 +1476,353 @@
           ],
           "return": {
             "type": "(String | undefined)"
+          },
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
+          "name": "_computeEndpointModel",
+          "description": "Computes model for an endpoint documentation.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 489,
+              "column": 4
+            },
+            "end": {
+              "line": 495,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "webApi",
+              "type": "Object",
+              "description": "Current value of `webApi` property"
+            },
+            {
+              "name": "selected",
+              "type": "String",
+              "description": "Selected shape ID"
+            }
+          ],
+          "return": {
+            "type": "Object",
+            "desc": "An endponit definition"
+          },
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
+          "name": "_computeMethodModel",
+          "description": "Computes method for the method documentation.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 503,
+              "column": 4
+            },
+            "end": {
+              "line": 509,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "webApi",
+              "type": "Object",
+              "description": "Current value of `webApi` property"
+            },
+            {
+              "name": "selected",
+              "type": "String",
+              "description": "Selected shape"
+            }
+          ],
+          "return": {
+            "type": "Object",
+            "desc": "A method definition"
+          },
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
+          "name": "__computeMethodsListForMethod",
+          "description": "",
+          "privacy": "private",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 510,
+              "column": 4
+            },
+            "end": {
+              "line": 524,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "webApi"
+            },
+            {
+              "name": "selected"
+            }
+          ],
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
+          "name": "_computeType",
+          "description": "Computes a type documentation model.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 533,
+              "column": 4
+            },
+            "end": {
+              "line": 550,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "declares",
+              "type": "Array",
+              "description": "Current value of `declares` property"
+            },
+            {
+              "name": "references",
+              "type": "?Array",
+              "description": "Current value of `references` property"
+            },
+            {
+              "name": "selected",
+              "type": "String",
+              "description": "Selected shape"
+            }
+          ],
+          "return": {
+            "type": "Object",
+            "desc": "A type definition"
+          },
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
+          "name": "_computeReferenceType",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 551,
+              "column": 4
+            },
+            "end": {
+              "line": 557,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "reference"
+            },
+            {
+              "name": "selected"
+            }
+          ],
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
+          "name": "_computeSecurityModel",
+          "description": "Computes model for selected security definition.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 565,
+              "column": 4
+            },
+            "end": {
+              "line": 570,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "declares",
+              "type": "Array",
+              "description": "Current value of `declares` property"
+            },
+            {
+              "name": "selected",
+              "type": "String",
+              "description": "Selected shape"
+            }
+          ],
+          "return": {
+            "type": "Object",
+            "desc": "A security definition"
+          },
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
+          "name": "_computeDocument",
+          "description": "Computes a documentation model.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 578,
+              "column": 4
+            },
+            "end": {
+              "line": 584,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "webApi",
+              "type": "Object",
+              "description": "Current value of `webApi` property"
+            },
+            {
+              "name": "selected",
+              "type": "String",
+              "description": "Selected shape"
+            }
+          ],
+          "return": {
+            "type": "Object",
+            "desc": "A method definition"
+          },
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
+          "name": "_resolve",
+          "description": "Resolves a reference to an external fragment.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 591,
+              "column": 4
+            },
+            "end": {
+              "line": 630,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "shape",
+              "type": "Object",
+              "description": "A shape to resolve"
+            }
+          ],
+          "return": {
+            "type": "Object",
+            "desc": "Resolved shape."
+          },
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
+          "name": "_getExampleValue",
+          "description": "Gets string value for an example data model.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 639,
+              "column": 4
+            },
+            "end": {
+              "line": 651,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "item",
+              "type": "Object",
+              "description": "Example item model"
+            },
+            {
+              "name": "isJson",
+              "type": "Boolean",
+              "description": "If set it checks if the `raw` value is valid JSON.\nIf it isn't then it parses structured value."
+            }
+          ],
+          "return": {
+            "type": "String"
+          },
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
+          "name": "_computeExampleFromStructuredValue",
+          "description": "Computes an example from example structured value.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 658,
+              "column": 4
+            },
+            "end": {
+              "line": 679,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "model",
+              "type": "Object",
+              "description": "`structuredValue` item model."
+            }
+          ],
+          "return": {
+            "type": "(Object | Array)",
+            "desc": "Javascript object or array with structured value."
+          },
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
+          "name": "_computeStructuredExampleValue",
+          "description": "Computes value with propert data type for a structured example.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 685,
+              "column": 4
+            },
+            "end": {
+              "line": 710,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "model",
+              "type": "Object",
+              "description": "Structured example item model."
+            }
+          ],
+          "return": {
+            "type": "(String | Boolean | Number)",
+            "desc": "Value for the example."
           },
           "inheritedFrom": "ApiElements.AmfHelperMixin"
         },
@@ -1510,7 +2136,10 @@
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_navigateNext",
@@ -1527,7 +2156,10 @@
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_navigate",
@@ -1553,7 +2185,10 @@
               "name": "type",
               "type": "String"
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_copyPathClipboard",
@@ -1574,7 +2209,10 @@
             {
               "name": "e"
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_scrollTargetChanged",
@@ -1597,7 +2235,10 @@
               "type": "Node",
               "description": "The scroll target."
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_scrollHandler",
@@ -1614,7 +2255,10 @@
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_checkMethodsPosition",
@@ -1631,7 +2275,10 @@
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_occupiesMainScrollArea",
@@ -1691,7 +2338,10 @@
               "type": "String",
               "description": "Id of selected method as in AMF model."
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         }
       ],
       "staticMethods": [],
@@ -1746,7 +2396,7 @@
             }
           },
           "metadata": {},
-          "type": "string"
+          "type": "string | null | undefined"
         },
         {
           "name": "endpoint",
@@ -1762,7 +2412,7 @@
             }
           },
           "metadata": {},
-          "type": "Object"
+          "type": "Object | null | undefined"
         },
         {
           "name": "base-uri",
@@ -1778,7 +2428,7 @@
             }
           },
           "metadata": {},
-          "type": "string"
+          "type": "string | null | undefined"
         },
         {
           "name": "endpoint-name",
@@ -1794,7 +2444,7 @@
             }
           },
           "metadata": {},
-          "type": "string"
+          "type": "string | null | undefined"
         },
         {
           "name": "description",
@@ -1810,7 +2460,7 @@
             }
           },
           "metadata": {},
-          "type": "string"
+          "type": "string | null | undefined"
         },
         {
           "name": "path",
@@ -1826,7 +2476,7 @@
             }
           },
           "metadata": {},
-          "type": "string"
+          "type": "string | null | undefined"
         },
         {
           "name": "has-custom-properties",
@@ -1842,7 +2492,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "security",
@@ -1858,7 +2508,7 @@
             }
           },
           "metadata": {},
-          "type": "Object"
+          "type": "Object | null | undefined"
         },
         {
           "name": "has-security",
@@ -1874,7 +2524,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "narrow",
@@ -1890,7 +2540,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "extends-types",
@@ -1922,7 +2572,7 @@
             }
           },
           "metadata": {},
-          "type": "Object"
+          "type": "Object | null | undefined"
         },
         {
           "name": "has-parent-type",
@@ -1938,7 +2588,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "parent-type-name",
@@ -1954,7 +2604,7 @@
             }
           },
           "metadata": {},
-          "type": "string"
+          "type": "string | null | undefined"
         },
         {
           "name": "traits",
@@ -1986,7 +2636,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "has-extension",
@@ -2002,7 +2652,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "operations",
@@ -2018,7 +2668,7 @@
             }
           },
           "metadata": {},
-          "type": "Array"
+          "type": "Array | null | undefined"
         },
         {
           "name": "previous",
@@ -2034,7 +2684,7 @@
             }
           },
           "metadata": {},
-          "type": "Object"
+          "type": "Object | null | undefined"
         },
         {
           "name": "has-previous-link",
@@ -2050,7 +2700,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "next",
@@ -2066,7 +2716,7 @@
             }
           },
           "metadata": {},
-          "type": "Object"
+          "type": "Object | null | undefined"
         },
         {
           "name": "has-next-link",
@@ -2082,7 +2732,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "has-pagination",
@@ -2098,7 +2748,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "scroll-target",
@@ -2114,14 +2764,14 @@
             }
           },
           "metadata": {},
-          "type": "Object"
+          "type": "Object | null | undefined"
         }
       ],
       "events": [
         {
           "type": "CustomEvent",
           "name": "api-navigation-selection-changed",
-          "description": "api-navigation-selection-changed",
+          "description": "Dispatched when the user requested previous / next",
           "metadata": {}
         }
       ],

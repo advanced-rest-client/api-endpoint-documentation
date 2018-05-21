@@ -479,64 +479,35 @@
                             "http://www.w3.org/ns/shacl#in": [
                               {
                                 "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/request/parameter/type/scalar/schema/list",
-                                "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
+                                "@type": "http://www.w3.org/2000/01/rdf-schema#Seq",
+                                "http://www.w3.org/2000/01/rdf-schema#_1": [
                                   {
                                     "@value": "text"
                                   }
                                 ],
-                                "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
+                                "http://www.w3.org/2000/01/rdf-schema#_2": [
                                   {
-                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/request/parameter/type/scalar/schema/list/list",
-                                    "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
-                                      {
-                                        "@value": "binary"
-                                      }
-                                    ],
-                                    "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
-                                      {
-                                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/request/parameter/type/scalar/schema/list/list/list",
-                                        "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
-                                          {
-                                            "@value": "wappush"
-                                          }
-                                        ],
-                                        "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
-                                          {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/request/parameter/type/scalar/schema/list/list/list/list",
-                                            "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
-                                              {
-                                                "@value": "unicode"
-                                              }
-                                            ],
-                                            "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
-                                              {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/request/parameter/type/scalar/schema/list/list/list/list/list",
-                                                "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
-                                                  {
-                                                    "@value": "vcal"
-                                                  }
-                                                ],
-                                                "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
-                                                  {
-                                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/request/parameter/type/scalar/schema/list/list/list/list/list/list",
-                                                    "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
-                                                      {
-                                                        "@value": "vcard"
-                                                      }
-                                                    ],
-                                                    "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
-                                                      {
-                                                        "@id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"
-                                                      }
-                                                    ]
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          }
-                                        ]
-                                      }
-                                    ]
+                                    "@value": "binary"
+                                  }
+                                ],
+                                "http://www.w3.org/2000/01/rdf-schema#_3": [
+                                  {
+                                    "@value": "wappush"
+                                  }
+                                ],
+                                "http://www.w3.org/2000/01/rdf-schema#_4": [
+                                  {
+                                    "@value": "unicode"
+                                  }
+                                ],
+                                "http://www.w3.org/2000/01/rdf-schema#_5": [
+                                  {
+                                    "@value": "vcal"
+                                  }
+                                ],
+                                "http://www.w3.org/2000/01/rdf-schema#_6": [
+                                  {
+                                    "@value": "vcard"
                                   }
                                 ]
                               }
@@ -1000,44 +971,25 @@
                             "http://www.w3.org/ns/shacl#in": [
                               {
                                 "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/request/parameter/message-class/scalar/schema/list",
-                                "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
+                                "@type": "http://www.w3.org/2000/01/rdf-schema#Seq",
+                                "http://www.w3.org/2000/01/rdf-schema#_1": [
                                   {
                                     "@value": "0"
                                   }
                                 ],
-                                "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
+                                "http://www.w3.org/2000/01/rdf-schema#_2": [
                                   {
-                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/request/parameter/message-class/scalar/schema/list/list",
-                                    "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
-                                      {
-                                        "@value": "1"
-                                      }
-                                    ],
-                                    "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
-                                      {
-                                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/request/parameter/message-class/scalar/schema/list/list/list",
-                                        "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
-                                          {
-                                            "@value": "2"
-                                          }
-                                        ],
-                                        "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
-                                          {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/request/parameter/message-class/scalar/schema/list/list/list/list",
-                                            "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
-                                              {
-                                                "@value": "3"
-                                              }
-                                            ],
-                                            "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
-                                              {
-                                                "@id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"
-                                              }
-                                            ]
-                                          }
-                                        ]
-                                      }
-                                    ]
+                                    "@value": "1"
+                                  }
+                                ],
+                                "http://www.w3.org/2000/01/rdf-schema#_3": [
+                                  {
+                                    "@value": "2"
+                                  }
+                                ],
+                                "http://www.w3.org/2000/01/rdf-schema#_4": [
+                                  {
+                                    "@value": "3"
                                   }
                                 ]
                               }
@@ -1440,7 +1392,7 @@
                     ],
                     "http://raml.org/vocabularies/http#payload": [
                       {
-                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain",
+                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain",
                         "@type": [
                           "http://raml.org/vocabularies/http#Payload",
                           "http://raml.org/vocabularies/document#DomainElement"
@@ -1452,7 +1404,7 @@
                         ],
                         "http://raml.org/vocabularies/http#schema": [
                           {
-                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema",
+                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema",
                             "@type": [
                               "http://www.w3.org/ns/shacl#NodeShape",
                               "http://www.w3.org/ns/shacl#Shape",
@@ -1466,7 +1418,7 @@
                             ],
                             "http://www.w3.org/ns/shacl#property": [
                               {
-                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema/property/messages",
+                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema/property/messages",
                                 "@type": [
                                   "http://www.w3.org/ns/shacl#PropertyShape",
                                   "http://www.w3.org/ns/shacl#Shape",
@@ -1479,7 +1431,7 @@
                                 ],
                                 "http://raml.org/vocabularies/shapes#range": [
                                   {
-                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema/property/messages/array/messages",
+                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema/property/messages/array/messages",
                                     "@type": [
                                       "http://raml.org/vocabularies/shapes#ArrayShape",
                                       "http://www.w3.org/ns/shacl#Shape",
@@ -1488,7 +1440,7 @@
                                     ],
                                     "http://raml.org/vocabularies/shapes#items": [
                                       {
-                                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema/property/messages/array/messages/items",
+                                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema/property/messages/array/messages/items",
                                         "@type": [
                                           "http://www.w3.org/ns/shacl#NodeShape",
                                           "http://www.w3.org/ns/shacl#Shape",
@@ -1502,7 +1454,7 @@
                                         ],
                                         "http://www.w3.org/ns/shacl#property": [
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema/property/messages/array/messages/items/property/message-id",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema/property/messages/array/messages/items/property/message-id",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -1515,7 +1467,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema/property/messages/array/messages/items/property/message-id/scalar/message-id",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema/property/messages/array/messages/items/property/message-id/scalar/message-id",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -1556,7 +1508,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema/property/messages/array/messages/items/property/status",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema/property/messages/array/messages/items/property/status",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -1569,7 +1521,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema/property/messages/array/messages/items/property/status/scalar/status",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema/property/messages/array/messages/items/property/status/scalar/status",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -1615,7 +1567,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema/property/messages/array/messages/items/property/client-ref",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema/property/messages/array/messages/items/property/client-ref",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -1628,7 +1580,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema/property/messages/array/messages/items/property/client-ref/scalar/client-ref",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema/property/messages/array/messages/items/property/client-ref/scalar/client-ref",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -1669,7 +1621,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema/property/messages/array/messages/items/property/error-text",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema/property/messages/array/messages/items/property/error-text",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -1682,7 +1634,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema/property/messages/array/messages/items/property/error-text/scalar/error-text",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema/property/messages/array/messages/items/property/error-text/scalar/error-text",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -1723,7 +1675,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema/property/messages/array/messages/items/property/to",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema/property/messages/array/messages/items/property/to",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -1736,7 +1688,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema/property/messages/array/messages/items/property/to/scalar/to",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema/property/messages/array/messages/items/property/to/scalar/to",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -1777,7 +1729,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema/property/messages/array/messages/items/property/remaining-balance",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema/property/messages/array/messages/items/property/remaining-balance",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -1790,7 +1742,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema/property/messages/array/messages/items/property/remaining-balance/scalar/remaining-balance",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema/property/messages/array/messages/items/property/remaining-balance/scalar/remaining-balance",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -1831,7 +1783,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema/property/messages/array/messages/items/property/network",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema/property/messages/array/messages/items/property/network",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -1844,7 +1796,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema/property/messages/array/messages/items/property/network/scalar/network",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema/property/messages/array/messages/items/property/network/scalar/network",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -1885,7 +1837,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema/property/messages/array/messages/items/property/message-price",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema/property/messages/array/messages/items/property/message-price",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -1898,7 +1850,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema/property/messages/array/messages/items/property/message-price/scalar/message-price",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema/property/messages/array/messages/items/property/message-price/scalar/message-price",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -1980,7 +1932,7 @@
                                 ]
                               },
                               {
-                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema/property/message-count",
+                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema/property/message-count",
                                 "@type": [
                                   "http://www.w3.org/ns/shacl#PropertyShape",
                                   "http://www.w3.org/ns/shacl#Shape",
@@ -1993,7 +1945,7 @@
                                 ],
                                 "http://raml.org/vocabularies/shapes#range": [
                                   {
-                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text/plain/schema/property/message-count/scalar/message-count",
+                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fsms%2Fjson/post/200/text%2Fplain/schema/property/message-count/scalar/message-count",
                                     "@type": [
                                       "http://raml.org/vocabularies/shapes#ScalarShape",
                                       "http://www.w3.org/ns/shacl#Shape",
@@ -2366,34 +2318,20 @@
                             "http://www.w3.org/ns/shacl#in": [
                               {
                                 "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/request/parameter/search_pattern/scalar/schema/list",
-                                "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
+                                "@type": "http://www.w3.org/2000/01/rdf-schema#Seq",
+                                "http://www.w3.org/2000/01/rdf-schema#_1": [
                                   {
                                     "@value": "0"
                                   }
                                 ],
-                                "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
+                                "http://www.w3.org/2000/01/rdf-schema#_2": [
                                   {
-                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/request/parameter/search_pattern/scalar/schema/list/list",
-                                    "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
-                                      {
-                                        "@value": "1"
-                                      }
-                                    ],
-                                    "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
-                                      {
-                                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/request/parameter/search_pattern/scalar/schema/list/list/list",
-                                        "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
-                                          {
-                                            "@value": "2"
-                                          }
-                                        ],
-                                        "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
-                                          {
-                                            "@id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"
-                                          }
-                                        ]
-                                      }
-                                    ]
+                                    "@value": "1"
+                                  }
+                                ],
+                                "http://www.w3.org/2000/01/rdf-schema#_3": [
+                                  {
+                                    "@value": "2"
                                   }
                                 ]
                               }
@@ -2564,7 +2502,7 @@
                     ],
                     "http://raml.org/vocabularies/http#payload": [
                       {
-                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application/json",
+                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application%2Fjson",
                         "@type": [
                           "http://raml.org/vocabularies/http#Payload",
                           "http://raml.org/vocabularies/document#DomainElement"
@@ -2576,7 +2514,7 @@
                         ],
                         "http://raml.org/vocabularies/http#schema": [
                           {
-                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application/json/schema",
+                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application%2Fjson/schema",
                             "@type": [
                               "http://www.w3.org/ns/shacl#NodeShape",
                               "http://www.w3.org/ns/shacl#Shape",
@@ -2590,7 +2528,7 @@
                             ],
                             "http://www.w3.org/ns/shacl#property": [
                               {
-                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application/json/schema/property/numbers",
+                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application%2Fjson/schema/property/numbers",
                                 "@type": [
                                   "http://www.w3.org/ns/shacl#PropertyShape",
                                   "http://www.w3.org/ns/shacl#Shape",
@@ -2603,7 +2541,7 @@
                                 ],
                                 "http://raml.org/vocabularies/shapes#range": [
                                   {
-                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application/json/schema/property/numbers/array/numbers",
+                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application%2Fjson/schema/property/numbers/array/numbers",
                                     "@type": [
                                       "http://raml.org/vocabularies/shapes#ArrayShape",
                                       "http://www.w3.org/ns/shacl#Shape",
@@ -2612,7 +2550,7 @@
                                     ],
                                     "http://raml.org/vocabularies/shapes#items": [
                                       {
-                                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application/json/schema/property/numbers/array/numbers/items",
+                                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application%2Fjson/schema/property/numbers/array/numbers/items",
                                         "@type": [
                                           "http://www.w3.org/ns/shacl#NodeShape",
                                           "http://www.w3.org/ns/shacl#Shape",
@@ -2626,7 +2564,7 @@
                                         ],
                                         "http://www.w3.org/ns/shacl#property": [
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application/json/schema/property/numbers/array/numbers/items/property/msisdn",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/msisdn",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -2639,7 +2577,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application/json/schema/property/numbers/array/numbers/items/property/msisdn/scalar/msisdn",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/msisdn/scalar/msisdn",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -2680,7 +2618,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application/json/schema/property/numbers/array/numbers/items/property/country",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/country",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -2693,7 +2631,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application/json/schema/property/numbers/array/numbers/items/property/country/scalar/country",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/country/scalar/country",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -2734,7 +2672,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application/json/schema/property/numbers/array/numbers/items/property/cost",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/cost",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -2747,7 +2685,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application/json/schema/property/numbers/array/numbers/items/property/cost/scalar/cost",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/cost/scalar/cost",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -2788,7 +2726,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application/json/schema/property/numbers/array/numbers/items/property/type",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/type",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -2801,7 +2739,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application/json/schema/property/numbers/array/numbers/items/property/type/scalar/type",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/type/scalar/type",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -2883,7 +2821,7 @@
                                 ]
                               },
                               {
-                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application/json/schema/property/count",
+                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application%2Fjson/schema/property/count",
                                 "@type": [
                                   "http://www.w3.org/ns/shacl#PropertyShape",
                                   "http://www.w3.org/ns/shacl#Shape",
@@ -2896,7 +2834,7 @@
                                 ],
                                 "http://raml.org/vocabularies/shapes#range": [
                                   {
-                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application/json/schema/property/count/scalar/count",
+                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Faccount%2Fnumbers/get/200/application%2Fjson/schema/property/count/scalar/count",
                                     "@type": [
                                       "http://raml.org/vocabularies/shapes#ScalarShape",
                                       "http://www.w3.org/ns/shacl#Shape",
@@ -3327,34 +3265,20 @@
                             "http://www.w3.org/ns/shacl#in": [
                               {
                                 "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/request/parameter/search_pattern/scalar/schema/list",
-                                "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
+                                "@type": "http://www.w3.org/2000/01/rdf-schema#Seq",
+                                "http://www.w3.org/2000/01/rdf-schema#_1": [
                                   {
                                     "@value": "0"
                                   }
                                 ],
-                                "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
+                                "http://www.w3.org/2000/01/rdf-schema#_2": [
                                   {
-                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/request/parameter/search_pattern/scalar/schema/list/list",
-                                    "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
-                                      {
-                                        "@value": "1"
-                                      }
-                                    ],
-                                    "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
-                                      {
-                                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/request/parameter/search_pattern/scalar/schema/list/list/list",
-                                        "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
-                                          {
-                                            "@value": "2"
-                                          }
-                                        ],
-                                        "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
-                                          {
-                                            "@id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"
-                                          }
-                                        ]
-                                      }
-                                    ]
+                                    "@value": "1"
+                                  }
+                                ],
+                                "http://www.w3.org/2000/01/rdf-schema#_3": [
+                                  {
+                                    "@value": "2"
                                   }
                                 ]
                               }
@@ -3588,7 +3512,7 @@
                     ],
                     "http://raml.org/vocabularies/http#payload": [
                       {
-                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application/json",
+                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application%2Fjson",
                         "@type": [
                           "http://raml.org/vocabularies/http#Payload",
                           "http://raml.org/vocabularies/document#DomainElement"
@@ -3600,7 +3524,7 @@
                         ],
                         "http://raml.org/vocabularies/http#schema": [
                           {
-                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application/json/schema",
+                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application%2Fjson/schema",
                             "@type": [
                               "http://www.w3.org/ns/shacl#NodeShape",
                               "http://www.w3.org/ns/shacl#Shape",
@@ -3614,7 +3538,7 @@
                             ],
                             "http://www.w3.org/ns/shacl#property": [
                               {
-                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application/json/schema/property/numbers",
+                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application%2Fjson/schema/property/numbers",
                                 "@type": [
                                   "http://www.w3.org/ns/shacl#PropertyShape",
                                   "http://www.w3.org/ns/shacl#Shape",
@@ -3627,7 +3551,7 @@
                                 ],
                                 "http://raml.org/vocabularies/shapes#range": [
                                   {
-                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application/json/schema/property/numbers/array/numbers",
+                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application%2Fjson/schema/property/numbers/array/numbers",
                                     "@type": [
                                       "http://raml.org/vocabularies/shapes#ArrayShape",
                                       "http://www.w3.org/ns/shacl#Shape",
@@ -3636,7 +3560,7 @@
                                     ],
                                     "http://raml.org/vocabularies/shapes#items": [
                                       {
-                                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application/json/schema/property/numbers/array/numbers/items",
+                                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application%2Fjson/schema/property/numbers/array/numbers/items",
                                         "@type": [
                                           "http://www.w3.org/ns/shacl#NodeShape",
                                           "http://www.w3.org/ns/shacl#Shape",
@@ -3650,7 +3574,7 @@
                                         ],
                                         "http://www.w3.org/ns/shacl#property": [
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application/json/schema/property/numbers/array/numbers/items/property/msisdn",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/msisdn",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -3663,7 +3587,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application/json/schema/property/numbers/array/numbers/items/property/msisdn/scalar/msisdn",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/msisdn/scalar/msisdn",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -3704,7 +3628,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application/json/schema/property/numbers/array/numbers/items/property/country",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/country",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -3717,7 +3641,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application/json/schema/property/numbers/array/numbers/items/property/country/scalar/country",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/country/scalar/country",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -3758,7 +3682,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application/json/schema/property/numbers/array/numbers/items/property/cost",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/cost",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -3771,7 +3695,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application/json/schema/property/numbers/array/numbers/items/property/cost/scalar/cost",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/cost/scalar/cost",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -3812,7 +3736,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application/json/schema/property/numbers/array/numbers/items/property/type",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/type",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -3825,7 +3749,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application/json/schema/property/numbers/array/numbers/items/property/type/scalar/type",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/type/scalar/type",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -3907,7 +3831,7 @@
                                 ]
                               },
                               {
-                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application/json/schema/property/count",
+                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application%2Fjson/schema/property/count",
                                 "@type": [
                                   "http://www.w3.org/ns/shacl#PropertyShape",
                                   "http://www.w3.org/ns/shacl#Shape",
@@ -3920,7 +3844,7 @@
                                 ],
                                 "http://raml.org/vocabularies/shapes#range": [
                                   {
-                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application/json/schema/property/count/scalar/count",
+                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fsearch/get/200/application%2Fjson/schema/property/count/scalar/count",
                                     "@type": [
                                       "http://raml.org/vocabularies/shapes#ScalarShape",
                                       "http://www.w3.org/ns/shacl#Shape",
@@ -4305,7 +4229,7 @@
                     ],
                     "http://raml.org/vocabularies/http#payload": [
                       {
-                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application/json",
+                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application%2Fjson",
                         "@type": [
                           "http://raml.org/vocabularies/http#Payload",
                           "http://raml.org/vocabularies/document#DomainElement"
@@ -4317,7 +4241,7 @@
                         ],
                         "http://raml.org/vocabularies/http#schema": [
                           {
-                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application/json/schema",
+                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application%2Fjson/schema",
                             "@type": [
                               "http://www.w3.org/ns/shacl#NodeShape",
                               "http://www.w3.org/ns/shacl#Shape",
@@ -4331,7 +4255,7 @@
                             ],
                             "http://www.w3.org/ns/shacl#property": [
                               {
-                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application/json/schema/property/numbers",
+                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application%2Fjson/schema/property/numbers",
                                 "@type": [
                                   "http://www.w3.org/ns/shacl#PropertyShape",
                                   "http://www.w3.org/ns/shacl#Shape",
@@ -4344,7 +4268,7 @@
                                 ],
                                 "http://raml.org/vocabularies/shapes#range": [
                                   {
-                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application/json/schema/property/numbers/array/numbers",
+                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application%2Fjson/schema/property/numbers/array/numbers",
                                     "@type": [
                                       "http://raml.org/vocabularies/shapes#ArrayShape",
                                       "http://www.w3.org/ns/shacl#Shape",
@@ -4353,7 +4277,7 @@
                                     ],
                                     "http://raml.org/vocabularies/shapes#items": [
                                       {
-                                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application/json/schema/property/numbers/array/numbers/items",
+                                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application%2Fjson/schema/property/numbers/array/numbers/items",
                                         "@type": [
                                           "http://www.w3.org/ns/shacl#NodeShape",
                                           "http://www.w3.org/ns/shacl#Shape",
@@ -4367,7 +4291,7 @@
                                         ],
                                         "http://www.w3.org/ns/shacl#property": [
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application/json/schema/property/numbers/array/numbers/items/property/msisdn",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/msisdn",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -4380,7 +4304,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application/json/schema/property/numbers/array/numbers/items/property/msisdn/scalar/msisdn",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/msisdn/scalar/msisdn",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -4421,7 +4345,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application/json/schema/property/numbers/array/numbers/items/property/country",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/country",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -4434,7 +4358,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application/json/schema/property/numbers/array/numbers/items/property/country/scalar/country",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/country/scalar/country",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -4475,7 +4399,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application/json/schema/property/numbers/array/numbers/items/property/cost",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/cost",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -4488,7 +4412,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application/json/schema/property/numbers/array/numbers/items/property/cost/scalar/cost",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/cost/scalar/cost",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -4529,7 +4453,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application/json/schema/property/numbers/array/numbers/items/property/type",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/type",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -4542,7 +4466,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application/json/schema/property/numbers/array/numbers/items/property/type/scalar/type",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/type/scalar/type",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -4624,7 +4548,7 @@
                                 ]
                               },
                               {
-                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application/json/schema/property/count",
+                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application%2Fjson/schema/property/count",
                                 "@type": [
                                   "http://www.w3.org/ns/shacl#PropertyShape",
                                   "http://www.w3.org/ns/shacl#Shape",
@@ -4637,7 +4561,7 @@
                                 ],
                                 "http://raml.org/vocabularies/shapes#range": [
                                   {
-                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application/json/schema/property/count/scalar/count",
+                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fbuy/post/200/application%2Fjson/schema/property/count/scalar/count",
                                     "@type": [
                                       "http://raml.org/vocabularies/shapes#ScalarShape",
                                       "http://www.w3.org/ns/shacl#Shape",
@@ -5337,7 +5261,7 @@
                     ],
                     "http://raml.org/vocabularies/http#payload": [
                       {
-                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application/json",
+                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application%2Fjson",
                         "@type": [
                           "http://raml.org/vocabularies/http#Payload",
                           "http://raml.org/vocabularies/document#DomainElement"
@@ -5349,7 +5273,7 @@
                         ],
                         "http://raml.org/vocabularies/http#schema": [
                           {
-                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application/json/schema",
+                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application%2Fjson/schema",
                             "@type": [
                               "http://www.w3.org/ns/shacl#NodeShape",
                               "http://www.w3.org/ns/shacl#Shape",
@@ -5363,7 +5287,7 @@
                             ],
                             "http://www.w3.org/ns/shacl#property": [
                               {
-                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application/json/schema/property/numbers",
+                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application%2Fjson/schema/property/numbers",
                                 "@type": [
                                   "http://www.w3.org/ns/shacl#PropertyShape",
                                   "http://www.w3.org/ns/shacl#Shape",
@@ -5376,7 +5300,7 @@
                                 ],
                                 "http://raml.org/vocabularies/shapes#range": [
                                   {
-                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application/json/schema/property/numbers/array/numbers",
+                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application%2Fjson/schema/property/numbers/array/numbers",
                                     "@type": [
                                       "http://raml.org/vocabularies/shapes#ArrayShape",
                                       "http://www.w3.org/ns/shacl#Shape",
@@ -5385,7 +5309,7 @@
                                     ],
                                     "http://raml.org/vocabularies/shapes#items": [
                                       {
-                                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application/json/schema/property/numbers/array/numbers/items",
+                                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application%2Fjson/schema/property/numbers/array/numbers/items",
                                         "@type": [
                                           "http://www.w3.org/ns/shacl#NodeShape",
                                           "http://www.w3.org/ns/shacl#Shape",
@@ -5399,7 +5323,7 @@
                                         ],
                                         "http://www.w3.org/ns/shacl#property": [
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application/json/schema/property/numbers/array/numbers/items/property/msisdn",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/msisdn",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -5412,7 +5336,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application/json/schema/property/numbers/array/numbers/items/property/msisdn/scalar/msisdn",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/msisdn/scalar/msisdn",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -5453,7 +5377,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application/json/schema/property/numbers/array/numbers/items/property/country",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/country",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -5466,7 +5390,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application/json/schema/property/numbers/array/numbers/items/property/country/scalar/country",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/country/scalar/country",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -5507,7 +5431,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application/json/schema/property/numbers/array/numbers/items/property/cost",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/cost",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -5520,7 +5444,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application/json/schema/property/numbers/array/numbers/items/property/cost/scalar/cost",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/cost/scalar/cost",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -5561,7 +5485,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application/json/schema/property/numbers/array/numbers/items/property/type",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/type",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -5574,7 +5498,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application/json/schema/property/numbers/array/numbers/items/property/type/scalar/type",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/type/scalar/type",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -5656,7 +5580,7 @@
                                 ]
                               },
                               {
-                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application/json/schema/property/count",
+                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application%2Fjson/schema/property/count",
                                 "@type": [
                                   "http://www.w3.org/ns/shacl#PropertyShape",
                                   "http://www.w3.org/ns/shacl#Shape",
@@ -5669,7 +5593,7 @@
                                 ],
                                 "http://raml.org/vocabularies/shapes#range": [
                                   {
-                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application/json/schema/property/count/scalar/count",
+                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fupdate/post/200/application%2Fjson/schema/property/count/scalar/count",
                                     "@type": [
                                       "http://raml.org/vocabularies/shapes#ScalarShape",
                                       "http://www.w3.org/ns/shacl#Shape",
@@ -6054,7 +5978,7 @@
                     ],
                     "http://raml.org/vocabularies/http#payload": [
                       {
-                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application/json",
+                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application%2Fjson",
                         "@type": [
                           "http://raml.org/vocabularies/http#Payload",
                           "http://raml.org/vocabularies/document#DomainElement"
@@ -6066,7 +5990,7 @@
                         ],
                         "http://raml.org/vocabularies/http#schema": [
                           {
-                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application/json/schema",
+                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application%2Fjson/schema",
                             "@type": [
                               "http://www.w3.org/ns/shacl#NodeShape",
                               "http://www.w3.org/ns/shacl#Shape",
@@ -6080,7 +6004,7 @@
                             ],
                             "http://www.w3.org/ns/shacl#property": [
                               {
-                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application/json/schema/property/numbers",
+                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application%2Fjson/schema/property/numbers",
                                 "@type": [
                                   "http://www.w3.org/ns/shacl#PropertyShape",
                                   "http://www.w3.org/ns/shacl#Shape",
@@ -6093,7 +6017,7 @@
                                 ],
                                 "http://raml.org/vocabularies/shapes#range": [
                                   {
-                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application/json/schema/property/numbers/array/numbers",
+                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application%2Fjson/schema/property/numbers/array/numbers",
                                     "@type": [
                                       "http://raml.org/vocabularies/shapes#ArrayShape",
                                       "http://www.w3.org/ns/shacl#Shape",
@@ -6102,7 +6026,7 @@
                                     ],
                                     "http://raml.org/vocabularies/shapes#items": [
                                       {
-                                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application/json/schema/property/numbers/array/numbers/items",
+                                        "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application%2Fjson/schema/property/numbers/array/numbers/items",
                                         "@type": [
                                           "http://www.w3.org/ns/shacl#NodeShape",
                                           "http://www.w3.org/ns/shacl#Shape",
@@ -6116,7 +6040,7 @@
                                         ],
                                         "http://www.w3.org/ns/shacl#property": [
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application/json/schema/property/numbers/array/numbers/items/property/msisdn",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/msisdn",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -6129,7 +6053,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application/json/schema/property/numbers/array/numbers/items/property/msisdn/scalar/msisdn",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/msisdn/scalar/msisdn",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -6170,7 +6094,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application/json/schema/property/numbers/array/numbers/items/property/country",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/country",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -6183,7 +6107,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application/json/schema/property/numbers/array/numbers/items/property/country/scalar/country",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/country/scalar/country",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -6224,7 +6148,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application/json/schema/property/numbers/array/numbers/items/property/cost",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/cost",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -6237,7 +6161,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application/json/schema/property/numbers/array/numbers/items/property/cost/scalar/cost",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/cost/scalar/cost",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -6278,7 +6202,7 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application/json/schema/property/numbers/array/numbers/items/property/type",
+                                            "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/type",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
@@ -6291,7 +6215,7 @@
                                             ],
                                             "http://raml.org/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application/json/schema/property/numbers/array/numbers/items/property/type/scalar/type",
+                                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application%2Fjson/schema/property/numbers/array/numbers/items/property/type/scalar/type",
                                                 "@type": [
                                                   "http://raml.org/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
@@ -6373,7 +6297,7 @@
                                 ]
                               },
                               {
-                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application/json/schema/property/count",
+                                "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application%2Fjson/schema/property/count",
                                 "@type": [
                                   "http://www.w3.org/ns/shacl#PropertyShape",
                                   "http://www.w3.org/ns/shacl#Shape",
@@ -6386,7 +6310,7 @@
                                 ],
                                 "http://raml.org/vocabularies/shapes#range": [
                                   {
-                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application/json/schema/property/count/scalar/count",
+                                    "@id": "file://demo/nexmo-sms-api/nexmo-sms-api.raml#/web-api/end-points/%2Fnumber%2Fcancel/post/200/application%2Fjson/schema/property/count/scalar/count",
                                     "@type": [
                                       "http://raml.org/vocabularies/shapes#ScalarShape",
                                       "http://www.w3.org/ns/shacl#Shape",
