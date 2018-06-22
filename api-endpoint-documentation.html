@@ -136,7 +136,7 @@
     <clipboard-copy id="pathCopy" content="[[path]]"></clipboard-copy>
     <section class="methods">
       <template is="dom-repeat" items="[[operations]]">
-        <api-method-documentation data-operation-id$="[[_computeOperationId(item)]]" amf-model="[[amfModel]]" endpoint="[[endpoint]]" method="[[item]]" base-uri="[[baseUri]]"></api-method-documentation>
+        <api-method-documentation data-operation-id$="[[_computeOperationId(item)]]" amf-model="[[amfModel]]" endpoint="[[endpoint]]" method="[[item]]" base-uri="[[baseUri]]" no-try-it="[[noTryIt]]"></api-method-documentation>
       </template>
     </section>
     <template is="dom-if" if="[[hasPagination]]">
@@ -419,7 +419,12 @@
         scrollTarget: {
           type: Object,
           observer: '_scrollTargetChanged'
-        }
+        },
+        /**
+         * Passing value of `noTryIt` to the method documentation.
+         * Hiddes "Try it" button from the view.
+         */
+        noTryIt: Boolean
       };
     }
 

@@ -114,6 +114,12 @@ declare namespace ApiElements {
     endpoint: object|null|undefined;
 
     /**
+     * The ID in `amfModel` of current selection. It can be this endpoint
+     * or any of methods
+     */
+    selected: string|null|undefined;
+
+    /**
      * A property to set to override AMF's model base URI information.
      * When this property is set, the `endpointUri` property is recalculated.
      */
@@ -236,6 +242,12 @@ declare namespace ApiElements {
      * context enforced.
      */
     scrollTarget: object|null|undefined;
+
+    /**
+     * Passing value of `noTryIt` to the method documentation.
+     * Hiddes "Try it" button from the view.
+     */
+    noTryIt: boolean|null|undefined;
 
     /**
      * Computes method's endpoint name.
@@ -370,6 +382,22 @@ declare namespace ApiElements {
      * @param selected Id of selected method as in AMF model.
      */
     _notifyPassiveNavigation(selected: String|null): void;
+
+    /**
+     * Hadnler for either `selected` or `endpoint proerty change`
+     *
+     * @param selected Currently selected shape ID in AMF model
+     * @param endpoint AMF model for the endpoint.
+     */
+    _selectedChanged(selected: String|null, endpoint: object|null): void;
+
+    /**
+     * Positions the method (operation) or endpoint (main title).
+     *
+     * @param id Selected AMF id.
+     */
+    _repositionVerb(id: String|null): void;
+    _computeOperationId(item: any): any;
   }
 }
 
