@@ -622,7 +622,11 @@
       if (!st) {
         return;
       }
-      const scroll = st.scrollY;
+      // Window object has `scrollY` but HTML element has `scrollTop`
+      const scroll = st.scrollY || st.scrollTop;
+      if (scroll === undefined) {
+        return;
+      }
       const diff = (this._lastScrollPos || 0) - scroll;
       this._lastScrollPos = scroll;
       const dir = diff < 0 ? 'down' : 'up';
