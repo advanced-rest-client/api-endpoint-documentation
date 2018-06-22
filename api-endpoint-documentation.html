@@ -69,8 +69,8 @@
     .bottom-nav {
       padding: 32px 0;
       margin: 16px 0;
-      border-top: 1px var(--api-endpoint-documentation-bottom-navigation-border-color, #546E7A) solid;
-      color: var(--api-endpoint-documentation-bottom-navigation-color, #546E7A);
+      border-top: 1px var(--api-endpoint-documentation-bottom-navigation-border-color, #cfd8dc) solid;
+      color: var(--api-endpoint-documentation-bottom-navigation-color, #000);
       font-size: 18px;
     }
 
@@ -136,7 +136,7 @@
     <clipboard-copy id="pathCopy" content="[[path]]"></clipboard-copy>
     <section class="methods">
       <template is="dom-repeat" items="[[operations]]">
-        <api-method-documentation amf-model="[[amfModel]]" endpoint="[[endpoint]]" method="[[item]]" base-uri="[[baseUri]]"></api-method-documentation>
+        <api-method-documentation data-operation-id$="[[_computeOperationId(item)]]" amf-model="[[amfModel]]" endpoint="[[endpoint]]" method="[[item]]" base-uri="[[baseUri]]"></api-method-documentation>
       </template>
     </section>
     <template is="dom-if" if="[[hasPagination]]">
@@ -252,6 +252,11 @@
          * `http://raml.org/vocabularies/http#endpoint` of AMF model.
          */
         endpoint: Object,
+        /**
+         * The ID in `amfModel` of current selection. It can be this endpoint
+         * or any of methods
+         */
+        selected: String,
         /**
          * A property to set to override AMF's model base URI information.
          * When this property is set, the `endpointUri` property is recalculated.
@@ -416,6 +421,12 @@
           observer: '_scrollTargetChanged'
         }
       };
+    }
+
+    static get observers() {
+      return [
+        '_selectedChanged(selected, endpoint)'
+      ];
     }
 
     constructor() {
@@ -681,6 +692,51 @@
           }
         }));
       }, 200);
+    }
+    /**
+     * Hadnler for either `selected` or `endpoint proerty change`
+     * @param {String} selected Currently selected shape ID in AMF model
+     * @param {Object} endpoint AMF model for the endpoint.
+     */
+    _selectedChanged(selected, endpoint) {
+      if (!selected || !endpoint) {
+        return;
+      }
+      Polymer.RenderStatus.afterNextRender(this, () => this._repositionVerb(selected));
+    }
+    /**
+     * Positions the method (operation) or endpoint (main title).
+     *
+     * @param {String} id Selected AMF id.
+     */
+    _repositionVerb(id) {
+      const parts = id.split('/');
+      const last = parts[parts.length - 1];
+
+      let options;
+      if ('scrollBehavior' in document.documentElement.style) {
+        options = {
+          block: 'start',
+          inline: 'nearest'
+        };
+      } else {
+        options = true;
+      }
+
+      if (last.indexOf('%2F') === 0) {
+        this.shadowRoot.querySelector('.title').scrollIntoView(true);
+        return;
+      }
+      const selector = `[data-operation-id="${id}"]`;
+      const node = this.shadowRoot.querySelector(selector);
+      if (!node) {
+        return;
+      }
+      node.scrollIntoView(options);
+    }
+
+    _computeOperationId(item) {
+      return item && item['@id'];
     }
     /**
      * Dispatched when the user requested previous / next
