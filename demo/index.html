@@ -116,7 +116,7 @@
           <raml-aware raml="{{amfModel}}" scope="model"></raml-aware>
           <api-navigation aware="model" endpoints-opened></api-navigation>
           <template is="dom-if" if="[[hasData]]">
-            <api-endpoint-documentation aware="model" endpoint="[[endpoint]]" previous="[[previous]]" next="[[next]]" scroll-target="[[scrollTarget]]"></api-endpoint-documentation>
+            <api-endpoint-documentation aware="model" endpoint="[[endpoint]]" previous="[[previous]]" next="[[next]]" selected="[[selectedShape]]" scroll-target="[[scrollTarget]]"></api-endpoint-documentation>
           </template>
           <template is="dom-if" if="[[!hasData]]">
             <p>Select a HTTP method in the navigation to see the demo.</p>
@@ -151,22 +151,24 @@
           return;
         }
         const type = e.detail.type;
-        if (type === 'endpoint') {
-          app.setData(e.detail.selected);
+        if (['endpoint', 'method'].indexOf(type) !== -1) {
+          app.setData(e.detail.selected, type);
           app.hasData = true;
         } else {
           app.hasData = false;
         }
       };
-      app.setData = function(id) {
+      app.setData = function(id, type) {
         const enc = app.amfModel[0]['http://raml.org/vocabularies/document#encodes'][0];
         const endpoints = enc['http://raml.org/vocabularies/http#endpoint'];
+        let endpointId = type === 'endpoint' ? id : id.substr(0, id.lastIndexOf('/'));
         for (let i = 0, len = endpoints.length; i < len; i++) {
           let item = endpoints[i];
-          if (item['@id'] !== id) {
+          if (item['@id'] !== endpointId) {
             continue;
           }
           app.endpoint = item;
+          app.selectedShape = id;
           app._setPrevious(endpoints[i - 1]);
           app._setNext(endpoints[i + 1]);
           break;
