@@ -1,7 +1,7 @@
 {
   "excludeFiles": [
     "tasks/*",
-    "demo/*",
+    "demo/**",
     "test/*",
     "index.html"
   ]

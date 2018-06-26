@@ -16,11 +16,11 @@
 /// <reference path="../iron-flex-layout/iron-flex-layout.d.ts" />
 /// <reference path="../api-annotation-document/api-annotation-document.d.ts" />
 /// <reference path="../api-parameters-document/api-parameters-document.d.ts" />
-/// <reference path="../api-method-documentation/api-method-documentation.d.ts" />
 /// <reference path="../markdown-styles/markdown-styles.d.ts" />
 /// <reference path="../marked-element/marked-element.d.ts" />
 /// <reference path="../amf-helper-mixin/amf-helper-mixin.d.ts" />
 /// <reference path="../clipboard-copy/clipboard-copy.d.ts" />
+/// <reference path="../paper-icon-button/paper-icon-button.d.ts" />
 
 declare namespace ApiElements {
 
@@ -54,7 +54,8 @@ declare namespace ApiElements {
    * When the component constructs the funal URI for the endpoint it does the following:
    * - if `baseUri` is set it uses this value as a base uri for the endpoint
    * - else if `iron-meta` with key `ApiBaseUri` exists and contains a value
-   * it uses it uses this value as a base uri for the endpoint
+   * it uses it uses this value as a base uri for the endpoin
+   *    t
    * - else if `amfModel` is set then it computes base uri value from main
    * model document
    * Then it concatenates computed base URI with `endpoint`'s path property.
@@ -114,12 +115,6 @@ declare namespace ApiElements {
     endpoint: object|null|undefined;
 
     /**
-     * The ID in `amfModel` of current selection. It can be this endpoint
-     * or any of methods
-     */
-    selected: string|null|undefined;
-
-    /**
      * A property to set to override AMF's model base URI information.
      * When this property is set, the `endpointUri` property is recalculated.
      */
@@ -143,7 +138,7 @@ declare namespace ApiElements {
     readonly path: string|null|undefined;
 
     /**
-     * Computed value from current `method`. True if the model contains
+     * Computed value from current `method`. True if the model containsPATCH
      * custom properties (annotations in RAML).
      */
     readonly hasCustomProperties: boolean|null|undefined;
@@ -201,12 +196,6 @@ declare namespace ApiElements {
     readonly hasExtension: boolean|null|undefined;
 
     /**
-     * A list of AMF's supported operations (HTTP methods) in this
-     * endpoint
-     */
-    readonly operations: any[]|null|undefined;
-
-    /**
      * Model to generate a link to previous HTTP endpoint.
      * It should contain `id` and `label` properties
      */
@@ -234,20 +223,20 @@ declare namespace ApiElements {
     readonly hasPagination: boolean|null|undefined;
 
     /**
-     * Scroll target used to observe `scroll` event.
-     * When set the element will observe scroll and inform other components
-     * about changes in navigation while scrolling through methods list.
-     * The navigation event contains `passive: true` property that
-     * determines that it's not user triggered navigation but rather
-     * context enforced.
-     */
-    scrollTarget: object|null|undefined;
-
-    /**
      * Passing value of `noTryIt` to the method documentation.
      * Hiddes "Try it" button from the view.
      */
     noTryIt: boolean|null|undefined;
+
+    /**
+     * Computed list of operations to render in the operations list.
+     */
+    readonly operations: object|null;
+
+    /**
+     * Computed value if the endpoint contains operations.
+     */
+    readonly hasOperations: boolean|null|undefined;
 
     /**
      * Computes method's endpoint name.
@@ -315,14 +304,6 @@ declare namespace ApiElements {
     _computeHasExtension(hasTraits: Boolean|null, hasParentType: Boolean|null): Boolean|null;
 
     /**
-     * Computes list of operations for the endpoint.
-     *
-     * @param endpoint Endpoint model
-     * @returns Operations if defined.
-     */
-    _computeOperations(endpoint: object|null): Array<object|null>|null|undefined;
-
-    /**
      * Computes value for `hasPagination` property
      */
     _computeHasNavigation(previous: Boolean|null, next: Boolean|null): Boolean|null;
@@ -345,59 +326,12 @@ declare namespace ApiElements {
     _copyPathClipboard(e: any): void;
 
     /**
-     * Handles scroll target chane and adds scroll event.
+     * Computes value for `operations` property.
      *
-     * @param st The scroll target.
+     * @param endpoint Endpoint model.
      */
-    _scrollTargetChanged(st: Node|null): void;
-
-    /**
-     * Scroll handler for `scrollTarget`.
-     * It does not stall main thred by executing the action after nex render.
-     */
-    _scrollHandler(): void;
-
-    /**
-     * I hope this won't be required in final version :(
-     */
-    _checkMethodsPosition(): void;
-
-    /**
-     * Function that checks if an `element` is in the main scrolling area.
-     *
-     * @param heigth Height of the scroll target
-     * @param dir Direction where the scroll is going (up or down)
-     * @param element The node to test
-     * @returns True when it determines that the element is in the main
-     * scroll area,
-     */
-    _occupiesMainScrollArea(heigth: Number|null, dir: String|null, element: Node|null): Boolean|null;
-
-    /**
-     * Dispatches `api-navigation-selection-changed` custom event with
-     * `passive: true` set on the detail object.
-     * Listeners should not react on this event except for the ones that
-     * should reflect passive navigation change.
-     *
-     * @param selected Id of selected method as in AMF model.
-     */
-    _notifyPassiveNavigation(selected: String|null): void;
-
-    /**
-     * Hadnler for either `selected` or `endpoint proerty change`
-     *
-     * @param selected Currently selected shape ID in AMF model
-     * @param endpoint AMF model for the endpoint.
-     */
-    _selectedChanged(selected: String|null, endpoint: object|null): void;
-
-    /**
-     * Positions the method (operation) or endpoint (main title).
-     *
-     * @param id Selected AMF id.
-     */
-    _repositionVerb(id: String|null): void;
-    _computeOperationId(item: any): any;
+    _computeOperations(endpoint: object|null): Array<object|null>|null;
+    _methodNavigate(e: any): void;
   }
 }
 
