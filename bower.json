@@ -19,9 +19,9 @@
     "iron-flex-layout": "PolymerElements/iron-flex-layout#^2.0.3",
     "api-annotation-document": "advanced-rest-client/api-annotation-document#^2.0.0",
     "api-parameters-document": "advanced-rest-client/api-parameters-document#^2.0.0",
-    "api-method-documentation": "advanced-rest-client/api-method-documentation#^2.0.0",
     "amf-helper-mixin": "advanced-rest-client/amf-helper-mixin#^2.0.0",
-    "clipboard-copy": "advanced-rest-client/clipboard-copy#^2.0.1"
+    "clipboard-copy": "advanced-rest-client/clipboard-copy#^2.0.1",
+    "paper-icon-button": "PolymerElements/paper-icon-button#^2.0.0"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",

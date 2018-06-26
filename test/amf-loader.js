@@ -14,8 +14,8 @@ AmfLoader.load = function(endpointIndex) {
         reject(e);
         return;
       }
-      const def = data[0]['http://raml.org/vocabularies/document#encodes'][0];
-      const endpoint = def['http://raml.org/vocabularies/http#endpoint'][endpointIndex];
+      const def = data[0]['http://a.ml/vocabularies/document#encodes'][0];
+      const endpoint = def['http://a.ml/vocabularies/http#endpoint'][endpointIndex];
       resolve([data, endpoint]);
     });
     xhr.addEventListener('error',

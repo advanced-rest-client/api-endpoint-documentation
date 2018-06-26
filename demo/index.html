@@ -61,6 +61,10 @@
         --method-label-patch-color: #fff;
         --method-label-delete-background-color: rgb(244, 67, 54);
         --method-label-delete-color: #fff;
+
+        --arc-link: {
+          color: #1976D2;
+        };
       }
 
       html,
@@ -108,7 +112,7 @@
               <paper-item data-src="demo-api.json">Demo api</paper-item>
               <paper-item data-src="nexmo-sms-api.json">Nexmo SMS API</paper-item>
               <paper-item data-src="appian-api.json">Appian API</paper-item>
-              <paper-item data-src="github-api.json">☠ GitHub API ☠</paper-item>
+              <paper-item data-src="exchange-experience-api.json">Exchange XAPI</paper-item>
             </paper-listbox>
           </paper-dropdown-menu>
         </header>
@@ -116,7 +120,7 @@
           <raml-aware raml="{{amfModel}}" scope="model"></raml-aware>
           <api-navigation aware="model" endpoints-opened></api-navigation>
           <template is="dom-if" if="[[hasData]]">
-            <api-endpoint-documentation aware="model" endpoint="[[endpoint]]" previous="[[previous]]" next="[[next]]" selected="[[selectedShape]]" scroll-target="[[scrollTarget]]"></api-endpoint-documentation>
+            <api-endpoint-documentation aware="model" endpoint="[[endpoint]]" previous="[[previous]]" next="[[next]]"></api-endpoint-documentation>
           </template>
           <template is="dom-if" if="[[!hasData]]">
             <p>Select a HTTP method in the navigation to see the demo.</p>
@@ -128,7 +132,6 @@
     <script>
     (function(app) {
       app.hasData = false;
-      app.scrollTarget = window;
       app._load = function() {
         document.getElementById('enpointsList').selected = 0;
       };
@@ -151,7 +154,7 @@
           return;
         }
         const type = e.detail.type;
-        if (['endpoint', 'method'].indexOf(type) !== -1) {
+        if (['endpoint'].indexOf(type) !== -1) {
           app.setData(e.detail.selected, type);
           app.hasData = true;
         } else {
@@ -159,8 +162,8 @@
         }
       };
       app.setData = function(id, type) {
-        const enc = app.amfModel[0]['http://raml.org/vocabularies/document#encodes'][0];
-        const endpoints = enc['http://raml.org/vocabularies/http#endpoint'];
+        const enc = app.amfModel[0]['http://a.ml/vocabularies/document#encodes'][0];
+        const endpoints = enc['http://a.ml/vocabularies/http#endpoint'];
         let endpointId = type === 'endpoint' ? id : id.substr(0, id.lastIndexOf('/'));
         for (let i = 0, len = endpoints.length; i < len; i++) {
           let item = endpoints[i];
@@ -168,7 +171,6 @@
             continue;
           }
           app.endpoint = item;
-          app.selectedShape = id;
           app._setPrevious(endpoints[i - 1]);
           app._setNext(endpoints[i + 1]);
           break;
@@ -183,7 +185,7 @@
         if ('http://schema.org/name' in item) {
           name = item['http://schema.org/name'][0]['@value'];
         } else {
-          name = item['http://raml.org/vocabularies/http#path'][0]['@value'];
+          name = item['http://a.ml/vocabularies/http#path'][0]['@value'];
         }
         app.previous = {
           id: item['@id'],
@@ -199,7 +201,7 @@
         if ('http://schema.org/name' in item) {
           name = item['http://schema.org/name'][0]['@value'];
         } else {
-          name = item['http://raml.org/vocabularies/http#path'][0]['@value'];
+          name = item['http://a.ml/vocabularies/http#path'][0]['@value'];
         }
         app.next = {
           id: item['@id'],
