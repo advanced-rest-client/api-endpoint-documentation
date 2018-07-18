@@ -178,6 +178,36 @@
           assert.ok(node);
         });
       });
+
+      suite('Title behavior', () => {
+        test('Renders title when display name', (done) => {
+          AmfLoader.load(0)
+          .then((data) => {
+            element = fixture('Basic');
+            element.amfModel = data[0];
+            element.endpoint = data[1];
+            flush(() => {
+              const title = element.shadowRoot.querySelector('.title');
+              assert.ok(title);
+              done();
+            });
+          });
+        });
+
+        test('Hides title when no display name', (done) => {
+          AmfLoader.load(3)
+          .then((data) => {
+            element = fixture('Basic');
+            element.amfModel = data[0];
+            element.endpoint = data[1];
+            flush(() => {
+              const title = element.shadowRoot.querySelector('.title');
+              assert.notOk(title);
+              done();
+            });
+          });
+        });
+      });
     });
 
     /* global AmfLoader */
