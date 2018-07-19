@@ -99,6 +99,10 @@
       border-radius: 2px;
     }
 
+    .url-area[extra-margin] {
+      margin-top: 20px;
+    }
+
     .url-value {
       @apply --layout-flex;
       word-break: break-all;
@@ -166,7 +170,16 @@
     <template is="dom-if" if="[[aware]]">
       <raml-aware raml="{{amfModel}}" scope="[[aware]]"></raml-aware>
     </template>
-    <h1 class="title">[[endpointName]]</h1>
+    <template is="dom-if" if="[[hasName]]">
+      <h1 class="title">[[endpointName]]</h1>
+    </template>
+
+    <section class="url-area" extra-margin$="[[!hasName]]">
+      <div class="url-value">[[path]]</div>
+      <paper-icon-button class="action-icon copy-icon" icon="arc:content-copy" on-tap="_copyPathClipboard" title="Copy path to clipboard"></paper-icon-button>
+    </section>
+    <clipboard-copy id="pathCopy" content="[[path]]"></clipboard-copy>
+
     <template is="dom-if" if="[[hasExtension]]">
       <section class="extensions">
         <span>Extends </span>
@@ -191,12 +204,6 @@
         <div slot="markdown-html" class="markdown-bpaper-icon-buttonody"></div>
       </marked-element>
     </template>
-
-    <section class="url-area">
-      <div class="url-value">[[path]]</div>
-      <paper-icon-button class="action-icon copy-icon" icon="arc:content-copy" on-tap="_copyPathClipboard" title="Copy path to clipboard"></paper-icon-button>
-    </section>
-    <clipboard-copy id="pathCopy" content="[[path]]"></clipboard-copy>
 
     <template is="dom-if" if="[[hasOperations]]">
       <h2>Methods</h2>
@@ -344,6 +351,13 @@
         endpointName: {
           type: String,
           computed: '_computeEndpointName(endpoint)'
+        },
+        /**
+         * Computed value, `true` if the endpoint has display name.
+         */
+        hasName: {
+          type: Boolean,
+          computed: '_computeHasStringValue(endpointName)'
         },
         /**
          * Computed value of method description from `method` property.
@@ -506,9 +520,9 @@
      */
     _computeEndpointName(endpoint) {
       let name = this._getValue(endpoint, this.ns.schema.schemaName);
-      if (!name) {
-        name = this._getValue(endpoint, this.ns.raml.vocabularies.http + 'path');
-      }
+      // if (!name) {
+      //   name = this._getValue(endpoint, this.ns.raml.vocabularies.http + 'path');
+      // }
       return name;
     }
     /**

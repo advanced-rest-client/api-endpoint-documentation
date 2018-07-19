@@ -1,7 +1,7 @@
 {
   "name": "@api-components/api-endpoint-documentation",
   "description": "A component to generate documentation for a resource from AMF model",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "license": "Apache-2.0",
   "main": "api-endpoint-documentation.html",
   "authors": [
@@ -10,7 +10,7 @@
   ],
   "devDependencies": {
     "@polymer/gen-typescript-declarations": "^1.1.1",
-    "amf-client-js": "1.5.0"
+    "amf-client-js": "1.7.0"
   },
   "private": false,
   "scripts": {
