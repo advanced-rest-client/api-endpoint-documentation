@@ -128,6 +128,11 @@ declare namespace ApiElements {
     readonly endpointName: string|null|undefined;
 
     /**
+     * Computed value, `true` if the endpoint has display name.
+     */
+    readonly hasName: boolean|null|undefined;
+
+    /**
      * Computed value of method description from `method` property.
      */
     readonly description: string|null|undefined;
