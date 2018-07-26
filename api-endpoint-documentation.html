@@ -6,6 +6,7 @@
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../api-annotation-document/api-annotation-document.html">
 <link rel="import" href="../api-parameters-document/api-parameters-document.html">
+<link rel="import" href="../api-method-documentation/api-method-documentation.html">
 <link rel="import" href="../markdown-styles/markdown-styles.html">
 <link rel="import" href="../marked-element/marked-element.html">
 <link rel="import" href="../amf-helper-mixin/amf-helper-mixin.html">
@@ -174,11 +175,13 @@
       <h1 class="title">[[endpointName]]</h1>
     </template>
 
-    <section class="url-area" extra-margin$="[[!hasName]]">
-      <div class="url-value">[[path]]</div>
-      <paper-icon-button class="action-icon copy-icon" icon="arc:content-copy" on-tap="_copyPathClipboard" title="Copy path to clipboard"></paper-icon-button>
-    </section>
-    <clipboard-copy id="pathCopy" content="[[path]]"></clipboard-copy>
+    <template is="dom-if" if="[[!inlineMethods]]">
+      <section class="url-area" extra-margin$="[[!hasName]]">
+        <div class="url-value">[[path]]</div>
+        <paper-icon-button class="action-icon copy-icon" icon="arc:content-copy" on-tap="_copyPathClipboard" title="Copy path to clipboard"></paper-icon-button>
+      </section>
+      <clipboard-copy id="pathCopy" content="[[path]]"></clipboard-copy>
+    </template>
 
     <template is="dom-if" if="[[hasExtension]]">
       <section class="extensions">
@@ -206,22 +209,38 @@
     </template>
 
     <template is="dom-if" if="[[hasOperations]]">
-      <h2>Methods</h2>
-      <section class="methods">
-        <template is="dom-repeat" items="[[operations]]">
-          <div class="method">
-            <div class="method-name">
-              <a href="#" on-click="_methodNavigate" class="method-anchor" data-api-id$="[[item.id]]">
-                <span class="method-label" data-method$="[[item.method]]">[[item.method]]</span>
-                <span class="method-value" data-method$="[[item.name]]">[[item.name]]</span>
-              </a>
+      <template is="dom-if" if="[[inlineMethods]]" restamp="true">
+        <section class="methods">
+          <template is="dom-repeat" items="[[operations]]">
+            <api-method-documentation
+              data-operation-id$="[[_computeOperationId(item)]]"
+              amf-model="[[amfModel]]"
+              endpoint="[[endpoint]]"
+              method="[[item]]"
+              narrow="[[narrow]]"
+              base-uri="[[baseUri]]"
+              no-try-it="[[noTryIt]]"></api-method-documentation>
+          </template>
+        </section>
+      </template>
+      <template is="dom-if" if="[[!inlineMethods]]" restamp="true">
+        <h2>Methods</h2>
+        <section class="methods">
+          <template is="dom-repeat" items="[[operations]]">
+            <div class="method">
+              <div class="method-name">
+                <a href="#" on-click="_methodNavigate" class="method-anchor" data-api-id$="[[item.id]]">
+                  <span class="method-label" data-method$="[[item.method]]">[[item.method]]</span>
+                  <span class="method-value" data-method$="[[item.name]]">[[item.name]]</span>
+                </a>
+              </div>
+              <template is="dom-if" if="[[item.desc]]">
+                <p>[[item.desc]]</p>
+              </template>
             </div>
-            <template is="dom-if" if="[[item.desc]]">
-              <p>[[item.desc]]</p>
-            </template>
-          </div>
-        </template>
-      </section>
+          </template>
+        </section>
+      </template>
     </template>
 
     <template is="dom-if" if="[[hasPagination]]">
@@ -267,10 +286,12 @@
    *
    * To update base URI value either update `baseUri` property or use
    * `iron-meta` with key `ApiBaseUri`. First method is easier but the second
-   * gives much more flexibility since it use a [monostate pattern](http://wiki.c2.com/?MonostatePattern)
+   * gives much more flexibility since it use a
+   * [monostate pattern](http://wiki.c2.com/?MonostatePattern)
    * to manage base URI property.
    *
-   * When the component constructs the funal URI for the endpoint it does the following:
+   * When the component constructs the funal URI for the endpoint it does the
+   * following:
    * - if `baseUri` is set it uses this value as a base uri for the endpoint
    * - else if `iron-meta` with key `ApiBaseUri` exists and contains a value
    * it uses it uses this value as a base uri for the endpoin
@@ -295,7 +316,8 @@
    *
    * ## Styling
    *
-   * `<api-endpoint-documentation>` provides the following custom properties and mixins for styling:
+   * `<api-endpoint-documentation>` provides the following custom properties
+   * and mixins for styling:
    *
    * Custom property | Description | Default
    * ----------------|-------------|----------
@@ -303,10 +325,13 @@
    * `--arc-font-headline` | Theme mixin, Applied to h1 element (title) | `{}`
    * `--arc-font-code1` | Theme mixin, applied to the URL area | `{}`
    * `--api-endpoint-documentation-url-font-size` | Font size of endpoin URL | `16px`
-   * `--api-endpoint-documentation-url-background-color` | Background color of the URL section | `#424242`
+   * `--api-endpoint-documentation-url-background-color` | Background color of
+   * the URL section | `#424242`
    * `--api-endpoint-documentation-url-font-color` | Font color of the URL area | `#fff`
-   * `--api-endpoint-documentation-bottom-navigation-border-color` | Color of the top border of the bottom navigartion | `#546E7A`
-   * `--api-endpoint-documentation-bottom-navigation-color` | Color of of the bottom navigartion (icon + text) | `#546E7A`
+   * `--api-endpoint-documentation-bottom-navigation-border-color` | Color of
+   * the top border of the bottom navigartion | `#546E7A`
+   * `--api-endpoint-documentation-bottom-navigation-color` | Color of of the
+   * bottom navigartion (icon + text) | `#546E7A`
    *
    * @customElement
    * @polymer
@@ -338,6 +363,11 @@
          * `http://raml.org/vocabularies/http#endpoint` of AMF model.
          */
         endpoint: Object,
+        /**
+         * The ID in `amfModel` of current selection. It can be this endpoint
+         * or any of methods
+         */
+        selected: String,
         /**
          * A property to set to override AMF's model base URI information.
          * When this property is set, the `endpointUri` property is recalculated.
@@ -490,6 +520,18 @@
           computed: '_computeHasNavigation(hasPreviousLink, hasNextLink)'
         },
         /**
+         * Scroll target used to observe `scroll` event.
+         * When set the element will observe scroll and inform other components
+         * about changes in navigation while scrolling through methods list.
+         * The navigation event contains `passive: true` property that
+         * determines that it's not user triggered navigation but rather
+         * context enforced.
+         */
+        scrollTarget: {
+          type: Object,
+          observer: '_scrollTargetChanged'
+        },
+        /**
          * Passing value of `noTryIt` to the method documentation.
          * Hiddes "Try it" button from the view.
          */
@@ -500,7 +542,7 @@
          */
         operations: {
           type: Array,
-          computed: '_computeOperations(endpoint)'
+          computed: '_computeOperations(endpoint, inlineMethods)'
         },
         /**
          * Computed value if the endpoint contains operations.
@@ -508,9 +550,31 @@
         hasOperations: {
           type: Boolean,
           computed: '_computeHasArrayValue(operations)'
+        },
+        /**
+         * If set then it renders methods documentation inline with
+         * the endpoint documentation.
+         * When it's not set (or value is `false`, default) then it renders
+         * just a list of methods with links.
+         */
+        inlineMethods: {
+          type: Boolean,
+          value: false
         }
       };
     }
+
+    static get observers() {
+      return [
+        '_selectedChanged(selected, endpoint, inlineMethods)'
+      ];
+    }
+
+    constructor() {
+      super();
+      this._scrollHandler = this._scrollHandler.bind(this);
+    }
+
     /**
      * Computes method's endpoint name.
      * It looks for `http://schema.org/name` in the endpoint definition and
@@ -664,13 +728,16 @@
      * @param {Object} endpoint Endpoint model.
      * @return {Array<Object>}
      */
-    _computeOperations(endpoint) {
+    _computeOperations(endpoint, inlineMethods) {
       if (!endpoint) {
         return;
       }
       const ops = endpoint[this.ns.w3.hydra.supportedOperation];
       if (!ops || !ops.length) {
         return;
+      }
+      if (inlineMethods) {
+        return ops;
       }
       const result = [];
       for (let i = 0, len = ops.length; i < len; i++) {
@@ -692,6 +759,166 @@
       const target = e.path.find((node) => node.nodeName === 'A');
       const id = target.dataset.apiId;
       this._navigate(id, 'method');
+    }
+
+    /**
+     * Handles scroll target chane and adds scroll event.
+     *
+     * @param {Node} st The scroll target.
+     */
+    _scrollTargetChanged(st) {
+      if (this._oldScrollTarget) {
+        this._oldScrollTarget.removeEventListener('scroll', this._scrollHandler);
+        this._oldScrollTarget = undefined;
+      }
+      if (st) {
+        st.addEventListener('scroll', this._scrollHandler);
+        this._oldScrollTarget = st;
+      }
+    }
+    /**
+     * Scroll handler for `scrollTarget`.
+     * It does not stall main thred by executing the action after nex render.
+     */
+    _scrollHandler() {
+      if (!this.inlineMethods) {
+        return;
+      }
+      Polymer.RenderStatus.afterNextRender(this, this._checkMethodsPosition);
+    }
+    /**
+     * I hope this won't be required in final version :(
+     */
+    _checkMethodsPosition() {
+      const st = this._oldScrollTarget;
+      if (!st) {
+        return;
+      }
+      // Window object has `scrollY` but HTML element has `scrollTop`
+      const scroll = st.scrollY || st.scrollTop;
+      if (scroll === undefined) {
+        return;
+      }
+      const diff = (this._lastScrollPos || 0) - scroll;
+      this._lastScrollPos = scroll;
+      const dir = diff < 0 ? 'down' : 'up';
+      const heigth = st.scrollHeight || st.innerHeight;
+      if (!this._methodsList) {
+        const section = this.shadowRoot.querySelector('section.methods');
+        // This lis live node list so the reference has to be made only once.
+        this._methodsList = section.childNodes;
+      }
+      for (let i = 0, len = this._methodsList.length; i < len; i++) {
+        const node = this._methodsList[i];
+        if (node.nodeName !== 'API-METHOD-DOCUMENTATION') {
+          continue;
+        }
+        if (this._occupiesMainScrollArea(heigth, dir, node)) {
+          this._notifyPassiveNavigation(node.method['@id']);
+          return;
+        }
+      }
+    }
+    /**
+     * Function that checks if an `element` is in the main scrolling area.
+     *
+     * @param {Number} heigth Height of the scroll target
+     * @param {String} dir Direction where the scroll is going (up or down)
+     * @param {Node} element The node to test
+     * @return {Boolean} True when it determines that the element is in the main
+     * scroll area,
+     */
+    _occupiesMainScrollArea(heigth, dir, element) {
+      const rect = element.getBoundingClientRect();
+      const padding = 60;
+      if (rect.bottom < 0) {
+        return false;
+      }
+      if (rect.top > heigth) {
+        return false;
+      }
+      if (rect.y > 0 && rect.y < padding) {
+        if (dir === 'up') {
+          return false;
+        }
+        return true;
+      }
+      if (dir === 'up' && (rect.bottom + padding) > heigth && rect.bottom < heigth) {
+        return true;
+      }
+      return false;
+    }
+
+    /**
+     * Dispatches `api-navigation-selection-changed` custom event with
+     * `passive: true` set on the detail object.
+     * Listeners should not react on this event except for the ones that
+     * should reflect passive navigation change.
+     *
+     * @param {String} selected Id of selected method as in AMF model.
+     */
+    _notifyPassiveNavigation(selected) {
+      if (this.__notyfyingChange) {
+        return;
+      }
+      this.__notyfyingChange = true;
+      setTimeout(() => {
+        this.__notyfyingChange = false;
+        this.dispatchEvent(new CustomEvent('api-navigation-selection-changed', {
+          composed: true,
+          bubbles: true,
+          detail: {
+            selected,
+            type: 'method',
+            passive: true
+          }
+        }));
+      }, 200);
+    }
+
+    /**
+     * Hadnler for either `selected` or `endpoint proerty change`
+     * @param {String} selected Currently selected shape ID in AMF model
+     * @param {Object} endpoint AMF model for the endpoint.
+     * @param {Boolean} inlineMethods True if methods documentation is included
+     */
+    _selectedChanged(selected, endpoint, inlineMethods) {
+      if (!selected || !endpoint || !inlineMethods) {
+        return;
+      }
+      Polymer.RenderStatus.afterNextRender(this, () => this._repositionVerb(selected));
+    }
+    /**
+     * Positions the method (operation) or endpoint (main title).
+     *
+     * @param {String} id Selected AMF id.
+     */
+    _repositionVerb(id) {
+      const parts = id.split('/');
+      const last = parts[parts.length - 1];
+      let options;
+      if ('scrollBehavior' in document.documentElement.style) {
+        options = {
+          block: 'start',
+          inline: 'nearest'
+        };
+      } else {
+        options = true;
+      }
+      if (last.indexOf('%2F') === 0) {
+        this.shadowRoot.querySelector('.title').scrollIntoView(true);
+        return;
+      }
+      const selector = `[data-operation-id="${id}"]`;
+      const node = this.shadowRoot.querySelector(selector);
+      if (!node) {
+        return;
+      }
+      node.scrollIntoView(options);
+    }
+
+    _computeOperationId(item) {
+      return item && item['@id'];
     }
     /**
      * Dispatched when the user requested previous / next

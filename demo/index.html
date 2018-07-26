@@ -18,6 +18,7 @@
     <link rel="import" href="../../paper-listbox/paper-listbox.html">
     <link rel="import" href="../../neon-animation/web-animations.html">
     <link rel="import" href="../../paper-toast/paper-toast.html">
+    <link rel="import" href="../../paper-toggle-button/paper-toggle-button.html">
     <link rel="import" href="../api-endpoint-documentation.html">
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
@@ -75,6 +76,7 @@
 
       [role="main"] {
         max-width: 1100px;
+        position: relative;
         @apply --layout-horizontal;
         @apply --layout-start;
       }
@@ -84,10 +86,19 @@
         min-width: 320px;
         overflow: auto;
       }
+      .demo-nav {
+        position: fixed;
+        top: 86px;
+        width: 320px;
+      }
 
       api-endpoint-documentation {
-        margin-left: 40px;
+        margin-left: 360px;
         @apply --layout-flex;
+      }
+
+      .info {
+        margin-left: 360px;
       }
 
       header {
@@ -98,14 +109,29 @@
         --paper-input-container-label: {
           color: #3E2723;
         };
+        @apply --layout-horizontal;
+        @apply --layout-center;
       }
 
+      .spacer {
+        @apply --layout-flex;
+      }
+
+      .options {
+        @apply --layout-horizontal;
+        @apply --layout-center;
+      }
+
+      .options > * {
+        margin-left: 8px;
+      }
       </style>
     </custom-style>
   </head>
   <body>
     <dom-bind id="demo">
       <template is="dom-bind">
+        <raml-aware raml="{{amfModel}}" scope="model"></raml-aware>
         <header>
           <paper-dropdown-menu label="Select demo endpoint">
             <paper-listbox slot="dropdown-content" id="enpointsList" on-selected-changed="_apiChanged">
@@ -115,15 +141,23 @@
               <paper-item data-src="exchange-experience-api.json">Exchange XAPI</paper-item>
             </paper-listbox>
           </paper-dropdown-menu>
+          <div class="spacer"></div>
+          <div class="options">
+            <paper-toggle-button checked="{{narrow}}">Render narrow view</paper-toggle-button>
+            <paper-toggle-button checked="{{noTryit}}">No try it button</paper-toggle-button>
+            <paper-toggle-button checked="{{inlineMethods}}">Render full method docs</paper-toggle-button>
+          </div>
         </header>
         <div class="vertical-section-container centered" role="main">
-          <raml-aware raml="{{amfModel}}" scope="model"></raml-aware>
-          <api-navigation aware="model" endpoints-opened></api-navigation>
+
+          <nav class="demo-nav">
+            <api-navigation aware="model" endpoints-opened></api-navigation>
+          </nav>
           <template is="dom-if" if="[[hasData]]">
-            <api-endpoint-documentation aware="model" endpoint="[[endpoint]]" previous="[[previous]]" next="[[next]]"></api-endpoint-documentation>
+            <api-endpoint-documentation aware="model" endpoint="[[endpoint]]" previous="[[previous]]" next="[[next]]" narrow="[[narrow]]" no-try-it="[[noTryit]]" inline-methods="[[inlineMethods]]" selected="[[selectedShape]]" scroll-target="[[scrollTarget]]"></api-endpoint-documentation>
           </template>
           <template is="dom-if" if="[[!hasData]]">
-            <p>Select a HTTP method in the navigation to see the demo.</p>
+            <p class="info">Select a HTTP method in the navigation to see the demo.</p>
           </template>
         </div>
       </template>
@@ -132,6 +166,7 @@
     <script>
     (function(app) {
       app.hasData = false;
+      app.scrollTarget = window;
       app._load = function() {
         document.getElementById('enpointsList').selected = 0;
       };
@@ -154,7 +189,11 @@
           return;
         }
         const type = e.detail.type;
-        if (['endpoint'].indexOf(type) !== -1) {
+        const allowed = ['endpoint'];
+        if (app.inlineMethods) {
+          allowed.push('method');
+        }
+        if (allowed.indexOf(type) !== -1) {
           app.setData(e.detail.selected, type);
           app.hasData = true;
         } else {
@@ -171,6 +210,7 @@
             continue;
           }
           app.endpoint = item;
+          app.selectedShape = id;
           app._setPrevious(endpoints[i - 1]);
           app._setNext(endpoints[i + 1]);
           break;
