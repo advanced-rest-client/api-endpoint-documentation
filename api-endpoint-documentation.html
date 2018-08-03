@@ -1138,7 +1138,10 @@
         options = true;
       }
       if (last.indexOf('%2F') === 0) {
-        this.shadowRoot.querySelector('.title').scrollIntoView(true);
+        const title = this.shadowRoot.querySelector('.title');
+        if (title) {
+          title.scrollIntoView(true);
+        }
         return;
       }
       const selector = `[data-operation-id="${id}"]`;
