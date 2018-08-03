@@ -19,6 +19,10 @@
     <link rel="import" href="../../neon-animation/web-animations.html">
     <link rel="import" href="../../paper-toast/paper-toast.html">
     <link rel="import" href="../../paper-toggle-button/paper-toggle-button.html">
+    <link rel="import" href="../../oauth-authorization/oauth2-authorization.html">
+    <link rel="import" href="../../oauth-authorization/oauth1-authorization.html">
+    <link rel="import" href="../../xhr-simple-request/xhr-simple-request.html">
+    <link rel="import" href="../../iron-meta/iron-meta.html">
     <link rel="import" href="../api-endpoint-documentation.html">
     <link rel="import" href="api-console-styles.html">
     <custom-style>
@@ -88,9 +92,13 @@
     </custom-style>
   </head>
   <body>
+    <iron-meta key="oauth2-client-id" value="59KaqF90hLgZMJec"></iron-meta>
     <dom-bind id="demo">
       <template is="dom-bind">
         <raml-aware raml="{{amfModel}}" scope="model"></raml-aware>
+        <xhr-simple-request></xhr-simple-request>
+        <oauth2-authorization></oauth2-authorization>
+        <oauth1-authorization></oauth1-authorization>
         <header>
           <paper-dropdown-menu label="Select demo endpoint">
             <paper-listbox slot="dropdown-content" id="enpointsList" on-selected-changed="_apiChanged">
@@ -124,7 +132,8 @@
                 no-try-it="[[noTryit]]"
                 inline-methods="[[inlineMethods]]"
                 selected="[[selectedShape]]"
-                scroll-target="[[scrollTarget]]"></api-endpoint-documentation>
+                scroll-target="[[scrollTarget]]"
+                redirect-uri="[[redirectUri]]"></api-endpoint-documentation>
             </template>
             <template is="dom-if" if="[[!hasData]]">
               <p class="info">Select a HTTP method in the navigation to see the demo.</p>
@@ -136,6 +145,10 @@
     <paper-toast id="navToast"></paper-toast>
     <script>
     (function(app) {
+      // app.redirectUri = location.href.replace(
+      //   /api-endpoint-documentation\/demo\/(index\.html)?/,
+      //   'oauth-authorization/oauth-popup.html');
+      app.redirectUri = 'https://auth.advancedrestclient.com/oauth-popup.html';
       app.hasData = false;
       app.inlineMethods = true;
       app._load = function() {
