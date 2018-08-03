@@ -183,19 +183,31 @@
     }
 
     .method-container api-method-documentation {
-      @apply --layout-flex-2;
+      /* @apply --layout-flex; */
+      width: 60%;
       max-width: 900px;
       border-top: 2px #E5E5E5 solid;
       padding-right: 12px;
       box-sizing: border-box;
     }
 
+    .method-container .try-it-column {
+      /* @apply --layout-flex; */
+      width: 40%;
+      max-width: 600px;
+      background-color: #ECEFF1;
+      border: 1px #B0BEC5 solid;
+      border-top: 2px #B0BEC5 solid;
+      border-bottom: none;
+    }
+
     :host([narrow]) .method-container api-method-documentation,
     :host([narrow]) .method-container .try-it-column {
-      @apply --layout-flex-none;
       border: none !important;
       max-width: 900px;
-      padding-left: 0;
+      width: 100%;
+      margin: 0;
+      padding: 0;
     }
 
     .method-container.first api-method-documentation,
@@ -209,15 +221,6 @@
 
     .method-container.first .try-it-column {
       border-top-color: #B0BEC5;
-    }
-
-    .method-container .try-it-column {
-      @apply --layout-flex;
-      max-width: 600px;
-      background-color: #ECEFF1;
-      border: 1px #B0BEC5 solid;
-      border-top: 2px #B0BEC5 solid;
-      border-bottom: none;
     }
 
     .first .try-it-column {
@@ -1274,7 +1277,7 @@
     }
     /**
      * Computes special class names for the method container.
-     * It adds `first`, and `last` names to corresponding 
+     * It adds `first`, and `last` names to corresponding
      * containers.
      */
     _computeTryItColumClass(index, operations) {
