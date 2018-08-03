@@ -353,14 +353,16 @@
                     </div>
                   </div>
                   <iron-collapse opened="[[item._tryitOpened]]">
-                    <api-request-panel
-                      amf-model="[[amfModel]]"
-                      selected="[[_computeTryItSelected(item)]]"
-                      narrow="[[narrow]]"
-                      no-url-editor="[[noUrlEditor]]"
-                      base-uri="[[baseUri]]"
-                      redirect-uri="[[redirectUri]]"
-                      no-docs></api-request-panel>
+                    <template is="dom-if" restamp="true" data-type="arp-if" on-dom-change="_tryItRendered">
+                      <api-request-panel
+                        amf-model="[[amfModel]]"
+                        selected="[[_computeTryItSelected(item)]]"
+                        narrow="[[narrow]]"
+                        no-url-editor="[[noUrlEditor]]"
+                        base-uri="[[baseUri]]"
+                        redirect-uri="[[redirectUri]]"
+                        no-docs></api-request-panel>
+                    </template>
                   </iron-collapse>
                 </section>
                 <section class="snippets">
@@ -525,7 +527,7 @@
          * The ID in `amfModel` of current selection. It can be this endpoint
          * or any of methods
          */
-        selected: String,
+        selected: {type: String, observer: '_selectedUpdated'},
         /**
          * A property to set to override AMF's model base URI information.
          * When this property is set, the `endpointUri` property is recalculated.
@@ -534,7 +536,7 @@
         /**
          * Computed value, API version name
          */
-         apiVersion: {
+        apiVersion: {
           type: String,
           computed: '_computeApiVersion(amfModel)'
         },
@@ -550,7 +552,7 @@
          * Computed value of the `http://raml.org/vocabularies/http#server`
          * from `amfModel`
          */
-         server: {
+        server: {
           type: Object,
           computed: '_computeServer(amfModel)'
         },
@@ -1077,7 +1079,8 @@
      * @param {String} selected Id of selected method as in AMF model.
      */
     _notifyPassiveNavigation(selected) {
-      if (this.__notyfyingChange || this.__latestNotified === selected) {
+      if (this.__notyfyingChange || this.__latestNotified === selected ||
+        this.selected === selected) {
         return;
       }
       this.__latestNotified = selected;
@@ -1259,16 +1262,86 @@
       }
     }
     /**
+     * The try it panel is not rendered at start time when the user initializes
+     * the endpoint documentation to reduce number of computations happening
+     * at the same time. When `dom-repeat` renders all documentation
+     * panels it calls this function which initializes requests panels one
+     * by one in the tasks scheduler.
+     */
+    _operationRendered() {
+      const ifs = this.shadowRoot.querySelectorAll('[data-type="arp-if"]');
+      this._renderTryItQueue(ifs);
+    }
+    /**
+     * Renders next try it panel from the NodeList
+     * @param {NodeList} queue Node list of `dom-if`'s with the panel
+     * @param {?Number} index Currently iterated item.
+     */
+    _renderTryItQueue(queue, index) {
+      index = index || 0;
+      const domIf = queue[index];
+      if (!domIf) {
+        return;
+      }
+      Polymer.RenderStatus.afterNextRender(this, () => {
+        domIf.if = true;
+        index++;
+        this._renderTryItQueue(queue, index);
+      });
+    }
+    /**
      * Request editor handles events when it's state changes. But the change
      * may influence other editors visible on the same page (eg URL change).
      * When the request panel is rendered it sets events target of the panel
      * to the panel so it won't listen for changes in other editors.
      */
-    _operationRendered() {
-      const panels = this.shadowRoot.querySelectorAll('api-request-panel');
-      for (let i = 0, len = panels.length; i < len; i++) {
-        if (!panels[i].eventsTarget) {
-          panels[i].eventsTarget = panels[i];
+    _tryItRendered(e) {
+      if (!e.target.if) {
+        return;
+      }
+      const panel = e.target.parentElement.querySelector('api-request-panel');
+      panel.eventsTarget = panel;
+    }
+    /**
+     * Clears try it panels from the view when endpoint changes
+     * @param {?String} value
+     * @param {?String} old
+     */
+    _selectedUpdated(value, old) {
+      if (!value && old) {
+        this._clearRequestPanels();
+        return;
+      }
+      if (!old || !value) {
+        return;
+      }
+      if (this._endpointIdFromId(value) !== this._endpointIdFromId(old)) {
+        this._clearRequestPanels();
+      }
+    }
+    /**
+     * Computes endpoint ID from given id.
+     * If the id is already an endpoint id it returns the same string.
+     *
+     * @param {String} id Id to transform
+     * @return {String} ID that is an endpoint ID.
+     */
+    _endpointIdFromId(id) {
+      const parts = id.split('/');
+      if (parts[parts.length - 1][0] === '%') {
+        return id;
+      }
+      parts.pop();
+      return parts.join('/');
+    }
+    /**
+     * Sets `false` on try it condition templae.
+     */
+    _clearRequestPanels() {
+      const ifs = this.shadowRoot.querySelectorAll('[data-type="arp-if"]');
+      for (let i = 0; i < ifs.length; i++) {
+        if (ifs[i].if) {
+          ifs[i].if = false;
         }
       }
     }
@@ -1283,10 +1356,10 @@
       }
       let klass = '';
       if (index === 0) {
-        klass += ' first'
+        klass += ' first';
       }
       if (index === operations.length - 1) {
-        klass += ' last'
+        klass += ' last';
       }
       return klass;
     }
