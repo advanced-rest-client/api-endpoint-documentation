@@ -1003,21 +1003,27 @@
         return;
       }
       const diff = (this._lastScrollPos || 0) - scroll;
+      if (diff === 0) {
+        return;
+      }
       this._lastScrollPos = scroll;
       const dir = diff < 0 ? 'down' : 'up';
-      const heigth = st.scrollHeight || st.innerHeight;
+      const scrollHeigth = st.scrollHeight || st.innerHeight;
+      const targetHeigth = st.offsetHeight || st.innerHeight;
       if (!this._methodsList) {
         const section = this.shadowRoot.querySelector('section.methods');
-        // This lis live node list so the reference has to be made only once.
+        // This list is a live node list so the reference has to be made
+        // only once.
         this._methodsList = section.childNodes;
       }
       for (let i = 0, len = this._methodsList.length; i < len; i++) {
         const node = this._methodsList[i];
-        if (node.nodeName !== 'API-METHOD-DOCUMENTATION') {
+        if (node.nodeName !== 'DIV') {
           continue;
         }
-        if (this._occupiesMainScrollArea(heigth, dir, node)) {
-          this._notifyPassiveNavigation(node.method['@id']);
+        if (this._occupiesMainScrollArea(targetHeigth, scrollHeigth, dir, node)) {
+          const doc = node.querySelector('api-method-documentation');
+          this._notifyPassiveNavigation(doc.method['@id']);
           return;
         }
       }
@@ -1025,28 +1031,38 @@
     /**
      * Function that checks if an `element` is in the main scrolling area.
      *
-     * @param {Number} heigth Height of the scroll target
+     * @param {Number} targetHeigth Height (visible) of the scroll target
+     * @param {Number} scrollHeigth Height of the scroll target
      * @param {String} dir Direction where the scroll is going (up or down)
      * @param {Node} element The node to test
      * @return {Boolean} True when it determines that the element is in the main
      * scroll area,
      */
-    _occupiesMainScrollArea(heigth, dir, element) {
+    _occupiesMainScrollArea(targetHeigth, scrollHeigth, dir, element) {
       const rect = element.getBoundingClientRect();
+      if (rect.top < 0 && rect.bottom > targetHeigth) {
+        // Occupies whole area
+        return true;
+      }
+      if (rect.bottom < 0 || targetHeigth < rect.top || (rect.top < 0 && rect.top + rect.height <= 0)) {
+        // Completely out of screen
+        return false;
+      }
+      if (rect.top < 0 && dir === 'down' && rect.top + rect.height < targetHeigth / 2) {
+        // less than half screen
+        return false;
+      }
+      if (dir === 'down' && (rect.top + rect.height) > targetHeigth / 2) {
+        return true;
+      }
       const padding = 60;
-      if (rect.bottom < 0) {
-        return false;
-      }
-      if (rect.top > heigth) {
-        return false;
-      }
       if (rect.y > 0 && rect.y < padding) {
         if (dir === 'up') {
           return false;
         }
         return true;
       }
-      if (dir === 'up' && (rect.bottom + padding) > heigth && rect.bottom < heigth) {
+      if (dir === 'up' && (rect.bottom + padding) > scrollHeigth && rect.bottom < targetHeigth) {
         return true;
       }
       return false;
@@ -1061,9 +1077,10 @@
      * @param {String} selected Id of selected method as in AMF model.
      */
     _notifyPassiveNavigation(selected) {
-      if (this.__notyfyingChange) {
+      if (this.__notyfyingChange || this.__latestNotified === selected) {
         return;
       }
+      this.__latestNotified = selected;
       this.__notyfyingChange = true;
       setTimeout(() => {
         this.__notyfyingChange = false;
