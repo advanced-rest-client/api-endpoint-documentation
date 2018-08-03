@@ -39,17 +39,12 @@
       api-navigation {
         width: 320px;
         min-width: 320px;
-        overflow: auto;
-      }
-      .demo-nav {
-        position: fixed;
-        top: 86px;
-        width: 320px;
       }
 
-      api-endpoint-documentation {
-        margin-left: 360px;
-        @apply --layout-flex;
+      .demo-nav {
+        width: 320px;
+        height: calc(100vh - 86px);
+        overflow: auto;
       }
 
       .info {
@@ -80,6 +75,13 @@
       .options > * {
         margin-left: 8px;
       }
+
+      .doc-container {
+        height: calc(100vh - 86px);
+        overflow: auto;
+        margin-left: 20px;
+        @apply --layout-flex;
+      }
       </style>
     </custom-style>
   </head>
@@ -108,12 +110,24 @@
           <nav class="demo-nav">
             <api-navigation aware="model" endpoints-opened></api-navigation>
           </nav>
-          <template is="dom-if" if="[[hasData]]">
-            <api-endpoint-documentation aware="model" endpoint="[[endpoint]]" previous="[[previous]]" next="[[next]]" narrow="[[narrow]]" no-try-it="[[noTryit]]" inline-methods="[[inlineMethods]]" selected="[[selectedShape]]" scroll-target="[[scrollTarget]]"></api-endpoint-documentation>
-          </template>
-          <template is="dom-if" if="[[!hasData]]">
-            <p class="info">Select a HTTP method in the navigation to see the demo.</p>
-          </template>
+
+          <div class="doc-container">
+            <template is="dom-if" if="[[hasData]]">
+              <api-endpoint-documentation
+                aware="model"
+                endpoint="[[endpoint]]"
+                previous="[[previous]]"
+                next="[[next]]"
+                narrow="[[narrow]]"
+                no-try-it="[[noTryit]]"
+                inline-methods="[[inlineMethods]]"
+                selected="[[selectedShape]]"
+                scroll-target="[[scrollTarget]]"></api-endpoint-documentation>
+            </template>
+            <template is="dom-if" if="[[!hasData]]">
+              <p class="info">Select a HTTP method in the navigation to see the demo.</p>
+            </template>
+          </div>
         </div>
       </template>
     </dom-bind>
@@ -121,10 +135,10 @@
     <script>
     (function(app) {
       app.hasData = false;
-      app.scrollTarget = window;
       app.inlineMethods = true;
       app._load = function() {
         document.getElementById('enpointsList').selected = 0;
+        app.scrollTarget = document.querySelector('.doc-container');
       };
       app._loadFile = function(file) {
         fetch('./' + file)
