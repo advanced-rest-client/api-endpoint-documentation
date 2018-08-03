@@ -286,6 +286,10 @@
     .toggle-icon.opened {
       transform: rotateZ(-180deg);
     }
+
+    .noinfo {
+      @apply --no-info-message;
+    }
     </style>
     <template is="dom-if" if="[[aware]]">
       <raml-aware raml="{{amfModel}}" scope="[[aware]]"></raml-aware>
@@ -327,6 +331,7 @@
       </marked-element>
     </template>
 
+    <h2>Methods</h2>
     <template is="dom-if" if="[[hasOperations]]">
       <template is="dom-if" if="[[inlineMethods]]" restamp="true">
         <section class="methods">
@@ -385,7 +390,6 @@
         </section>
       </template>
       <template is="dom-if" if="[[!inlineMethods]]" restamp="true">
-        <h2>Methods</h2>
         <section class="methods">
           <template is="dom-repeat" items="[[operations]]">
             <div class="method">
@@ -402,6 +406,10 @@
           </template>
         </section>
       </template>
+    </template>
+
+    <template is="dom-if" if="[[!hasOperations]]">
+      <p class="noinfo">This enpoint doesn't have mathods defined in the API specification file.</p>
     </template>
 
     <template is="dom-if" if="[[hasPagination]]">
@@ -732,6 +740,7 @@
          */
         hasOperations: {
           type: Boolean,
+          value: false,
           computed: '_computeHasArrayValue(operations)'
         },
         /**
