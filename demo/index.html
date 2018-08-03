@@ -20,54 +20,9 @@
     <link rel="import" href="../../paper-toast/paper-toast.html">
     <link rel="import" href="../../paper-toggle-button/paper-toggle-button.html">
     <link rel="import" href="../api-endpoint-documentation.html">
+    <link rel="import" href="api-console-styles.html">
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
-      :root {
-        --arc-font-display1: {
-          @apply --paper-font-display1;
-        };
-        --arc-font-headline: {
-          @apply --paper-font-headline;
-        };
-        --arc-font-title: {
-          @apply --paper-font-title;
-        };
-        --arc-font-subhead: {
-          @apply --paper-font-subhead;
-        };
-        --arc-font-body1: {
-          @apply --paper-font-body1;
-          word-break: break-word;
-        };
-        --arc-font-common-code: {
-          @apply --paper-font-common-code;
-          word-break: break-word !important;
-          overflow: auto;
-          white-space: pre-wrap !important;
-        };
-        --arc-font-code1: {
-          @apply --paper-font-code1;
-          word-wrap: break-word;
-          word-break: break-all;
-          overflow: auto;
-        };
-
-        --method-label-get-background-color: rgb(0, 128, 0);
-        --method-label-get-color: #fff;
-        --method-label-post-background-color: rgb(33, 150, 243);
-        --method-label-post-color: #fff;
-        --method-label-put-background-color: rgb(255, 165, 0);
-        --method-label-put-color: #fff;
-        --method-label-patch-background-color: rgb(156, 39, 176);
-        --method-label-patch-color: #fff;
-        --method-label-delete-background-color: rgb(244, 67, 54);
-        --method-label-delete-color: #fff;
-
-        --arc-link: {
-          color: #1976D2;
-        };
-      }
-
       html,
       body {
         margin: 0;
@@ -75,7 +30,7 @@
       }
 
       [role="main"] {
-        max-width: 1100px;
+        max-width: none;
         position: relative;
         @apply --layout-horizontal;
         @apply --layout-start;
@@ -167,6 +122,7 @@
     (function(app) {
       app.hasData = false;
       app.scrollTarget = window;
+      app.inlineMethods = true;
       app._load = function() {
         document.getElementById('enpointsList').selected = 0;
       };
