@@ -353,7 +353,7 @@
                   <iron-collapse opened="[[item._tryitOpened]]">
                     <api-request-panel
                       amf-model="[[amfModel]]"
-                      selected="[[selected]]"
+                      selected="[[_computeTryItSelected(item)]]"
                       narrow="[[narrow]]"
                       no-url-editor="[[noUrlEditor]]"
                       base-uri="[[baseUri]]"
@@ -1285,11 +1285,17 @@
       if (index === 0) {
         klass += ' first'
       }
-
       if (index === operations.length - 1) {
         klass += ' last'
       }
       return klass;
+    }
+
+    _computeTryItSelected(item) {
+      if (!item) {
+        return;
+      }
+      return item['@id'];
     }
     /**
      * Dispatched when the user requested previous / next
