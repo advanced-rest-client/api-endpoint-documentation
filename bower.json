@@ -44,7 +44,8 @@
     "paper-toast": "PolymerElements/paper-toast#^2.1.0",
     "paper-toggle-button": "PolymerElements/paper-toggle-button#^2.1.1",
     "oauth-authorization": "advanced-rest-client/oauth-authorization#^2.0.1",
-    "xhr-simple-request": "advanced-rest-client/xhr-simple-request#^2.0.0"
+    "xhr-simple-request": "advanced-rest-client/xhr-simple-request#^2.0.0",
+    "api-console-default-theme": "advanced-rest-client/api-console-default-theme#5.0.0-preview"
   },
   "repository": {
     "type": "git",
