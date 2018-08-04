@@ -335,7 +335,7 @@
     <template is="dom-if" if="[[hasOperations]]">
       <template is="dom-if" if="[[inlineMethods]]" restamp="true">
         <section class="methods">
-          <template is="dom-repeat" items="[[operations]]" on-dom-change="_operationRendered">
+          <template is="dom-repeat" items="[[operations]]" on-dom-change="_operationRendered" initial-count="2">
             <div class$="method-container [[_computeTryItColumClass(index, operations)]]">
               <api-method-documentation
                 data-operation-id$="[[_computeOperationId(item)]]"
