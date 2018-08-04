@@ -12,4 +12,4 @@ A component to generate documentation for an API resource from AMF model.
 
 ### API components
 
-This components is a part of API components ecosystem: https://elements.advancedrestclient.com/
+This components is a part of [API components ecosystem](https://elements.advancedrestclient.com/)
