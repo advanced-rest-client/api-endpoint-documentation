@@ -409,7 +409,7 @@
     </template>
 
     <template is="dom-if" if="[[!hasOperations]]">
-      <p class="noinfo">This enpoint doesn't have mathods defined in the API specification file.</p>
+      <p class="noinfo">This enpoint doesn't have HTTP methods defined in the API specification file.</p>
     </template>
 
     <template is="dom-if" if="[[hasPagination]]">
@@ -530,12 +530,12 @@
          * Method's endpoint definition as a
          * `http://raml.org/vocabularies/http#endpoint` of AMF model.
          */
-        endpoint: Object,
+        endpoint: {type: Object, observer: '_endpointChnaged'},
         /**
          * The ID in `amfModel` of current selection. It can be this endpoint
          * or any of methods
          */
-        selected: {type: String, observer: '_selectedUpdated'},
+        selected: {type: String},
         /**
          * A property to set to override AMF's model base URI information.
          * When this property is set, the `endpointUri` property is recalculated.
@@ -733,7 +733,7 @@
          */
         operations: {
           type: Array,
-          computed: '_computeOperations(endpoint, inlineMethods)'
+          computed: '_computeOperations(endpoint, inlineMethods, amfModel)'
         },
         /**
          * Computed value if the endpoint contains operations.
@@ -795,9 +795,9 @@
      * @return {String} Endpoint name.
      */
     _computeEndpointName(endpoint) {
-      let name = this._getValue(endpoint, this.ns.schema.schemaName);
+      const name = this._getValue(endpoint, this.ns.schema.schemaName);
       // if (!name) {
-      //   name = this._getValue(endpoint, this.ns.raml.vocabularies.http + 'path');
+      //   name = this._computePath(endpoint);
       // }
       return name;
     }
@@ -817,7 +817,8 @@
      * @return {Array<Object>|undefined}
      */
     _computeExtendsTypes(shape) {
-      return shape && shape[this.ns.raml.vocabularies.document + 'extends'];
+      const key = this._getAmfKey(this.ns.raml.vocabularies.document + 'extends');
+      return shape && shape[key + 'extends'];
     }
     /**
      * Computes parent type as RAML's resource type.
@@ -943,7 +944,8 @@
       if (!endpoint) {
         return;
       }
-      const ops = endpoint[this.ns.w3.hydra.supportedOperation];
+      const key = this._getAmfKey(this.ns.w3.hydra.supportedOperation);
+      const ops = this._ensureArray(endpoint[key]);
       if (!ops || !ops.length) {
         return;
       }
@@ -1126,8 +1128,6 @@
      * @param {String} id Selected AMF id.
      */
     _repositionVerb(id) {
-      const parts = id.split('/');
-      const last = parts[parts.length - 1];
       let options;
       if ('scrollBehavior' in document.documentElement.style) {
         options = {
@@ -1137,7 +1137,8 @@
       } else {
         options = true;
       }
-      if (last.indexOf('%2F') === 0) {
+      const isEndpoint = (this.endpoint && this.endpoint['@id'] === id);
+      if (isEndpoint) {
         const title = this.shadowRoot.querySelector('.title');
         if (title) {
           title.scrollIntoView(true);
@@ -1223,7 +1224,8 @@
      * @return {String|undefined}
      */
     _computePropertyValue(item) {
-      let schema = item && item[this.ns.raml.vocabularies.http + 'schema'];
+      const key = this._getAmfKey(this.ns.raml.vocabularies.http + 'schema');
+      let schema = item && item[key];
       if (!schema) {
         return;
       }
@@ -1231,7 +1233,7 @@
       const defValKey = this.ns.w3.shacl.name + 'defaultValue';
       let value = this._getValue(item, defValKey);
       if (!value) {
-        const examplesKey = this.ns.raml.vocabularies.document + 'examples';
+        const examplesKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
         let example = item[examplesKey];
         if (example) {
           example = example[0];
@@ -1315,38 +1317,6 @@
       panel.eventsTarget = panel;
     }
     /**
-     * Clears try it panels from the view when endpoint changes
-     * @param {?String} value
-     * @param {?String} old
-     */
-    _selectedUpdated(value, old) {
-      if (!value && old) {
-        this._clearRequestPanels();
-        return;
-      }
-      if (!old || !value) {
-        return;
-      }
-      if (this._endpointIdFromId(value) !== this._endpointIdFromId(old)) {
-        this._clearRequestPanels();
-      }
-    }
-    /**
-     * Computes endpoint ID from given id.
-     * If the id is already an endpoint id it returns the same string.
-     *
-     * @param {String} id Id to transform
-     * @return {String} ID that is an endpoint ID.
-     */
-    _endpointIdFromId(id) {
-      const parts = id.split('/');
-      if (parts[parts.length - 1][0] === '%') {
-        return id;
-      }
-      parts.pop();
-      return parts.join('/');
-    }
-    /**
      * Sets `false` on try it condition templae.
      */
     _clearRequestPanels() {
@@ -1381,6 +1351,10 @@
         return;
       }
       return item['@id'];
+    }
+
+    _endpointChnaged() {
+      this._clearRequestPanels();
     }
     /**
      * Dispatched when the user requested previous / next
