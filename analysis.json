@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "elements": [
     {
-      "description": "`api-endpoint-documentation`\n\nA component to generate documentation for an endpoint from AMF model\n\nThis element works with [AMF](https://github.com/mulesoft/amf) data model.\nTo properly compute all the information relevant to endpoint documentation\nset the following properties:\n\n- amfModel - as AMF's WebApi data model\n- endpoint - As AMF's EndPoint data model\n\nWhen set, this will automatically populate the wiew with data.\n\n## Updating API's base URI\n\nBy default the component render the documentation as it is defined\nin the AMF model. Sometimes, however, you may need to replace the base URI\nof the API with something else. It is useful when the API does not\nhave base URI property defined (therefore this component render relative\npaths instead of URIs) or when you want to manage different environments.\n\nTo update base URI value either update `baseUri` property or use\n`iron-meta` with key `ApiBaseUri`. First method is easier but the second\ngives much more flexibility since it use a [monostate pattern](http://wiki.c2.com/?MonostatePattern)\nto manage base URI property.\n\nWhen the component constructs the funal URI for the endpoint it does the following:\n- if `baseUri` is set it uses this value as a base uri for the endpoint\n- else if `iron-meta` with key `ApiBaseUri` exists and contains a value\nit uses it uses this value as a base uri for the endpoin\n   t\n- else if `amfModel` is set then it computes base uri value from main\nmodel document\nThen it concatenates computed base URI with `endpoint`'s path property.\n\n### Example\n\n```html\n<iron-meta key=\"ApiBaseUri\" value=\"https://domain.com\"></iron-meta>\n```\n\nTo update value of the `iron-meta`:\n```javascript\nnew Polymer.IronMeta({key: 'ApiBaseUri'}).value = 'https://other.domain';\n```\n\nNote: The element will not get notified about the change in `iron-meta`.\nThe change will be reflected whehn `amfModel` or `endpoint` property chnage.\n\n## Styling\n\n`<api-endpoint-documentation>` provides the following custom properties and mixins for styling:\n\nCustom property | Description | Default\n----------------|-------------|----------\n`--api-endpoint-documentation` | Mixin applied to this elment | `{}`\n`--arc-font-headline` | Theme mixin, Applied to h1 element (title) | `{}`\n`--arc-font-code1` | Theme mixin, applied to the URL area | `{}`\n`--api-endpoint-documentation-url-font-size` | Font size of endpoin URL | `16px`\n`--api-endpoint-documentation-url-background-color` | Background color of the URL section | `#424242`\n`--api-endpoint-documentation-url-font-color` | Font color of the URL area | `#fff`\n`--api-endpoint-documentation-bottom-navigation-border-color` | Color of the top border of the bottom navigartion | `#546E7A`\n`--api-endpoint-documentation-bottom-navigation-color` | Color of of the bottom navigartion (icon + text) | `#546E7A`",
+      "description": "`api-endpoint-documentation`\n\nA component to generate documentation for an endpoint from AMF model\n\nThis element works with [AMF](https://github.com/mulesoft/amf) data model.\nTo properly compute all the information relevant to endpoint documentation\nset the following properties:\n\n- amfModel - as AMF's WebApi data model\n- endpoint - As AMF's EndPoint data model\n\nWhen set, this will automatically populate the wiew with data.\n\n## Updating API's base URI\n\nBy default the component render the documentation as it is defined\nin the AMF model. Sometimes, however, you may need to replace the base URI\nof the API with something else. It is useful when the API does not\nhave base URI property defined (therefore this component render relative\npaths instead of URIs) or when you want to manage different environments.\n\nTo update base URI value either update `baseUri` property or use\n`iron-meta` with key `ApiBaseUri`. First method is easier but the second\ngives much more flexibility since it use a\n[monostate pattern](http://wiki.c2.com/?MonostatePattern)\nto manage base URI property.\n\nWhen the component constructs the funal URI for the endpoint it does the\nfollowing:\n- if `baseUri` is set it uses this value as a base uri for the endpoint\n- else if `iron-meta` with key `ApiBaseUri` exists and contains a value\nit uses it uses this value as a base uri for the endpoin\n   t\n- else if `amfModel` is set then it computes base uri value from main\nmodel document\nThen it concatenates computed base URI with `endpoint`'s path property.\n\n### Example\n\n```html\n<iron-meta key=\"ApiBaseUri\" value=\"https://domain.com\"></iron-meta>\n```\n\nTo update value of the `iron-meta`:\n```javascript\nnew Polymer.IronMeta({key: 'ApiBaseUri'}).value = 'https://other.domain';\n```\n\nNote: The element will not get notified about the change in `iron-meta`.\nThe change will be reflected whehn `amfModel` or `endpoint` property chnage.\n\n## Inline methods layout\n\nWhen `inlineMethods` is set then methods (api-method-document) is rendered\ninstead of list of links to methods.\nDeep linking is still supported. The page scrolls when navigation event\nchanges.\n\nIn this layout the try it panel is rendered next to method documentation\n(normal layout) or below method documentation (narrow layout).\n\n## Styling\n\n`<api-endpoint-documentation>` provides the following custom properties\nand mixins for styling:\n\nCustom property | Description | Default\n----------------|-------------|----------\n`--api-endpoint-documentation` | Mixin applied to this elment | `{}`\n`--arc-font-headline` | Theme mixin, Applied to h1 element (title) | `{}`\n`--arc-font-code1` | Theme mixin, applied to the URL area | `{}`\n`--api-endpoint-documentation-url-font-size` | Font size of endpoin URL | `16px`\n`--api-endpoint-documentation-url-background-color` | Background color of\nthe URL section | `#424242`\n`--api-endpoint-documentation-url-font-color` | Font color of the URL area | `#fff`\n`--api-endpoint-documentation-bottom-navigation-color` | Color of of the\nbottom navigartion (icon + text) | `#546E7A`",
       "summary": "",
       "path": "api-endpoint-documentation.html",
       "properties": [
@@ -13,11 +13,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 334,
+              "line": 537,
               "column": 8
             },
             "end": {
-              "line": 334,
+              "line": 537,
               "column": 24
             }
           },
@@ -58,11 +58,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 323,
+              "line": 526,
               "column": 8
             },
             "end": {
-              "line": 323,
+              "line": 526,
               "column": 21
             }
           },
@@ -79,17 +79,39 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 339,
+              "line": 542,
               "column": 8
             },
             "end": {
-              "line": 339,
-              "column": 24
+              "line": 542,
+              "column": 62
             }
           },
           "metadata": {
             "polymer": {
+              "observer": "\"_endpointChnaged\"",
               "attributeType": "Object"
+            }
+          }
+        },
+        {
+          "name": "selected",
+          "type": "string | null | undefined",
+          "description": "The ID in `amfModel` of current selection. It can be this endpoint\nor any of methods",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 547,
+              "column": 8
+            },
+            "end": {
+              "line": 547,
+              "column": 32
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
             }
           }
         },
@@ -100,11 +122,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 344,
+              "line": 552,
               "column": 8
             },
             "end": {
-              "line": 344,
+              "line": 552,
               "column": 23
             }
           },
@@ -115,17 +137,83 @@
           }
         },
         {
+          "name": "apiVersion",
+          "type": "string | null | undefined",
+          "description": "Computed value, API version name",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 556,
+              "column": 8
+            },
+            "end": {
+              "line": 559,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "readOnly": true,
+              "attributeType": "String"
+            }
+          }
+        },
+        {
+          "name": "endpointUri",
+          "type": "string | null | undefined",
+          "description": "Endpoint URI to display in main URL field.\nThis value is computed when `amfModel`, `endpoint` or `baseUri` change.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 564,
+              "column": 8
+            },
+            "end": {
+              "line": 567,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "readOnly": true,
+              "attributeType": "String"
+            }
+          }
+        },
+        {
+          "name": "server",
+          "type": "Object | null | undefined",
+          "description": "Computed value of the `http://raml.org/vocabularies/http#server`\nfrom `amfModel`",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 572,
+              "column": 8
+            },
+            "end": {
+              "line": 575,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "readOnly": true,
+              "attributeType": "Object"
+            }
+          }
+        },
+        {
           "name": "endpointName",
           "type": "string | null | undefined",
           "description": "Endpoint name.\nIt should be either a \"displayName\" or endpoint's relative\npath.",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 350,
+              "line": 581,
               "column": 8
             },
             "end": {
-              "line": 353,
+              "line": 584,
               "column": 9
             }
           },
@@ -143,11 +231,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 357,
+              "line": 588,
               "column": 8
             },
             "end": {
-              "line": 361,
+              "line": 592,
               "column": 9
             }
           },
@@ -166,11 +254,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 365,
+              "line": 596,
               "column": 8
             },
             "end": {
-              "line": 368,
+              "line": 599,
               "column": 9
             }
           },
@@ -188,11 +276,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 372,
+              "line": 603,
               "column": 8
             },
             "end": {
-              "line": 375,
+              "line": 606,
               "column": 9
             }
           },
@@ -210,11 +298,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 380,
+              "line": 611,
               "column": 8
             },
             "end": {
-              "line": 383,
+              "line": 614,
               "column": 9
             }
           },
@@ -232,11 +320,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 388,
+              "line": 619,
               "column": 8
             },
             "end": {
-              "line": 391,
+              "line": 622,
               "column": 9
             }
           },
@@ -254,11 +342,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 395,
+              "line": 626,
               "column": 8
             },
             "end": {
-              "line": 398,
+              "line": 629,
               "column": 9
             }
           },
@@ -276,11 +364,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 402,
+              "line": 633,
               "column": 8
             },
             "end": {
-              "line": 405,
+              "line": 636,
               "column": 9
             }
           },
@@ -297,11 +385,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 411,
+              "line": 642,
               "column": 8
             },
             "end": {
-              "line": 414,
+              "line": 645,
               "column": 9
             }
           },
@@ -319,11 +407,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 419,
+              "line": 650,
               "column": 8
             },
             "end": {
-              "line": 422,
+              "line": 653,
               "column": 9
             }
           },
@@ -341,11 +429,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 426,
+              "line": 657,
               "column": 8
             },
             "end": {
-              "line": 429,
+              "line": 660,
               "column": 9
             }
           },
@@ -363,11 +451,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 433,
+              "line": 664,
               "column": 8
             },
             "end": {
-              "line": 436,
+              "line": 667,
               "column": 9
             }
           },
@@ -385,11 +473,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 442,
+              "line": 673,
               "column": 8
             },
             "end": {
-              "line": 445,
+              "line": 676,
               "column": 9
             }
           },
@@ -407,11 +495,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 449,
+              "line": 680,
               "column": 8
             },
             "end": {
-              "line": 452,
+              "line": 683,
               "column": 9
             }
           },
@@ -429,11 +517,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 456,
+              "line": 687,
               "column": 8
             },
             "end": {
-              "line": 459,
+              "line": 690,
               "column": 9
             }
           },
@@ -451,11 +539,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 464,
+              "line": 695,
               "column": 8
             },
             "end": {
-              "line": 464,
+              "line": 695,
               "column": 24
             }
           },
@@ -472,11 +560,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 468,
+              "line": 699,
               "column": 8
             },
             "end": {
-              "line": 471,
+              "line": 702,
               "column": 9
             }
           },
@@ -494,11 +582,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 476,
+              "line": 707,
               "column": 8
             },
             "end": {
-              "line": 476,
+              "line": 707,
               "column": 20
             }
           },
@@ -515,11 +603,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 480,
+              "line": 711,
               "column": 8
             },
             "end": {
-              "line": 483,
+              "line": 714,
               "column": 9
             }
           },
@@ -537,11 +625,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 487,
+              "line": 718,
               "column": 8
             },
             "end": {
-              "line": 490,
+              "line": 721,
               "column": 9
             }
           },
@@ -553,17 +641,39 @@
           }
         },
         {
+          "name": "scrollTarget",
+          "type": "Object | null | undefined",
+          "description": "Scroll target used to observe `scroll` event.\nWhen set the element will observe scroll and inform other components\nabout changes in navigation while scrolling through methods list.\nThe navigation event contains `passive: true` property that\ndetermines that it's not user triggered navigation but rather\ncontext enforced.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 730,
+              "column": 8
+            },
+            "end": {
+              "line": 733,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "observer": "\"_scrollTargetChanged\"",
+              "attributeType": "Object"
+            }
+          }
+        },
+        {
           "name": "noTryIt",
           "type": "boolean | null | undefined",
           "description": "Passing value of `noTryIt` to the method documentation.\nHiddes \"Try it\" button from the view.",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 495,
+              "line": 738,
               "column": 8
             },
             "end": {
-              "line": 495,
+              "line": 738,
               "column": 24
             }
           },
@@ -580,11 +690,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 500,
+              "line": 743,
               "column": 8
             },
             "end": {
-              "line": 503,
+              "line": 746,
               "column": 9
             }
           },
@@ -602,11 +712,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 507,
+              "line": 750,
               "column": 8
             },
             "end": {
-              "line": 510,
+              "line": 754,
               "column": 9
             }
           },
@@ -615,13 +725,101 @@
               "readOnly": true,
               "attributeType": "Boolean"
             }
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "inlineMethods",
+          "type": "boolean | null | undefined",
+          "description": "If set then it renders methods documentation inline with\nthe endpoint documentation.\nWhen it's not set (or value is `false`, default) then it renders\njust a list of methods with links.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 761,
+              "column": 8
+            },
+            "end": {
+              "line": 765,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "observer": "\"_inlineMethodsChanged\"",
+              "attributeType": "Boolean"
+            }
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "noUrlEditor",
+          "type": "boolean | null | undefined",
+          "description": "In inline mode, passes the `noUrlEditor` value on the\n`api-request-paqnel`",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 770,
+              "column": 8
+            },
+            "end": {
+              "line": 770,
+              "column": 28
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          }
+        },
+        {
+          "name": "redirectUri",
+          "type": "string | null | undefined",
+          "description": "OAuth2 redirect URI.\nThis value **must** be set in order for OAuth 1/2 to work properly.\nThis is only required in inline mode (`inlineMethods`).",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 776,
+              "column": 8
+            },
+            "end": {
+              "line": 776,
+              "column": 27
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          }
+        },
+        {
+          "name": "_editorEventTarget",
+          "type": "Object | null | undefined",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 777,
+              "column": 8
+            },
+            "end": {
+              "line": 783,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "readOnly": true,
+              "attributeType": "Object"
+            }
           }
         }
       ],
       "methods": [
         {
-          "name": "_ensureAmfModel",
-          "description": "Ensures that the model is AMF object.",
+          "name": "_getAmfKey",
+          "description": "Returns compact model key for given value.",
           "privacy": "protected",
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
@@ -630,7 +828,36 @@
               "column": 4
             },
             "end": {
-              "line": 157,
+              "line": 179,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "property",
+              "type": "String",
+              "description": "AMF orioginal property"
+            }
+          ],
+          "return": {
+            "type": "String",
+            "desc": "Compact model property name or the same value if\nvalue not found in the context."
+          },
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
+          "name": "_ensureAmfModel",
+          "description": "Ensures that the model is AMF object.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 186,
+              "column": 4
+            },
+            "end": {
+              "line": 196,
               "column": 5
             }
           },
@@ -649,17 +876,45 @@
           "inheritedFrom": "ApiElements.AmfHelperMixin"
         },
         {
+          "name": "_ensureArray",
+          "description": "Ensures that the value is an array.\nIt returns undefined when there's no value.\nIt returns the same array if the value is already an array.\nIt returns new array of the item is not an array.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 206,
+              "column": 4
+            },
+            "end": {
+              "line": 214,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "value",
+              "type": "(Array | any)",
+              "description": "An item to test"
+            }
+          ],
+          "return": {
+            "type": "(Array | undefined)"
+          },
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
           "name": "_getValue",
           "description": "Gets a signle scalar value from a model.",
           "privacy": "protected",
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 164,
+              "line": 221,
               "column": 4
             },
             "end": {
-              "line": 174,
+              "line": 238,
               "column": 5
             }
           },
@@ -689,11 +944,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 181,
+              "line": 245,
               "column": 4
             },
             "end": {
-              "line": 187,
+              "line": 252,
               "column": 5
             }
           },
@@ -723,11 +978,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 194,
+              "line": 259,
               "column": 4
             },
             "end": {
-              "line": 202,
+              "line": 271,
               "column": 5
             }
           },
@@ -757,18 +1012,20 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 209,
+              "line": 278,
               "column": 4
             },
             "end": {
-              "line": 211,
+              "line": 281,
               "column": 5
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "model"
+              "name": "shape",
+              "type": "?Object",
+              "description": "The shape to test"
             },
             {
               "name": "key",
@@ -788,11 +1045,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 219,
+              "line": 289,
               "column": 4
             },
             "end": {
-              "line": 228,
+              "line": 299,
               "column": 5
             }
           },
@@ -821,11 +1078,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 237,
+              "line": 308,
               "column": 4
             },
             "end": {
-              "line": 240,
+              "line": 312,
               "column": 5
             }
           },
@@ -854,11 +1111,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 247,
+              "line": 319,
               "column": 4
             },
             "end": {
-              "line": 249,
+              "line": 321,
               "column": 5
             }
           },
@@ -882,11 +1139,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 256,
+              "line": 328,
               "column": 4
             },
             "end": {
-              "line": 258,
+              "line": 330,
               "column": 5
             }
           },
@@ -910,11 +1167,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 264,
+              "line": 336,
               "column": 4
             },
             "end": {
-              "line": 266,
+              "line": 338,
               "column": 5
             }
           },
@@ -939,11 +1196,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 268,
+              "line": 340,
               "column": 4
             },
             "end": {
-              "line": 270,
+              "line": 342,
               "column": 5
             }
           },
@@ -962,11 +1219,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 272,
+              "line": 344,
               "column": 4
             },
             "end": {
-              "line": 274,
+              "line": 346,
               "column": 5
             }
           },
@@ -985,11 +1242,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 276,
+              "line": 348,
               "column": 4
             },
             "end": {
-              "line": 278,
+              "line": 350,
               "column": 5
             }
           },
@@ -1008,11 +1265,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 280,
+              "line": 352,
               "column": 4
             },
             "end": {
-              "line": 287,
+              "line": 359,
               "column": 5
             }
           },
@@ -1031,11 +1288,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 295,
+              "line": 367,
               "column": 4
             },
             "end": {
-              "line": 297,
+              "line": 369,
               "column": 5
             }
           },
@@ -1060,11 +1317,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 304,
+              "line": 376,
               "column": 4
             },
             "end": {
-              "line": 306,
+              "line": 378,
               "column": 5
             }
           },
@@ -1089,11 +1346,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 313,
+              "line": 385,
               "column": 4
             },
             "end": {
-              "line": 315,
+              "line": 387,
               "column": 5
             }
           },
@@ -1118,11 +1375,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 322,
+              "line": 394,
               "column": 4
             },
             "end": {
-              "line": 324,
+              "line": 396,
               "column": 5
             }
           },
@@ -1146,11 +1403,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 331,
+              "line": 403,
               "column": 4
             },
             "end": {
-              "line": 333,
+              "line": 405,
               "column": 5
             }
           },
@@ -1174,11 +1431,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 340,
+              "line": 412,
               "column": 4
             },
             "end": {
-              "line": 342,
+              "line": 414,
               "column": 5
             }
           },
@@ -1202,11 +1459,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 349,
+              "line": 421,
               "column": 4
             },
             "end": {
-              "line": 358,
+              "line": 433,
               "column": 5
             }
           },
@@ -1231,11 +1488,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 365,
+              "line": 440,
               "column": 4
             },
             "end": {
-              "line": 377,
+              "line": 453,
               "column": 5
             }
           },
@@ -1260,11 +1517,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 384,
+              "line": 460,
               "column": 4
             },
             "end": {
-              "line": 396,
+              "line": 473,
               "column": 5
             }
           },
@@ -1289,11 +1546,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 403,
+              "line": 480,
               "column": 4
             },
             "end": {
-              "line": 409,
+              "line": 488,
               "column": 5
             }
           },
@@ -1318,11 +1575,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 416,
+              "line": 495,
               "column": 4
             },
             "end": {
-              "line": 423,
+              "line": 503,
               "column": 5
             }
           },
@@ -1347,11 +1604,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 433,
+              "line": 513,
               "column": 4
             },
             "end": {
-              "line": 445,
+              "line": 525,
               "column": 5
             }
           },
@@ -1391,11 +1648,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 455,
+              "line": 535,
               "column": 4
             },
             "end": {
-              "line": 466,
+              "line": 546,
               "column": 5
             }
           },
@@ -1430,11 +1687,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 476,
+              "line": 556,
               "column": 4
             },
             "end": {
-              "line": 480,
+              "line": 560,
               "column": 5
             }
           },
@@ -1464,11 +1721,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 492,
+              "line": 572,
               "column": 4
             },
             "end": {
-              "line": 506,
+              "line": 586,
               "column": 5
             }
           },
@@ -1498,11 +1755,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 513,
+              "line": 593,
               "column": 4
             },
             "end": {
-              "line": 523,
+              "line": 599,
               "column": 5
             }
           },
@@ -1526,11 +1783,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 530,
+              "line": 606,
               "column": 4
             },
             "end": {
-              "line": 537,
+              "line": 614,
               "column": 5
             }
           },
@@ -1552,13 +1809,12 @@
           "description": "Tries to find an example value (whether it's default value or from an\nexample) to put it into snippet's values.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 545,
+              "line": 1239,
               "column": 4
             },
             "end": {
-              "line": 562,
+              "line": 1260,
               "column": 5
             }
           },
@@ -1572,6 +1828,33 @@
           ],
           "return": {
             "type": "(String | undefined)"
+          }
+        },
+        {
+          "name": "_computeEndpoints",
+          "description": "Computes list of endpoints from a WebApi model.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 646,
+              "column": 4
+            },
+            "end": {
+              "line": 652,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "webApi",
+              "type": "Object"
+            }
+          ],
+          "return": {
+            "type": "Array",
+            "desc": "Always returns an array of endpoints."
           },
           "inheritedFrom": "ApiElements.AmfHelperMixin"
         },
@@ -1582,11 +1865,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 570,
+              "line": 660,
               "column": 4
             },
             "end": {
-              "line": 576,
+              "line": 663,
               "column": 5
             }
           },
@@ -1598,7 +1881,7 @@
               "description": "Current value of `webApi` property"
             },
             {
-              "name": "selected",
+              "name": "id",
               "type": "String",
               "description": "Selected shape ID"
             }
@@ -1610,17 +1893,51 @@
           "inheritedFrom": "ApiElements.AmfHelperMixin"
         },
         {
+          "name": "_computeEndpointByPath",
+          "description": "Computes model for an endpoint documentation using it's path.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 671,
+              "column": 4
+            },
+            "end": {
+              "line": 682,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "webApi",
+              "type": "Object",
+              "description": "Current value of `webApi` property"
+            },
+            {
+              "name": "path",
+              "type": "String",
+              "description": "Endpoint path"
+            }
+          ],
+          "return": {
+            "type": "(Object | undefined)",
+            "desc": "An endponit definition"
+          },
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
           "name": "_computeMethodModel",
           "description": "Computes method for the method documentation.",
           "privacy": "protected",
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 584,
+              "line": 690,
               "column": 4
             },
             "end": {
-              "line": 590,
+              "line": 696,
               "column": 5
             }
           },
@@ -1644,29 +1961,101 @@
           "inheritedFrom": "ApiElements.AmfHelperMixin"
         },
         {
-          "name": "__computeMethodsListForMethod",
-          "description": "",
-          "privacy": "private",
+          "name": "_computeOperations",
+          "description": "Computes value for `operations` property.",
+          "privacy": "protected",
           "sourceRange": {
-            "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 591,
+              "line": 953,
               "column": 4
             },
             "end": {
-              "line": 605,
+              "line": 982,
               "column": 5
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "webApi"
+              "name": "endpoint",
+              "type": "Object",
+              "description": "Endpoint model."
             },
             {
-              "name": "selected"
+              "name": "inlineMethods",
+              "type": "Boolean"
             }
           ],
+          "return": {
+            "type": "Array.<Object>"
+          }
+        },
+        {
+          "name": "_computeMethodEndpoint",
+          "description": "Computes an endpoint for a method.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 717,
+              "column": 4
+            },
+            "end": {
+              "line": 738,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "webApi",
+              "type": "Object",
+              "description": "The WebApi AMF model"
+            },
+            {
+              "name": "methodId",
+              "type": "String",
+              "description": "Method id"
+            }
+          ],
+          "return": {
+            "type": "(Object | undefined)",
+            "desc": "An endpoint model of undefined."
+          },
+          "inheritedFrom": "ApiElements.AmfHelperMixin"
+        },
+        {
+          "name": "__computeMethodsListForMethod",
+          "description": "Computes a list of methods for an endpoint that contains a method with\ngiven id.",
+          "privacy": "private",
+          "sourceRange": {
+            "file": "../amf-helper-mixin/amf-helper-mixin.html",
+            "start": {
+              "line": 747,
+              "column": 4
+            },
+            "end": {
+              "line": 754,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "webApi",
+              "type": "Object",
+              "description": "WebApi model"
+            },
+            {
+              "name": "methodId",
+              "type": "String",
+              "description": "Method id."
+            }
+          ],
+          "return": {
+            "type": "(Array.<Object> | undefined)",
+            "desc": "A list of sibling methods or undefined."
+          },
           "inheritedFrom": "ApiElements.AmfHelperMixin"
         },
         {
@@ -1676,11 +2065,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 614,
+              "line": 763,
               "column": 4
             },
             "end": {
-              "line": 631,
+              "line": 780,
               "column": 5
             }
           },
@@ -1715,11 +2104,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 632,
+              "line": 781,
               "column": 4
             },
             "end": {
-              "line": 638,
+              "line": 787,
               "column": 5
             }
           },
@@ -1741,11 +2130,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 646,
+              "line": 795,
               "column": 4
             },
             "end": {
-              "line": 651,
+              "line": 800,
               "column": 5
             }
           },
@@ -1775,11 +2164,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 659,
+              "line": 808,
               "column": 4
             },
             "end": {
-              "line": 665,
+              "line": 815,
               "column": 5
             }
           },
@@ -1809,11 +2198,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 672,
+              "line": 822,
               "column": 4
             },
             "end": {
-              "line": 708,
+              "line": 871,
               "column": 5
             }
           },
@@ -1838,11 +2227,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 710,
+              "line": 873,
               "column": 4
             },
             "end": {
-              "line": 732,
+              "line": 895,
               "column": 5
             }
           },
@@ -1864,11 +2253,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 734,
+              "line": 897,
               "column": 4
             },
             "end": {
-              "line": 760,
+              "line": 916,
               "column": 5
             }
           },
@@ -1890,11 +2279,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 762,
+              "line": 918,
               "column": 4
             },
             "end": {
-              "line": 773,
+              "line": 929,
               "column": 5
             }
           },
@@ -1916,11 +2305,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 782,
+              "line": 938,
               "column": 4
             },
             "end": {
-              "line": 794,
+              "line": 951,
               "column": 5
             }
           },
@@ -1949,11 +2338,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 801,
+              "line": 958,
               "column": 4
             },
             "end": {
-              "line": 822,
+              "line": 979,
               "column": 5
             }
           },
@@ -1978,11 +2367,11 @@
           "sourceRange": {
             "file": "../amf-helper-mixin/amf-helper-mixin.html",
             "start": {
-              "line": 828,
+              "line": 985,
               "column": 4
             },
             "end": {
-              "line": 853,
+              "line": 1011,
               "column": 5
             }
           },
@@ -2006,11 +2395,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 521,
+              "line": 806,
               "column": 4
             },
             "end": {
-              "line": 527,
+              "line": 812,
               "column": 5
             }
           },
@@ -2033,11 +2422,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 534,
+              "line": 819,
               "column": 4
             },
             "end": {
-              "line": 536,
+              "line": 821,
               "column": 5
             }
           },
@@ -2059,11 +2448,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 543,
+              "line": 828,
               "column": 4
             },
             "end": {
-              "line": 545,
+              "line": 831,
               "column": 5
             }
           },
@@ -2085,11 +2474,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 552,
+              "line": 838,
               "column": 4
             },
             "end": {
-              "line": 558,
+              "line": 844,
               "column": 5
             }
           },
@@ -2111,11 +2500,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 565,
+              "line": 851,
               "column": 4
             },
             "end": {
-              "line": 567,
+              "line": 853,
               "column": 5
             }
           },
@@ -2137,11 +2526,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 574,
+              "line": 860,
               "column": 4
             },
             "end": {
-              "line": 576,
+              "line": 862,
               "column": 5
             }
           },
@@ -2163,11 +2552,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 583,
+              "line": 869,
               "column": 4
             },
             "end": {
-              "line": 590,
+              "line": 876,
               "column": 5
             }
           },
@@ -2189,11 +2578,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 597,
+              "line": 883,
               "column": 4
             },
             "end": {
-              "line": 599,
+              "line": 885,
               "column": 5
             }
           },
@@ -2216,11 +2605,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 607,
+              "line": 893,
               "column": 4
             },
             "end": {
-              "line": 609,
+              "line": 895,
               "column": 5
             }
           },
@@ -2245,11 +2634,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 616,
+              "line": 902,
               "column": 4
             },
             "end": {
-              "line": 618,
+              "line": 904,
               "column": 5
             }
           },
@@ -2274,11 +2663,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 622,
+              "line": 908,
               "column": 4
             },
             "end": {
-              "line": 624,
+              "line": 910,
               "column": 5
             }
           },
@@ -2294,11 +2683,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 628,
+              "line": 914,
               "column": 4
             },
             "end": {
-              "line": 630,
+              "line": 916,
               "column": 5
             }
           },
@@ -2314,11 +2703,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 638,
+              "line": 924,
               "column": 4
             },
             "end": {
-              "line": 648,
+              "line": 934,
               "column": 5
             }
           },
@@ -2343,11 +2732,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 650,
+              "line": 936,
               "column": 4
             },
             "end": {
-              "line": 660,
+              "line": 946,
               "column": 5
             }
           },
@@ -2362,42 +2751,16 @@
           }
         },
         {
-          "name": "_computeOperations",
-          "description": "Computes value for `operations` property.",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 666,
-              "column": 4
-            },
-            "end": {
-              "line": 688,
-              "column": 5
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "endpoint",
-              "type": "Object",
-              "description": "Endpoint model."
-            }
-          ],
-          "return": {
-            "type": "Array.<Object>"
-          }
-        },
-        {
           "name": "_methodNavigate",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 690,
+              "line": 984,
               "column": 4
             },
             "end": {
-              "line": 694,
+              "line": 990,
               "column": 5
             }
           },
@@ -2407,6 +2770,586 @@
               "name": "e"
             }
           ],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_scrollTargetChanged",
+          "description": "Handles scroll target chane and adds scroll event.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 997,
+              "column": 4
+            },
+            "end": {
+              "line": 1006,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "st",
+              "type": "Node",
+              "description": "The scroll target."
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_scrollHandler",
+          "description": "Scroll handler for `scrollTarget`.\nIt does not stall main thred by executing the action after nex render.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1011,
+              "column": 4
+            },
+            "end": {
+              "line": 1016,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_checkMethodsPosition",
+          "description": "I hope this won't be required in final version :(",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1020,
+              "column": 4
+            },
+            "end": {
+              "line": 1055,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_occupiesMainScrollArea",
+          "description": "Function that checks if an `element` is in the main scrolling area.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1066,
+              "column": 4
+            },
+            "end": {
+              "line": 1095,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "targetHeigth",
+              "type": "Number",
+              "description": "Height (visible) of the scroll target"
+            },
+            {
+              "name": "scrollHeigth",
+              "type": "Number",
+              "description": "Height of the scroll target"
+            },
+            {
+              "name": "dir",
+              "type": "String",
+              "description": "Direction where the scroll is going (up or down)"
+            },
+            {
+              "name": "element",
+              "type": "Node",
+              "description": "The node to test"
+            }
+          ],
+          "return": {
+            "type": "Boolean",
+            "desc": "True when it determines that the element is in the main\nscroll area,"
+          }
+        },
+        {
+          "name": "_notifyPassiveNavigation",
+          "description": "Dispatches `api-navigation-selection-changed` custom event with\n`passive: true` set on the detail object.\nListeners should not react on this event except for the ones that\nshould reflect passive navigation change.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1105,
+              "column": 4
+            },
+            "end": {
+              "line": 1124,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "selected",
+              "type": "String",
+              "description": "Id of selected method as in AMF model."
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_selectedChanged",
+          "description": "Hadnler for either `selected` or `endpoint proerty change`",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1132,
+              "column": 4
+            },
+            "end": {
+              "line": 1137,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "selected",
+              "type": "String",
+              "description": "Currently selected shape ID in AMF model"
+            },
+            {
+              "name": "endpoint",
+              "type": "Object",
+              "description": "AMF model for the endpoint."
+            },
+            {
+              "name": "inlineMethods",
+              "type": "Boolean",
+              "description": "True if methods documentation is included"
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_repositionVerb",
+          "description": "Positions the method (operation) or endpoint (main title).",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1143,
+              "column": 4
+            },
+            "end": {
+              "line": 1167,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "id",
+              "type": "String",
+              "description": "Selected AMF id."
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_computeOperationId",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1169,
+              "column": 4
+            },
+            "end": {
+              "line": 1171,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "item"
+            }
+          ]
+        },
+        {
+          "name": "_computeToggleActionLabel",
+          "description": "Computes a label for the section toggle buttons.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1173,
+              "column": 4
+            },
+            "end": {
+              "line": 1175,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "opened"
+            }
+          ]
+        },
+        {
+          "name": "_computeToggleIconClass",
+          "description": "Computes class for the toggle's button icon.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1177,
+              "column": 4
+            },
+            "end": {
+              "line": 1183,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "opened"
+            }
+          ]
+        },
+        {
+          "name": "_computeSnippetsHeaders",
+          "description": "Computes example headers string for code snippets.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1190,
+              "column": 4
+            },
+            "end": {
+              "line": 1209,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "method",
+              "type": "Array",
+              "description": "Method (operation) model"
+            }
+          ],
+          "return": {
+            "type": "(String | undefind)",
+            "desc": "Computed example value for headers"
+          }
+        },
+        {
+          "name": "_computeSnippetsPayload",
+          "description": "Computes example payload string for code snippets.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1215,
+              "column": 4
+            },
+            "end": {
+              "line": 1231,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "method",
+              "type": "Array",
+              "description": "Method (operation) model"
+            }
+          ],
+          "return": {
+            "type": "(String | undefind)",
+            "desc": "Computed example value for payload"
+          }
+        },
+        {
+          "name": "_computeHttpMethod",
+          "description": "Computes value for `httpMethod` property.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1268,
+              "column": 4
+            },
+            "end": {
+              "line": 1274,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "method",
+              "type": "Object",
+              "description": "AMF `supportedOperation` model"
+            }
+          ],
+          "return": {
+            "type": "(String | undefined)",
+            "desc": "HTTP method name"
+          }
+        },
+        {
+          "name": "_toggleSnippets",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1276,
+              "column": 4
+            },
+            "end": {
+              "line": 1279,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "e"
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_toggleRequestPanel",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1281,
+              "column": 4
+            },
+            "end": {
+              "line": 1284,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "e"
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_inlineMethodsChanged",
+          "description": "A handler for the `inlineMethods` property change.\nWhen set it automatically disables the try it button.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1291,
+              "column": 4
+            },
+            "end": {
+              "line": 1295,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "value",
+              "type": "Boolean",
+              "description": "Current value of `inlineMethods`"
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_operationRendered",
+          "description": "The try it panel is not rendered at start time when the user initializes\nthe endpoint documentation to reduce number of computations happening\nat the same time. When `dom-repeat` renders all documentation\npanels it calls this function which initializes requests panels one\nby one in the tasks scheduler.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1303,
+              "column": 4
+            },
+            "end": {
+              "line": 1306,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_renderTryItQueue",
+          "description": "Renders next try it panel from the NodeList",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1312,
+              "column": 4
+            },
+            "end": {
+              "line": 1323,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "queue",
+              "type": "NodeList",
+              "description": "Node list of `dom-if`'s with the panel"
+            },
+            {
+              "name": "index",
+              "type": "?Number",
+              "description": "Currently iterated item."
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_tryItRendered",
+          "description": "Request editor handles events when it's state changes. But the change\nmay influence other editors visible on the same page (eg URL change).\nWhen the request panel is rendered it sets events target of the panel\nto the panel so it won't listen for changes in other editors.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1332,
+              "column": 4
+            },
+            "end": {
+              "line": 1338,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "e",
+              "type": "CustomEvent"
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_clearRequestPanels",
+          "description": "Sets `false` on try it condition templae.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1342,
+              "column": 4
+            },
+            "end": {
+              "line": 1349,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_computeTryItColumClass",
+          "description": "Computes special class names for the method container.\nIt adds `first`, and `last` names to corresponding\ncontainers.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1359,
+              "column": 4
+            },
+            "end": {
+              "line": 1371,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "index",
+              "type": "Number"
+            },
+            {
+              "name": "operations",
+              "type": "Array"
+            }
+          ],
+          "return": {
+            "type": "String"
+          }
+        },
+        {
+          "name": "_computeTryItSelected",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1373,
+              "column": 4
+            },
+            "end": {
+              "line": 1378,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "item"
+            }
+          ]
+        },
+        {
+          "name": "_endpointChnaged",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1380,
+              "column": 4
+            },
+            "end": {
+              "line": 1382,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
           "return": {
             "type": "void"
           }
@@ -2422,11 +3365,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 316,
+          "line": 519,
           "column": 2
         },
         "end": {
-          "line": 702,
+          "line": 1390,
           "column": 3
         }
       },
@@ -2439,11 +3382,11 @@
           "description": "Generated AMF json/ld model form the API spec.\nThe element assumes the object of the first array item to be a\ntype of `\"http://raml.org/vocabularies/document#Document`\non AMF vocabulary.\n\nIt is only usefult for the element to resolve references.",
           "sourceRange": {
             "start": {
-              "line": 334,
+              "line": 537,
               "column": 8
             },
             "end": {
-              "line": 334,
+              "line": 537,
               "column": 24
             }
           },
@@ -2473,11 +3416,11 @@
           "description": "`raml-aware` scope property to use.",
           "sourceRange": {
             "start": {
-              "line": 323,
+              "line": 526,
               "column": 8
             },
             "end": {
-              "line": 323,
+              "line": 526,
               "column": 21
             }
           },
@@ -2489,27 +3432,43 @@
           "description": "Method's endpoint definition as a\n`http://raml.org/vocabularies/http#endpoint` of AMF model.",
           "sourceRange": {
             "start": {
-              "line": 339,
+              "line": 542,
               "column": 8
             },
             "end": {
-              "line": 339,
-              "column": 24
+              "line": 542,
+              "column": 62
             }
           },
           "metadata": {},
           "type": "Object | null | undefined"
         },
         {
+          "name": "selected",
+          "description": "The ID in `amfModel` of current selection. It can be this endpoint\nor any of methods",
+          "sourceRange": {
+            "start": {
+              "line": 547,
+              "column": 8
+            },
+            "end": {
+              "line": 547,
+              "column": 32
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
+        },
+        {
           "name": "base-uri",
           "description": "A property to set to override AMF's model base URI information.\nWhen this property is set, the `endpointUri` property is recalculated.",
           "sourceRange": {
             "start": {
-              "line": 344,
+              "line": 552,
               "column": 8
             },
             "end": {
-              "line": 344,
+              "line": 552,
               "column": 23
             }
           },
@@ -2517,15 +3476,63 @@
           "type": "string | null | undefined"
         },
         {
+          "name": "api-version",
+          "description": "Computed value, API version name",
+          "sourceRange": {
+            "start": {
+              "line": 556,
+              "column": 8
+            },
+            "end": {
+              "line": 559,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
+        },
+        {
+          "name": "endpoint-uri",
+          "description": "Endpoint URI to display in main URL field.\nThis value is computed when `amfModel`, `endpoint` or `baseUri` change.",
+          "sourceRange": {
+            "start": {
+              "line": 564,
+              "column": 8
+            },
+            "end": {
+              "line": 567,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
+        },
+        {
+          "name": "server",
+          "description": "Computed value of the `http://raml.org/vocabularies/http#server`\nfrom `amfModel`",
+          "sourceRange": {
+            "start": {
+              "line": 572,
+              "column": 8
+            },
+            "end": {
+              "line": 575,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "type": "Object | null | undefined"
+        },
+        {
           "name": "endpoint-name",
           "description": "Endpoint name.\nIt should be either a \"displayName\" or endpoint's relative\npath.",
           "sourceRange": {
             "start": {
-              "line": 350,
+              "line": 581,
               "column": 8
             },
             "end": {
-              "line": 353,
+              "line": 584,
               "column": 9
             }
           },
@@ -2537,11 +3544,11 @@
           "description": "Computed value, `true` if the endpoint has display name.",
           "sourceRange": {
             "start": {
-              "line": 357,
+              "line": 588,
               "column": 8
             },
             "end": {
-              "line": 361,
+              "line": 592,
               "column": 9
             }
           },
@@ -2553,11 +3560,11 @@
           "description": "Computed value of method description from `method` property.",
           "sourceRange": {
             "start": {
-              "line": 365,
+              "line": 596,
               "column": 8
             },
             "end": {
-              "line": 368,
+              "line": 599,
               "column": 9
             }
           },
@@ -2569,11 +3576,11 @@
           "description": "Computed value of endpoint's path.",
           "sourceRange": {
             "start": {
-              "line": 372,
+              "line": 603,
               "column": 8
             },
             "end": {
-              "line": 375,
+              "line": 606,
               "column": 9
             }
           },
@@ -2585,11 +3592,11 @@
           "description": "Computed value from current `method`. True if the model containsPATCH\ncustom properties (annotations in RAML).",
           "sourceRange": {
             "start": {
-              "line": 380,
+              "line": 611,
               "column": 8
             },
             "end": {
-              "line": 383,
+              "line": 614,
               "column": 9
             }
           },
@@ -2601,11 +3608,11 @@
           "description": "Computed value of AMF security definition from `method`\nproperty.",
           "sourceRange": {
             "start": {
-              "line": 388,
+              "line": 619,
               "column": 8
             },
             "end": {
-              "line": 391,
+              "line": 622,
               "column": 9
             }
           },
@@ -2617,11 +3624,11 @@
           "description": "Computed value, true if `security` has values.",
           "sourceRange": {
             "start": {
-              "line": 395,
+              "line": 626,
               "column": 8
             },
             "end": {
-              "line": 398,
+              "line": 629,
               "column": 9
             }
           },
@@ -2633,11 +3640,11 @@
           "description": "If set it will renders the view in the narrow layout.",
           "sourceRange": {
             "start": {
-              "line": 402,
+              "line": 633,
               "column": 8
             },
             "end": {
-              "line": 405,
+              "line": 636,
               "column": 9
             }
           },
@@ -2649,11 +3656,11 @@
           "description": "List of traits and resource types, if any.",
           "sourceRange": {
             "start": {
-              "line": 411,
+              "line": 642,
               "column": 8
             },
             "end": {
-              "line": 414,
+              "line": 645,
               "column": 9
             }
           },
@@ -2665,11 +3672,11 @@
           "description": "Computed value of a parent type.\nIn RAML it is resource type that can be applied to a resource.",
           "sourceRange": {
             "start": {
-              "line": 419,
+              "line": 650,
               "column": 8
             },
             "end": {
-              "line": 422,
+              "line": 653,
               "column": 9
             }
           },
@@ -2681,11 +3688,11 @@
           "description": "Computed value, true if `parentType` has a value.",
           "sourceRange": {
             "start": {
-              "line": 426,
+              "line": 657,
               "column": 8
             },
             "end": {
-              "line": 429,
+              "line": 660,
               "column": 9
             }
           },
@@ -2697,11 +3704,11 @@
           "description": "Computed value for parent type name.",
           "sourceRange": {
             "start": {
-              "line": 433,
+              "line": 664,
               "column": 8
             },
             "end": {
-              "line": 436,
+              "line": 667,
               "column": 9
             }
           },
@@ -2713,11 +3720,11 @@
           "description": "List of traits appied to this endpoint",
           "sourceRange": {
             "start": {
-              "line": 442,
+              "line": 673,
               "column": 8
             },
             "end": {
-              "line": 445,
+              "line": 676,
               "column": 9
             }
           },
@@ -2729,11 +3736,11 @@
           "description": "Computed value, true if the endpoint has traits.",
           "sourceRange": {
             "start": {
-              "line": 449,
+              "line": 680,
               "column": 8
             },
             "end": {
-              "line": 452,
+              "line": 683,
               "column": 9
             }
           },
@@ -2745,11 +3752,11 @@
           "description": "True if the endpoint is extended by either traits or resource type.",
           "sourceRange": {
             "start": {
-              "line": 456,
+              "line": 687,
               "column": 8
             },
             "end": {
-              "line": 459,
+              "line": 690,
               "column": 9
             }
           },
@@ -2761,11 +3768,11 @@
           "description": "Model to generate a link to previous HTTP endpoint.\nIt should contain `id` and `label` properties",
           "sourceRange": {
             "start": {
-              "line": 464,
+              "line": 695,
               "column": 8
             },
             "end": {
-              "line": 464,
+              "line": 695,
               "column": 24
             }
           },
@@ -2777,11 +3784,11 @@
           "description": "Computed value, true if `previous` is set",
           "sourceRange": {
             "start": {
-              "line": 468,
+              "line": 699,
               "column": 8
             },
             "end": {
-              "line": 471,
+              "line": 702,
               "column": 9
             }
           },
@@ -2793,11 +3800,11 @@
           "description": "Model to generate a link to next HTTP endpoint.\nIt should contain `id` and `label` properties",
           "sourceRange": {
             "start": {
-              "line": 476,
+              "line": 707,
               "column": 8
             },
             "end": {
-              "line": 476,
+              "line": 707,
               "column": 20
             }
           },
@@ -2809,11 +3816,11 @@
           "description": "Computed value, true if `next` is set",
           "sourceRange": {
             "start": {
-              "line": 480,
+              "line": 711,
               "column": 8
             },
             "end": {
-              "line": 483,
+              "line": 714,
               "column": 9
             }
           },
@@ -2825,11 +3832,11 @@
           "description": "Computed value, true to render bottom navigation",
           "sourceRange": {
             "start": {
-              "line": 487,
+              "line": 718,
               "column": 8
             },
             "end": {
-              "line": 490,
+              "line": 721,
               "column": 9
             }
           },
@@ -2837,15 +3844,31 @@
           "type": "boolean | null | undefined"
         },
         {
+          "name": "scroll-target",
+          "description": "Scroll target used to observe `scroll` event.\nWhen set the element will observe scroll and inform other components\nabout changes in navigation while scrolling through methods list.\nThe navigation event contains `passive: true` property that\ndetermines that it's not user triggered navigation but rather\ncontext enforced.",
+          "sourceRange": {
+            "start": {
+              "line": 730,
+              "column": 8
+            },
+            "end": {
+              "line": 733,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "type": "Object | null | undefined"
+        },
+        {
           "name": "no-try-it",
           "description": "Passing value of `noTryIt` to the method documentation.\nHiddes \"Try it\" button from the view.",
           "sourceRange": {
             "start": {
-              "line": 495,
+              "line": 738,
               "column": 8
             },
             "end": {
-              "line": 495,
+              "line": 738,
               "column": 24
             }
           },
@@ -2857,11 +3880,11 @@
           "description": "Computed list of operations to render in the operations list.",
           "sourceRange": {
             "start": {
-              "line": 500,
+              "line": 743,
               "column": 8
             },
             "end": {
-              "line": 503,
+              "line": 746,
               "column": 9
             }
           },
@@ -2873,16 +3896,64 @@
           "description": "Computed value if the endpoint contains operations.",
           "sourceRange": {
             "start": {
-              "line": 507,
+              "line": 750,
               "column": 8
             },
             "end": {
-              "line": 510,
+              "line": 754,
               "column": 9
             }
           },
           "metadata": {},
           "type": "boolean | null | undefined"
+        },
+        {
+          "name": "inline-methods",
+          "description": "If set then it renders methods documentation inline with\nthe endpoint documentation.\nWhen it's not set (or value is `false`, default) then it renders\njust a list of methods with links.",
+          "sourceRange": {
+            "start": {
+              "line": 761,
+              "column": 8
+            },
+            "end": {
+              "line": 765,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined"
+        },
+        {
+          "name": "no-url-editor",
+          "description": "In inline mode, passes the `noUrlEditor` value on the\n`api-request-paqnel`",
+          "sourceRange": {
+            "start": {
+              "line": 770,
+              "column": 8
+            },
+            "end": {
+              "line": 770,
+              "column": 28
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined"
+        },
+        {
+          "name": "redirect-uri",
+          "description": "OAuth2 redirect URI.\nThis value **must** be set in order for OAuth 1/2 to work properly.\nThis is only required in inline mode (`inlineMethods`).",
+          "sourceRange": {
+            "start": {
+              "line": 776,
+              "column": 8
+            },
+            "end": {
+              "line": 776,
+              "column": 27
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
         }
       ],
       "events": [
