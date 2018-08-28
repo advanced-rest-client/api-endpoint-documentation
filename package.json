@@ -9,9 +9,8 @@
     "The Advanced REST client authors <arc@mulesoft.com>"
   ],
   "devDependencies": {
-    "@polymer/gen-typescript-declarations": "^1.1.1",
-    "amf-client-js": "1.8.0",
-    "jsonld": "^1.0.3"
+    "@api-components/api-model-generator": "^0.1.1",
+    "@polymer/gen-typescript-declarations": "^1.5.1"
   },
   "private": false,
   "scripts": {

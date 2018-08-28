@@ -484,6 +484,16 @@
    * Note: The element will not get notified about the change in `iron-meta`.
    * The change will be reflected whehn `amfModel` or `endpoint` property chnage.
    *
+   * ## Inline methods layout
+   *
+   * When `inlineMethods` is set then methods (api-method-document) is rendered
+   * instead of list of links to methods.
+   * Deep linking is still supported. The page scrolls when navigation event
+   * changes.
+   *
+   * In this layout the try it panel is rendered next to method documentation
+   * (normal layout) or below method documentation (narrow layout).
+   *
    * ## Styling
    *
    * `<api-endpoint-documentation>` provides the following custom properties
@@ -508,7 +518,7 @@
    * @appliesMixin ApiElements.AmfHelperMixin
    */
   class ApiEndpointDocumentation extends ApiElements.AmfHelperMixin(Polymer.Element) {
-    static get is() { return 'api-endpoint-documentation'; }
+    static get is() {return 'api-endpoint-documentation';}
     static get properties() {
       return {
         /**
@@ -818,7 +828,7 @@
      */
     _computeExtendsTypes(shape) {
       const key = this._getAmfKey(this.ns.raml.vocabularies.document + 'extends');
-      return shape && shape[key + 'extends'];
+      return shape && this._ensureArray(shape[key]);
     }
     /**
      * Computes parent type as RAML's resource type.
@@ -938,6 +948,7 @@
     /**
      * Computes value for `operations` property.
      * @param {Object} endpoint Endpoint model.
+     * @param {Boolean} inlineMethods
      * @return {Array<Object>}
      */
     _computeOperations(endpoint, inlineMethods) {
@@ -972,6 +983,8 @@
     }
 
     _methodNavigate(e) {
+      e.stopPropagation();
+      e.preventDefault();
       const target = e.path.find((node) => node.nodeName === 'A');
       const id = target.dataset.apiId;
       this._navigate(id, 'method');
@@ -1057,7 +1070,8 @@
         // Occupies whole area
         return true;
       }
-      if (rect.bottom < 0 || targetHeigth < rect.top || (rect.top < 0 && rect.top + rect.height <= 0)) {
+      if (rect.bottom < 0 || targetHeigth < rect.top ||
+        (rect.top < 0 && rect.top + rect.height <= 0)) {
         // Completely out of screen
         return false;
       }
@@ -1162,7 +1176,7 @@
     }
     // Computes class for the toggle's button icon.
     _computeToggleIconClass(opened) {
-      var clazz = 'toggle-icon';
+      let clazz = 'toggle-icon';
       if (opened) {
         clazz += ' opened';
       }
@@ -1229,14 +1243,17 @@
       if (!schema) {
         return;
       }
-      schema = schema[0];
-      const defValKey = this.ns.w3.shacl.name + 'defaultValue';
-      let value = this._getValue(item, defValKey);
+      if (schema instanceof Array) {
+        schema = schema[0];
+      }
+      let value = this._getValue(item, this.ns.w3.shacl.name + 'defaultValue');
       if (!value) {
         const examplesKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
         let example = item[examplesKey];
         if (example) {
-          example = example[0];
+          if (example instanceof Array) {
+            example = example[0];
+          }
           value = this._getValue(item, this.ns.raml.vocabularies.document + 'value');
         }
       }
@@ -1269,6 +1286,8 @@
     /**
      * A handler for the `inlineMethods` property change.
      * When set it automatically disables the try it button.
+     *
+     * @param {Boolean} value Current value of `inlineMethods`
      */
     _inlineMethodsChanged(value) {
       if (value) {
@@ -1308,6 +1327,8 @@
      * may influence other editors visible on the same page (eg URL change).
      * When the request panel is rendered it sets events target of the panel
      * to the panel so it won't listen for changes in other editors.
+     *
+     * @param {CustomEvent} e
      */
     _tryItRendered(e) {
       if (!e.target.if) {
@@ -1331,6 +1352,10 @@
      * Computes special class names for the method container.
      * It adds `first`, and `last` names to corresponding
      * containers.
+     *
+     * @param {Number} index
+     * @param {Array} operations
+     * @return {String}
      */
     _computeTryItColumClass(index, operations) {
       if (!operations || !operations.length || index === undefined) {

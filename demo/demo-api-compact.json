@@ -4725,7 +4725,7 @@
                           "doc:DomainElement"
                         ],
                         "doc:reference-id": {
-                          "@id": "amf://id#171"
+                          "@id": "amf://id#173"
                         },
                         "doc:strict": true,
                         "http://a.ml/vocabularies/document-source-maps#sources": {
@@ -4738,7 +4738,7 @@
                         }
                       },
                       "doc:reference-id": {
-                        "@id": "amf://id#162"
+                        "@id": "amf://id#165"
                       },
                       "shacl:mediaType": "application/xml",
                       "shacl:name": "schema"
@@ -5507,7 +5507,7 @@
                         "doc:DomainElement"
                       ],
                       "doc:reference-id": {
-                        "@id": "amf://id#171"
+                        "@id": "amf://id#173"
                       },
                       "doc:strict": true,
                       "http://a.ml/vocabularies/document-source-maps#sources": {
@@ -5520,7 +5520,7 @@
                       }
                     },
                     "doc:reference-id": {
-                      "@id": "amf://id#162"
+                      "@id": "amf://id#165"
                     },
                     "shacl:mediaType": "application/xml",
                     "shacl:name": "schema"
@@ -5711,7 +5711,7 @@
                     }
                   },
                   "doc:reference-id": {
-                    "@id": "amf://id#169"
+                    "@id": "amf://id#170"
                   },
                   "shacl:mediaType": "application/xml",
                   "shacl:name": "schema"
@@ -5820,7 +5820,7 @@
                       }
                     },
                     "doc:reference-id": {
-                      "@id": "amf://id#169"
+                      "@id": "amf://id#170"
                     },
                     "shacl:mediaType": "application/xml",
                     "shacl:name": "schema"
@@ -6123,573 +6123,6 @@
     {
       "@id": "amf://id#158",
       "@type": [
-        "doc:DataType",
-        "doc:Fragment",
-        "doc:Unit"
-      ],
-      "doc:encodes": {
-        "@id": "amf://id#26",
-        "@type": [
-          "shacl:NodeShape",
-          "shacl:Shape",
-          "raml-shapes:Shape",
-          "doc:DomainElement"
-        ],
-        "doc:examples": {
-          "@id": "amf://id#27",
-          "@type": [
-            "doc:Example",
-            "doc:DomainElement"
-          ],
-          "doc:strict": true,
-          "doc:structuredValue": {
-            "@id": "amf://id#29",
-            "@type": "data:Object",
-            "data:birthday": {
-              "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/scalar_4",
-              "@type": "data:Scalar",
-              "data:value": {
-                "@type": "xsd:string",
-                "@value": "1983-10-20"
-              }
-            },
-            "data:etag": {
-              "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/scalar_12",
-              "@type": "data:Scalar",
-              "data:value": {
-                "@type": "xsd:string",
-                "@value": "W\\244m4n5kj3gbn2nj4k4n4"
-              }
-            },
-            "data:gender": {
-              "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/scalar_5",
-              "@type": "data:Scalar",
-              "data:value": {
-                "@type": "xsd:string",
-                "@value": "male"
-              }
-            },
-            "data:id": {
-              "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/scalar_2",
-              "@type": "data:Scalar",
-              "data:value": {
-                "@type": "xsd:string",
-                "@value": "R34fg663H9KW9MMSKISI"
-              }
-            },
-            "data:image": {
-              "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/object_7",
-              "@type": "data:Object",
-              "data:thumb": {
-                "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/object_7/scalar_9",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:string",
-                  "@value": "https://domain.com/profile/pawel.psztyc/image/thumb"
-                }
-              },
-              "data:url": {
-                "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/object_7/scalar_8",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:string",
-                  "@value": "https://domain.com/profile/pawel.psztyc/image"
-                }
-              }
-            },
-            "data:language": {
-              "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/scalar_11",
-              "@type": "data:Scalar",
-              "data:value": {
-                "@type": "xsd:string",
-                "@value": "en_GB"
-              }
-            },
-            "data:name": {
-              "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/scalar_3",
-              "@type": "data:Scalar",
-              "data:value": {
-                "@type": "xsd:string",
-                "@value": "Pawel Psztyc"
-              }
-            },
-            "data:tagline": {
-              "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/scalar_10",
-              "@type": "data:Scalar",
-              "data:value": {
-                "@type": "xsd:string",
-                "@value": "Some text about me."
-              }
-            },
-            "data:url": {
-              "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/scalar_6",
-              "@type": "data:Scalar",
-              "data:value": {
-                "@type": "xsd:string",
-                "@value": "https://domain.com/profile/pawel.psztyc"
-              }
-            }
-          },
-          "shacl:raw": "  id: \"R34fg663H9KW9MMSKISI\"\n  name: \"Pawel Psztyc\"\n  birthday: \"1983-10-20\"\n  gender: male\n  url: \"https://domain.com/profile/pawel.psztyc\"\n  image:\n    url: https://domain.com/profile/pawel.psztyc/image\n    thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n  tagline: Some text about me.\n  language: en_GB\n  etag: \"W\\\\244m4n5kj3gbn2nj4k4n4\"\n"
-        },
-        "schema-org:description": "An object representing a person in the API.\nThis object will be used in all methods returning a Person or list of people.\n",
-        "schema-org:name": "A person resource",
-        "shacl:closed": false,
-        "shacl:name": "AppPerson",
-        "shacl:property": [
-          {
-            "@id": "amf://id#30",
-            "@type": [
-              "shacl:PropertyShape",
-              "shacl:Shape",
-              "raml-shapes:Shape"
-            ],
-            "raml-shapes:range": {
-              "@id": "amf://id#31",
-              "@type": [
-                "raml-shapes:ScalarShape",
-                "shacl:Shape",
-                "raml-shapes:Shape",
-                "doc:DomainElement"
-              ],
-              "schema-org:description": "ETag of this resource for caching purposes.\n__This property will be ignored when creating an object.__\n",
-              "shacl:datatype": {
-                "@id": "xsd:string"
-              },
-              "shacl:name": "etag"
-            },
-            "shacl:minCount": 1,
-            "shacl:name": "etag",
-            "shacl:path": {
-              "@id": "data:etag"
-            }
-          },
-          {
-            "@id": "amf://id#32",
-            "@type": [
-              "shacl:PropertyShape",
-              "shacl:Shape",
-              "raml-shapes:Shape"
-            ],
-            "raml-shapes:range": {
-              "@id": "amf://id#33",
-              "@type": [
-                "raml-shapes:ScalarShape",
-                "shacl:Shape",
-                "raml-shapes:Shape",
-                "doc:DomainElement"
-              ],
-              "schema-org:description": "The brief description (tagline) of this person.",
-              "shacl:datatype": {
-                "@id": "xsd:string"
-              },
-              "shacl:name": "tagline"
-            },
-            "shacl:minCount": 1,
-            "shacl:name": "tagline",
-            "shacl:path": {
-              "@id": "data:tagline"
-            }
-          },
-          {
-            "@id": "amf://id#34",
-            "@type": [
-              "shacl:PropertyShape",
-              "shacl:Shape",
-              "raml-shapes:Shape"
-            ],
-            "raml-shapes:range": {
-              "@id": "amf://id#35",
-              "@type": [
-                "raml-shapes:ScalarShape",
-                "shacl:Shape",
-                "raml-shapes:Shape",
-                "doc:DomainElement"
-              ],
-              "doc:examples": {
-                "@id": "amf://id#36",
-                "@type": [
-                  "doc:Example",
-                  "doc:DomainElement"
-                ],
-                "doc:strict": true,
-                "doc:structuredValue": {
-                  "@id": "amf://id#37",
-                  "@type": "data:Scalar",
-                  "data:value": {
-                    "@type": "xsd:string",
-                    "@value": "John Smith"
-                  }
-                },
-                "shacl:raw": "John Smith"
-              },
-              "schema-org:description": "Person full name. The input will be rejected if this property is not set while creating new object.",
-              "shacl:datatype": {
-                "@id": "xsd:string"
-              },
-              "shacl:name": "name",
-              "shacl:pattern": "^[0-9a-zA-Z ]+$"
-            },
-            "shacl:minCount": 1,
-            "shacl:name": "name",
-            "shacl:path": {
-              "@id": "data:name"
-            }
-          },
-          {
-            "@id": "amf://id#38",
-            "@type": [
-              "shacl:PropertyShape",
-              "shacl:Shape",
-              "raml-shapes:Shape"
-            ],
-            "raml-shapes:range": {
-              "@id": "amf://id#39",
-              "@type": [
-                "raml-shapes:ScalarShape",
-                "shacl:Shape",
-                "raml-shapes:Shape",
-                "doc:DomainElement"
-              ],
-              "schema-org:description": "The URL of this person's profile.",
-              "shacl:datatype": {
-                "@id": "xsd:string"
-              },
-              "shacl:name": "url"
-            },
-            "shacl:minCount": 1,
-            "shacl:name": "url",
-            "shacl:path": {
-              "@id": "data:url"
-            }
-          },
-          {
-            "@id": "amf://id#40",
-            "@type": [
-              "shacl:PropertyShape",
-              "shacl:Shape",
-              "raml-shapes:Shape"
-            ],
-            "raml-shapes:range": {
-              "@id": "amf://id#41",
-              "@type": [
-                "raml-shapes:ScalarShape",
-                "shacl:Shape",
-                "raml-shapes:Shape",
-                "doc:DomainElement"
-              ],
-              "schema-org:description": "The user's preferred language for rendering.",
-              "shacl:datatype": {
-                "@id": "xsd:string"
-              },
-              "shacl:name": "language"
-            },
-            "shacl:minCount": 1,
-            "shacl:name": "language",
-            "shacl:path": {
-              "@id": "data:language"
-            }
-          },
-          {
-            "@id": "amf://id#42",
-            "@type": [
-              "shacl:PropertyShape",
-              "shacl:Shape",
-              "raml-shapes:Shape"
-            ],
-            "raml-shapes:range": {
-              "@id": "amf://id#43",
-              "@type": [
-                "raml-shapes:ScalarShape",
-                "shacl:Shape",
-                "raml-shapes:Shape",
-                "doc:DomainElement"
-              ],
-              "schema-org:description": "A unique identifier for a person. It is a 32 bit string containing alphanumeric characters.",
-              "shacl:datatype": {
-                "@id": "xsd:string"
-              },
-              "shacl:name": "id"
-            },
-            "shacl:minCount": 1,
-            "shacl:name": "id",
-            "shacl:path": {
-              "@id": "data:id"
-            }
-          },
-          {
-            "@id": "amf://id#44",
-            "@type": [
-              "shacl:PropertyShape",
-              "shacl:Shape",
-              "raml-shapes:Shape"
-            ],
-            "raml-shapes:range": {
-              "@id": "amf://id#45",
-              "@type": [
-                "raml-shapes:ScalarShape",
-                "shacl:Shape",
-                "raml-shapes:Shape",
-                "doc:DomainElement"
-              ],
-              "schema-org:description": "The person's date of birth, represented as YYYY-MM-DD.",
-              "shacl:datatype": {
-                "@id": "xsd:string"
-              },
-              "shacl:name": "birthday"
-            },
-            "shacl:minCount": 1,
-            "shacl:name": "birthday",
-            "shacl:path": {
-              "@id": "data:birthday"
-            }
-          },
-          {
-            "@id": "amf://id#46",
-            "@type": [
-              "shacl:PropertyShape",
-              "shacl:Shape",
-              "raml-shapes:Shape"
-            ],
-            "raml-shapes:range": {
-              "@id": "amf://id#47/linked_1",
-              "@type": [
-                "shacl:NodeShape",
-                "shacl:Shape",
-                "raml-shapes:Shape",
-                "doc:DomainElement"
-              ],
-              "doc:link-label": "image",
-              "doc:link-target": {
-                "@id": "amf://id#47"
-              }
-            },
-            "shacl:minCount": 1,
-            "shacl:name": "image",
-            "shacl:path": {
-              "@id": "data:image"
-            }
-          },
-          {
-            "@id": "amf://id#56",
-            "@type": [
-              "shacl:PropertyShape",
-              "shacl:Shape",
-              "raml-shapes:Shape"
-            ],
-            "raml-shapes:range": {
-              "@id": "amf://id#57",
-              "@type": [
-                "raml-shapes:ScalarShape",
-                "shacl:Shape",
-                "raml-shapes:Shape",
-                "doc:DomainElement"
-              ],
-              "schema-org:description": "The person's gender. Possible values includes, but are not limited to, the following values:\n* \"male\" - Male gender.\n* \"female\" - Female gender.\n* \"other\" - Other.\n",
-              "shacl:datatype": {
-                "@id": "xsd:string"
-              },
-              "shacl:name": "gender?"
-            },
-            "shacl:minCount": 0,
-            "shacl:name": "gender",
-            "shacl:path": {
-              "@id": "data:gender"
-            }
-          }
-        ]
-      },
-      "doc:references": [
-        {
-          "@id": "amf://id#159",
-          "@type": [
-            "doc:DataType",
-            "doc:Fragment",
-            "doc:Unit"
-          ],
-          "doc:encodes": {
-            "@id": "amf://id#47",
-            "@type": [
-              "shacl:NodeShape",
-              "shacl:Shape",
-              "raml-shapes:Shape",
-              "doc:DomainElement"
-            ],
-            "doc:examples": {
-              "@id": "amf://id#48",
-              "@type": [
-                "doc:Example",
-                "doc:DomainElement"
-              ],
-              "doc:strict": true,
-              "doc:structuredValue": {
-                "@id": "amf://id#49",
-                "@type": "data:Object",
-                "data:thumb": {
-                  "@id": "file://demo/demo-api/resourceTypes/image.raml#/shape/example/default-example/object_1/scalar_3",
-                  "@type": "data:Scalar",
-                  "data:value": {
-                    "@type": "xsd:string",
-                    "@value": "https://domain.com/profile/pawel.psztyc/image/thumb"
-                  }
-                },
-                "data:url": {
-                  "@id": "file://demo/demo-api/resourceTypes/image.raml#/shape/example/default-example/object_1/scalar_2",
-                  "@type": "data:Scalar",
-                  "data:value": {
-                    "@type": "xsd:string",
-                    "@value": "https://domain.com/profile/pawel.psztyc/image"
-                  }
-                }
-              },
-              "shacl:raw": "  url: https://domain.com/profile/pawel.psztyc/image\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n"
-            },
-            "schema-org:description": "An image object representing an image object strored in the file store.\nThe image can be only included in the response. It has no effect if the Image appear in the\nrequest. Endpoint handles image creation on it's own and clients can't process images\nexcept of sending image data.\n",
-            "shacl:closed": false,
-            "shacl:name": "image",
-            "shacl:property": [
-              {
-                "@id": "amf://id#50",
-                "@type": [
-                  "shacl:PropertyShape",
-                  "shacl:Shape",
-                  "raml-shapes:Shape"
-                ],
-                "raml-shapes:range": {
-                  "@id": "amf://id#51",
-                  "@type": [
-                    "raml-shapes:ScalarShape",
-                    "shacl:Shape",
-                    "raml-shapes:Shape",
-                    "doc:DomainElement"
-                  ],
-                  "schema-org:description": "The URL of the image.\nTo resize the image and crop it to a square, append the query string **?sz=x**, where x is the dimension in pixels of each side.\n",
-                  "shacl:datatype": {
-                    "@id": "xsd:string"
-                  },
-                  "shacl:name": "url"
-                },
-                "shacl:minCount": 1,
-                "shacl:name": "url",
-                "shacl:path": {
-                  "@id": "data:url"
-                }
-              },
-              {
-                "@id": "amf://id#52",
-                "@type": [
-                  "shacl:PropertyShape",
-                  "shacl:Shape",
-                  "raml-shapes:Shape"
-                ],
-                "raml-shapes:range": {
-                  "@id": "amf://id#53",
-                  "@type": [
-                    "raml-shapes:ScalarShape",
-                    "shacl:Shape",
-                    "raml-shapes:Shape",
-                    "doc:DomainElement"
-                  ],
-                  "schema-org:description": "An URL to the thumbnail of the image. Thumbnails are 60x60px cropped images of the original image.\n",
-                  "schema-org:name": "Thumbnail",
-                  "shacl:datatype": {
-                    "@id": "xsd:string"
-                  },
-                  "shacl:name": "thumb"
-                },
-                "shacl:minCount": 1,
-                "shacl:name": "thumb",
-                "shacl:path": {
-                  "@id": "data:thumb"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "@id": "amf://id#160",
-          "@type": [
-            "doc:DataType",
-            "doc:Fragment",
-            "doc:Unit"
-          ],
-          "doc:encodes": {
-            "@id": "amf://id#63",
-            "@type": [
-              "shacl:NodeShape",
-              "shacl:Shape",
-              "raml-shapes:Shape",
-              "doc:DomainElement"
-            ],
-            "schema-org:description": "Common properties for all resources returned by the API.\n",
-            "shacl:closed": false,
-            "shacl:name": "Resource",
-            "shacl:property": {
-              "@id": "amf://id#30",
-              "@type": [
-                "shacl:PropertyShape",
-                "shacl:Shape",
-                "raml-shapes:Shape"
-              ],
-              "raml-shapes:range": {
-                "@id": "amf://id#31",
-                "@type": [
-                  "raml-shapes:ScalarShape",
-                  "shacl:Shape",
-                  "raml-shapes:Shape",
-                  "doc:DomainElement"
-                ],
-                "schema-org:description": "ETag of this resource for caching purposes.\n__This property will be ignored when creating an object.__\n",
-                "shacl:datatype": {
-                  "@id": "xsd:string"
-                },
-                "shacl:name": "etag"
-              },
-              "shacl:minCount": 1,
-              "shacl:name": "etag",
-              "shacl:path": {
-                "@id": "data:etag"
-              }
-            }
-          }
-        }
-      ]
-    },
-    {
-      "@id": "amf://id#161",
-      "@type": [
-        "doc:ExternalFragment",
-        "doc:Fragment",
-        "doc:Unit"
-      ],
-      "doc:encodes": {
-        "@id": "amf://id#162",
-        "@type": [
-          "doc:ExternalDomainElement",
-          "doc:DomainElement"
-        ],
-        "doc:raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\n  <xs:element name=\"resource\">\n    <xs:complexType>\n      <xs:sequence>\n        <xs:element name=\"id\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"name\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"birthday\" type=\"xs:date\"></xs:element>\n        <xs:element name=\"gender\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"url\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"image\">\n          <xs:complexType>\n            <xs:sequence>\n              <xs:element name=\"url\" type=\"xs:string\"></xs:element>\n              <xs:element name=\"thumb\" type=\"xs:string\"></xs:element>\n            </xs:sequence>\n          </xs:complexType>\n        </xs:element>\n        <xs:element name=\"tagline\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"language\" type=\"xs:string\"></xs:element>\n      </xs:sequence>\n      <xs:attribute name=\"error\" type=\"xs:boolean\" use=\"required\"></xs:attribute>\n      <xs:attribute name=\"type\" type=\"xs:string\" use=\"required\"></xs:attribute>\n    </xs:complexType>\n  </xs:element>\n</xs:schema>\n"
-      }
-    },
-    {
-      "@id": "amf://id#163",
-      "@type": [
-        "doc:ExternalFragment",
-        "doc:Fragment",
-        "doc:Unit"
-      ],
-      "doc:encodes": {
-        "@id": "amf://id#164",
-        "@type": [
-          "doc:ExternalDomainElement",
-          "doc:DomainElement"
-        ],
-        "doc:raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\n  <xs:element name=\"resource\">\n    <xs:complexType>\n      <xs:sequence>\n        <xs:element name=\"message\" type=\"xs:string\"></xs:element>\n      </xs:sequence>\n      <xs:attribute name=\"error\" type=\"xs:boolean\" use=\"required\"/>\n    </xs:complexType>\n  </xs:element>\n</xs:schema>\n"
-      }
-    },
-    {
-      "@id": "amf://id#165",
-      "@type": [
         "doc:SecuritySchemeFragment",
         "doc:Fragment",
         "doc:Unit"
@@ -6860,421 +6293,129 @@
       }
     },
     {
-      "@id": "amf://id#166",
+      "@id": "amf://id#159",
       "@type": [
-        "doc:TraitFragment",
+        "doc:DataType",
         "doc:Fragment",
         "doc:Unit"
       ],
       "doc:encodes": {
-        "@id": "amf://id#28",
+        "@id": "amf://id#47",
         "@type": [
-          "doc:Trait",
-          "doc:AbstractDeclaration",
+          "shacl:NodeShape",
+          "shacl:Shape",
+          "raml-shapes:Shape",
           "doc:DomainElement"
         ],
-        "doc:dataNode": {
-          "@id": "amf://id#112",
-          "@type": "data:Object",
-          "data:description": {
-            "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/scalar_2",
-            "@type": "data:Scalar",
-            "data:value": {
-              "@type": "xsd:string",
-              "@value": "The collection of <<resourcePathName>>."
-            }
-          },
-          "data:queryParameters": {
-            "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3",
+        "doc:examples": {
+          "@id": "amf://id#48",
+          "@type": [
+            "doc:Example",
+            "doc:DomainElement"
+          ],
+          "doc:strict": true,
+          "doc:structuredValue": {
+            "@id": "amf://id#49",
             "@type": "data:Object",
-            "data:limit": {
-              "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_4",
-              "@type": "data:Object",
-              "data:default": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_4/scalar_10",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:integer",
-                  "@value": "25"
-                }
-              },
-              "data:description": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_4/scalar_6",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:string",
-                  "@value": "Limit in the response list"
-                }
-              },
-              "data:example": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_4/scalar_9",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:integer",
-                  "@value": "100"
-                }
-              },
-              "data:maximum": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_4/scalar_7",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:integer",
-                  "@value": "300"
-                }
-              },
-              "data:minimum": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_4/scalar_8",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:integer",
-                  "@value": "1"
-                }
-              },
-              "data:required": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_4/scalar_11",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:boolean",
-                  "@value": "false"
-                }
-              },
-              "data:type": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_4/scalar_5",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:string",
-                  "@value": "number"
-                }
+            "data:thumb": {
+              "@id": "file://demo/demo-api/resourceTypes/image.raml#/shape/example/default-example/object_1/scalar_3",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:string",
+                "@value": "https://domain.com/profile/pawel.psztyc/image/thumb"
               }
             },
-            "data:nextPageToken": {
-              "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_19",
-              "@type": "data:Object",
-              "data:description": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_19/scalar_22",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:string",
-                  "@value": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page.\n"
-                }
-              },
-              "data:example": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_19/scalar_21",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:string",
-                  "@value": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
-                }
-              },
-              "data:pattern": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_19/scalar_23",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:string",
-                  "@value": "[a-zA-Z0-9]+"
-                }
-              },
-              "data:required": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_19/scalar_24",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:boolean",
-                  "@value": "false"
-                }
-              },
-              "data:type": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_19/scalar_20",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:string",
-                  "@value": "string"
-                }
-              }
-            },
-            "data:start": {
-              "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_12",
-              "@type": "data:Object",
-              "data:default": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_12/scalar_17",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:integer",
-                  "@value": "0"
-                }
-              },
-              "data:description": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_12/scalar_14",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:string",
-                  "@value": "The start entry of the list"
-                }
-              },
-              "data:example": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_12/scalar_16",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:integer",
-                  "@value": "25"
-                }
-              },
-              "data:minimum": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_12/scalar_15",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:integer",
-                  "@value": "0"
-                }
-              },
-              "data:required": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_12/scalar_18",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:boolean",
-                  "@value": "false"
-                }
-              },
-              "data:type": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_12/scalar_13",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:string",
-                  "@value": "number"
-                }
+            "data:url": {
+              "@id": "file://demo/demo-api/resourceTypes/image.raml#/shape/example/default-example/object_1/scalar_2",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:string",
+                "@value": "https://domain.com/profile/pawel.psztyc/image"
               }
             }
           },
-          "data:responses": {
-            "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25",
-            "@type": "data:Object",
-            "data:200": {
-              "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26",
-              "@type": "data:Object",
-              "data:body": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28",
-                "@type": "data:Object",
-                "data:application%2Fjson": {
-                  "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29",
-                  "@type": "data:Object",
-                  "data:properties": {
-                    "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31",
-                    "@type": "data:Object",
-                    "data:items": {
-                      "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31/object_32",
-                      "@type": "data:Object",
-                      "data:description": {
-                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31/object_32/scalar_35",
-                        "@type": "data:Scalar",
-                        "data:value": {
-                          "@type": "xsd:string",
-                          "@value": "Contains a list of objects for this method."
-                        }
-                      },
-                      "data:items": {
-                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31/object_32/scalar_36",
-                        "@type": "data:Scalar",
-                        "data:value": {
-                          "@type": "xsd:string",
-                          "@value": "<<resourceType>>"
-                        }
-                      },
-                      "data:required": {
-                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31/object_32/scalar_34",
-                        "@type": "data:Scalar",
-                        "data:value": {
-                          "@type": "xsd:boolean",
-                          "@value": "true"
-                        }
-                      },
-                      "data:type": {
-                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31/object_32/scalar_33",
-                        "@type": "data:Scalar",
-                        "data:value": {
-                          "@type": "xsd:string",
-                          "@value": "array"
-                        }
-                      }
-                    },
-                    "data:nextPageToken": {
-                      "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31/object_37",
-                      "@type": "data:Object",
-                      "data:description": {
-                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31/object_37/scalar_41",
-                        "@type": "data:Scalar",
-                        "data:value": {
-                          "@type": "xsd:string",
-                          "@value": "The next page token is a web safe encoded cursor to the next entry in the database.\nUse it in the next request to obtain next page of the results.\n"
-                        }
-                      },
-                      "data:example": {
-                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31/object_37/scalar_40",
-                        "@type": "data:Scalar",
-                        "data:value": {
-                          "@type": "xsd:string",
-                          "@value": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
-                        }
-                      },
-                      "data:required": {
-                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31/object_37/scalar_39",
-                        "@type": "data:Scalar",
-                        "data:value": {
-                          "@type": "xsd:boolean",
-                          "@value": "true"
-                        }
-                      },
-                      "data:type": {
-                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31/object_37/scalar_38",
-                        "@type": "data:Scalar",
-                        "data:value": {
-                          "@type": "xsd:string",
-                          "@value": "string"
-                        }
-                      }
-                    }
-                  },
-                  "data:type": {
-                    "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/scalar_30",
-                    "@type": "data:Scalar",
-                    "data:value": {
-                      "@type": "xsd:string",
-                      "@value": "object"
-                    }
-                  }
-                }
+          "shacl:raw": "  url: https://domain.com/profile/pawel.psztyc/image\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n"
+        },
+        "schema-org:description": "An image object representing an image object strored in the file store.\nThe image can be only included in the response. It has no effect if the Image appear in the\nrequest. Endpoint handles image creation on it's own and clients can't process images\nexcept of sending image data.\n",
+        "shacl:closed": false,
+        "shacl:name": "image",
+        "shacl:property": [
+          {
+            "@id": "amf://id#50",
+            "@type": [
+              "shacl:PropertyShape",
+              "shacl:Shape",
+              "raml-shapes:Shape"
+            ],
+            "raml-shapes:range": {
+              "@id": "amf://id#51",
+              "@type": [
+                "raml-shapes:ScalarShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "schema-org:description": "The URL of the image.\nTo resize the image and crop it to a square, append the query string **?sz=x**, where x is the dimension in pixels of each side.\n",
+              "shacl:datatype": {
+                "@id": "xsd:string"
               },
-              "data:description": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/scalar_27",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:string",
-                  "@value": "Paginated response containing a single page of the result.\nBy default one page of the results contains 25 items. You can extend it by setting a\n`limit` query parameter in your request.\nWhen changing parameters while using the `nextPageToken` the `nextPageToken` will be ignored\nand new query will be performed. Queries with `nextPageToken` should contain the same set\nof parameters as the first request.\n"
-                }
-              }
+              "shacl:name": "url"
             },
-            "data:400": {
-              "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42",
-              "@type": "data:Object",
-              "data:body": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44",
-                "@type": "data:Object",
-                "data:application%2Fjson": {
-                  "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45",
-                  "@type": "data:Object",
-                  "data:displayName": {
-                    "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/scalar_46",
-                    "@type": "data:Scalar",
-                    "data:value": {
-                      "@type": "xsd:string",
-                      "@value": "Invalid"
-                    }
-                  },
-                  "data:properties": {
-                    "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48",
-                    "@type": "data:Object",
-                    "data:error": {
-                      "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48/object_49",
-                      "@type": "data:Object",
-                      "data:description": {
-                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48/object_49/scalar_53",
-                        "@type": "data:Scalar",
-                        "data:value": {
-                          "@type": "xsd:string",
-                          "@value": "Indicate that the response is errored."
-                        }
-                      },
-                      "data:example": {
-                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48/object_49/scalar_52",
-                        "@type": "data:Scalar",
-                        "data:value": {
-                          "@type": "xsd:boolean",
-                          "@value": "true"
-                        }
-                      },
-                      "data:required": {
-                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48/object_49/scalar_51",
-                        "@type": "data:Scalar",
-                        "data:value": {
-                          "@type": "xsd:boolean",
-                          "@value": "true"
-                        }
-                      },
-                      "data:type": {
-                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48/object_49/scalar_50",
-                        "@type": "data:Scalar",
-                        "data:value": {
-                          "@type": "xsd:string",
-                          "@value": "boolean"
-                        }
-                      }
-                    },
-                    "data:message": {
-                      "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48/object_54",
-                      "@type": "data:Object",
-                      "data:description": {
-                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48/object_54/scalar_56",
-                        "@type": "data:Scalar",
-                        "data:value": {
-                          "@type": "xsd:string",
-                          "@value": "The error message associated with the error."
-                        }
-                      },
-                      "data:example": {
-                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48/object_54/scalar_57",
-                        "@type": "data:Scalar",
-                        "data:value": {
-                          "@type": "xsd:string",
-                          "@value": "The `limit` parameter is invalid. Please, provide a number between 1 and 300."
-                        }
-                      },
-                      "data:required": {
-                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48/object_54/scalar_58",
-                        "@type": "data:Scalar",
-                        "data:value": {
-                          "@type": "xsd:boolean",
-                          "@value": "true"
-                        }
-                      },
-                      "data:type": {
-                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48/object_54/scalar_55",
-                        "@type": "data:Scalar",
-                        "data:value": {
-                          "@type": "xsd:string",
-                          "@value": "string"
-                        }
-                      }
-                    }
-                  },
-                  "data:type": {
-                    "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/scalar_47",
-                    "@type": "data:Scalar",
-                    "data:value": {
-                      "@type": "xsd:string",
-                      "@value": "object"
-                    }
-                  }
-                }
+            "shacl:minCount": 1,
+            "shacl:name": "url",
+            "shacl:path": {
+              "@id": "data:url"
+            }
+          },
+          {
+            "@id": "amf://id#52",
+            "@type": [
+              "shacl:PropertyShape",
+              "shacl:Shape",
+              "raml-shapes:Shape"
+            ],
+            "raml-shapes:range": {
+              "@id": "amf://id#53",
+              "@type": [
+                "raml-shapes:ScalarShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "schema-org:description": "An URL to the thumbnail of the image. Thumbnails are 60x60px cropped images of the original image.\n",
+              "schema-org:name": "Thumbnail",
+              "shacl:datatype": {
+                "@id": "xsd:string"
               },
-              "data:description": {
-                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/scalar_43",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:string",
-                  "@value": "The error response when one of the parameters is invalid and can't be parsed.\nNothing can be done at this time except correcting the request to send valid data.\n"
-                }
-              }
+              "shacl:name": "thumb"
+            },
+            "shacl:minCount": 1,
+            "shacl:name": "thumb",
+            "shacl:path": {
+              "@id": "data:thumb"
             }
           }
-        },
-        "doc:variable": [
-          "resourceType",
-          "resourcePathName"
-        ],
-        "schema-org:name": "trait"
-      },
-      "doc:usage": "This trait is to be used when the resource is paginated that is the edpoint producses\na list of resources in the response.\nEvery paginated response contains a `nextPageToken` property that should be used in pagination\nto request for next page of the results and `items` which is a list of resources.\nThe `items` property is always defined, even if the response is empty. Therefore the `404`\nresponse in this case is not possible. Clients need to handle empty responses by their own.\nIt is crutial that the subsequent requests contain the same set of parameters (like `limit`\nor `start`) because if this values will change then the `nextPageToken` will be revalidated\nand pagination will start from the first page.\n"
+        ]
+      }
     },
     {
-      "@id": "amf://id#167",
+      "@id": "amf://id#160",
+      "@type": [
+        "doc:ExternalFragment",
+        "doc:Fragment",
+        "doc:Unit"
+      ],
+      "doc:encodes": {
+        "@id": "amf://id#161",
+        "@type": [
+          "doc:ExternalDomainElement",
+          "doc:DomainElement"
+        ],
+        "doc:raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<resource error=\"true\">\n  <message>Unauthorized</message>\n</resource>\n"
+      }
+    },
+    {
+      "@id": "amf://id#162",
       "@type": [
         "doc:DataType",
         "doc:Fragment",
@@ -7800,7 +6941,7 @@
         ]
       },
       "doc:references": {
-        "@id": "amf://id#160",
+        "@id": "amf://id#163",
         "@type": [
           "doc:DataType",
           "doc:Fragment",
@@ -7848,7 +6989,23 @@
       }
     },
     {
-      "@id": "amf://id#160",
+      "@id": "amf://id#164",
+      "@type": [
+        "doc:ExternalFragment",
+        "doc:Fragment",
+        "doc:Unit"
+      ],
+      "doc:encodes": {
+        "@id": "amf://id#165",
+        "@type": [
+          "doc:ExternalDomainElement",
+          "doc:DomainElement"
+        ],
+        "doc:raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\n  <xs:element name=\"resource\">\n    <xs:complexType>\n      <xs:sequence>\n        <xs:element name=\"id\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"name\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"birthday\" type=\"xs:date\"></xs:element>\n        <xs:element name=\"gender\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"url\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"image\">\n          <xs:complexType>\n            <xs:sequence>\n              <xs:element name=\"url\" type=\"xs:string\"></xs:element>\n              <xs:element name=\"thumb\" type=\"xs:string\"></xs:element>\n            </xs:sequence>\n          </xs:complexType>\n        </xs:element>\n        <xs:element name=\"tagline\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"language\" type=\"xs:string\"></xs:element>\n      </xs:sequence>\n      <xs:attribute name=\"error\" type=\"xs:boolean\" use=\"required\"></xs:attribute>\n      <xs:attribute name=\"type\" type=\"xs:string\" use=\"required\"></xs:attribute>\n    </xs:complexType>\n  </xs:element>\n</xs:schema>\n"
+      }
+    },
+    {
+      "@id": "amf://id#163",
       "@type": [
         "doc:DataType",
         "doc:Fragment",
@@ -7895,14 +7052,444 @@
       }
     },
     {
-      "@id": "amf://id#168",
+      "@id": "amf://id#166",
+      "@type": [
+        "doc:TraitFragment",
+        "doc:Fragment",
+        "doc:Unit"
+      ],
+      "doc:encodes": {
+        "@id": "amf://id#28",
+        "@type": [
+          "doc:Trait",
+          "doc:AbstractDeclaration",
+          "doc:DomainElement"
+        ],
+        "doc:dataNode": {
+          "@id": "amf://id#112",
+          "@type": "data:Object",
+          "data:description": {
+            "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/scalar_2",
+            "@type": "data:Scalar",
+            "data:value": {
+              "@type": "xsd:string",
+              "@value": "The collection of <<resourcePathName>>."
+            }
+          },
+          "data:queryParameters": {
+            "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3",
+            "@type": "data:Object",
+            "data:limit": {
+              "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_4",
+              "@type": "data:Object",
+              "data:default": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_4/scalar_10",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:integer",
+                  "@value": "25"
+                }
+              },
+              "data:description": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_4/scalar_6",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "Limit in the response list"
+                }
+              },
+              "data:example": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_4/scalar_9",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:integer",
+                  "@value": "100"
+                }
+              },
+              "data:maximum": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_4/scalar_7",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:integer",
+                  "@value": "300"
+                }
+              },
+              "data:minimum": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_4/scalar_8",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:integer",
+                  "@value": "1"
+                }
+              },
+              "data:required": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_4/scalar_11",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:boolean",
+                  "@value": "false"
+                }
+              },
+              "data:type": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_4/scalar_5",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "number"
+                }
+              }
+            },
+            "data:nextPageToken": {
+              "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_19",
+              "@type": "data:Object",
+              "data:description": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_19/scalar_22",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "The `nextPageToken` is a web safe encoded cursor to the next entry in the database.\nIt can be obtained by requesting paginated resource and used in next request to get\nnext results page.\n"
+                }
+              },
+              "data:example": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_19/scalar_21",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
+                }
+              },
+              "data:pattern": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_19/scalar_23",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "[a-zA-Z0-9]+"
+                }
+              },
+              "data:required": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_19/scalar_24",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:boolean",
+                  "@value": "false"
+                }
+              },
+              "data:type": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_19/scalar_20",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "string"
+                }
+              }
+            },
+            "data:start": {
+              "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_12",
+              "@type": "data:Object",
+              "data:default": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_12/scalar_17",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:integer",
+                  "@value": "0"
+                }
+              },
+              "data:description": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_12/scalar_14",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "The start entry of the list"
+                }
+              },
+              "data:example": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_12/scalar_16",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:integer",
+                  "@value": "25"
+                }
+              },
+              "data:minimum": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_12/scalar_15",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:integer",
+                  "@value": "0"
+                }
+              },
+              "data:required": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_12/scalar_18",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:boolean",
+                  "@value": "false"
+                }
+              },
+              "data:type": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_3/object_12/scalar_13",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "number"
+                }
+              }
+            }
+          },
+          "data:responses": {
+            "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25",
+            "@type": "data:Object",
+            "data:200": {
+              "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26",
+              "@type": "data:Object",
+              "data:body": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28",
+                "@type": "data:Object",
+                "data:application%2Fjson": {
+                  "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29",
+                  "@type": "data:Object",
+                  "data:properties": {
+                    "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31",
+                    "@type": "data:Object",
+                    "data:items": {
+                      "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31/object_32",
+                      "@type": "data:Object",
+                      "data:description": {
+                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31/object_32/scalar_35",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "Contains a list of objects for this method."
+                        }
+                      },
+                      "data:items": {
+                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31/object_32/scalar_36",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "<<resourceType>>"
+                        }
+                      },
+                      "data:required": {
+                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31/object_32/scalar_34",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:boolean",
+                          "@value": "true"
+                        }
+                      },
+                      "data:type": {
+                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31/object_32/scalar_33",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "array"
+                        }
+                      }
+                    },
+                    "data:nextPageToken": {
+                      "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31/object_37",
+                      "@type": "data:Object",
+                      "data:description": {
+                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31/object_37/scalar_41",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "The next page token is a web safe encoded cursor to the next entry in the database.\nUse it in the next request to obtain next page of the results.\n"
+                        }
+                      },
+                      "data:example": {
+                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31/object_37/scalar_40",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
+                        }
+                      },
+                      "data:required": {
+                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31/object_37/scalar_39",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:boolean",
+                          "@value": "true"
+                        }
+                      },
+                      "data:type": {
+                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/object_31/object_37/scalar_38",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "string"
+                        }
+                      }
+                    }
+                  },
+                  "data:type": {
+                    "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/object_28/object_29/scalar_30",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:string",
+                      "@value": "object"
+                    }
+                  }
+                }
+              },
+              "data:description": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_26/scalar_27",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "Paginated response containing a single page of the result.\nBy default one page of the results contains 25 items. You can extend it by setting a\n`limit` query parameter in your request.\nWhen changing parameters while using the `nextPageToken` the `nextPageToken` will be ignored\nand new query will be performed. Queries with `nextPageToken` should contain the same set\nof parameters as the first request.\n"
+                }
+              }
+            },
+            "data:400": {
+              "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42",
+              "@type": "data:Object",
+              "data:body": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44",
+                "@type": "data:Object",
+                "data:application%2Fjson": {
+                  "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45",
+                  "@type": "data:Object",
+                  "data:displayName": {
+                    "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/scalar_46",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:string",
+                      "@value": "Invalid"
+                    }
+                  },
+                  "data:properties": {
+                    "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48",
+                    "@type": "data:Object",
+                    "data:error": {
+                      "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48/object_49",
+                      "@type": "data:Object",
+                      "data:description": {
+                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48/object_49/scalar_53",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "Indicate that the response is errored."
+                        }
+                      },
+                      "data:example": {
+                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48/object_49/scalar_52",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:boolean",
+                          "@value": "true"
+                        }
+                      },
+                      "data:required": {
+                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48/object_49/scalar_51",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:boolean",
+                          "@value": "true"
+                        }
+                      },
+                      "data:type": {
+                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48/object_49/scalar_50",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "boolean"
+                        }
+                      }
+                    },
+                    "data:message": {
+                      "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48/object_54",
+                      "@type": "data:Object",
+                      "data:description": {
+                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48/object_54/scalar_56",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "The error message associated with the error."
+                        }
+                      },
+                      "data:example": {
+                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48/object_54/scalar_57",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "The `limit` parameter is invalid. Please, provide a number between 1 and 300."
+                        }
+                      },
+                      "data:required": {
+                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48/object_54/scalar_58",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:boolean",
+                          "@value": "true"
+                        }
+                      },
+                      "data:type": {
+                        "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/object_48/object_54/scalar_55",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "string"
+                        }
+                      }
+                    }
+                  },
+                  "data:type": {
+                    "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/object_44/object_45/scalar_47",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:string",
+                      "@value": "object"
+                    }
+                  }
+                }
+              },
+              "data:description": {
+                "@id": "file://demo/demo-api/traits/pagination.raml#/trait/object_1/object_25/object_42/scalar_43",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "The error response when one of the parameters is invalid and can't be parsed.\nNothing can be done at this time except correcting the request to send valid data.\n"
+                }
+              }
+            }
+          }
+        },
+        "doc:variable": [
+          "resourceType",
+          "resourcePathName"
+        ],
+        "schema-org:name": "trait"
+      },
+      "doc:usage": "This trait is to be used when the resource is paginated that is the edpoint producses\na list of resources in the response.\nEvery paginated response contains a `nextPageToken` property that should be used in pagination\nto request for next page of the results and `items` which is a list of resources.\nThe `items` property is always defined, even if the response is empty. Therefore the `404`\nresponse in this case is not possible. Clients need to handle empty responses by their own.\nIt is crutial that the subsequent requests contain the same set of parameters (like `limit`\nor `start`) because if this values will change then the `nextPageToken` will be revalidated\nand pagination will start from the first page.\n"
+    },
+    {
+      "@id": "amf://id#167",
       "@type": [
         "doc:ExternalFragment",
         "doc:Fragment",
         "doc:Unit"
       ],
       "doc:encodes": {
-        "@id": "amf://id#169",
+        "@id": "amf://id#168",
+        "@type": [
+          "doc:ExternalDomainElement",
+          "doc:DomainElement"
+        ],
+        "doc:raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<resource error=\"true\">\n  <message>Not found</message>\n</resource>\n"
+      }
+    },
+    {
+      "@id": "amf://id#169",
+      "@type": [
+        "doc:ExternalFragment",
+        "doc:Fragment",
+        "doc:Unit"
+      ],
+      "doc:encodes": {
+        "@id": "amf://id#170",
         "@type": [
           "doc:ExternalDomainElement",
           "doc:DomainElement"
@@ -7911,14 +7498,549 @@
       }
     },
     {
-      "@id": "amf://id#170",
+      "@id": "amf://id#171",
+      "@type": [
+        "doc:DataType",
+        "doc:Fragment",
+        "doc:Unit"
+      ],
+      "doc:encodes": {
+        "@id": "amf://id#26",
+        "@type": [
+          "shacl:NodeShape",
+          "shacl:Shape",
+          "raml-shapes:Shape",
+          "doc:DomainElement"
+        ],
+        "doc:examples": {
+          "@id": "amf://id#27",
+          "@type": [
+            "doc:Example",
+            "doc:DomainElement"
+          ],
+          "doc:strict": true,
+          "doc:structuredValue": {
+            "@id": "amf://id#29",
+            "@type": "data:Object",
+            "data:birthday": {
+              "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/scalar_4",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:string",
+                "@value": "1983-10-20"
+              }
+            },
+            "data:etag": {
+              "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/scalar_12",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:string",
+                "@value": "W\\244m4n5kj3gbn2nj4k4n4"
+              }
+            },
+            "data:gender": {
+              "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/scalar_5",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:string",
+                "@value": "male"
+              }
+            },
+            "data:id": {
+              "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/scalar_2",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:string",
+                "@value": "R34fg663H9KW9MMSKISI"
+              }
+            },
+            "data:image": {
+              "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/object_7",
+              "@type": "data:Object",
+              "data:thumb": {
+                "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/object_7/scalar_9",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "https://domain.com/profile/pawel.psztyc/image/thumb"
+                }
+              },
+              "data:url": {
+                "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/object_7/scalar_8",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "https://domain.com/profile/pawel.psztyc/image"
+                }
+              }
+            },
+            "data:language": {
+              "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/scalar_11",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:string",
+                "@value": "en_GB"
+              }
+            },
+            "data:name": {
+              "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/scalar_3",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:string",
+                "@value": "Pawel Psztyc"
+              }
+            },
+            "data:tagline": {
+              "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/scalar_10",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:string",
+                "@value": "Some text about me."
+              }
+            },
+            "data:url": {
+              "@id": "file://demo/demo-api/resourceTypes/app-person.raml#/shape/example/default-example/object_1/scalar_6",
+              "@type": "data:Scalar",
+              "data:value": {
+                "@type": "xsd:string",
+                "@value": "https://domain.com/profile/pawel.psztyc"
+              }
+            }
+          },
+          "shacl:raw": "  id: \"R34fg663H9KW9MMSKISI\"\n  name: \"Pawel Psztyc\"\n  birthday: \"1983-10-20\"\n  gender: male\n  url: \"https://domain.com/profile/pawel.psztyc\"\n  image:\n    url: https://domain.com/profile/pawel.psztyc/image\n    thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n  tagline: Some text about me.\n  language: en_GB\n  etag: \"W\\\\244m4n5kj3gbn2nj4k4n4\"\n"
+        },
+        "schema-org:description": "An object representing a person in the API.\nThis object will be used in all methods returning a Person or list of people.\n",
+        "schema-org:name": "A person resource",
+        "shacl:closed": false,
+        "shacl:name": "AppPerson",
+        "shacl:property": [
+          {
+            "@id": "amf://id#30",
+            "@type": [
+              "shacl:PropertyShape",
+              "shacl:Shape",
+              "raml-shapes:Shape"
+            ],
+            "raml-shapes:range": {
+              "@id": "amf://id#31",
+              "@type": [
+                "raml-shapes:ScalarShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "schema-org:description": "ETag of this resource for caching purposes.\n__This property will be ignored when creating an object.__\n",
+              "shacl:datatype": {
+                "@id": "xsd:string"
+              },
+              "shacl:name": "etag"
+            },
+            "shacl:minCount": 1,
+            "shacl:name": "etag",
+            "shacl:path": {
+              "@id": "data:etag"
+            }
+          },
+          {
+            "@id": "amf://id#32",
+            "@type": [
+              "shacl:PropertyShape",
+              "shacl:Shape",
+              "raml-shapes:Shape"
+            ],
+            "raml-shapes:range": {
+              "@id": "amf://id#33",
+              "@type": [
+                "raml-shapes:ScalarShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "schema-org:description": "The brief description (tagline) of this person.",
+              "shacl:datatype": {
+                "@id": "xsd:string"
+              },
+              "shacl:name": "tagline"
+            },
+            "shacl:minCount": 1,
+            "shacl:name": "tagline",
+            "shacl:path": {
+              "@id": "data:tagline"
+            }
+          },
+          {
+            "@id": "amf://id#34",
+            "@type": [
+              "shacl:PropertyShape",
+              "shacl:Shape",
+              "raml-shapes:Shape"
+            ],
+            "raml-shapes:range": {
+              "@id": "amf://id#35",
+              "@type": [
+                "raml-shapes:ScalarShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "doc:examples": {
+                "@id": "amf://id#36",
+                "@type": [
+                  "doc:Example",
+                  "doc:DomainElement"
+                ],
+                "doc:strict": true,
+                "doc:structuredValue": {
+                  "@id": "amf://id#37",
+                  "@type": "data:Scalar",
+                  "data:value": {
+                    "@type": "xsd:string",
+                    "@value": "John Smith"
+                  }
+                },
+                "shacl:raw": "John Smith"
+              },
+              "schema-org:description": "Person full name. The input will be rejected if this property is not set while creating new object.",
+              "shacl:datatype": {
+                "@id": "xsd:string"
+              },
+              "shacl:name": "name",
+              "shacl:pattern": "^[0-9a-zA-Z ]+$"
+            },
+            "shacl:minCount": 1,
+            "shacl:name": "name",
+            "shacl:path": {
+              "@id": "data:name"
+            }
+          },
+          {
+            "@id": "amf://id#38",
+            "@type": [
+              "shacl:PropertyShape",
+              "shacl:Shape",
+              "raml-shapes:Shape"
+            ],
+            "raml-shapes:range": {
+              "@id": "amf://id#39",
+              "@type": [
+                "raml-shapes:ScalarShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "schema-org:description": "The URL of this person's profile.",
+              "shacl:datatype": {
+                "@id": "xsd:string"
+              },
+              "shacl:name": "url"
+            },
+            "shacl:minCount": 1,
+            "shacl:name": "url",
+            "shacl:path": {
+              "@id": "data:url"
+            }
+          },
+          {
+            "@id": "amf://id#40",
+            "@type": [
+              "shacl:PropertyShape",
+              "shacl:Shape",
+              "raml-shapes:Shape"
+            ],
+            "raml-shapes:range": {
+              "@id": "amf://id#41",
+              "@type": [
+                "raml-shapes:ScalarShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "schema-org:description": "The user's preferred language for rendering.",
+              "shacl:datatype": {
+                "@id": "xsd:string"
+              },
+              "shacl:name": "language"
+            },
+            "shacl:minCount": 1,
+            "shacl:name": "language",
+            "shacl:path": {
+              "@id": "data:language"
+            }
+          },
+          {
+            "@id": "amf://id#42",
+            "@type": [
+              "shacl:PropertyShape",
+              "shacl:Shape",
+              "raml-shapes:Shape"
+            ],
+            "raml-shapes:range": {
+              "@id": "amf://id#43",
+              "@type": [
+                "raml-shapes:ScalarShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "schema-org:description": "A unique identifier for a person. It is a 32 bit string containing alphanumeric characters.",
+              "shacl:datatype": {
+                "@id": "xsd:string"
+              },
+              "shacl:name": "id"
+            },
+            "shacl:minCount": 1,
+            "shacl:name": "id",
+            "shacl:path": {
+              "@id": "data:id"
+            }
+          },
+          {
+            "@id": "amf://id#44",
+            "@type": [
+              "shacl:PropertyShape",
+              "shacl:Shape",
+              "raml-shapes:Shape"
+            ],
+            "raml-shapes:range": {
+              "@id": "amf://id#45",
+              "@type": [
+                "raml-shapes:ScalarShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "schema-org:description": "The person's date of birth, represented as YYYY-MM-DD.",
+              "shacl:datatype": {
+                "@id": "xsd:string"
+              },
+              "shacl:name": "birthday"
+            },
+            "shacl:minCount": 1,
+            "shacl:name": "birthday",
+            "shacl:path": {
+              "@id": "data:birthday"
+            }
+          },
+          {
+            "@id": "amf://id#46",
+            "@type": [
+              "shacl:PropertyShape",
+              "shacl:Shape",
+              "raml-shapes:Shape"
+            ],
+            "raml-shapes:range": {
+              "@id": "amf://id#47/linked_1",
+              "@type": [
+                "shacl:NodeShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "doc:link-label": "image",
+              "doc:link-target": {
+                "@id": "amf://id#47"
+              }
+            },
+            "shacl:minCount": 1,
+            "shacl:name": "image",
+            "shacl:path": {
+              "@id": "data:image"
+            }
+          },
+          {
+            "@id": "amf://id#56",
+            "@type": [
+              "shacl:PropertyShape",
+              "shacl:Shape",
+              "raml-shapes:Shape"
+            ],
+            "raml-shapes:range": {
+              "@id": "amf://id#57",
+              "@type": [
+                "raml-shapes:ScalarShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "schema-org:description": "The person's gender. Possible values includes, but are not limited to, the following values:\n* \"male\" - Male gender.\n* \"female\" - Female gender.\n* \"other\" - Other.\n",
+              "shacl:datatype": {
+                "@id": "xsd:string"
+              },
+              "shacl:name": "gender?"
+            },
+            "shacl:minCount": 0,
+            "shacl:name": "gender",
+            "shacl:path": {
+              "@id": "data:gender"
+            }
+          }
+        ]
+      },
+      "doc:references": [
+        {
+          "@id": "amf://id#159",
+          "@type": [
+            "doc:DataType",
+            "doc:Fragment",
+            "doc:Unit"
+          ],
+          "doc:encodes": {
+            "@id": "amf://id#47",
+            "@type": [
+              "shacl:NodeShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "doc:examples": {
+              "@id": "amf://id#48",
+              "@type": [
+                "doc:Example",
+                "doc:DomainElement"
+              ],
+              "doc:strict": true,
+              "doc:structuredValue": {
+                "@id": "amf://id#49",
+                "@type": "data:Object",
+                "data:thumb": {
+                  "@id": "file://demo/demo-api/resourceTypes/image.raml#/shape/example/default-example/object_1/scalar_3",
+                  "@type": "data:Scalar",
+                  "data:value": {
+                    "@type": "xsd:string",
+                    "@value": "https://domain.com/profile/pawel.psztyc/image/thumb"
+                  }
+                },
+                "data:url": {
+                  "@id": "file://demo/demo-api/resourceTypes/image.raml#/shape/example/default-example/object_1/scalar_2",
+                  "@type": "data:Scalar",
+                  "data:value": {
+                    "@type": "xsd:string",
+                    "@value": "https://domain.com/profile/pawel.psztyc/image"
+                  }
+                }
+              },
+              "shacl:raw": "  url: https://domain.com/profile/pawel.psztyc/image\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n"
+            },
+            "schema-org:description": "An image object representing an image object strored in the file store.\nThe image can be only included in the response. It has no effect if the Image appear in the\nrequest. Endpoint handles image creation on it's own and clients can't process images\nexcept of sending image data.\n",
+            "shacl:closed": false,
+            "shacl:name": "image",
+            "shacl:property": [
+              {
+                "@id": "amf://id#50",
+                "@type": [
+                  "shacl:PropertyShape",
+                  "shacl:Shape",
+                  "raml-shapes:Shape"
+                ],
+                "raml-shapes:range": {
+                  "@id": "amf://id#51",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "schema-org:description": "The URL of the image.\nTo resize the image and crop it to a square, append the query string **?sz=x**, where x is the dimension in pixels of each side.\n",
+                  "shacl:datatype": {
+                    "@id": "xsd:string"
+                  },
+                  "shacl:name": "url"
+                },
+                "shacl:minCount": 1,
+                "shacl:name": "url",
+                "shacl:path": {
+                  "@id": "data:url"
+                }
+              },
+              {
+                "@id": "amf://id#52",
+                "@type": [
+                  "shacl:PropertyShape",
+                  "shacl:Shape",
+                  "raml-shapes:Shape"
+                ],
+                "raml-shapes:range": {
+                  "@id": "amf://id#53",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "schema-org:description": "An URL to the thumbnail of the image. Thumbnails are 60x60px cropped images of the original image.\n",
+                  "schema-org:name": "Thumbnail",
+                  "shacl:datatype": {
+                    "@id": "xsd:string"
+                  },
+                  "shacl:name": "thumb"
+                },
+                "shacl:minCount": 1,
+                "shacl:name": "thumb",
+                "shacl:path": {
+                  "@id": "data:thumb"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "@id": "amf://id#163",
+          "@type": [
+            "doc:DataType",
+            "doc:Fragment",
+            "doc:Unit"
+          ],
+          "doc:encodes": {
+            "@id": "amf://id#63",
+            "@type": [
+              "shacl:NodeShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "schema-org:description": "Common properties for all resources returned by the API.\n",
+            "shacl:closed": false,
+            "shacl:name": "Resource",
+            "shacl:property": {
+              "@id": "amf://id#30",
+              "@type": [
+                "shacl:PropertyShape",
+                "shacl:Shape",
+                "raml-shapes:Shape"
+              ],
+              "raml-shapes:range": {
+                "@id": "amf://id#31",
+                "@type": [
+                  "raml-shapes:ScalarShape",
+                  "shacl:Shape",
+                  "raml-shapes:Shape",
+                  "doc:DomainElement"
+                ],
+                "schema-org:description": "ETag of this resource for caching purposes.\n__This property will be ignored when creating an object.__\n",
+                "shacl:datatype": {
+                  "@id": "xsd:string"
+                },
+                "shacl:name": "etag"
+              },
+              "shacl:minCount": 1,
+              "shacl:name": "etag",
+              "shacl:path": {
+                "@id": "data:etag"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@id": "amf://id#172",
       "@type": [
         "doc:ExternalFragment",
         "doc:Fragment",
         "doc:Unit"
       ],
       "doc:encodes": {
-        "@id": "amf://id#171",
+        "@id": "amf://id#173",
         "@type": [
           "doc:ExternalDomainElement",
           "doc:DomainElement"
@@ -7927,7 +8049,23 @@
       }
     },
     {
-      "@id": "amf://id#172",
+      "@id": "amf://id#174",
+      "@type": [
+        "doc:ExternalFragment",
+        "doc:Fragment",
+        "doc:Unit"
+      ],
+      "doc:encodes": {
+        "@id": "amf://id#175",
+        "@type": [
+          "doc:ExternalDomainElement",
+          "doc:DomainElement"
+        ],
+        "doc:raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<resource error=\"true\">\n  <message>Invalid request</message>\n</resource>\n"
+      }
+    },
+    {
+      "@id": "amf://id#176",
       "@type": [
         "doc:SecuritySchemeFragment",
         "doc:Fragment",
@@ -7945,267 +8083,7 @@
       }
     },
     {
-      "@id": "amf://id#173",
-      "@type": [
-        "doc:ExternalFragment",
-        "doc:Fragment",
-        "doc:Unit"
-      ],
-      "doc:encodes": {
-        "@id": "amf://id#174",
-        "@type": [
-          "doc:ExternalDomainElement",
-          "doc:DomainElement"
-        ],
-        "doc:raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<resource error=\"true\">\n  <message>Not found</message>\n</resource>\n"
-      }
-    },
-    {
-      "@id": "amf://id#175",
-      "@type": [
-        "doc:ExternalFragment",
-        "doc:Fragment",
-        "doc:Unit"
-      ],
-      "doc:encodes": {
-        "@id": "amf://id#176",
-        "@type": [
-          "doc:ExternalDomainElement",
-          "doc:DomainElement"
-        ],
-        "doc:raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<resource error=\"true\">\n  <message>Invalid request</message>\n</resource>\n"
-      }
-    },
-    {
       "@id": "amf://id#177",
-      "@type": [
-        "doc:TraitFragment",
-        "doc:Fragment",
-        "doc:Unit"
-      ],
-      "doc:encodes": {
-        "@id": "amf://id#114",
-        "@type": [
-          "doc:Trait",
-          "doc:AbstractDeclaration",
-          "doc:DomainElement"
-        ],
-        "doc:dataNode": {
-          "@id": "amf://id#115",
-          "@type": "data:Object",
-          "data:description": {
-            "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/scalar_2",
-            "@type": "data:Scalar",
-            "data:value": {
-              "@type": "xsd:string",
-              "@value": "Use this to mark a resource that can be changed only by users with admin level."
-            }
-          },
-          "data:responses": {
-            "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/object_3",
-            "@type": "data:Object",
-            "data:200": {
-              "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/object_3/object_4",
-              "@type": "data:Object",
-              "data:headers": {
-                "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/object_3/object_4/object_5",
-                "@type": "data:Object",
-                "data:X-Amin-Resource": {
-                  "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/object_3/object_4/object_5/object_6",
-                  "@type": "data:Object",
-                  "data:default": {
-                    "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/object_3/object_4/object_5/object_6/scalar_9",
-                    "@type": "data:Scalar",
-                    "data:value": {
-                      "@type": "xsd:boolean",
-                      "@value": "false"
-                    }
-                  },
-                  "data:description": {
-                    "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/object_3/object_4/object_5/object_6/scalar_10",
-                    "@type": "data:Scalar",
-                    "data:value": {
-                      "@type": "xsd:string",
-                      "@value": "This header is not set if the resource can be changed by non-admin users."
-                    }
-                  },
-                  "data:displayName": {
-                    "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/object_3/object_4/object_5/object_6/scalar_7",
-                    "@type": "data:Scalar",
-                    "data:value": {
-                      "@type": "xsd:string",
-                      "@value": "Admin resource mark header"
-                    }
-                  },
-                  "data:type": {
-                    "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/object_3/object_4/object_5/object_6/scalar_8",
-                    "@type": "data:Scalar",
-                    "data:value": {
-                      "@type": "xsd:string",
-                      "@value": "boolean"
-                    }
-                  }
-                }
-              }
-            },
-            "data:401": {
-              "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/object_3/object_11",
-              "@type": "data:Object",
-              "data:description": {
-                "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/object_3/object_11/scalar_12",
-                "@type": "data:Scalar",
-                "data:value": {
-                  "@type": "xsd:string",
-                  "@value": "The 401 response will be returned when trying to update the resource with\nnon-admin clerance level. Resources that requires admin privileges are marked with\n`X-Admin-Resource` header when getting the resource.\n"
-                }
-              }
-            }
-          }
-        },
-        "schema-org:name": "trait"
-      },
-      "doc:usage": "Some resources can be changed only by users with Admin clerance level. This resources will be\nmarked with the header `X-Admin-Resource` when requesting it. It means that every attemp to\nupdate the resource by non-admin user will result with 401 response.\n"
-    },
-    {
-      "@id": "amf://id#159",
-      "@type": [
-        "doc:DataType",
-        "doc:Fragment",
-        "doc:Unit"
-      ],
-      "doc:encodes": {
-        "@id": "amf://id#47",
-        "@type": [
-          "shacl:NodeShape",
-          "shacl:Shape",
-          "raml-shapes:Shape",
-          "doc:DomainElement"
-        ],
-        "doc:examples": {
-          "@id": "amf://id#48",
-          "@type": [
-            "doc:Example",
-            "doc:DomainElement"
-          ],
-          "doc:strict": true,
-          "doc:structuredValue": {
-            "@id": "amf://id#49",
-            "@type": "data:Object",
-            "data:thumb": {
-              "@id": "file://demo/demo-api/resourceTypes/image.raml#/shape/example/default-example/object_1/scalar_3",
-              "@type": "data:Scalar",
-              "data:value": {
-                "@type": "xsd:string",
-                "@value": "https://domain.com/profile/pawel.psztyc/image/thumb"
-              }
-            },
-            "data:url": {
-              "@id": "file://demo/demo-api/resourceTypes/image.raml#/shape/example/default-example/object_1/scalar_2",
-              "@type": "data:Scalar",
-              "data:value": {
-                "@type": "xsd:string",
-                "@value": "https://domain.com/profile/pawel.psztyc/image"
-              }
-            }
-          },
-          "shacl:raw": "  url: https://domain.com/profile/pawel.psztyc/image\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n"
-        },
-        "schema-org:description": "An image object representing an image object strored in the file store.\nThe image can be only included in the response. It has no effect if the Image appear in the\nrequest. Endpoint handles image creation on it's own and clients can't process images\nexcept of sending image data.\n",
-        "shacl:closed": false,
-        "shacl:name": "image",
-        "shacl:property": [
-          {
-            "@id": "amf://id#50",
-            "@type": [
-              "shacl:PropertyShape",
-              "shacl:Shape",
-              "raml-shapes:Shape"
-            ],
-            "raml-shapes:range": {
-              "@id": "amf://id#51",
-              "@type": [
-                "raml-shapes:ScalarShape",
-                "shacl:Shape",
-                "raml-shapes:Shape",
-                "doc:DomainElement"
-              ],
-              "schema-org:description": "The URL of the image.\nTo resize the image and crop it to a square, append the query string **?sz=x**, where x is the dimension in pixels of each side.\n",
-              "shacl:datatype": {
-                "@id": "xsd:string"
-              },
-              "shacl:name": "url"
-            },
-            "shacl:minCount": 1,
-            "shacl:name": "url",
-            "shacl:path": {
-              "@id": "data:url"
-            }
-          },
-          {
-            "@id": "amf://id#52",
-            "@type": [
-              "shacl:PropertyShape",
-              "shacl:Shape",
-              "raml-shapes:Shape"
-            ],
-            "raml-shapes:range": {
-              "@id": "amf://id#53",
-              "@type": [
-                "raml-shapes:ScalarShape",
-                "shacl:Shape",
-                "raml-shapes:Shape",
-                "doc:DomainElement"
-              ],
-              "schema-org:description": "An URL to the thumbnail of the image. Thumbnails are 60x60px cropped images of the original image.\n",
-              "schema-org:name": "Thumbnail",
-              "shacl:datatype": {
-                "@id": "xsd:string"
-              },
-              "shacl:name": "thumb"
-            },
-            "shacl:minCount": 1,
-            "shacl:name": "thumb",
-            "shacl:path": {
-              "@id": "data:thumb"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "@id": "amf://id#178",
-      "@type": [
-        "doc:ExternalFragment",
-        "doc:Fragment",
-        "doc:Unit"
-      ],
-      "doc:encodes": {
-        "@id": "amf://id#179",
-        "@type": [
-          "doc:ExternalDomainElement",
-          "doc:DomainElement"
-        ],
-        "doc:raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<resource error=\"false\" type=\"Product\">\n  <id>f2f7933a-a9ce-11e6-80f5-76304dec7eb7</id>\n  <name>Acme product - mentol flavor, 500 ml.</name>\n  <quantity>500</quantity>\n  <unit>ml</unit>\n  <upc>042100005264</upc>\n  <available>true</available>\n</resource>\n"
-      }
-    },
-    {
-      "@id": "amf://id#180",
-      "@type": [
-        "doc:ExternalFragment",
-        "doc:Fragment",
-        "doc:Unit"
-      ],
-      "doc:encodes": {
-        "@id": "amf://id#181",
-        "@type": [
-          "doc:ExternalDomainElement",
-          "doc:DomainElement"
-        ],
-        "doc:raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<resource error=\"true\">\n  <message>Unauthorized</message>\n</resource>\n"
-      }
-    },
-    {
-      "@id": "amf://id#182",
       "@type": [
         "doc:SecuritySchemeFragment",
         "doc:Fragment",
@@ -8385,6 +8263,128 @@
             "hydra:statusCode": "403"
           }
         ]
+      }
+    },
+    {
+      "@id": "amf://id#178",
+      "@type": [
+        "doc:ExternalFragment",
+        "doc:Fragment",
+        "doc:Unit"
+      ],
+      "doc:encodes": {
+        "@id": "amf://id#179",
+        "@type": [
+          "doc:ExternalDomainElement",
+          "doc:DomainElement"
+        ],
+        "doc:raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<resource error=\"false\" type=\"Product\">\n  <id>f2f7933a-a9ce-11e6-80f5-76304dec7eb7</id>\n  <name>Acme product - mentol flavor, 500 ml.</name>\n  <quantity>500</quantity>\n  <unit>ml</unit>\n  <upc>042100005264</upc>\n  <available>true</available>\n</resource>\n"
+      }
+    },
+    {
+      "@id": "amf://id#180",
+      "@type": [
+        "doc:TraitFragment",
+        "doc:Fragment",
+        "doc:Unit"
+      ],
+      "doc:encodes": {
+        "@id": "amf://id#114",
+        "@type": [
+          "doc:Trait",
+          "doc:AbstractDeclaration",
+          "doc:DomainElement"
+        ],
+        "doc:dataNode": {
+          "@id": "amf://id#115",
+          "@type": "data:Object",
+          "data:description": {
+            "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/scalar_2",
+            "@type": "data:Scalar",
+            "data:value": {
+              "@type": "xsd:string",
+              "@value": "Use this to mark a resource that can be changed only by users with admin level."
+            }
+          },
+          "data:responses": {
+            "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/object_3",
+            "@type": "data:Object",
+            "data:200": {
+              "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/object_3/object_4",
+              "@type": "data:Object",
+              "data:headers": {
+                "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/object_3/object_4/object_5",
+                "@type": "data:Object",
+                "data:X-Amin-Resource": {
+                  "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/object_3/object_4/object_5/object_6",
+                  "@type": "data:Object",
+                  "data:default": {
+                    "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/object_3/object_4/object_5/object_6/scalar_9",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:boolean",
+                      "@value": "false"
+                    }
+                  },
+                  "data:description": {
+                    "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/object_3/object_4/object_5/object_6/scalar_10",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:string",
+                      "@value": "This header is not set if the resource can be changed by non-admin users."
+                    }
+                  },
+                  "data:displayName": {
+                    "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/object_3/object_4/object_5/object_6/scalar_7",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:string",
+                      "@value": "Admin resource mark header"
+                    }
+                  },
+                  "data:type": {
+                    "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/object_3/object_4/object_5/object_6/scalar_8",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:string",
+                      "@value": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "data:401": {
+              "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/object_3/object_11",
+              "@type": "data:Object",
+              "data:description": {
+                "@id": "file://demo/demo-api/traits/adminable.raml#/trait/object_1/object_3/object_11/scalar_12",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "The 401 response will be returned when trying to update the resource with\nnon-admin clerance level. Resources that requires admin privileges are marked with\n`X-Admin-Resource` header when getting the resource.\n"
+                }
+              }
+            }
+          }
+        },
+        "schema-org:name": "trait"
+      },
+      "doc:usage": "Some resources can be changed only by users with Admin clerance level. This resources will be\nmarked with the header `X-Admin-Resource` when requesting it. It means that every attemp to\nupdate the resource by non-admin user will result with 401 response.\n"
+    },
+    {
+      "@id": "amf://id#181",
+      "@type": [
+        "doc:ExternalFragment",
+        "doc:Fragment",
+        "doc:Unit"
+      ],
+      "doc:encodes": {
+        "@id": "amf://id#182",
+        "@type": [
+          "doc:ExternalDomainElement",
+          "doc:DomainElement"
+        ],
+        "doc:raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\n  <xs:element name=\"resource\">\n    <xs:complexType>\n      <xs:sequence>\n        <xs:element name=\"message\" type=\"xs:string\"></xs:element>\n      </xs:sequence>\n      <xs:attribute name=\"error\" type=\"xs:boolean\" use=\"required\"/>\n    </xs:complexType>\n  </xs:element>\n</xs:schema>\n"
       }
     }
   ]
