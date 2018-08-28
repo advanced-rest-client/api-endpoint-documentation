@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
-    <title>api-request-editor demo</title>
+    <title>api-endpoint-documentation demo</title>
     <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
     <link rel="import" href="../../shadycss/apply-shim.html">
     <link rel="import" href="../../polymer/lib/elements/custom-style.html">
@@ -18,63 +18,25 @@
     <link rel="import" href="../../paper-listbox/paper-listbox.html">
     <link rel="import" href="../../neon-animation/web-animations.html">
     <link rel="import" href="../../paper-toast/paper-toast.html">
+    <link rel="import" href="../../paper-toggle-button/paper-toggle-button.html">
+    <link rel="import" href="../../oauth-authorization/oauth2-authorization.html">
+    <link rel="import" href="../../oauth-authorization/oauth1-authorization.html">
+    <link rel="import" href="../../xhr-simple-request/xhr-simple-request.html">
+    <link rel="import" href="../../iron-meta/iron-meta.html">
+    <link rel="import" href="../../api-console-default-theme/api-console-default-theme.html">
     <link rel="import" href="../api-endpoint-documentation.html">
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
-      :root {
-        --arc-font-display1: {
-          @apply --paper-font-display1;
-        };
-        --arc-font-headline: {
-          @apply --paper-font-headline;
-        };
-        --arc-font-title: {
-          @apply --paper-font-title;
-        };
-        --arc-font-subhead: {
-          @apply --paper-font-subhead;
-        };
-        --arc-font-body1: {
-          @apply --paper-font-body1;
-          word-break: break-word;
-        };
-        --arc-font-common-code: {
-          @apply --paper-font-common-code;
-          word-break: break-word !important;
-          overflow: auto;
-          white-space: pre-wrap !important;
-        };
-        --arc-font-code1: {
-          @apply --paper-font-code1;
-          word-wrap: break-word;
-          word-break: break-all;
-          overflow: auto;
-        };
-
-        --method-label-get-background-color: rgb(0, 128, 0);
-        --method-label-get-color: #fff;
-        --method-label-post-background-color: rgb(33, 150, 243);
-        --method-label-post-color: #fff;
-        --method-label-put-background-color: rgb(255, 165, 0);
-        --method-label-put-color: #fff;
-        --method-label-patch-background-color: rgb(156, 39, 176);
-        --method-label-patch-color: #fff;
-        --method-label-delete-background-color: rgb(244, 67, 54);
-        --method-label-delete-color: #fff;
-
-        --arc-link: {
-          color: #1976D2;
-        };
-      }
-
       html,
       body {
         margin: 0;
         padding: 0;
+        background-color: #fff;
       }
 
       [role="main"] {
-        max-width: 1100px;
+        max-width: none;
+        position: relative;
         @apply --layout-horizontal;
         @apply --layout-start;
       }
@@ -82,12 +44,17 @@
       api-navigation {
         width: 320px;
         min-width: 320px;
-        overflow: auto;
       }
 
-      api-endpoint-documentation {
-        margin-left: 40px;
-        @apply --layout-flex;
+      .demo-nav {
+        width: 320px;
+        height: calc(100vh - 86px);
+        overflow: auto;
+        background-color: #F5F5F5;
+      }
+
+      .info {
+        margin-left: 360px;
       }
 
       header {
@@ -98,42 +65,102 @@
         --paper-input-container-label: {
           color: #3E2723;
         };
+        @apply --layout-horizontal;
+        @apply --layout-center;
       }
 
+      .spacer {
+        @apply --layout-flex;
+      }
+
+      .options {
+        @apply --layout-horizontal;
+        @apply --layout-center;
+      }
+
+      .options > * {
+        margin-left: 8px;
+      }
+
+      .doc-container {
+        height: calc(100vh - 86px);
+        overflow: auto;
+        margin-left: 20px;
+        @apply --layout-flex;
+      }
       </style>
     </custom-style>
   </head>
   <body>
+    <iron-meta key="oauth2-client-id" value="59KaqF90hLgZMJec"></iron-meta>
     <dom-bind id="demo">
       <template is="dom-bind">
+        <raml-aware raml="{{amfModel}}" scope="model"></raml-aware>
+        <xhr-simple-request></xhr-simple-request>
+        <oauth2-authorization></oauth2-authorization>
+        <oauth1-authorization></oauth1-authorization>
         <header>
           <paper-dropdown-menu label="Select demo endpoint">
             <paper-listbox slot="dropdown-content" id="enpointsList" on-selected-changed="_apiChanged">
               <paper-item data-src="demo-api.json">Demo api</paper-item>
+              <paper-item data-src="demo-api-compact.json">Demo api - compact version</paper-item>
               <paper-item data-src="nexmo-sms-api.json">Nexmo SMS API</paper-item>
               <paper-item data-src="appian-api.json">Appian API</paper-item>
               <paper-item data-src="exchange-experience-api.json">Exchange XAPI</paper-item>
             </paper-listbox>
           </paper-dropdown-menu>
+          <div class="spacer"></div>
+          <div class="options">
+            <paper-toggle-button checked="{{narrow}}">Render narrow view</paper-toggle-button>
+            <paper-toggle-button checked="{{noTryit}}">No try it button</paper-toggle-button>
+            <paper-toggle-button checked="{{inlineMethods}}">Render full method docs</paper-toggle-button>
+          </div>
         </header>
         <div class="vertical-section-container centered" role="main">
-          <raml-aware raml="{{amfModel}}" scope="model"></raml-aware>
-          <api-navigation aware="model" endpoints-opened></api-navigation>
-          <template is="dom-if" if="[[hasData]]">
-            <api-endpoint-documentation aware="model" endpoint="[[endpoint]]" previous="[[previous]]" next="[[next]]"></api-endpoint-documentation>
-          </template>
-          <template is="dom-if" if="[[!hasData]]">
-            <p>Select a HTTP method in the navigation to see the demo.</p>
-          </template>
+
+          <nav class="demo-nav">
+            <api-navigation aware="model" endpoints-opened></api-navigation>
+          </nav>
+
+          <div class="doc-container">
+            <template is="dom-if" if="[[hasData]]">
+              <api-endpoint-documentation
+                aware="model"
+                endpoint="[[endpoint]]"
+                previous="[[previous]]"
+                next="[[next]]"
+                narrow="[[narrow]]"
+                no-try-it="[[noTryit]]"
+                inline-methods="[[inlineMethods]]"
+                selected="[[selectedShape]]"
+                scroll-target="[[scrollTarget]]"
+                redirect-uri="[[redirectUri]]"></api-endpoint-documentation>
+            </template>
+            <template is="dom-if" if="[[!hasData]]">
+              <p class="info">Select a HTTP method in the navigation to see the demo.</p>
+            </template>
+          </div>
         </div>
+
+        <demo-element id="helper" amf-model="{{amfModel}}"></demo-element>
       </template>
     </dom-bind>
     <paper-toast id="navToast"></paper-toast>
     <script>
     (function(app) {
+      const ns = ApiElements.Amf.ns;
+      class DemoElement extends ApiElements.AmfHelperMixin(Polymer.Element) {}
+      window.customElements.define('demo-element', DemoElement);
+
+      // app.redirectUri = location.href.replace(
+      //   /api-endpoint-documentation\/demo\/(index\.html)?/,
+      //   'oauth-authorization/oauth-popup.html');
+      app.redirectUri = 'https://auth.advancedrestclient.com/oauth-popup.html';
       app.hasData = false;
+      app.inlineMethods = false;
       app._load = function() {
         document.getElementById('enpointsList').selected = 0;
+        app.scrollTarget = document.querySelector('.doc-container');
       };
       app._loadFile = function(file) {
         fetch('./' + file)
@@ -154,26 +181,37 @@
           return;
         }
         const type = e.detail.type;
-        if (['endpoint'].indexOf(type) !== -1) {
-          app.setData(e.detail.selected, type);
+        const allowed = ['endpoint'];
+        if (app.inlineMethods) {
+          allowed.push('method');
+        }
+        if (allowed.indexOf(type) !== -1) {
+          app.setData(e.detail.selected, type, e.detail.endpointId);
           app.hasData = true;
         } else {
           app.hasData = false;
         }
       };
-      app.setData = function(id, type) {
-        const enc = app.amfModel[0]['http://a.ml/vocabularies/document#encodes'][0];
-        const endpoints = enc['http://a.ml/vocabularies/http#endpoint'];
-        let endpointId = type === 'endpoint' ? id : id.substr(0, id.lastIndexOf('/'));
-        for (let i = 0, len = endpoints.length; i < len; i++) {
-          let item = endpoints[i];
-          if (item['@id'] !== endpointId) {
-            continue;
+      app.setData = function(id, type, endpointId) {
+        const eId = type === 'method' ? endpointId : id;
+        if (app.endpoint) {
+          const currentId = app.endpoint['@id'];
+          if (currentId === eId) {
+            app.selectedShape = id;
+            return;
           }
-          app.endpoint = item;
-          app._setPrevious(endpoints[i - 1]);
-          app._setNext(endpoints[i + 1]);
-          break;
+        }
+        const webApi = app.$.helper._computeWebApi(app.amfModel);
+        const endpoint = app.$.helper._computeEndpointModel(webApi, eId);
+        app.endpoint = endpoint;
+        app.selectedShape = id;
+        const endpoints = app.$.helper._computeEndpoints(webApi);
+        for (let i = 0, len = endpoints.length; i < len; i++) {
+          if (endpoints[i]['@id'] === eId) {
+            app._setPrevious(endpoints[i - 1]);
+            app._setNext(endpoints[i + 1]);
+            break;
+          }
         }
       };
       app._setPrevious = function(item) {
@@ -181,11 +219,9 @@
           app.previous = undefined;
           return;
         }
-        let name;
-        if ('http://schema.org/name' in item) {
-          name = item['http://schema.org/name'][0]['@value'];
-        } else {
-          name = item['http://a.ml/vocabularies/http#path'][0]['@value'];
+        let name = app.$.helper._getValue(item, ns.schema.schemaName);
+        if (!name) {
+          name = app.$.helper._getValue(item, ns.raml.vocabularies.http + 'path');
         }
         app.previous = {
           id: item['@id'],
@@ -197,11 +233,9 @@
           app.next = undefined;
           return;
         }
-        let name;
-        if ('http://schema.org/name' in item) {
-          name = item['http://schema.org/name'][0]['@value'];
-        } else {
-          name = item['http://a.ml/vocabularies/http#path'][0]['@value'];
+        let name = app.$.helper._getValue(item, ns.schema.schemaName);
+        if (!name) {
+          name = app.$.helper._getValue(item, ns.raml.vocabularies.http + 'path');
         }
         app.next = {
           id: item['@id'],

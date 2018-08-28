@@ -16,11 +16,17 @@
 /// <reference path="../iron-flex-layout/iron-flex-layout.d.ts" />
 /// <reference path="../api-annotation-document/api-annotation-document.d.ts" />
 /// <reference path="../api-parameters-document/api-parameters-document.d.ts" />
+/// <reference path="../api-method-documentation/api-method-documentation.d.ts" />
 /// <reference path="../markdown-styles/markdown-styles.d.ts" />
 /// <reference path="../marked-element/marked-element.d.ts" />
 /// <reference path="../amf-helper-mixin/amf-helper-mixin.d.ts" />
 /// <reference path="../clipboard-copy/clipboard-copy.d.ts" />
 /// <reference path="../paper-icon-button/paper-icon-button.d.ts" />
+/// <reference path="../api-request-panel/api-request-panel.d.ts" />
+/// <reference path="../iron-collapse/iron-collapse.d.ts" />
+/// <reference path="../http-code-snippets/http-code-snippets.d.ts" />
+/// <reference path="../api-view-model-transformer/api-view-model-transformer.d.ts" />
+/// <reference path="../arc-icons/arc-icons.d.ts" />
 
 declare namespace ApiElements {
 
@@ -48,10 +54,12 @@ declare namespace ApiElements {
    *
    * To update base URI value either update `baseUri` property or use
    * `iron-meta` with key `ApiBaseUri`. First method is easier but the second
-   * gives much more flexibility since it use a [monostate pattern](http://wiki.c2.com/?MonostatePattern)
+   * gives much more flexibility since it use a
+   * [monostate pattern](http://wiki.c2.com/?MonostatePattern)
    * to manage base URI property.
    *
-   * When the component constructs the funal URI for the endpoint it does the following:
+   * When the component constructs the funal URI for the endpoint it does the
+   * following:
    * - if `baseUri` is set it uses this value as a base uri for the endpoint
    * - else if `iron-meta` with key `ApiBaseUri` exists and contains a value
    * it uses it uses this value as a base uri for the endpoin
@@ -76,7 +84,8 @@ declare namespace ApiElements {
    *
    * ## Styling
    *
-   * `<api-endpoint-documentation>` provides the following custom properties and mixins for styling:
+   * `<api-endpoint-documentation>` provides the following custom properties
+   * and mixins for styling:
    *
    * Custom property | Description | Default
    * ----------------|-------------|----------
@@ -84,10 +93,11 @@ declare namespace ApiElements {
    * `--arc-font-headline` | Theme mixin, Applied to h1 element (title) | `{}`
    * `--arc-font-code1` | Theme mixin, applied to the URL area | `{}`
    * `--api-endpoint-documentation-url-font-size` | Font size of endpoin URL | `16px`
-   * `--api-endpoint-documentation-url-background-color` | Background color of the URL section | `#424242`
+   * `--api-endpoint-documentation-url-background-color` | Background color of
+   * the URL section | `#424242`
    * `--api-endpoint-documentation-url-font-color` | Font color of the URL area | `#fff`
-   * `--api-endpoint-documentation-bottom-navigation-border-color` | Color of the top border of the bottom navigartion | `#546E7A`
-   * `--api-endpoint-documentation-bottom-navigation-color` | Color of of the bottom navigartion (icon + text) | `#546E7A`
+   * `--api-endpoint-documentation-bottom-navigation-color` | Color of of the
+   * bottom navigartion (icon + text) | `#546E7A`
    */
   class ApiEndpointDocumentation extends
     ApiElements.AmfHelperMixin(
@@ -115,10 +125,33 @@ declare namespace ApiElements {
     endpoint: object|null|undefined;
 
     /**
+     * The ID in `amfModel` of current selection. It can be this endpoint
+     * or any of methods
+     */
+    selected: string|null|undefined;
+
+    /**
      * A property to set to override AMF's model base URI information.
      * When this property is set, the `endpointUri` property is recalculated.
      */
     baseUri: string|null|undefined;
+
+    /**
+     * Computed value, API version name
+     */
+    readonly apiVersion: string|null|undefined;
+
+    /**
+     * Endpoint URI to display in main URL field.
+     * This value is computed when `amfModel`, `endpoint` or `baseUri` change.
+     */
+    readonly endpointUri: string|null|undefined;
+
+    /**
+     * Computed value of the `http://raml.org/vocabularies/http#server`
+     * from `amfModel`
+     */
+    readonly server: object|null|undefined;
 
     /**
      * Endpoint name.
@@ -228,6 +261,16 @@ declare namespace ApiElements {
     readonly hasPagination: boolean|null|undefined;
 
     /**
+     * Scroll target used to observe `scroll` event.
+     * When set the element will observe scroll and inform other components
+     * about changes in navigation while scrolling through methods list.
+     * The navigation event contains `passive: true` property that
+     * determines that it's not user triggered navigation but rather
+     * context enforced.
+     */
+    scrollTarget: object|null|undefined;
+
+    /**
      * Passing value of `noTryIt` to the method documentation.
      * Hiddes "Try it" button from the view.
      */
@@ -242,6 +285,36 @@ declare namespace ApiElements {
      * Computed value if the endpoint contains operations.
      */
     readonly hasOperations: boolean|null|undefined;
+
+    /**
+     * If set then it renders methods documentation inline with
+     * the endpoint documentation.
+     * When it's not set (or value is `false`, default) then it renders
+     * just a list of methods with links.
+     */
+    inlineMethods: boolean|null|undefined;
+
+    /**
+     * In inline mode, passes the `noUrlEditor` value on the
+     * `api-request-paqnel`
+     */
+    noUrlEditor: boolean|null|undefined;
+
+    /**
+     * OAuth2 redirect URI.
+     * This value **must** be set in order for OAuth 1/2 to work properly.
+     * This is only required in inline mode (`inlineMethods`).
+     */
+    redirectUri: string|null|undefined;
+    readonly _editorEventTarget: object|null|undefined;
+
+    /**
+     * Tries to find an example value (whether it's default value or from an
+     * example) to put it into snippet's values.
+     *
+     * @param item A http://raml.org/vocabularies/http#Parameter property
+     */
+    _computePropertyValue(item: object|null): String|null|undefined;
 
     /**
      * Computes method's endpoint name.
@@ -335,8 +408,159 @@ declare namespace ApiElements {
      *
      * @param endpoint Endpoint model.
      */
-    _computeOperations(endpoint: object|null): Array<object|null>|null;
+    _computeOperations(endpoint: object|null, inlineMethods: any): Array<object|null>|null;
     _methodNavigate(e: any): void;
+
+    /**
+     * Handles scroll target chane and adds scroll event.
+     *
+     * @param st The scroll target.
+     */
+    _scrollTargetChanged(st: Node|null): void;
+
+    /**
+     * Scroll handler for `scrollTarget`.
+     * It does not stall main thred by executing the action after nex render.
+     */
+    _scrollHandler(): void;
+
+    /**
+     * I hope this won't be required in final version :(
+     */
+    _checkMethodsPosition(): void;
+
+    /**
+     * Function that checks if an `element` is in the main scrolling area.
+     *
+     * @param targetHeigth Height (visible) of the scroll target
+     * @param scrollHeigth Height of the scroll target
+     * @param dir Direction where the scroll is going (up or down)
+     * @param element The node to test
+     * @returns True when it determines that the element is in the main
+     * scroll area,
+     */
+    _occupiesMainScrollArea(targetHeigth: Number|null, scrollHeigth: Number|null, dir: String|null, element: Node|null): Boolean|null;
+
+    /**
+     * Dispatches `api-navigation-selection-changed` custom event with
+     * `passive: true` set on the detail object.
+     * Listeners should not react on this event except for the ones that
+     * should reflect passive navigation change.
+     *
+     * @param selected Id of selected method as in AMF model.
+     */
+    _notifyPassiveNavigation(selected: String|null): void;
+
+    /**
+     * Hadnler for either `selected` or `endpoint proerty change`
+     *
+     * @param selected Currently selected shape ID in AMF model
+     * @param endpoint AMF model for the endpoint.
+     * @param inlineMethods True if methods documentation is included
+     */
+    _selectedChanged(selected: String|null, endpoint: object|null, inlineMethods: Boolean|null): void;
+
+    /**
+     * Positions the method (operation) or endpoint (main title).
+     *
+     * @param id Selected AMF id.
+     */
+    _repositionVerb(id: String|null): void;
+    _computeOperationId(item: any): any;
+
+    /**
+     * Computes a label for the section toggle buttons.
+     */
+    _computeToggleActionLabel(opened: any): any;
+
+    /**
+     * Computes class for the toggle's button icon.
+     */
+    _computeToggleIconClass(opened: any): any;
+
+    /**
+     * Computes example headers string for code snippets.
+     *
+     * @param method Method (operation) model
+     * @returns Computed example value for headers
+     */
+    _computeSnippetsHeaders(method: any[]|null): String|undefind|null;
+
+    /**
+     * Computes example payload string for code snippets.
+     *
+     * @param method Method (operation) model
+     * @returns Computed example value for payload
+     */
+    _computeSnippetsPayload(method: any[]|null): String|undefind|null;
+
+    /**
+     * Computes value for `httpMethod` property.
+     *
+     * @param method AMF `supportedOperation` model
+     * @returns HTTP method name
+     */
+    _computeHttpMethod(method: object|null): String|null|undefined;
+    _toggleSnippets(e: any): void;
+    _toggleRequestPanel(e: any): void;
+
+    /**
+     * A handler for the `inlineMethods` property change.
+     * When set it automatically disables the try it button.
+     */
+    _inlineMethodsChanged(value: any): void;
+
+    /**
+     * The try it panel is not rendered at start time when the user initializes
+     * the endpoint documentation to reduce number of computations happening
+     * at the same time. When `dom-repeat` renders all documentation
+     * panels it calls this function which initializes requests panels one
+     * by one in the tasks scheduler.
+     */
+    _operationRendered(): void;
+
+    /**
+     * Renders next try it panel from the NodeList
+     *
+     * @param queue Node list of `dom-if`'s with the panel
+     * @param index Currently iterated item.
+     */
+    _renderTryItQueue(queue: NodeList|null, index: Number|null): void;
+
+    /**
+     * Request editor handles events when it's state changes. But the change
+     * may influence other editors visible on the same page (eg URL change).
+     * When the request panel is rendered it sets events target of the panel
+     * to the panel so it won't listen for changes in other editors.
+     */
+    _tryItRendered(e: any): void;
+
+    /**
+     * Clears try it panels from the view when endpoint changes
+     */
+    _selectedUpdated(value: String|null, old: String|null): void;
+
+    /**
+     * Computes endpoint ID from given id.
+     * If the id is already an endpoint id it returns the same string.
+     *
+     * @param id Id to transform
+     * @returns ID that is an endpoint ID.
+     */
+    _endpointIdFromId(id: String|null): String|null;
+
+    /**
+     * Sets `false` on try it condition templae.
+     */
+    _clearRequestPanels(): void;
+
+    /**
+     * Computes special class names for the method container.
+     * It adds `first`, and `last` names to corresponding
+     * containers.
+     */
+    _computeTryItColumClass(index: any, operations: any): any;
+    _computeTryItSelected(item: any): any;
   }
 }
 
