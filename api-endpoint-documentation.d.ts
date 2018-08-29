@@ -351,7 +351,7 @@ declare namespace ApiElements {
     _computePath(endpoint: object|null): String|null;
 
     /**
-     * Computes `ectendsTypes`
+     * Computes `extendsTypes`
      *
      * @param shape AMF shape to get `#extends` model
      */
@@ -386,12 +386,12 @@ declare namespace ApiElements {
     _computeTraits(types: Array<object|null>|null): Array<object|null>|null|undefined;
 
     /**
-     * Computes name of a trait.
+     * Computes list of trait names to render it in the doc.
      *
-     * @param trait AMF trait definition
+     * @param traits AMF trait definition
      * @returns Trait name if defined.
      */
-    _computeTraitName(trait: object|null): String|null|undefined;
+    _computeTraitNames(traits: Array<object|null>|null): String|null|undefined;
 
     /**
      * Computes value for `hasExtension` property
