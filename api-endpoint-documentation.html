@@ -308,17 +308,13 @@
 
     <template is="dom-if" if="[[hasExtension]]">
       <section class="extensions">
-        <span>Extends </span>
         <template is="dom-if" if="[[hasParentType]]">
-          <span class="resource-type-name" title="Resource type applied to this endpoint">[[parentTypeName]]</span>
+          <span>Implements </span>
+          <span class="resource-type-name" title="Resource type applied to this endpoint">[[parentTypeName]]</span>.
         </template>
         <template is="dom-if" if="[[hasTraits]]">
-          <template is="dom-if" if="[[hasParentType]]">
-            <span class="ex-with">with</spane>
-          </template>
-          <template is="dom-repeat" items="[[traits]]">
-            <span class="trait-name" title="A trait applied to this endpoint">[[_computeTraitName(item)]]</span>
-          </template>
+          <span>Mixes in </spane>
+          <span class="trait-name">[[_computeTraitNames(traits)]]</span>.
         </template>
       </section>
     </template>
@@ -821,7 +817,7 @@
       return this._getValue(endpoint, this.ns.raml.vocabularies.http + 'path');
     }
     /**
-     * Computes `ectendsTypes`
+     * Computes `extendsTypes`
      *
      * @param {Object} shape AMF shape to get `#extends` model
      * @return {Array<Object>|undefined}
@@ -876,13 +872,20 @@
       return data.length ? data : undefined;
     }
     /**
-     * Computes name of a trait.
+     * Computes list of trait names to render it in the doc.
      *
-     * @param {Object} trait AMF trait definition
+     * @param {Array<Object>} traits AMF trait definition
      * @return {String|undefined} Trait name if defined.
      */
-    _computeTraitName(trait) {
-      return this._getValue(trait, this.ns.schema.schemaName);
+    _computeTraitNames(traits) {
+      if (!traits || !traits.length) {
+        return;
+      }
+      const names = traits.map((trait) => this._getValue(trait, this.ns.schema.schemaName));
+      if (names.length === 2) {
+        return names.join(' and ');
+      }
+      return names.join(', ');
     }
     /**
      * Computes value for `hasExtension` property
