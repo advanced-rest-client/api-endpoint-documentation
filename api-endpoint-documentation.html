@@ -15,7 +15,7 @@
 <link rel="import" href="../api-request-panel/api-request-panel.html">
 <link rel="import" href="../iron-collapse/iron-collapse.html">
 <link rel="import" href="../http-code-snippets/http-code-snippets.html">
-<link rel="import" href="../api-view-model-transformer/api-view-model-transformer.html">
+<link rel="import" href="../api-example-generator/api-example-generator.html">
 <link rel="import" href="../arc-icons/arc-icons.html">
 
 <dom-module id="api-endpoint-documentation">
@@ -425,7 +425,7 @@
         </template>
       </section>
     </template>
-    <api-view-model-transformer id="transformer"></api-view-model-transformer>
+    <api-example-generator amf-model="[[amfModel]]" id="exampleGenerator"></api-example-generator>
   </template>
   <script>
   /**
@@ -1213,25 +1213,32 @@
     }
     /**
      * Computes example payload string for code snippets.
-     * @param {Array} method Method (operation) model
+     * @param {Array} payload Payload model from AMF
      * @return {String|undefind} Computed example value for payload
      */
-    _computeSnippetsPayload(method) {
-      if (!method) {
-        return;
-      }
-      const expects = this._computeExpects(method);
-      if (!expects) {
-        return;
-      }
-      let payload = this._computePayload(expects);
+    _computeSnippetsPayload(payload) {
       if (!payload) {
         return;
       }
       if (payload instanceof Array) {
         payload = payload[0];
       }
-      return this.$.transformer.bodyToExample(payload);
+      if (!payload) {
+        return;
+      }
+      const skey = this._getAmfKey(this.ns.raml.vocabularies.http + 'schema');
+      let schema = payload[skey];
+      if (!schema) {
+        return;
+      }
+      if (schema instanceof Array) {
+        schema = schema[0];
+      }
+      let mt = this._getValue(payload, this.ns.raml.vocabularies.http + 'mediaType');
+      if (!mt) {
+        mt = 'application/json';
+      }
+      return this.$.exampleGenerator.computeExample(mt, schema);
     }
     /**
      * Tries to find an example value (whether it's default value or from an
