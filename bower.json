@@ -27,7 +27,7 @@
     "api-request-panel": "advanced-rest-client/api-request-panel#^2.0.2",
     "iron-collapse": "PolymerElements/iron-collapse#^2.2.0",
     "http-code-snippets": "advanced-rest-client/http-code-snippets#^2.0.0",
-    "api-view-model-transformer": "advanced-rest-client/api-view-model-transformer#^2.0.2"
+    "api-example-generator": "advanced-rest-client/api-example-generator#^2.0.0"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
