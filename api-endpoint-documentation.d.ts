@@ -25,7 +25,7 @@
 /// <reference path="../api-request-panel/api-request-panel.d.ts" />
 /// <reference path="../iron-collapse/iron-collapse.d.ts" />
 /// <reference path="../http-code-snippets/http-code-snippets.d.ts" />
-/// <reference path="../api-view-model-transformer/api-view-model-transformer.d.ts" />
+/// <reference path="../api-example-generator/api-example-generator.d.ts" />
 /// <reference path="../arc-icons/arc-icons.d.ts" />
 
 declare namespace ApiElements {
@@ -499,10 +499,10 @@ declare namespace ApiElements {
     /**
      * Computes example payload string for code snippets.
      *
-     * @param method Method (operation) model
+     * @param payload Payload model from AMF
      * @returns Computed example value for payload
      */
-    _computeSnippetsPayload(method: any[]|null): String|undefind|null;
+    _computeSnippetsPayload(payload: any[]|null): String|undefind|null;
 
     /**
      * Computes value for `httpMethod` property.
