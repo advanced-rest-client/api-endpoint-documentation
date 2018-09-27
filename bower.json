@@ -1,7 +1,7 @@
 {
   "name": "api-endpoint-documentation",
   "description": "A component to generate documentation for a resource from AMF model",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "license": "Apache-2.0",
   "main": "api-endpoint-documentation.html",
   "keywords": [
@@ -27,7 +27,8 @@
     "api-request-panel": "advanced-rest-client/api-request-panel#^2.0.2",
     "iron-collapse": "PolymerElements/iron-collapse#^2.2.0",
     "http-code-snippets": "advanced-rest-client/http-code-snippets#^2.0.0",
-    "api-example-generator": "advanced-rest-client/api-example-generator#^2.0.0"
+    "api-example-generator": "advanced-rest-client/api-example-generator#^2.0.0",
+    "http-method-label": "advanced-rest-client/http-method-label#^2.0.2"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
@@ -45,6 +46,7 @@
     "paper-toggle-button": "PolymerElements/paper-toggle-button#^2.1.1",
     "oauth-authorization": "advanced-rest-client/oauth-authorization#^2.0.1",
     "xhr-simple-request": "advanced-rest-client/xhr-simple-request#^2.0.0",
+    "anypoint-styles": "mulesoft-labs/anypoint-styles#master",
     "api-console-default-theme": "advanced-rest-client/api-console-default-theme#5.0.0-preview"
   },
   "repository": {

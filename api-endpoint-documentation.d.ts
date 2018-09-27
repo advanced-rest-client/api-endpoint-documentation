@@ -27,6 +27,7 @@
 /// <reference path="../http-code-snippets/http-code-snippets.d.ts" />
 /// <reference path="../api-example-generator/api-example-generator.d.ts" />
 /// <reference path="../arc-icons/arc-icons.d.ts" />
+/// <reference path="../http-method-label/http-method-label-common-styles.d.ts" />
 
 declare namespace ApiElements {
 

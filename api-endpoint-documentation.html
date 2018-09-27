@@ -17,10 +17,11 @@
 <link rel="import" href="../http-code-snippets/http-code-snippets.html">
 <link rel="import" href="../api-example-generator/api-example-generator.html">
 <link rel="import" href="../arc-icons/arc-icons.html">
-
+<link rel="import" href="../http-method-label/http-method-label-common-styles.html">
 <dom-module id="api-endpoint-documentation">
   <template>
     <style include="markdown-styles"></style>
+    <style include="http-method-label-common-styles"></style>
     <style>
     :host {
       display: block;
@@ -115,38 +116,7 @@
     }
 
     .method-label {
-      display: inline-block;
-      margin-right: 8px;
-      padding: 2px 8px;
-      background-color: var(--api-method-documentation-method-label-background-color, transparent);
-      text-transform: uppercase;
-      border-radius: var(--api-method-documentation-method-label-border-radius, 3px);
-      font-weight: var(--method-display-font-weigth, 400);
-    }
-
-    .method-label[data-method="get"] {
-      background-color: var(--method-label-get-background-color);
-      color: var(--method-label-get-color);
-    }
-
-    .method-label[data-method="post"] {
-      background-color: var(--method-label-post-background-color);
-      color: var(--method-label-post-color);
-    }
-
-    .method-label[data-method="delete"] {
-      background-color: var(--method-label-delete-background-color);
-      color: var(--method-label-delete-color);
-    }
-
-    .method-label[data-method="put"] {
-      background-color: var(--method-label-put-background-color);
-      color: var(--method-label-put-color);
-    }
-
-    .method-label[data-method="patch"] {
-      background-color: var(--method-label-patch-background-color);
-      color: var(--method-label-patch-color);
+      margin-bottom: 0px;
     }
 
     .method-anchor {
