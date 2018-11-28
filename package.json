@@ -9,7 +9,7 @@
     "The Advanced REST client authors <arc@mulesoft.com>"
   ],
   "devDependencies": {
-    "@api-components/api-model-generator": "^0.1.1",
+    "@api-components/api-model-generator": "^0.1.5",
     "@polymer/gen-typescript-declarations": "^1.5.1"
   },
   "private": false,
