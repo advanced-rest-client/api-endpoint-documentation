@@ -934,7 +934,7 @@
     _methodNavigate(e) {
       e.stopPropagation();
       e.preventDefault();
-      const target = e.path.find((node) => node.nodeName === 'A');
+      const target = e.composedPath().find((node) => node.nodeName === 'A');
       const id = target.dataset.apiId;
       this._navigate(id, 'method');
     }
