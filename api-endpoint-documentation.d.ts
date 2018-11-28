@@ -104,11 +104,17 @@ declare namespace ApiElements {
    * `--arc-font-headline` | Theme mixin, Applied to h1 element (title) | `{}`
    * `--arc-font-code1` | Theme mixin, applied to the URL area | `{}`
    * `--api-endpoint-documentation-url-font-size` | Font size of endpoin URL | `16px`
-   * `--api-endpoint-documentation-url-background-color` | Background color of
-   * the URL section | `#424242`
+   * `--api-endpoint-documentation-url-background-color` | Background color of the URL section | `#424242`
    * `--api-endpoint-documentation-url-font-color` | Font color of the URL area | `#fff`
-   * `--api-endpoint-documentation-bottom-navigation-color` | Color of of the
-   * bottom navigartion (icon + text) | `#546E7A`
+   * `--api-endpoint-documentation-bottom-navigation-color` | Color of of the bottom navigartion (icon + text) | `#000`
+   * `--api-endpoint-documentation-tryit-background-color` | Background color of inlined "try it" panel | `#ECEFF1`
+   * `--api-endpoint-documentation-method-doc-border-top-color` | Method doc top border color |  `#E5E5E5`
+   * `--api-endpoint-documentation-method-doc-border-top-style` | Method doc top border style | `dashed`
+   * `--api-endpoint-documentation-tryit-panels-background-color` | Bg color of try it panels | `#fff`
+   * `--api-endpoint-documentation-tryit-panels-border-radius` | Try it panels border radius | `3px`
+   * `--api-endpoint-documentation-tryit-panels-border-color` | Try it panels border color | `#EEEEEE`
+   * `--api-endpoint-documentation-tryit-panels-border-style` | Try it panels border style | `solid`
+   * `--api-endpoint-documentation-tryit-section-title`
    */
   class ApiEndpointDocumentation extends
     ApiElements.AmfHelperMixin(
