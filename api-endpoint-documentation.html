@@ -53,7 +53,7 @@
 
     .markdown-body {
       margin-bottom: 28px;
-      color: rgba(0, 0, 0, 0.74);
+      color: var(--api-endpoint-documentation-description-color, rgba(0, 0, 0, 0.74));
       @apply --arc-font-body1;
     }
 
@@ -145,6 +145,9 @@
 
     .method-container {
       @apply --layout-horizontal;
+      padding: 24px 0;
+      box-sizing: border-box;
+      border-top: 2px var(--api-endpoint-documentation-method-doc-border-top-color, #E5E5E5) var(--api-endpoint-documentation-method-doc-border-top-style, dashed);
     }
 
     :host([narrow]) .method-container {
@@ -152,22 +155,16 @@
     }
 
     .method-container api-method-documentation {
-      /* @apply --layout-flex; */
-      width: 60%;
-      max-width: 900px;
-      border-top: 2px #E5E5E5 solid;
+      width: var(--api-endpoint-documentation-method-doc-width, 60%);
+      max-width: var(--api-endpoint-documentation-method-doc-max-width, 900px);
       padding-right: 12px;
       box-sizing: border-box;
     }
 
     .method-container .try-it-column {
-      /* @apply --layout-flex; */
-      width: 40%;
-      max-width: 600px;
-      background-color: #ECEFF1;
-      border: 1px #B0BEC5 solid;
-      border-top: 2px #B0BEC5 solid;
-      border-bottom: none;
+      width: var(--api-endpoint-documentation-tryit-width, 40%);
+      max-width: var(--api-endpoint-documentation-tryit-max-width, 600px);
+      background-color: var(--api-endpoint-documentation-tryit-background-color, #ECEFF1);
     }
 
     :host([narrow]) .method-container api-method-documentation,
@@ -179,41 +176,14 @@
       padding: 0;
     }
 
-    .method-container.first api-method-documentation,
-    .method-container.first .try-it-column {
-      border-top-width: 1px;
-    }
-
-    .method-container.first api-method-documentation {
-      border-top-left-radius: 3px;
-    }
-
-    .method-container.first .try-it-column {
-      border-top-color: #B0BEC5;
-    }
-
-    .first .try-it-column {
-      border-top-right-radius: 3px;
-    }
-
-    .last .try-it-column {
-      border-bottom-right-radius: 3px;
-      border-bottom: 1px #B0BEC5 solid;
-    }
-
-    .last api-method-documentation {
-      border-bottom-left-radius: 3px;
-      border-bottom: 1px #E5E5E5 solid;
-    }
-
     .try-it-column api-request-panel,
     .try-it-column http-code-snippets {
       margin: 12px;
       padding: 8px;
-      background-color: #fff;
+      background-color: var(--api-endpoint-documentation-tryit-panels-background-color, #fff);
       box-sizing: border-box;
-      border-radius: 3px;
-      border: 1px #EEEEEE solid;
+      border-radius: var(--api-endpoint-documentation-tryit-panels-border-radius, 3px);
+      border: 1px var(--api-endpoint-documentation-tryit-panels-border-color, #EEEEEE) var(--api-endpoint-documentation-tryit-panels-border-style, solid);
     }
 
     .try-it-column h3 {
@@ -227,7 +197,7 @@
     .section-title-area {
       @apply --layout-horizontal;
       @apply --layout-center;
-      border-bottom: 1px #bac6cb solid;
+      border-bottom: 1px var(--api-endpoint-documentation-tryit-title-border-bottom-color, #bac6cb) var(--api-endpoint-documentation-tryit-title-border-bottom-style, solid);
       cursor: pointer;
       -webkit-user-select: none;
       -moz-user-select: none;
@@ -283,7 +253,7 @@
           <span class="resource-type-name" title="Resource type applied to this endpoint">[[parentTypeName]]</span>.
         </template>
         <template is="dom-if" if="[[hasTraits]]">
-          <span>Mixes in </spane>
+          <span>Mixes in </span>
           <span class="trait-name">[[_computeTraitNames(traits)]]</span>.
         </template>
       </section>
@@ -293,7 +263,7 @@
     </template>
     <template is="dom-if" if="[[description]]">
       <marked-element markdown="[[description]]">
-        <div slot="markdown-html" class="markdown-bpaper-icon-buttonody"></div>
+        <div slot="markdown-html" class="markdown-body"></div>
       </marked-element>
     </template>
 
@@ -471,11 +441,17 @@
    * `--arc-font-headline` | Theme mixin, Applied to h1 element (title) | `{}`
    * `--arc-font-code1` | Theme mixin, applied to the URL area | `{}`
    * `--api-endpoint-documentation-url-font-size` | Font size of endpoin URL | `16px`
-   * `--api-endpoint-documentation-url-background-color` | Background color of
-   * the URL section | `#424242`
+   * `--api-endpoint-documentation-url-background-color` | Background color of the URL section | `#424242`
    * `--api-endpoint-documentation-url-font-color` | Font color of the URL area | `#fff`
-   * `--api-endpoint-documentation-bottom-navigation-color` | Color of of the
-   * bottom navigartion (icon + text) | `#546E7A`
+   * `--api-endpoint-documentation-bottom-navigation-color` | Color of of the bottom navigartion (icon + text) | `#000`
+   * `--api-endpoint-documentation-tryit-background-color` | Background color of inlined "try it" panel | `#ECEFF1`
+   * `--api-endpoint-documentation-method-doc-border-top-color` | Method doc top border color |  `#E5E5E5`
+   * `--api-endpoint-documentation-method-doc-border-top-style` | Method doc top border style | `dashed`
+   * `--api-endpoint-documentation-tryit-panels-background-color` | Bg color of try it panels | `#fff`
+   * `--api-endpoint-documentation-tryit-panels-border-radius` | Try it panels border radius | `3px`
+   * `--api-endpoint-documentation-tryit-panels-border-color` | Try it panels border color | `#EEEEEE`
+   * `--api-endpoint-documentation-tryit-panels-border-style` | Try it panels border style | `solid`
+   * `--api-endpoint-documentation-tryit-section-title`
    *
    * @customElement
    * @polymer
@@ -958,7 +934,7 @@
     _methodNavigate(e) {
       e.stopPropagation();
       e.preventDefault();
-      const target = e.path.find((node) => node.nodeName === 'A');
+      const target = e.composedPath().find((node) => node.nodeName === 'A');
       const id = target.dataset.apiId;
       this._navigate(id, 'method');
     }

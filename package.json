@@ -1,7 +1,7 @@
 {
   "name": "@api-components/api-endpoint-documentation",
   "description": "A component to generate documentation for a resource from AMF model",
-  "version": "2.0.11",
+  "version": "2.0.12",
   "license": "Apache-2.0",
   "main": "api-endpoint-documentation.html",
   "authors": [
@@ -9,7 +9,7 @@
     "The Advanced REST client authors <arc@mulesoft.com>"
   ],
   "devDependencies": {
-    "@api-components/api-model-generator": "^0.1.1",
+    "@api-components/api-model-generator": "^0.1.5",
     "@polymer/gen-typescript-declarations": "^1.5.1"
   },
   "private": false,

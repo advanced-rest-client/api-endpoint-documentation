@@ -88,6 +88,10 @@
         margin-left: 20px;
         @apply --layout-flex;
       }
+
+      api-endpoint-documentation {
+        max-width: 1500px;
+      }
       </style>
     </custom-style>
   </head>
@@ -148,10 +152,6 @@
     <paper-toast id="navToast"></paper-toast>
     <script>
     (function(app) {
-      const ns = ApiElements.Amf.ns;
-      class DemoElement extends ApiElements.AmfHelperMixin(Polymer.Element) {}
-      window.customElements.define('demo-element', DemoElement);
-
       // app.redirectUri = location.href.replace(
       //   /api-endpoint-documentation\/demo\/(index\.html)?/,
       //   'oauth-authorization/oauth-popup.html');
@@ -159,6 +159,8 @@
       app.hasData = false;
       app.inlineMethods = false;
       app._load = function() {
+        class DemoElement extends ApiElements.AmfHelperMixin(Polymer.Element) {}
+        window.customElements.define('demo-element', DemoElement);
         document.getElementById('enpointsList').selected = 0;
         app.scrollTarget = document.querySelector('.doc-container');
       };
@@ -219,6 +221,7 @@
           app.previous = undefined;
           return;
         }
+        const ns = ApiElements.Amf.ns;
         let name = app.$.helper._getValue(item, ns.schema.schemaName);
         if (!name) {
           name = app.$.helper._getValue(item, ns.raml.vocabularies.http + 'path');
@@ -233,6 +236,7 @@
           app.next = undefined;
           return;
         }
+        const ns = ApiElements.Amf.ns;
         let name = app.$.helper._getValue(item, ns.schema.schemaName);
         if (!name) {
           name = app.$.helper._getValue(item, ns.raml.vocabularies.http + 'path');
