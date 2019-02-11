@@ -1163,28 +1163,29 @@
      * @return {String|undefind} Computed example value for payload
      */
     _computeSnippetsPayload(payload) {
-      if (!payload) {
-        return;
+      if (payload && payload instanceof Array) {
+        payload = payload[0];
       }
-      if (payload instanceof Array) {
+      if (this._hasType(payload, this.ns.w3.hydra.core + 'Operation')) {
+        const expects = this._computeExpects(payload);
+        payload = this._computePayload(expects);
+      }
+      if (payload && payload instanceof Array) {
         payload = payload[0];
       }
       if (!payload) {
         return;
       }
-      const skey = this._getAmfKey(this.ns.raml.vocabularies.http + 'schema');
-      let schema = payload[skey];
-      if (!schema) {
-        return;
-      }
-      if (schema instanceof Array) {
-        schema = schema[0];
-      }
+
       let mt = this._getValue(payload, this.ns.raml.vocabularies.http + 'mediaType');
       if (!mt) {
         mt = 'application/json';
       }
-      return this.$.exampleGenerator.computeExample(mt, schema);
+      const examples = this.$.exampleGenerator.generatePayloadExamples(payload, mt, {});
+      if (!examples || !examples[0]) {
+        return;
+      }
+      return examples[0].value;
     }
     /**
      * Tries to find an example value (whether it's default value or from an
