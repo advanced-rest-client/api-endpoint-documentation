@@ -30,6 +30,20 @@
   </test-fixture>
 
   <script>
+  /* global AmfLoader */
+
+  function getEndpoint(element, amf, endpoint) {
+    const webApi = element._computeWebApi(amf);
+    return element._computeEndpointByPath(webApi, endpoint);
+  }
+
+  function getMethod(element, amf, endpoint, method) {
+    const endPoint = getEndpoint(element, amf, endpoint);
+    const opKey = element._getAmfKey(element.ns.w3.hydra.supportedOperation);
+    const ops = element._ensureArray(endPoint[opKey]);
+    return ops.find((item) => element._getValue(item, element.ns.w3.hydra.core + 'method') === method);
+  }
+
   suite('api-endpoint-documentation', () => {
     suite('Basic', () => {
       test('Adds raml-aware to the DOM if aware is set', (done) => {
@@ -77,265 +91,383 @@
         });
       });
     });
-    /* global AmfLoader */
-    suite('Full AMF model', () => {
-      let element;
-      let amf;
-      let endpoint;
-      suiteSetup(() => {
-        return AmfLoader.load(0)
-        .then((data) => {
-          amf = data[0];
-          endpoint = data[1];
-        });
-      });
 
-      suite('Computations', () => {
-        suiteSetup((done) => {
-          element = fixture('Basic');
-          element.amfModel = amf;
-          element.endpoint = endpoint;
-          flush(() => done());
-        });
-
-        test('endpointName is computed', () => {
-          assert.equal(element.endpointName, 'People');
-        });
-
-        test('path is computed', () => {
-          assert.equal(element.path, '/people');
-        });
-
-        test('description is computed', () => {
-          assert.typeOf(element.description, 'string');
-        });
-
-        test('hasCustomProperties is computed', () => {
-          assert.isTrue(element.hasCustomProperties);
-        });
-
-        test('extendsTypes is computed', () => {
-          assert.typeOf(element.extendsTypes, 'array');
-          assert.lengthOf(element.extendsTypes, 3);
-        });
-
-        test('parentType is computed', () => {
-          assert.typeOf(element.parentType, 'object');
-        });
-
-        test('hasParentType is true', () => {
-          assert.isTrue(element.hasParentType);
-        });
-
-        test('parentTypeName is computed', () => {
-          assert.equal(element.parentTypeName, 'ResourceNotFound');
-        });
-
-        test('traits is computed', () => {
-          assert.typeOf(element.traits, 'array');
-          assert.lengthOf(element.traits, 2);
-        });
-
-        test('hasTraits is true', () => {
-          assert.isTrue(element.hasTraits);
-        });
-
-        test('hasExtension is true', () => {
-          assert.isTrue(element.hasExtension);
-        });
-      });
-
-      suite('DOM content', () => {
-        setup((done) => {
-          element = fixture('Basic');
-          element.amfModel = amf;
-          element.endpoint = endpoint;
-          flush(() => done());
-        });
-
-        test('api-annotation-document is rendered', () => {
-          const node = element.shadowRoot.querySelector('api-annotation-document');
-          assert.ok(node);
-        });
-
-        test('marked-element is rendered', () => {
-          const node = element.shadowRoot.querySelector('marked-element');
-          assert.ok(node);
-        });
-
-        test('Extensions are rendered', () => {
-          const node = element.shadowRoot.querySelector('.extensions');
-          assert.ok(node);
-        });
-
-        test('Resource type name is rendered', () => {
-          const node = element.shadowRoot.querySelector('.resource-type-name');
-          assert.ok(node);
-        });
-
-        test('Trait name is rendered', () => {
-          const node = element.shadowRoot.querySelector('.trait-name');
-          assert.ok(node);
-        });
-      });
-
-      suite('Title behavior', () => {
-        test('Renders title when display name', (done) => {
-          AmfLoader.load(0)
-          .then((data) => {
-            element = fixture('Basic');
-            element.amfModel = data[0];
-            element.endpoint = data[1];
-            flush(() => {
-              const title = element.shadowRoot.querySelector('.title');
-              assert.ok(title);
-              done();
+    suite('AMF related computations', () => {
+      [
+        ['Full model', false],
+        ['Compact model', true]
+      ]
+      .forEach((item) => {
+        suite(item[0], () => {
+          let element;
+          let endpoint;
+          let amf;
+          suiteSetup((done) => {
+            AmfLoader.load(0, item[1])
+            .then((data) => {
+              amf = data[0];
+              endpoint = data[1];
+              element = fixture('Basic');
+              element.amfModel = amf;
+              element.endpoint = endpoint;
+              flush(() => done());
             });
           });
-        });
 
-        test('Hides title when no display name', (done) => {
-          AmfLoader.load(3)
-          .then((data) => {
-            element = fixture('Basic');
-            element.amfModel = data[0];
-            element.endpoint = data[1];
-            flush(() => {
-              const title = element.shadowRoot.querySelector('.title');
-              assert.notOk(title);
-              done();
+          test('endpointName is computed', () => {
+            assert.equal(element.endpointName, 'People');
+          });
+
+          test('path is computed', () => {
+            assert.equal(element.path, '/people');
+          });
+
+          test('description is computed', () => {
+            assert.typeOf(element.description, 'string');
+          });
+
+          test('hasCustomProperties is computed', () => {
+            assert.isTrue(element.hasCustomProperties);
+          });
+
+          test('extendsTypes is computed', () => {
+            assert.typeOf(element.extendsTypes, 'array');
+            assert.lengthOf(element.extendsTypes, 3);
+          });
+
+          test('parentType is computed', () => {
+            assert.typeOf(element.parentType, 'object');
+          });
+
+          test('hasParentType is true', () => {
+            assert.isTrue(element.hasParentType);
+          });
+
+          test('parentTypeName is computed', () => {
+            assert.equal(element.parentTypeName, 'ResourceNotFound');
+          });
+
+          test('traits is computed', () => {
+            assert.typeOf(element.traits, 'array');
+            assert.lengthOf(element.traits, 2);
+          });
+
+          test('hasTraits is true', () => {
+            assert.isTrue(element.hasTraits);
+          });
+
+          test('hasExtension is true', () => {
+            assert.isTrue(element.hasExtension);
+          });
+        });
+      });
+    });
+
+    suite('AMF - DOM content', () => {
+      [
+        ['Full model', false],
+        ['Compact model', true]
+      ]
+      .forEach((item) => {
+        suite(item[0], () => {
+          let element;
+          let endpoint;
+          let amf;
+          suiteSetup((done) => {
+            AmfLoader.load(0, item[1])
+            .then((data) => {
+              amf = data[0];
+              endpoint = data[1];
+              element = fixture('Basic');
+              element.amfModel = amf;
+              element.endpoint = endpoint;
+              flush(() => done());
+            });
+          });
+
+          test('api-annotation-document is rendered', () => {
+            const node = element.shadowRoot.querySelector('api-annotation-document');
+            assert.ok(node);
+          });
+
+          test('marked-element is rendered', () => {
+            const node = element.shadowRoot.querySelector('marked-element');
+            assert.ok(node);
+          });
+
+          test('Extensions are rendered', () => {
+            const node = element.shadowRoot.querySelector('.extensions');
+            assert.ok(node);
+          });
+
+          test('Resource type name is rendered', () => {
+            const node = element.shadowRoot.querySelector('.resource-type-name');
+            assert.ok(node);
+          });
+
+          test('Trait name is rendered', () => {
+            const node = element.shadowRoot.querySelector('.trait-name');
+            assert.ok(node);
+          });
+        });
+      });
+    });
+
+    suite('Full AMF model', () => {
+      [
+        ['Full model', false],
+        ['Compact model', true]
+      ]
+      .forEach((item) => {
+        suite(item[0], () => {
+          let element;
+          let endpoint;
+          let amf;
+          suiteSetup((done) => {
+            AmfLoader.load(0, item[1])
+            .then((data) => {
+              amf = data[0];
+              endpoint = data[1];
+              element = fixture('Basic');
+              element.amfModel = amf;
+              element.endpoint = endpoint;
+              flush(() => done());
+            });
+          });
+
+          test('Renders title when display name', (done) => {
+            AmfLoader.load(0)
+            .then((data) => {
+              element = fixture('Basic');
+              element.amfModel = data[0];
+              element.endpoint = data[1];
+              flush(() => {
+                const title = element.shadowRoot.querySelector('.title');
+                assert.ok(title);
+                done();
+              });
+            });
+          });
+
+          test('Hides title when no display name', (done) => {
+            AmfLoader.load(3)
+            .then((data) => {
+              element = fixture('Basic');
+              element.amfModel = data[0];
+              element.endpoint = data[1];
+              flush(() => {
+                const title = element.shadowRoot.querySelector('.title');
+                assert.notOk(title);
+                done();
+              });
             });
           });
         });
       });
     });
 
-    /* global AmfLoader */
-    suite('AMF model without traits', () => {
-      let element;
-      let amf;
-      let endpoint;
-      suiteSetup(() => {
-        return AmfLoader.load(1)
-        .then((data) => {
-          amf = data[0];
-          endpoint = data[1];
+    suite('AMF model without traits and extensions', () => {
+      [
+        ['Full model', false],
+        ['Compact model', true]
+      ]
+      .forEach((item) => {
+        suite(item[0], () => {
+          suite('Properties computations', () => {
+            let element;
+            let amf;
+            suiteSetup((done) => {
+              AmfLoader.load(0, item[1])
+              .then((data) => {
+                amf = data[0];
+                element = fixture('Basic');
+                element.amfModel = amf;
+                element.endpoint = getEndpoint(element, amf, '/notypes');
+                flush(() => done());
+              });
+            });
+
+            test('traits is not computed', () => {
+              assert.isUndefined(element.traits);
+            });
+
+            test('hasTraits is not computed', () => {
+              assert.isUndefined(element.hasTraits);
+            });
+
+            test('hasExtension is not computed', () => {
+              assert.isUndefined(element.hasExtension);
+            });
+          });
+
+          suite('DOM content', () => {
+            let element;
+            let amf;
+            setup((done) => {
+              AmfLoader.load(0, item[1])
+              .then((data) => {
+                amf = data[0];
+                element = fixture('Basic');
+                element.amfModel = amf;
+                element.endpoint = getEndpoint(element, amf, '/notypes');
+                flush(() => done());
+              });
+            });
+
+            test('Extensions are not rendered', () => {
+              const node = element.shadowRoot.querySelector('.extensions');
+              assert.notOk(node);
+            });
+          });
         });
       });
+    });
 
-      suite('Computations', () => {
-        suiteSetup((done) => {
-          element = fixture('Basic');
-          element.amfModel = amf;
-          element.endpoint = endpoint;
-          flush(() => done());
-        });
+    suite('Resource type computations', () => {
+      [
+        ['Full model', false],
+        ['Compact model', true]
+      ]
+      .forEach((item) => {
+        suite(item[0], () => {
+          suite('Properties computations', () => {
+            let element;
+            let amf;
+            suiteSetup((done) => {
+              AmfLoader.load(0, item[1])
+              .then((data) => {
+                amf = data[0];
+                element = fixture('Basic');
+                element.amfModel = amf;
+                element.endpoint = getEndpoint(element, amf, '/people/{personId}');
+                flush(() => done());
+              });
+            });
 
-        test('traits is computed', () => {
-          assert.isUndefined(element.traits);
-        });
+            test('traits is not computed', () => {
+              assert.isUndefined(element.traits);
+            });
 
-        test('hasTraits is not defined', () => {
-          assert.isUndefined(element.hasTraits);
-        });
+            test('hasTraits is not computed', () => {
+              assert.isUndefined(element.hasTraits);
+            });
 
-        test('hasExtension is true', () => {
-          assert.isTrue(element.hasExtension);
-        });
-      });
+            test('hasExtension is computed', () => {
+              assert.isTrue(element.hasExtension);
+            });
 
-      suite('DOM content', () => {
-        setup((done) => {
-          element = fixture('Basic');
-          element.amfModel = amf;
-          element.endpoint = endpoint;
-          flush(() => done());
-        });
+            test('hasParentType is computed', () => {
+              assert.isTrue(element.hasParentType);
+            });
+          });
 
-        test('Extensions are rendered', () => {
-          const node = element.shadowRoot.querySelector('.extensions');
-          assert.ok(node);
-        });
+          suite('DOM content', () => {
+            let element;
+            let amf;
+            setup((done) => {
+              AmfLoader.load(0, item[1])
+              .then((data) => {
+                amf = data[0];
+                element = fixture('Basic');
+                element.amfModel = amf;
+                element.endpoint = getEndpoint(element, amf, '/people/{personId}');
+                flush(() => done());
+              });
+            });
 
-        test('Resource type name is rendered', () => {
-          const node = element.shadowRoot.querySelector('.resource-type-name');
-          assert.ok(node);
-        });
+            test('Extensions node is rendered', () => {
+              const node = element.shadowRoot.querySelector('.extensions');
+              assert.ok(node);
+            });
 
-        test('Trait name is not rendered', () => {
-          const node = element.shadowRoot.querySelector('.trait-name');
-          assert.notOk(node);
+            test('Resource type name is rendered', () => {
+              const node = element.shadowRoot.querySelector('.resource-type-name');
+              assert.ok(node);
+            });
+
+            test('Trait name is not rendered', () => {
+              const node = element.shadowRoot.querySelector('.trait-name');
+              assert.notOk(node);
+            });
+          });
         });
       });
     });
 
     suite('AMF model with traits only', () => {
-      let element;
-      let amf;
-      let endpoint;
-      suiteSetup(() => {
-        return AmfLoader.load(4)
-        .then((data) => {
-          amf = data[0];
-          endpoint = data[1];
-        });
-      });
+      [
+        ['Full model', false],
+        ['Compact model', true]
+      ]
+      .forEach((item) => {
+        suite(item[0], () => {
+          suite('Properties computations', () => {
+            let element;
+            suiteSetup((done) => {
+              AmfLoader.load(0, item[1])
+              .then((data) => {
+                const amf = data[0];
+                element = fixture('Basic');
+                element.amfModel = amf;
+                element.endpoint = getEndpoint(element, amf, '/products');
+                flush(() => done());
+              });
+            });
 
-      suite('Computations', () => {
-        suiteSetup((done) => {
-          element = fixture('Basic');
-          element.amfModel = amf;
-          element.endpoint = endpoint;
-          flush(() => done());
-        });
+            test('parentType is not computed', () => {
+              assert.isUndefined(element.parentType);
+            });
 
-        test('parentType is computed', () => {
-          assert.isUndefined(element.parentType);
-        });
+            test('hasParentType is not computed', () => {
+              assert.isUndefined(element.hasParentType);
+            });
 
-        test('hasParentType is undefined', () => {
-          assert.isUndefined(element.hasParentType);
-        });
+            test('parentTypeName is not computed', () => {
+              assert.isUndefined(element.parentTypeName);
+            });
 
-        test('parentTypeName is undefined', () => {
-          assert.isUndefined(element.parentTypeName);
-        });
+            test('traits is computed', () => {
+              assert.typeOf(element.traits, 'array');
+              assert.lengthOf(element.traits, 1);
+            });
 
-        test('traits is computed', () => {
-          assert.typeOf(element.traits, 'array');
-          assert.lengthOf(element.traits, 1);
-        });
+            test('hasTraits is true', () => {
+              assert.isTrue(element.hasTraits);
+            });
 
-        test('hasTraits is true', () => {
-          assert.isTrue(element.hasTraits);
-        });
+            test('hasExtension is true', () => {
+              assert.isTrue(element.hasExtension);
+            });
+          });
 
-        test('hasExtension is true', () => {
-          assert.isTrue(element.hasExtension);
-        });
-      });
+          suite('DOM content', () => {
+            let element;
+            setup((done) => {
+              AmfLoader.load(0, item[1])
+              .then((data) => {
+                const amf = data[0];
+                element = fixture('Basic');
+                element.amfModel = amf;
+                element.endpoint = getEndpoint(element, amf, '/products');
+                flush(() => done());
+              });
+            });
 
-      suite('DOM content', () => {
-        setup((done) => {
-          element = fixture('Basic');
-          element.amfModel = amf;
-          element.endpoint = endpoint;
-          flush(() => done());
-        });
+            test('Extensions node is rendered', () => {
+              const node = element.shadowRoot.querySelector('.extensions');
+              assert.ok(node);
+            });
 
-        test('Extensions are rendered', () => {
-          const node = element.shadowRoot.querySelector('.extensions');
-          assert.ok(node);
-        });
+            test('Resource type name is not rendered', () => {
+              const node = element.shadowRoot.querySelector('.resource-type-name');
+              assert.notOk(node);
+            });
 
-        test('Resource type name is not rendered', () => {
-          const node = element.shadowRoot.querySelector('.resource-type-name');
-          assert.notOk(node);
-        });
-
-        test('Trait name is rendered', () => {
-          const node = element.shadowRoot.querySelector('.trait-name');
-          assert.ok(node);
+            test('Trait name is rendered', () => {
+              const node = element.shadowRoot.querySelector('.trait-name');
+              assert.ok(node);
+            });
+          });
         });
       });
     });

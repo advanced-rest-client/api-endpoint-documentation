@@ -50,10 +50,10 @@
       ],
       "thresholds": {
         "global": {
-          "statements": 20,
-          "branches": 10,
-          "functions": 40,
-          "lines": 20
+          "statements": 50,
+          "branches": 40,
+          "functions": 65,
+          "lines": 50
         }
       }
     }
