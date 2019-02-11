@@ -50,7 +50,14 @@
           element = fixture('Basic');
           element.amfModel = amf;
           element.endpoint = getEndpoint(element, amf, '/people/{personId}');
-          flush(() => done());
+          flush(() => {
+            // Becaus of async panels redering it has to wait a bit longer
+            // otherwise slower browsers like Edge or Safari will not render
+            // the content on time.
+            setTimeout(() => {
+              done();
+            });
+          });
         });
 
         test('Renders 3 methods containers', () => {
