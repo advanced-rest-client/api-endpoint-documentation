@@ -1,4 +1,4 @@
 const generator = require('@api-components/api-model-generator');
-generator('./demo/models.json')
+generator('./demo/api.json')
 .then(() => console.log('Models created'))
 .catch((cause) => console.error(cause));
