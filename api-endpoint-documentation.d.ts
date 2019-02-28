@@ -5,29 +5,20 @@
  *   https://github.com/Polymer/tools/tree/master/packages/gen-typescript-declarations
  *
  * To modify these typings, edit the source file(s):
- *   api-endpoint-documentation.html
+ *   api-endpoint-documentation.js
  */
 
-/// <reference path="../polymer/types/polymer-element.d.ts" />
-/// <reference path="../polymer/types/lib/elements/dom-if.d.ts" />
-/// <reference path="../polymer/types/lib/elements/dom-repeat.d.ts" />
-/// <reference path="../polymer/types/lib/utils/render-status.d.ts" />
-/// <reference path="../raml-aware/raml-aware.d.ts" />
-/// <reference path="../iron-flex-layout/iron-flex-layout.d.ts" />
-/// <reference path="../api-annotation-document/api-annotation-document.d.ts" />
-/// <reference path="../api-parameters-document/api-parameters-document.d.ts" />
-/// <reference path="../api-method-documentation/api-method-documentation.d.ts" />
-/// <reference path="../markdown-styles/markdown-styles.d.ts" />
-/// <reference path="../marked-element/marked-element.d.ts" />
-/// <reference path="../amf-helper-mixin/amf-helper-mixin.d.ts" />
-/// <reference path="../clipboard-copy/clipboard-copy.d.ts" />
-/// <reference path="../paper-icon-button/paper-icon-button.d.ts" />
-/// <reference path="../api-request-panel/api-request-panel.d.ts" />
-/// <reference path="../iron-collapse/iron-collapse.d.ts" />
-/// <reference path="../http-code-snippets/http-code-snippets.d.ts" />
-/// <reference path="../api-example-generator/api-example-generator.d.ts" />
-/// <reference path="../arc-icons/arc-icons.d.ts" />
-/// <reference path="../http-method-label/http-method-label-common-styles.d.ts" />
+
+// tslint:disable:variable-name Describing an API that's defined elsewhere.
+// tslint:disable:no-any describes the API as best we are able today
+
+import {PolymerElement} from '@polymer/polymer/polymer-element.js';
+
+import {AmfHelperMixin} from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+
+import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
+
+import {html} from '@polymer/polymer/lib/utils/html-tag.js';
 
 declare namespace ApiElements {
 
@@ -64,7 +55,7 @@ declare namespace ApiElements {
    * - if `baseUri` is set it uses this value as a base uri for the endpoint
    * - else if `iron-meta` with key `ApiBaseUri` exists and contains a value
    * it uses it uses this value as a base uri for the endpoin
-   *    t
+   *  t
    * - else if `amfModel` is set then it computes base uri value from main
    * model document
    * Then it concatenates computed base URI with `endpoint`'s path property.
@@ -117,7 +108,7 @@ declare namespace ApiElements {
    * `--api-endpoint-documentation-tryit-section-title`
    */
   class ApiEndpointDocumentation extends
-    ApiElements.AmfHelperMixin(
+    AmfHelperMixin(
     Object) {
 
     /**
@@ -570,6 +561,9 @@ declare namespace ApiElements {
   }
 }
 
-interface HTMLElementTagNameMap {
-  "api-endpoint-documentation": ApiElements.ApiEndpointDocumentation;
+declare global {
+
+  interface HTMLElementTagNameMap {
+    "api-endpoint-documentation": ApiElements.ApiEndpointDocumentation;
+  }
 }

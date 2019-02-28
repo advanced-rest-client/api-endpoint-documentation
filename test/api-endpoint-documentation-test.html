@@ -4,11 +4,37 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
   <title>api-endpoint-documentation test</title>
-  <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
-  <script src="../../web-component-tester/browser.js"></script>
-  <script src="amf-loader.js"></script>
-  <link rel="import" href="../../arc-polyfills/arc-polyfills.html">
-  <link rel="import" href="../api-endpoint-documentation.html">
+
+  <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <script src="../node_modules/@polymer/test-fixture/test-fixture.js"></script>
+  <script src="../node_modules/mocha/mocha.js"></script>
+  <script src="../node_modules/chai/chai.js"></script>
+  <script src="../node_modules/wct-mocha/wct-mocha.js"></script>
+
+  <script src="./amf-loader.js"></script>
+
+  <script src="../../../jsonlint/lib/jsonlint.js"></script>
+  <script src="../../../codemirror/lib/codemirror.js"></script>
+  <script src="../../../codemirror/addon/mode/loadmode.js"></script>
+  <script src="../../../codemirror/mode/meta.js"></script>
+  <script src="../../../codemirror/mode/javascript/javascript.js"></script>
+  <script src="../../../codemirror/mode/xml/xml.js"></script>
+  <script src="../../../codemirror/mode/htmlmixed/htmlmixed.js"></script>
+  <script src="../../../codemirror/addon/lint/lint.js"></script>
+  <script src="../../../codemirror/addon/lint/json-lint.js"></script>
+  <script src="../../../@advanced-rest-client/code-mirror-hint/headers-addon.js"></script>
+  <script src="../../../@advanced-rest-client/code-mirror-hint/show-hint.js"></script>
+  <script src="../../../@advanced-rest-client/code-mirror-hint/hint-http-headers.js"></script>
+  <script>
+  /* global CodeMirror */
+  CodeMirror.modeURL = '../../../codemirror/mode/%N/%N.js';
+  </script>
+  <script src="../../../cryptojslib/components/core.js"></script>
+  <script src="../../../cryptojslib/rollups/sha1.js"></script>
+  <script src="../../../cryptojslib/components/enc-base64-min.js"></script>
+  <script src="../../../cryptojslib/rollups/md5.js"></script>
+  <script src="../../../cryptojslib/rollups/hmac-sha1.js"></script>
+  <script src="../../../jsrsasign/lib/jsrsasign-rsa-min.js"></script>
 </head>
 <body>
   <test-fixture id="Basic">
@@ -29,7 +55,8 @@
     </template>
   </test-fixture>
 
-  <script>
+  <script type="module">
+  import '../api-endpoint-documentation.js';
   /* global AmfLoader */
 
   function getEndpoint(element, amf, endpoint) {
@@ -37,12 +64,12 @@
     return element._computeEndpointByPath(webApi, endpoint);
   }
 
-  function getMethod(element, amf, endpoint, method) {
-    const endPoint = getEndpoint(element, amf, endpoint);
-    const opKey = element._getAmfKey(element.ns.w3.hydra.supportedOperation);
-    const ops = element._ensureArray(endPoint[opKey]);
-    return ops.find((item) => element._getValue(item, element.ns.w3.hydra.core + 'method') === method);
-  }
+  // function getMethod(element, amf, endpoint, method) {
+  //   const endPoint = getEndpoint(element, amf, endpoint);
+  //   const opKey = element._getAmfKey(element.ns.w3.hydra.supportedOperation);
+  //   const ops = element._ensureArray(endPoint[opKey]);
+  //   return ops.find((item) => element._getValue(item, element.ns.w3.hydra.core + 'method') === method);
+  // }
 
   suite('api-endpoint-documentation', () => {
     suite('Basic', () => {
@@ -555,7 +582,6 @@
         });
       });
     });
-
   });
   </script>
 </body>

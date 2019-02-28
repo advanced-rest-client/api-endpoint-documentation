@@ -37460,7 +37460,7 @@
 ],
 "data:value": [
 {
-"@value": "W\\d3deef3rgrgf4r",
+"@value": "Wd3deef3rgrgf4r",
 "@type": "xsd:string"
 }
 ],
@@ -37479,7 +37479,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(52,8)-(52,27)]"
+"@value": "[(52,8)-(52,25)]"
 }
 ]
 }
@@ -37708,7 +37708,7 @@
 ],
 "shacl:raw": [
 {
-"@value": "\n  id: we2322-4f4f4f-f4f4ff-f4f4ff4\n  name: Acme Product\n  quantity: 200\n  unit: ml\n  upc: \"123456789101\"\n  available: true\n  etag: \"W\\sd3deef3rgrgf4r\"\n"
+"@value": "\n  id: we2322-4f4f4f-f4f4ff-f4f4ff4\n  name: Acme Product\n  quantity: 200\n  unit: ml\n  upc: \"123456789101\"\n  available: true\n  etag: \"Wd3deef3rgrgf4r\"\n"
 }
 ],
 "sourcemaps:sources": [
@@ -45354,7 +45354,7 @@
 ],
 "data:value": [
 {
-"@value": "W\\d3deef3rgrgf4r",
+"@value": "Wd3deef3rgrgf4r",
 "@type": "xsd:string"
 }
 ],
@@ -45373,7 +45373,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(52,8)-(52,27)]"
+"@value": "[(52,8)-(52,25)]"
 }
 ]
 }
@@ -45602,7 +45602,7 @@
 ],
 "shacl:raw": [
 {
-"@value": "\n  id: we2322-4f4f4f-f4f4ff-f4f4ff4\n  name: Acme Product\n  quantity: 200\n  unit: ml\n  upc: \"123456789101\"\n  available: true\n  etag: \"W\\sd3deef3rgrgf4r\"\n"
+"@value": "\n  id: we2322-4f4f4f-f4f4ff-f4f4ff4\n  name: Acme Product\n  quantity: 200\n  unit: ml\n  upc: \"123456789101\"\n  available: true\n  etag: \"Wd3deef3rgrgf4r\"\n"
 }
 ],
 "sourcemaps:sources": [

@@ -37458,7 +37458,7 @@
 ],
 "http://a.ml/vocabularies/data#value": [
 {
-"@value": "W\\d3deef3rgrgf4r",
+"@value": "Wd3deef3rgrgf4r",
 "@type": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
@@ -37477,7 +37477,7 @@
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
 {
-"@value": "[(52,8)-(52,27)]"
+"@value": "[(52,8)-(52,25)]"
 }
 ]
 }
@@ -37706,7 +37706,7 @@
 ],
 "http://www.w3.org/ns/shacl#raw": [
 {
-"@value": "\n  id: we2322-4f4f4f-f4f4ff-f4f4ff4\n  name: Acme Product\n  quantity: 200\n  unit: ml\n  upc: \"123456789101\"\n  available: true\n  etag: \"W\\sd3deef3rgrgf4r\"\n"
+"@value": "\n  id: we2322-4f4f4f-f4f4ff-f4f4ff4\n  name: Acme Product\n  quantity: 200\n  unit: ml\n  upc: \"123456789101\"\n  available: true\n  etag: \"Wd3deef3rgrgf4r\"\n"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#sources": [
@@ -45352,7 +45352,7 @@
 ],
 "http://a.ml/vocabularies/data#value": [
 {
-"@value": "W\\d3deef3rgrgf4r",
+"@value": "Wd3deef3rgrgf4r",
 "@type": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
@@ -45371,7 +45371,7 @@
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
 {
-"@value": "[(52,8)-(52,27)]"
+"@value": "[(52,8)-(52,25)]"
 }
 ]
 }
@@ -45600,7 +45600,7 @@
 ],
 "http://www.w3.org/ns/shacl#raw": [
 {
-"@value": "\n  id: we2322-4f4f4f-f4f4ff-f4f4ff4\n  name: Acme Product\n  quantity: 200\n  unit: ml\n  upc: \"123456789101\"\n  available: true\n  etag: \"W\\sd3deef3rgrgf4r\"\n"
+"@value": "\n  id: we2322-4f4f4f-f4f4ff-f4f4ff4\n  name: Acme Product\n  quantity: 200\n  unit: ml\n  upc: \"123456789101\"\n  available: true\n  etag: \"Wd3deef3rgrgf4r\"\n"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#sources": [
