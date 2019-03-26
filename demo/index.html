@@ -178,8 +178,8 @@
     </dom-bind>
     <paper-toast id="navToast"></paper-toast>
     <script type="module">
-    import {PolymerElement} from '@polymer/polymer/polymer-element.js';
-    import {AmfHelperMixin, ns} from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+    import {PolymerElement} from '../../../@polymer/polymer/polymer-element.js';
+    import {AmfHelperMixin, ns} from '../../../@api-components/amf-helper-mixin/amf-helper-mixin.js';
 
     class DemoElement extends AmfHelperMixin(PolymerElement) {}
     window.customElements.define('demo-element', DemoElement);

@@ -1,24 +1,22 @@
-import {PolymerElement} from '@polymer/polymer/polymer-element.js';
-import {AmfHelperMixin} from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
-import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
-import {html} from '@polymer/polymer/lib/utils/html-tag.js';
-import '@polymer/polymer/lib/elements/dom-if.js';
-import '@polymer/polymer/lib/elements/dom-repeat.js';
-import '@api-components/raml-aware/raml-aware.js';
-import '@polymer/iron-flex-layout/iron-flex-layout.js';
-import '@api-components/api-annotation-document/api-annotation-document.js';
-import '@api-components/api-parameters-document/api-parameters-document.js';
-import '@api-components/api-method-documentation/api-method-documentation.js';
-import '@advanced-rest-client/markdown-styles/markdown-styles.js';
-import '@polymer/marked-element/marked-element.js';
-import '@advanced-rest-client/clipboard-copy/clipboard-copy.js';
-import '@polymer/paper-icon-button/paper-icon-button.js';
-import '@api-components/api-request-panel/api-request-panel.js';
-import '@polymer/iron-collapse/iron-collapse.js';
-import '@advanced-rest-client/http-code-snippets/http-code-snippets.js';
-import '@api-components/api-example-generator/api-example-generator.js';
-import '@advanced-rest-client/arc-icons/arc-icons.js';
-import '@api-components/http-method-label/http-method-label-common-styles.js';
+import {PolymerElement} from '../../@polymer/polymer/polymer-element.js';
+import {AmfHelperMixin} from '../../@api-components/amf-helper-mixin/amf-helper-mixin.js';
+import {afterNextRender} from '../../@polymer/polymer/lib/utils/render-status.js';
+import {html} from '../../@polymer/polymer/lib/utils/html-tag.js';
+import '../../@api-components/raml-aware/raml-aware.js';
+import '../../@polymer/iron-flex-layout/iron-flex-layout.js';
+import '../../@api-components/api-annotation-document/api-annotation-document.js';
+import '../../@api-components/api-parameters-document/api-parameters-document.js';
+import '../../@api-components/api-method-documentation/api-method-documentation.js';
+import '../../@advanced-rest-client/markdown-styles/markdown-styles.js';
+import '../../@polymer/marked-element/marked-element.js';
+import '../../@advanced-rest-client/clipboard-copy/clipboard-copy.js';
+import '../../@polymer/paper-icon-button/paper-icon-button.js';
+import '../../@api-components/api-request-panel/api-request-panel.js';
+import '../../@polymer/iron-collapse/iron-collapse.js';
+import '../../@advanced-rest-client/http-code-snippets/http-code-snippets.js';
+import '../../@api-components/api-example-generator/api-example-generator.js';
+import '../../@advanced-rest-client/arc-icons/arc-icons.js';
+import '../../@api-components/http-method-label/http-method-label-common-styles.js';
 /* eslint-disable max-len */
 /**
  * `api-endpoint-documentation`
