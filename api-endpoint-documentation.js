@@ -11,7 +11,7 @@ import '@api-components/api-parameters-document/api-parameters-document.js';
 import '@api-components/api-method-documentation/api-method-documentation.js';
 import '@advanced-rest-client/markdown-styles/markdown-styles.js';
 import '@polymer/marked-element/marked-element.js';
-import '@api-components/clipboard-copy/clipboard-copy.js';
+import '@advanced-rest-client/clipboard-copy/clipboard-copy.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import '@api-components/api-request-panel/api-request-panel.js';
 import '@polymer/iron-collapse/iron-collapse.js';
