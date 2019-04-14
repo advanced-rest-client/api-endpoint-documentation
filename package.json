@@ -8,7 +8,7 @@
     "url": "git://github.com/advanced-rest-client/api-endpoint-documentation.git"
   },
   "name": "@api-components/api-endpoint-documentation",
-  "version": "3.0.0-preview.2",
+  "version": "3.0.0-preview.3",
   "license": "Apache-2.0",
   "main": "api-endpoint-documentation.js",
   "authors": [
