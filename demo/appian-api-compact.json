@@ -22,7 +22,7 @@
 ],
 "raml-http:server": [
 {
-"@id": "#206",
+"@id": "#230",
 "@type": [
 "raml-http:Server",
 "doc:DomainElement"
@@ -34,7 +34,7 @@
 ],
 "raml-http:variable": [
 {
-"@id": "#207",
+"@id": "#231",
 "@type": [
 "raml-http:Parameter",
 "doc:DomainElement"
@@ -56,9 +56,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#208",
+"@id": "#232",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -77,7 +78,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#207/source-map",
+"@id": "#231/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -85,7 +86,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#207"
+"@value": "amf://id#231"
 }
 ],
 "sourcemaps:value": [
@@ -101,7 +102,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#206/source-map",
+"@id": "#230/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -123,7 +124,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#206"
+"@value": "amf://id#230"
 }
 ],
 "sourcemaps:value": [
@@ -135,6 +136,16 @@
 ]
 }
 ]
+}
+],
+"raml-http:accepts": [
+{
+"@value": "application/json"
+}
+],
+"raml-http:contentType": [
+{
+"@value": "application/json"
 }
 ],
 "schema-org:version": [
@@ -168,14 +179,14 @@
 ],
 "hydra:expects": [
 {
-"@id": "#105",
+"@id": "#111",
 "@type": [
 "raml-http:Request",
 "doc:DomainElement"
 ],
 "raml-http:parameter": [
 {
-"@id": "#106",
+"@id": "#112",
 "@type": [
 "raml-http:Parameter",
 "doc:DomainElement"
@@ -207,9 +218,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#107",
+"@id": "#113",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -231,19 +243,30 @@
 ],
 "shacl:defaultValue": [
 {
-"@id": "#108",
+"@id": "#114",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "1",
-"@type": "xsd:integer"
+"@value": "1"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_1"
 }
 ],
 "sourcemaps:sources": [
 {
-"@id": "#108/source-map",
+"@id": "#114/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -251,7 +274,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#108"
+"@value": "amf://id#114"
 }
 ],
 "sourcemaps:value": [
@@ -272,7 +295,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#107/source-map",
+"@id": "#113/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -280,7 +303,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#107"
+"@value": "amf://id#113"
 }
 ],
 "sourcemaps:value": [
@@ -306,6 +329,30 @@
 {
 "sourcemaps:element": [
 {
+"@value": "schema-org:description"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(22,8)-(22,89)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#113"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(21,6)-(25,21)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
 "@value": "shacl:datatype"
 }
 ],
@@ -318,7 +365,31 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#107"
+"@value": "shacl:defaultValue"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(23,8)-(23,18)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#112/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "raml-http:schema"
 }
 ],
 "sourcemaps:value": [
@@ -338,19 +409,19 @@
 "@value": "[(22,8)-(22,89)]"
 }
 ]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
+},
 {
-"@id": "#106/source-map",
-"@type": [
-"sourcemaps:SourceMap"
+"sourcemaps:element": [
+{
+"@value": "amf://id#112"
+}
 ],
-"sourcemaps:lexical": [
+"sourcemaps:value": [
+{
+"@value": "[(21,6)-(25,21)]"
+}
+]
+},
 {
 "sourcemaps:element": [
 {
@@ -362,37 +433,13 @@
 "@value": "[(24,8)-(24,23)]"
 }
 ]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#106"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(21,6)-(25,21)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "schema-org:description"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(22,8)-(22,89)]"
-}
-]
 }
 ]
 }
 ]
 },
 {
-"@id": "#109",
+"@id": "#115",
 "@type": [
 "raml-http:Parameter",
 "doc:DomainElement"
@@ -424,9 +471,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#110",
+"@id": "#116",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -448,19 +496,30 @@
 ],
 "shacl:defaultValue": [
 {
-"@id": "#111",
+"@id": "#117",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "25",
-"@type": "xsd:integer"
+"@value": "25"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_1"
 }
 ],
 "sourcemaps:sources": [
 {
-"@id": "#111/source-map",
+"@id": "#117/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -468,7 +527,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#111"
+"@value": "amf://id#117"
 }
 ],
 "sourcemaps:value": [
@@ -489,7 +548,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#110/source-map",
+"@id": "#116/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -497,7 +556,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#110"
+"@value": "amf://id#116"
 }
 ],
 "sourcemaps:value": [
@@ -523,6 +582,30 @@
 {
 "sourcemaps:element": [
 {
+"@value": "schema-org:description"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(27,8)-(27,98)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#116"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(26,6)-(30,21)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
 "@value": "shacl:datatype"
 }
 ],
@@ -535,7 +618,31 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#110"
+"@value": "shacl:defaultValue"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(28,8)-(28,19)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#115/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "raml-http:schema"
 }
 ],
 "sourcemaps:value": [
@@ -555,19 +662,19 @@
 "@value": "[(27,8)-(27,98)]"
 }
 ]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
+},
 {
-"@id": "#109/source-map",
-"@type": [
-"sourcemaps:SourceMap"
+"sourcemaps:element": [
+{
+"@value": "amf://id#115"
+}
 ],
-"sourcemaps:lexical": [
+"sourcemaps:value": [
+{
+"@value": "[(26,6)-(30,21)]"
+}
+]
+},
 {
 "sourcemaps:element": [
 {
@@ -579,30 +686,6 @@
 "@value": "[(29,8)-(29,23)]"
 }
 ]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#109"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(26,6)-(30,21)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "schema-org:description"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(27,8)-(27,98)]"
-}
-]
 }
 ]
 }
@@ -612,7 +695,7 @@
 "raml-http:payload": [],
 "sourcemaps:sources": [
 {
-"@id": "#105/source-map",
+"@id": "#111/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -626,6 +709,18 @@
 "sourcemaps:value": [
 {
 "@value": "[(20,4)-(30,21)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#111"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(20,4)-(38,31)]"
 }
 ]
 }
@@ -668,6 +763,7 @@
 "@id": "#102",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -683,7 +779,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -695,6 +792,7 @@
 "@id": "#104",
 "@type": [
 "raml-shapes:ArrayShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -704,6 +802,7 @@
 "@id": "#1/linked_8",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -781,6 +880,276 @@
 ]
 }
 ]
+},
+{
+"@id": "#105",
+"@type": [
+"shacl:PropertyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:path": [
+{
+"@id": "http://a.ml/vocabularies/data#startIndex"
+}
+],
+"raml-shapes:range": [
+{
+"@id": "#106",
+"@type": [
+"raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"shacl:name": [
+{
+"@value": "startIndex"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#106/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#106"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(36,12)-(36,31)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"shacl:minCount": [
+{
+"@value": 1
+}
+],
+"shacl:name": [
+{
+"@value": "startIndex"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#105/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#105"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(36,12)-(36,31)]"
+}
+]
+}
+]
+}
+]
+},
+{
+"@id": "#107",
+"@type": [
+"shacl:PropertyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:path": [
+{
+"@id": "http://a.ml/vocabularies/data#batchSize"
+}
+],
+"raml-shapes:range": [
+{
+"@id": "#108",
+"@type": [
+"raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"shacl:name": [
+{
+"@value": "batchSize"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#108/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#108"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(37,12)-(37,30)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"shacl:minCount": [
+{
+"@value": 1
+}
+],
+"shacl:name": [
+{
+"@value": "batchSize"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#107/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#107"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(37,12)-(37,30)]"
+}
+]
+}
+]
+}
+]
+},
+{
+"@id": "#109",
+"@type": [
+"shacl:PropertyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:path": [
+{
+"@id": "http://a.ml/vocabularies/data#totalCount"
+}
+],
+"raml-shapes:range": [
+{
+"@id": "#110",
+"@type": [
+"raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"shacl:name": [
+{
+"@value": "totalCount"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#110/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#110"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(38,12)-(38,31)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"shacl:minCount": [
+{
+"@value": 1
+}
+],
+"shacl:name": [
+{
+"@value": "totalCount"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#109/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#109"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(38,12)-(38,31)]"
+}
+]
+}
+]
+}
+]
 }
 ],
 "shacl:name": [
@@ -794,7 +1163,7 @@
 "@type": [
 "sourcemaps:SourceMap"
 ],
-"sourcemaps:type-property-lexical-info": [
+"sourcemaps:auto-generated-name": [
 {
 "sourcemaps:element": [
 {
@@ -803,7 +1172,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(98,10)-(98,14)]"
+"@value": ""
 }
 ]
 }
@@ -818,6 +1187,20 @@
 "sourcemaps:value": [
 {
 "@value": "[(97,8)-(101,0)]"
+}
+]
+}
+],
+"sourcemaps:type-property-lexical-info": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#102"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(98,10)-(98,14)]"
 }
 ]
 }
@@ -876,7 +1259,7 @@
 ],
 "security:security": [
 {
-"@id": "#112",
+"@id": "#118",
 "@type": [
 "security:ParametrizedSecurityScheme",
 "doc:DomainElement"
@@ -1093,7 +1476,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#112/source-map",
+"@id": "#118/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1101,7 +1484,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#112"
+"@value": "amf://id#118"
 }
 ],
 "sourcemaps:value": [
@@ -1175,7 +1558,7 @@
 ]
 },
 {
-"@id": "#113",
+"@id": "#119",
 "@type": [
 "raml-http:EndPoint",
 "doc:DomainElement"
@@ -1187,7 +1570,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#113/source-map",
+"@id": "#119/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1195,7 +1578,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#113"
+"@value": "amf://id#119"
 }
 ],
 "sourcemaps:value": [
@@ -1209,7 +1592,7 @@
 ]
 },
 {
-"@id": "#114",
+"@id": "#120",
 "@type": [
 "raml-http:EndPoint",
 "doc:DomainElement"
@@ -1221,7 +1604,7 @@
 ],
 "hydra:supportedOperation": [
 {
-"@id": "#115",
+"@id": "#121",
 "@type": [
 "hydra:Operation",
 "doc:DomainElement"
@@ -1233,7 +1616,7 @@
 ],
 "hydra:returns": [
 {
-"@id": "#116",
+"@id": "#122",
 "@type": [
 "raml-http:Response",
 "doc:DomainElement"
@@ -1250,7 +1633,7 @@
 ],
 "raml-http:payload": [
 {
-"@id": "#117",
+"@id": "#123",
 "@type": [
 "raml-http:Payload",
 "doc:DomainElement"
@@ -1262,9 +1645,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#118",
+"@id": "#124",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -1276,11 +1660,12 @@
 ],
 "shacl:property": [
 {
-"@id": "#119",
+"@id": "#125",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -1292,6 +1677,7 @@
 "@id": "#1/linked_9",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -1320,7 +1706,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#119/source-map",
+"@id": "#125/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1328,7 +1714,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#119"
+"@value": "amf://id#125"
 }
 ],
 "sourcemaps:value": [
@@ -1349,15 +1735,43 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#118/source-map",
+"@id": "#124/source-map",
 "@type": [
 "sourcemaps:SourceMap"
+],
+"sourcemaps:auto-generated-name": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#124"
+}
+],
+"sourcemaps:value": [
+{
+"@value": ""
+}
+]
+}
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#124"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(106,10)-(110,0)]"
+}
+]
+}
 ],
 "sourcemaps:type-property-lexical-info": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#118"
+"@value": "amf://id#124"
 }
 ],
 "sourcemaps:value": [
@@ -1366,12 +1780,22 @@
 }
 ]
 }
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#123/source-map",
+"@type": [
+"sourcemaps:SourceMap"
 ],
 "sourcemaps:lexical": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#118"
+"@value": "amf://id#123"
 }
 ],
 "sourcemaps:value": [
@@ -1387,7 +1811,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#117/source-map",
+"@id": "#122/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1395,31 +1819,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#117"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(106,10)-(110,0)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#116/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#116"
+"@value": "amf://id#122"
 }
 ],
 "sourcemaps:value": [
@@ -1435,7 +1835,7 @@
 ],
 "security:security": [
 {
-"@id": "#112",
+"@id": "#118",
 "@type": [
 "security:ParametrizedSecurityScheme",
 "doc:DomainElement"
@@ -1652,7 +2052,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#112/source-map",
+"@id": "#118/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1660,7 +2060,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#112"
+"@value": "amf://id#118"
 }
 ],
 "sourcemaps:value": [
@@ -1676,7 +2076,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#115/source-map",
+"@id": "#121/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1696,7 +2096,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#115"
+"@value": "amf://id#121"
 }
 ],
 "sourcemaps:value": [
@@ -1712,7 +2112,7 @@
 ],
 "raml-http:parameter": [
 {
-"@id": "#120",
+"@id": "#126",
 "@type": [
 "raml-http:Parameter",
 "doc:DomainElement"
@@ -1739,9 +2139,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#121",
+"@id": "#127",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -1760,7 +2161,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#120/source-map",
+"@id": "#126/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1768,7 +2169,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#120"
+"@value": "amf://id#126"
 }
 ],
 "sourcemaps:value": [
@@ -1784,7 +2185,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#114/source-map",
+"@id": "#120/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1792,7 +2193,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#114"
+"@value": "amf://id#120"
 }
 ],
 "sourcemaps:value": [
@@ -1806,7 +2207,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#114"
+"@value": "amf://id#120"
 }
 ],
 "sourcemaps:value": [
@@ -1820,7 +2221,7 @@
 ]
 },
 {
-"@id": "#122",
+"@id": "#128",
 "@type": [
 "raml-http:EndPoint",
 "doc:DomainElement"
@@ -1832,7 +2233,7 @@
 ],
 "hydra:supportedOperation": [
 {
-"@id": "#123",
+"@id": "#129",
 "@type": [
 "hydra:Operation",
 "doc:DomainElement"
@@ -1844,14 +2245,14 @@
 ],
 "hydra:expects": [
 {
-"@id": "#124",
+"@id": "#130",
 "@type": [
 "raml-http:Request",
 "doc:DomainElement"
 ],
 "raml-http:payload": [
 {
-"@id": "#49",
+"@id": "#47",
 "@type": [
 "raml-http:Payload",
 "doc:DomainElement"
@@ -1866,6 +2267,7 @@
 "@id": "#43/linked_5",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -1884,7 +2286,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#49/source-map",
+"@id": "#47/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -1892,7 +2294,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#49"
+"@value": "amf://id#47"
 }
 ],
 "sourcemaps:value": [
@@ -1905,12 +2307,34 @@
 }
 ]
 }
+],
+"sourcemaps:sources": [
+{
+"@id": "#130/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#130"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(112,0)-(132,0)]"
+}
+]
+}
+]
+}
 ]
 }
 ],
 "hydra:returns": [
 {
-"@id": "#125",
+"@id": "#131",
 "@type": [
 "raml-http:Response",
 "doc:DomainElement"
@@ -1932,7 +2356,7 @@
 ],
 "raml-http:header": [
 {
-"@id": "#126",
+"@id": "#132",
 "@type": [
 "raml-http:Parameter",
 "doc:DomainElement"
@@ -1964,9 +2388,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#127",
+"@id": "#133",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -1988,7 +2413,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#127/source-map",
+"@id": "#133/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -2008,7 +2433,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#127"
+"@value": "amf://id#133"
 }
 ],
 "sourcemaps:value": [
@@ -2024,11 +2449,35 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#126/source-map",
+"@id": "#132/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
 "sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "raml-http:schema"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(124,14)-(126,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#132"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(124,14)-(126,0)]"
+}
+]
+},
 {
 "sourcemaps:element": [
 {
@@ -2040,18 +2489,6 @@
 "@value": "[(125,16)-(126,0)]"
 }
 ]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#126"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(124,14)-(126,0)]"
-}
-]
 }
 ]
 }
@@ -2060,7 +2497,7 @@
 ],
 "raml-http:payload": [
 {
-"@id": "#128",
+"@id": "#134",
 "@type": [
 "raml-http:Payload",
 "doc:DomainElement"
@@ -2072,9 +2509,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#129",
+"@id": "#135",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -2086,11 +2524,12 @@
 ],
 "shacl:property": [
 {
-"@id": "#130",
+"@id": "#136",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -2102,6 +2541,7 @@
 "@id": "#1/linked_10",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -2130,7 +2570,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#130/source-map",
+"@id": "#136/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -2138,7 +2578,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#130"
+"@value": "amf://id#136"
 }
 ],
 "sourcemaps:value": [
@@ -2152,11 +2592,12 @@
 ]
 },
 {
-"@id": "#131",
+"@id": "#137",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -2168,6 +2609,7 @@
 "@id": "#20/linked_11",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -2196,7 +2638,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#131/source-map",
+"@id": "#137/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -2204,7 +2646,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#131"
+"@value": "amf://id#137"
 }
 ],
 "sourcemaps:value": [
@@ -2218,11 +2660,12 @@
 ]
 },
 {
-"@id": "#132",
+"@id": "#138",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -2234,6 +2677,7 @@
 "@id": "#43/linked_6",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -2262,7 +2706,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#132/source-map",
+"@id": "#138/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -2270,7 +2714,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#132"
+"@value": "amf://id#138"
 }
 ],
 "sourcemaps:value": [
@@ -2291,15 +2735,43 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#129/source-map",
+"@id": "#135/source-map",
 "@type": [
 "sourcemaps:SourceMap"
+],
+"sourcemaps:auto-generated-name": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#135"
+}
+],
+"sourcemaps:value": [
+{
+"@value": ""
+}
+]
+}
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#135"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(126,12)-(132,0)]"
+}
+]
+}
 ],
 "sourcemaps:type-property-lexical-info": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#129"
+"@value": "amf://id#135"
 }
 ],
 "sourcemaps:value": [
@@ -2308,20 +2780,6 @@
 }
 ]
 }
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#129"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(126,12)-(132,0)]"
-}
-]
-}
 ]
 }
 ]
@@ -2329,7 +2787,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#128/source-map",
+"@id": "#134/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -2337,7 +2795,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#128"
+"@value": "amf://id#134"
 }
 ],
 "sourcemaps:value": [
@@ -2353,7 +2811,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#125/source-map",
+"@id": "#131/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -2373,7 +2831,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#125"
+"@value": "amf://id#131"
 }
 ],
 "sourcemaps:value": [
@@ -2401,7 +2859,7 @@
 ],
 "security:security": [
 {
-"@id": "#112",
+"@id": "#118",
 "@type": [
 "security:ParametrizedSecurityScheme",
 "doc:DomainElement"
@@ -2618,7 +3076,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#112/source-map",
+"@id": "#118/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -2626,7 +3084,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#112"
+"@value": "amf://id#118"
 }
 ],
 "sourcemaps:value": [
@@ -2642,7 +3100,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#123/source-map",
+"@id": "#129/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -2662,7 +3120,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#123"
+"@value": "amf://id#129"
 }
 ],
 "sourcemaps:value": [
@@ -2678,7 +3136,7 @@
 ],
 "raml-http:parameter": [
 {
-"@id": "#133",
+"@id": "#139",
 "@type": [
 "raml-http:Parameter",
 "doc:DomainElement"
@@ -2705,9 +3163,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#134",
+"@id": "#140",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -2726,7 +3185,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#133/source-map",
+"@id": "#139/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -2734,7 +3193,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#133"
+"@value": "amf://id#139"
 }
 ],
 "sourcemaps:value": [
@@ -2750,7 +3209,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#122/source-map",
+"@id": "#128/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -2758,7 +3217,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#122"
+"@value": "amf://id#128"
 }
 ],
 "sourcemaps:value": [
@@ -2772,7 +3231,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#122"
+"@value": "amf://id#128"
 }
 ],
 "sourcemaps:value": [
@@ -2786,7 +3245,7 @@
 ]
 },
 {
-"@id": "#135",
+"@id": "#141",
 "@type": [
 "raml-http:EndPoint",
 "doc:DomainElement"
@@ -2798,7 +3257,7 @@
 ],
 "hydra:supportedOperation": [
 {
-"@id": "#136",
+"@id": "#142",
 "@type": [
 "hydra:Operation",
 "doc:DomainElement"
@@ -2810,7 +3269,7 @@
 ],
 "hydra:returns": [
 {
-"@id": "#137",
+"@id": "#143",
 "@type": [
 "raml-http:Response",
 "doc:DomainElement"
@@ -2827,7 +3286,7 @@
 ],
 "raml-http:payload": [
 {
-"@id": "#138",
+"@id": "#144",
 "@type": [
 "raml-http:Payload",
 "doc:DomainElement"
@@ -2839,9 +3298,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#139",
+"@id": "#145",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -2853,11 +3313,12 @@
 ],
 "shacl:property": [
 {
-"@id": "#140",
+"@id": "#146",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -2866,9 +3327,10 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#141",
+"@id": "#147",
 "@type": [
 "raml-shapes:ArrayShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -2878,6 +3340,7 @@
 "@id": "#20/linked_12",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -2901,7 +3364,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#141/source-map",
+"@id": "#147/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -2909,7 +3372,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#141"
+"@value": "amf://id#147"
 }
 ],
 "sourcemaps:value": [
@@ -2935,7 +3398,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#140/source-map",
+"@id": "#146/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -2943,7 +3406,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#140"
+"@value": "amf://id#146"
 }
 ],
 "sourcemaps:value": [
@@ -2964,15 +3427,43 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#139/source-map",
+"@id": "#145/source-map",
 "@type": [
 "sourcemaps:SourceMap"
+],
+"sourcemaps:auto-generated-name": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#145"
+}
+],
+"sourcemaps:value": [
+{
+"@value": ""
+}
+]
+}
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#145"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(136,12)-(140,0)]"
+}
+]
+}
 ],
 "sourcemaps:type-property-lexical-info": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#139"
+"@value": "amf://id#145"
 }
 ],
 "sourcemaps:value": [
@@ -2981,12 +3472,22 @@
 }
 ]
 }
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#144/source-map",
+"@type": [
+"sourcemaps:SourceMap"
 ],
 "sourcemaps:lexical": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#139"
+"@value": "amf://id#144"
 }
 ],
 "sourcemaps:value": [
@@ -3002,7 +3503,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#138/source-map",
+"@id": "#143/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -3010,31 +3511,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#138"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(136,12)-(140,0)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#137/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#137"
+"@value": "amf://id#143"
 }
 ],
 "sourcemaps:value": [
@@ -3050,7 +3527,7 @@
 ],
 "security:security": [
 {
-"@id": "#112",
+"@id": "#118",
 "@type": [
 "security:ParametrizedSecurityScheme",
 "doc:DomainElement"
@@ -3267,7 +3744,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#112/source-map",
+"@id": "#118/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -3275,7 +3752,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#112"
+"@value": "amf://id#118"
 }
 ],
 "sourcemaps:value": [
@@ -3291,7 +3768,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#136/source-map",
+"@id": "#142/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -3311,7 +3788,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#136"
+"@value": "amf://id#142"
 }
 ],
 "sourcemaps:value": [
@@ -3327,7 +3804,7 @@
 ],
 "raml-http:parameter": [
 {
-"@id": "#142",
+"@id": "#148",
 "@type": [
 "raml-http:Parameter",
 "doc:DomainElement"
@@ -3354,9 +3831,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#143",
+"@id": "#149",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -3375,7 +3853,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#142/source-map",
+"@id": "#148/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -3383,7 +3861,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#142"
+"@value": "amf://id#148"
 }
 ],
 "sourcemaps:value": [
@@ -3399,7 +3877,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#135/source-map",
+"@id": "#141/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -3407,7 +3885,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#135"
+"@value": "amf://id#141"
 }
 ],
 "sourcemaps:value": [
@@ -3421,7 +3899,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#135"
+"@value": "amf://id#141"
 }
 ],
 "sourcemaps:value": [
@@ -3435,7 +3913,7 @@
 ]
 },
 {
-"@id": "#144",
+"@id": "#150",
 "@type": [
 "raml-http:EndPoint",
 "doc:DomainElement"
@@ -3447,7 +3925,7 @@
 ],
 "hydra:supportedOperation": [
 {
-"@id": "#145",
+"@id": "#151",
 "@type": [
 "hydra:Operation",
 "doc:DomainElement"
@@ -3459,14 +3937,14 @@
 ],
 "hydra:expects": [
 {
-"@id": "#151",
+"@id": "#163",
 "@type": [
 "raml-http:Request",
 "doc:DomainElement"
 ],
 "raml-http:parameter": [
 {
-"@id": "#152",
+"@id": "#164",
 "@type": [
 "raml-http:Parameter",
 "doc:DomainElement"
@@ -3498,9 +3976,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#153",
+"@id": "#165",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -3522,19 +4001,30 @@
 ],
 "shacl:defaultValue": [
 {
-"@id": "#154",
+"@id": "#166",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "1",
-"@type": "xsd:integer"
+"@value": "1"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_1"
 }
 ],
 "sourcemaps:sources": [
 {
-"@id": "#154/source-map",
+"@id": "#166/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -3542,7 +4032,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#154"
+"@value": "amf://id#166"
 }
 ],
 "sourcemaps:value": [
@@ -3563,7 +4053,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#153/source-map",
+"@id": "#165/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -3571,7 +4061,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#153"
+"@value": "amf://id#165"
 }
 ],
 "sourcemaps:value": [
@@ -3597,6 +4087,30 @@
 {
 "sourcemaps:element": [
 {
+"@value": "schema-org:description"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(22,8)-(22,89)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#165"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(21,6)-(25,21)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
 "@value": "shacl:datatype"
 }
 ],
@@ -3609,7 +4123,31 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#153"
+"@value": "shacl:defaultValue"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(23,8)-(23,18)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#164/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "raml-http:schema"
 }
 ],
 "sourcemaps:value": [
@@ -3629,19 +4167,19 @@
 "@value": "[(22,8)-(22,89)]"
 }
 ]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
+},
 {
-"@id": "#152/source-map",
-"@type": [
-"sourcemaps:SourceMap"
+"sourcemaps:element": [
+{
+"@value": "amf://id#164"
+}
 ],
-"sourcemaps:lexical": [
+"sourcemaps:value": [
+{
+"@value": "[(21,6)-(25,21)]"
+}
+]
+},
 {
 "sourcemaps:element": [
 {
@@ -3653,37 +4191,13 @@
 "@value": "[(24,8)-(24,23)]"
 }
 ]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#152"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(21,6)-(25,21)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "schema-org:description"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(22,8)-(22,89)]"
-}
-]
 }
 ]
 }
 ]
 },
 {
-"@id": "#155",
+"@id": "#167",
 "@type": [
 "raml-http:Parameter",
 "doc:DomainElement"
@@ -3715,9 +4229,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#156",
+"@id": "#168",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -3739,19 +4254,30 @@
 ],
 "shacl:defaultValue": [
 {
-"@id": "#157",
+"@id": "#169",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "25",
-"@type": "xsd:integer"
+"@value": "25"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_1"
 }
 ],
 "sourcemaps:sources": [
 {
-"@id": "#157/source-map",
+"@id": "#169/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -3759,7 +4285,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#157"
+"@value": "amf://id#169"
 }
 ],
 "sourcemaps:value": [
@@ -3780,7 +4306,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#156/source-map",
+"@id": "#168/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -3788,7 +4314,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#156"
+"@value": "amf://id#168"
 }
 ],
 "sourcemaps:value": [
@@ -3814,6 +4340,30 @@
 {
 "sourcemaps:element": [
 {
+"@value": "schema-org:description"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(27,8)-(27,98)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#168"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(26,6)-(30,21)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
 "@value": "shacl:datatype"
 }
 ],
@@ -3826,7 +4376,31 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#156"
+"@value": "shacl:defaultValue"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(28,8)-(28,19)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#167/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "raml-http:schema"
 }
 ],
 "sourcemaps:value": [
@@ -3846,19 +4420,19 @@
 "@value": "[(27,8)-(27,98)]"
 }
 ]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
+},
 {
-"@id": "#155/source-map",
-"@type": [
-"sourcemaps:SourceMap"
+"sourcemaps:element": [
+{
+"@value": "amf://id#167"
+}
 ],
-"sourcemaps:lexical": [
+"sourcemaps:value": [
+{
+"@value": "[(26,6)-(30,21)]"
+}
+]
+},
 {
 "sourcemaps:element": [
 {
@@ -3870,30 +4444,6 @@
 "@value": "[(29,8)-(29,23)]"
 }
 ]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#155"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(26,6)-(30,21)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "schema-org:description"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(27,8)-(27,98)]"
-}
-]
 }
 ]
 }
@@ -3903,7 +4453,7 @@
 "raml-http:payload": [],
 "sourcemaps:sources": [
 {
-"@id": "#151/source-map",
+"@id": "#163/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -3919,6 +4469,18 @@
 "@value": "[(20,4)-(30,21)]"
 }
 ]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#163"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(20,4)-(38,31)]"
+}
+]
 }
 ]
 }
@@ -3927,7 +4489,7 @@
 ],
 "hydra:returns": [
 {
-"@id": "#146",
+"@id": "#152",
 "@type": [
 "raml-http:Response",
 "doc:DomainElement"
@@ -3944,7 +4506,7 @@
 ],
 "raml-http:payload": [
 {
-"@id": "#147",
+"@id": "#153",
 "@type": [
 "raml-http:Payload",
 "doc:DomainElement"
@@ -3956,9 +4518,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#148",
+"@id": "#154",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -3970,11 +4533,12 @@
 ],
 "shacl:property": [
 {
-"@id": "#149",
+"@id": "#155",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -3983,9 +4547,10 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#150",
+"@id": "#156",
 "@type": [
 "raml-shapes:ArrayShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -3995,6 +4560,7 @@
 "@id": "#20/linked_13",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -4018,7 +4584,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#150/source-map",
+"@id": "#156/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4026,7 +4592,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#150"
+"@value": "amf://id#156"
 }
 ],
 "sourcemaps:value": [
@@ -4052,7 +4618,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#149/source-map",
+"@id": "#155/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4060,12 +4626,282 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#149"
+"@value": "amf://id#155"
 }
 ],
 "sourcemaps:value": [
 {
 "@value": "[(148,12)-(149,0)]"
+}
+]
+}
+]
+}
+]
+},
+{
+"@id": "#157",
+"@type": [
+"shacl:PropertyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:path": [
+{
+"@id": "http://a.ml/vocabularies/data#startIndex"
+}
+],
+"raml-shapes:range": [
+{
+"@id": "#158",
+"@type": [
+"raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"shacl:name": [
+{
+"@value": "startIndex"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#158/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#158"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(36,12)-(36,31)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"shacl:minCount": [
+{
+"@value": 1
+}
+],
+"shacl:name": [
+{
+"@value": "startIndex"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#157/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#157"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(36,12)-(36,31)]"
+}
+]
+}
+]
+}
+]
+},
+{
+"@id": "#159",
+"@type": [
+"shacl:PropertyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:path": [
+{
+"@id": "http://a.ml/vocabularies/data#batchSize"
+}
+],
+"raml-shapes:range": [
+{
+"@id": "#160",
+"@type": [
+"raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"shacl:name": [
+{
+"@value": "batchSize"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#160/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#160"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(37,12)-(37,30)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"shacl:minCount": [
+{
+"@value": 1
+}
+],
+"shacl:name": [
+{
+"@value": "batchSize"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#159/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#159"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(37,12)-(37,30)]"
+}
+]
+}
+]
+}
+]
+},
+{
+"@id": "#161",
+"@type": [
+"shacl:PropertyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:path": [
+{
+"@id": "http://a.ml/vocabularies/data#totalCount"
+}
+],
+"raml-shapes:range": [
+{
+"@id": "#162",
+"@type": [
+"raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"shacl:name": [
+{
+"@value": "totalCount"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#162/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#162"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(38,12)-(38,31)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"shacl:minCount": [
+{
+"@value": 1
+}
+],
+"shacl:name": [
+{
+"@value": "totalCount"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#161/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#161"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(38,12)-(38,31)]"
 }
 ]
 }
@@ -4081,15 +4917,43 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#148/source-map",
+"@id": "#154/source-map",
 "@type": [
 "sourcemaps:SourceMap"
+],
+"sourcemaps:auto-generated-name": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#154"
+}
+],
+"sourcemaps:value": [
+{
+"@value": ""
+}
+]
+}
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#154"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(145,8)-(149,0)]"
+}
+]
+}
 ],
 "sourcemaps:type-property-lexical-info": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#148"
+"@value": "amf://id#154"
 }
 ],
 "sourcemaps:value": [
@@ -4098,12 +4962,22 @@
 }
 ]
 }
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#153/source-map",
+"@type": [
+"sourcemaps:SourceMap"
 ],
 "sourcemaps:lexical": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#148"
+"@value": "amf://id#153"
 }
 ],
 "sourcemaps:value": [
@@ -4119,7 +4993,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#147/source-map",
+"@id": "#152/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4127,31 +5001,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#147"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(145,8)-(149,0)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#146/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#146"
+"@value": "amf://id#152"
 }
 ],
 "sourcemaps:value": [
@@ -4167,7 +5017,7 @@
 ],
 "security:security": [
 {
-"@id": "#112",
+"@id": "#118",
 "@type": [
 "security:ParametrizedSecurityScheme",
 "doc:DomainElement"
@@ -4384,7 +5234,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#112/source-map",
+"@id": "#118/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4392,7 +5242,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#112"
+"@value": "amf://id#118"
 }
 ],
 "sourcemaps:value": [
@@ -4408,7 +5258,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#145/source-map",
+"@id": "#151/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4428,7 +5278,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#145"
+"@value": "amf://id#151"
 }
 ],
 "sourcemaps:value": [
@@ -4444,7 +5294,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#144/source-map",
+"@id": "#150/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4452,7 +5302,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#144"
+"@value": "amf://id#150"
 }
 ],
 "sourcemaps:value": [
@@ -4466,7 +5316,7 @@
 ]
 },
 {
-"@id": "#158",
+"@id": "#170",
 "@type": [
 "raml-http:EndPoint",
 "doc:DomainElement"
@@ -4478,7 +5328,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#158/source-map",
+"@id": "#170/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4486,7 +5336,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#158"
+"@value": "amf://id#170"
 }
 ],
 "sourcemaps:value": [
@@ -4500,7 +5350,7 @@
 ]
 },
 {
-"@id": "#159",
+"@id": "#171",
 "@type": [
 "raml-http:EndPoint",
 "doc:DomainElement"
@@ -4512,7 +5362,7 @@
 ],
 "hydra:supportedOperation": [
 {
-"@id": "#160",
+"@id": "#172",
 "@type": [
 "hydra:Operation",
 "doc:DomainElement"
@@ -4524,7 +5374,7 @@
 ],
 "hydra:returns": [
 {
-"@id": "#161",
+"@id": "#173",
 "@type": [
 "raml-http:Response",
 "doc:DomainElement"
@@ -4541,7 +5391,7 @@
 ],
 "raml-http:payload": [
 {
-"@id": "#162",
+"@id": "#174",
 "@type": [
 "raml-http:Payload",
 "doc:DomainElement"
@@ -4553,9 +5403,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#163",
+"@id": "#175",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -4567,11 +5418,12 @@
 ],
 "shacl:property": [
 {
-"@id": "#164",
+"@id": "#176",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -4583,6 +5435,7 @@
 "@id": "#20/linked_14",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -4611,7 +5464,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#164/source-map",
+"@id": "#176/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4619,7 +5472,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#164"
+"@value": "amf://id#176"
 }
 ],
 "sourcemaps:value": [
@@ -4640,15 +5493,43 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#163/source-map",
+"@id": "#175/source-map",
 "@type": [
 "sourcemaps:SourceMap"
+],
+"sourcemaps:auto-generated-name": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#175"
+}
+],
+"sourcemaps:value": [
+{
+"@value": ""
+}
+]
+}
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#175"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(154,10)-(158,0)]"
+}
+]
+}
 ],
 "sourcemaps:type-property-lexical-info": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#163"
+"@value": "amf://id#175"
 }
 ],
 "sourcemaps:value": [
@@ -4657,12 +5538,22 @@
 }
 ]
 }
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#174/source-map",
+"@type": [
+"sourcemaps:SourceMap"
 ],
 "sourcemaps:lexical": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#163"
+"@value": "amf://id#174"
 }
 ],
 "sourcemaps:value": [
@@ -4678,7 +5569,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#162/source-map",
+"@id": "#173/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4686,31 +5577,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#162"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(154,10)-(158,0)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#161/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#161"
+"@value": "amf://id#173"
 }
 ],
 "sourcemaps:value": [
@@ -4726,7 +5593,7 @@
 ],
 "security:security": [
 {
-"@id": "#112",
+"@id": "#118",
 "@type": [
 "security:ParametrizedSecurityScheme",
 "doc:DomainElement"
@@ -4943,7 +5810,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#112/source-map",
+"@id": "#118/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4951,7 +5818,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#112"
+"@value": "amf://id#118"
 }
 ],
 "sourcemaps:value": [
@@ -4967,7 +5834,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#160/source-map",
+"@id": "#172/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -4987,7 +5854,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#160"
+"@value": "amf://id#172"
 }
 ],
 "sourcemaps:value": [
@@ -5003,7 +5870,7 @@
 ],
 "raml-http:parameter": [
 {
-"@id": "#165",
+"@id": "#177",
 "@type": [
 "raml-http:Parameter",
 "doc:DomainElement"
@@ -5030,9 +5897,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#166",
+"@id": "#178",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -5051,7 +5919,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#165/source-map",
+"@id": "#177/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5059,7 +5927,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#165"
+"@value": "amf://id#177"
 }
 ],
 "sourcemaps:value": [
@@ -5075,7 +5943,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#159/source-map",
+"@id": "#171/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5083,7 +5951,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#159"
+"@value": "amf://id#171"
 }
 ],
 "sourcemaps:value": [
@@ -5097,7 +5965,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#159"
+"@value": "amf://id#171"
 }
 ],
 "sourcemaps:value": [
@@ -5111,7 +5979,7 @@
 ]
 },
 {
-"@id": "#167",
+"@id": "#179",
 "@type": [
 "raml-http:EndPoint",
 "doc:DomainElement"
@@ -5123,7 +5991,7 @@
 ],
 "hydra:supportedOperation": [
 {
-"@id": "#168",
+"@id": "#180",
 "@type": [
 "hydra:Operation",
 "doc:DomainElement"
@@ -5135,14 +6003,14 @@
 ],
 "hydra:expects": [
 {
-"@id": "#174",
+"@id": "#192",
 "@type": [
 "raml-http:Request",
 "doc:DomainElement"
 ],
 "raml-http:parameter": [
 {
-"@id": "#175",
+"@id": "#193",
 "@type": [
 "raml-http:Parameter",
 "doc:DomainElement"
@@ -5174,9 +6042,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#176",
+"@id": "#194",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -5198,19 +6067,30 @@
 ],
 "shacl:defaultValue": [
 {
-"@id": "#177",
+"@id": "#195",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "1",
-"@type": "xsd:integer"
+"@value": "1"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_1"
 }
 ],
 "sourcemaps:sources": [
 {
-"@id": "#177/source-map",
+"@id": "#195/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5218,7 +6098,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#177"
+"@value": "amf://id#195"
 }
 ],
 "sourcemaps:value": [
@@ -5239,7 +6119,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#176/source-map",
+"@id": "#194/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5247,7 +6127,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#176"
+"@value": "amf://id#194"
 }
 ],
 "sourcemaps:value": [
@@ -5273,6 +6153,30 @@
 {
 "sourcemaps:element": [
 {
+"@value": "schema-org:description"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(22,8)-(22,89)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#194"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(21,6)-(25,21)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
 "@value": "shacl:datatype"
 }
 ],
@@ -5285,7 +6189,31 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#176"
+"@value": "shacl:defaultValue"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(23,8)-(23,18)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#193/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "raml-http:schema"
 }
 ],
 "sourcemaps:value": [
@@ -5305,19 +6233,19 @@
 "@value": "[(22,8)-(22,89)]"
 }
 ]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
+},
 {
-"@id": "#175/source-map",
-"@type": [
-"sourcemaps:SourceMap"
+"sourcemaps:element": [
+{
+"@value": "amf://id#193"
+}
 ],
-"sourcemaps:lexical": [
+"sourcemaps:value": [
+{
+"@value": "[(21,6)-(25,21)]"
+}
+]
+},
 {
 "sourcemaps:element": [
 {
@@ -5329,37 +6257,13 @@
 "@value": "[(24,8)-(24,23)]"
 }
 ]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#175"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(21,6)-(25,21)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "schema-org:description"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(22,8)-(22,89)]"
-}
-]
 }
 ]
 }
 ]
 },
 {
-"@id": "#178",
+"@id": "#196",
 "@type": [
 "raml-http:Parameter",
 "doc:DomainElement"
@@ -5391,9 +6295,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#179",
+"@id": "#197",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -5415,19 +6320,30 @@
 ],
 "shacl:defaultValue": [
 {
-"@id": "#180",
+"@id": "#198",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "25",
-"@type": "xsd:integer"
+"@value": "25"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_1"
 }
 ],
 "sourcemaps:sources": [
 {
-"@id": "#180/source-map",
+"@id": "#198/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5435,7 +6351,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#180"
+"@value": "amf://id#198"
 }
 ],
 "sourcemaps:value": [
@@ -5456,7 +6372,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#179/source-map",
+"@id": "#197/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5464,7 +6380,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#179"
+"@value": "amf://id#197"
 }
 ],
 "sourcemaps:value": [
@@ -5490,6 +6406,30 @@
 {
 "sourcemaps:element": [
 {
+"@value": "schema-org:description"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(27,8)-(27,98)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#197"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(26,6)-(30,21)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
 "@value": "shacl:datatype"
 }
 ],
@@ -5502,7 +6442,31 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#179"
+"@value": "shacl:defaultValue"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(28,8)-(28,19)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#196/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "raml-http:schema"
 }
 ],
 "sourcemaps:value": [
@@ -5522,19 +6486,19 @@
 "@value": "[(27,8)-(27,98)]"
 }
 ]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
+},
 {
-"@id": "#178/source-map",
-"@type": [
-"sourcemaps:SourceMap"
+"sourcemaps:element": [
+{
+"@value": "amf://id#196"
+}
 ],
-"sourcemaps:lexical": [
+"sourcemaps:value": [
+{
+"@value": "[(26,6)-(30,21)]"
+}
+]
+},
 {
 "sourcemaps:element": [
 {
@@ -5546,30 +6510,6 @@
 "@value": "[(29,8)-(29,23)]"
 }
 ]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#178"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(26,6)-(30,21)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "schema-org:description"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(27,8)-(27,98)]"
-}
-]
 }
 ]
 }
@@ -5579,7 +6519,7 @@
 "raml-http:payload": [],
 "sourcemaps:sources": [
 {
-"@id": "#174/source-map",
+"@id": "#192/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5595,6 +6535,18 @@
 "@value": "[(20,4)-(30,21)]"
 }
 ]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#192"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(20,4)-(38,31)]"
+}
+]
 }
 ]
 }
@@ -5603,7 +6555,7 @@
 ],
 "hydra:returns": [
 {
-"@id": "#169",
+"@id": "#181",
 "@type": [
 "raml-http:Response",
 "doc:DomainElement"
@@ -5620,7 +6572,7 @@
 ],
 "raml-http:payload": [
 {
-"@id": "#170",
+"@id": "#182",
 "@type": [
 "raml-http:Payload",
 "doc:DomainElement"
@@ -5632,9 +6584,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#171",
+"@id": "#183",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -5646,11 +6599,12 @@
 ],
 "shacl:property": [
 {
-"@id": "#172",
+"@id": "#184",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -5659,9 +6613,10 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#173",
+"@id": "#185",
 "@type": [
 "raml-shapes:ArrayShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -5671,6 +6626,7 @@
 "@id": "#50/linked_9",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -5694,7 +6650,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#173/source-map",
+"@id": "#185/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5702,7 +6658,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#173"
+"@value": "amf://id#185"
 }
 ],
 "sourcemaps:value": [
@@ -5728,7 +6684,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#172/source-map",
+"@id": "#184/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5736,12 +6692,282 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#172"
+"@value": "amf://id#184"
 }
 ],
 "sourcemaps:value": [
 {
 "@value": "[(166,16)-(167,0)]"
+}
+]
+}
+]
+}
+]
+},
+{
+"@id": "#186",
+"@type": [
+"shacl:PropertyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:path": [
+{
+"@id": "http://a.ml/vocabularies/data#startIndex"
+}
+],
+"raml-shapes:range": [
+{
+"@id": "#187",
+"@type": [
+"raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"shacl:name": [
+{
+"@value": "startIndex"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#187/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#187"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(36,12)-(36,31)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"shacl:minCount": [
+{
+"@value": 1
+}
+],
+"shacl:name": [
+{
+"@value": "startIndex"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#186/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#186"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(36,12)-(36,31)]"
+}
+]
+}
+]
+}
+]
+},
+{
+"@id": "#188",
+"@type": [
+"shacl:PropertyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:path": [
+{
+"@id": "http://a.ml/vocabularies/data#batchSize"
+}
+],
+"raml-shapes:range": [
+{
+"@id": "#189",
+"@type": [
+"raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"shacl:name": [
+{
+"@value": "batchSize"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#189/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#189"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(37,12)-(37,30)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"shacl:minCount": [
+{
+"@value": 1
+}
+],
+"shacl:name": [
+{
+"@value": "batchSize"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#188/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#188"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(37,12)-(37,30)]"
+}
+]
+}
+]
+}
+]
+},
+{
+"@id": "#190",
+"@type": [
+"shacl:PropertyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:path": [
+{
+"@id": "http://a.ml/vocabularies/data#totalCount"
+}
+],
+"raml-shapes:range": [
+{
+"@id": "#191",
+"@type": [
+"raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"shacl:name": [
+{
+"@value": "totalCount"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#191/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#191"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(38,12)-(38,31)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"shacl:minCount": [
+{
+"@value": 1
+}
+],
+"shacl:name": [
+{
+"@value": "totalCount"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#190/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#190"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(38,12)-(38,31)]"
 }
 ]
 }
@@ -5757,15 +6983,43 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#171/source-map",
+"@id": "#183/source-map",
 "@type": [
 "sourcemaps:SourceMap"
+],
+"sourcemaps:auto-generated-name": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#183"
+}
+],
+"sourcemaps:value": [
+{
+"@value": ""
+}
+]
+}
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#183"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(163,12)-(167,0)]"
+}
+]
+}
 ],
 "sourcemaps:type-property-lexical-info": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#171"
+"@value": "amf://id#183"
 }
 ],
 "sourcemaps:value": [
@@ -5774,12 +7028,22 @@
 }
 ]
 }
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#182/source-map",
+"@type": [
+"sourcemaps:SourceMap"
 ],
 "sourcemaps:lexical": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#171"
+"@value": "amf://id#182"
 }
 ],
 "sourcemaps:value": [
@@ -5795,7 +7059,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#170/source-map",
+"@id": "#181/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5803,31 +7067,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#170"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(163,12)-(167,0)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#169/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#169"
+"@value": "amf://id#181"
 }
 ],
 "sourcemaps:value": [
@@ -5843,7 +7083,7 @@
 ],
 "security:security": [
 {
-"@id": "#112",
+"@id": "#118",
 "@type": [
 "security:ParametrizedSecurityScheme",
 "doc:DomainElement"
@@ -6060,7 +7300,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#112/source-map",
+"@id": "#118/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6068,7 +7308,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#112"
+"@value": "amf://id#118"
 }
 ],
 "sourcemaps:value": [
@@ -6084,7 +7324,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#168/source-map",
+"@id": "#180/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6104,7 +7344,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#168"
+"@value": "amf://id#180"
 }
 ],
 "sourcemaps:value": [
@@ -6120,7 +7360,7 @@
 ],
 "raml-http:parameter": [
 {
-"@id": "#181",
+"@id": "#199",
 "@type": [
 "raml-http:Parameter",
 "doc:DomainElement"
@@ -6147,9 +7387,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#182",
+"@id": "#200",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -6168,7 +7409,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#181/source-map",
+"@id": "#199/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6176,7 +7417,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#181"
+"@value": "amf://id#199"
 }
 ],
 "sourcemaps:value": [
@@ -6192,7 +7433,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#167/source-map",
+"@id": "#179/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6200,7 +7441,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#167"
+"@value": "amf://id#179"
 }
 ],
 "sourcemaps:value": [
@@ -6214,7 +7455,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#167"
+"@value": "amf://id#179"
 }
 ],
 "sourcemaps:value": [
@@ -6228,7 +7469,7 @@
 ]
 },
 {
-"@id": "#183",
+"@id": "#201",
 "@type": [
 "raml-http:EndPoint",
 "doc:DomainElement"
@@ -6240,7 +7481,7 @@
 ],
 "hydra:supportedOperation": [
 {
-"@id": "#184",
+"@id": "#202",
 "@type": [
 "hydra:Operation",
 "doc:DomainElement"
@@ -6252,14 +7493,14 @@
 ],
 "hydra:expects": [
 {
-"@id": "#190",
+"@id": "#214",
 "@type": [
 "raml-http:Request",
 "doc:DomainElement"
 ],
 "raml-http:parameter": [
 {
-"@id": "#191",
+"@id": "#215",
 "@type": [
 "raml-http:Parameter",
 "doc:DomainElement"
@@ -6291,9 +7532,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#192",
+"@id": "#216",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -6315,19 +7557,30 @@
 ],
 "shacl:defaultValue": [
 {
-"@id": "#193",
+"@id": "#217",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "1",
-"@type": "xsd:integer"
+"@value": "1"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_1"
 }
 ],
 "sourcemaps:sources": [
 {
-"@id": "#193/source-map",
+"@id": "#217/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6335,7 +7588,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#193"
+"@value": "amf://id#217"
 }
 ],
 "sourcemaps:value": [
@@ -6356,7 +7609,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#192/source-map",
+"@id": "#216/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6364,7 +7617,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#192"
+"@value": "amf://id#216"
 }
 ],
 "sourcemaps:value": [
@@ -6390,6 +7643,30 @@
 {
 "sourcemaps:element": [
 {
+"@value": "schema-org:description"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(22,8)-(22,89)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#216"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(21,6)-(25,21)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
 "@value": "shacl:datatype"
 }
 ],
@@ -6402,7 +7679,31 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#192"
+"@value": "shacl:defaultValue"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(23,8)-(23,18)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#215/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "raml-http:schema"
 }
 ],
 "sourcemaps:value": [
@@ -6422,19 +7723,19 @@
 "@value": "[(22,8)-(22,89)]"
 }
 ]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
+},
 {
-"@id": "#191/source-map",
-"@type": [
-"sourcemaps:SourceMap"
+"sourcemaps:element": [
+{
+"@value": "amf://id#215"
+}
 ],
-"sourcemaps:lexical": [
+"sourcemaps:value": [
+{
+"@value": "[(21,6)-(25,21)]"
+}
+]
+},
 {
 "sourcemaps:element": [
 {
@@ -6446,37 +7747,13 @@
 "@value": "[(24,8)-(24,23)]"
 }
 ]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#191"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(21,6)-(25,21)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "schema-org:description"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(22,8)-(22,89)]"
-}
-]
 }
 ]
 }
 ]
 },
 {
-"@id": "#194",
+"@id": "#218",
 "@type": [
 "raml-http:Parameter",
 "doc:DomainElement"
@@ -6508,9 +7785,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#195",
+"@id": "#219",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -6532,19 +7810,30 @@
 ],
 "shacl:defaultValue": [
 {
-"@id": "#196",
+"@id": "#220",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "25",
-"@type": "xsd:integer"
+"@value": "25"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_1"
 }
 ],
 "sourcemaps:sources": [
 {
-"@id": "#196/source-map",
+"@id": "#220/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6552,7 +7841,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#196"
+"@value": "amf://id#220"
 }
 ],
 "sourcemaps:value": [
@@ -6573,7 +7862,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#195/source-map",
+"@id": "#219/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6581,7 +7870,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#195"
+"@value": "amf://id#219"
 }
 ],
 "sourcemaps:value": [
@@ -6607,6 +7896,30 @@
 {
 "sourcemaps:element": [
 {
+"@value": "schema-org:description"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(27,8)-(27,98)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#219"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(26,6)-(30,21)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
 "@value": "shacl:datatype"
 }
 ],
@@ -6619,7 +7932,31 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#195"
+"@value": "shacl:defaultValue"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(28,8)-(28,19)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#218/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "raml-http:schema"
 }
 ],
 "sourcemaps:value": [
@@ -6639,19 +7976,19 @@
 "@value": "[(27,8)-(27,98)]"
 }
 ]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
+},
 {
-"@id": "#194/source-map",
-"@type": [
-"sourcemaps:SourceMap"
+"sourcemaps:element": [
+{
+"@value": "amf://id#218"
+}
 ],
-"sourcemaps:lexical": [
+"sourcemaps:value": [
+{
+"@value": "[(26,6)-(30,21)]"
+}
+]
+},
 {
 "sourcemaps:element": [
 {
@@ -6663,30 +8000,6 @@
 "@value": "[(29,8)-(29,23)]"
 }
 ]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#194"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(26,6)-(30,21)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "schema-org:description"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(27,8)-(27,98)]"
-}
-]
 }
 ]
 }
@@ -6696,7 +8009,7 @@
 "raml-http:payload": [],
 "sourcemaps:sources": [
 {
-"@id": "#190/source-map",
+"@id": "#214/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6712,6 +8025,18 @@
 "@value": "[(20,4)-(30,21)]"
 }
 ]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#214"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(20,4)-(38,31)]"
+}
+]
 }
 ]
 }
@@ -6720,7 +8045,7 @@
 ],
 "hydra:returns": [
 {
-"@id": "#185",
+"@id": "#203",
 "@type": [
 "raml-http:Response",
 "doc:DomainElement"
@@ -6737,7 +8062,7 @@
 ],
 "raml-http:payload": [
 {
-"@id": "#186",
+"@id": "#204",
 "@type": [
 "raml-http:Payload",
 "doc:DomainElement"
@@ -6749,9 +8074,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#187",
+"@id": "#205",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -6763,11 +8089,12 @@
 ],
 "shacl:property": [
 {
-"@id": "#188",
+"@id": "#206",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -6776,9 +8103,10 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#189",
+"@id": "#207",
 "@type": [
 "raml-shapes:ArrayShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -6788,6 +8116,7 @@
 "@id": "#50/linked_10",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -6811,7 +8140,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#189/source-map",
+"@id": "#207/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6819,7 +8148,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#189"
+"@value": "amf://id#207"
 }
 ],
 "sourcemaps:value": [
@@ -6845,7 +8174,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#188/source-map",
+"@id": "#206/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6853,12 +8182,282 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#188"
+"@value": "amf://id#206"
 }
 ],
 "sourcemaps:value": [
 {
 "@value": "[(175,12)-(176,0)]"
+}
+]
+}
+]
+}
+]
+},
+{
+"@id": "#208",
+"@type": [
+"shacl:PropertyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:path": [
+{
+"@id": "http://a.ml/vocabularies/data#startIndex"
+}
+],
+"raml-shapes:range": [
+{
+"@id": "#209",
+"@type": [
+"raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"shacl:name": [
+{
+"@value": "startIndex"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#209/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#209"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(36,12)-(36,31)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"shacl:minCount": [
+{
+"@value": 1
+}
+],
+"shacl:name": [
+{
+"@value": "startIndex"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#208/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#208"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(36,12)-(36,31)]"
+}
+]
+}
+]
+}
+]
+},
+{
+"@id": "#210",
+"@type": [
+"shacl:PropertyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:path": [
+{
+"@id": "http://a.ml/vocabularies/data#batchSize"
+}
+],
+"raml-shapes:range": [
+{
+"@id": "#211",
+"@type": [
+"raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"shacl:name": [
+{
+"@value": "batchSize"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#211/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#211"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(37,12)-(37,30)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"shacl:minCount": [
+{
+"@value": 1
+}
+],
+"shacl:name": [
+{
+"@value": "batchSize"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#210/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#210"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(37,12)-(37,30)]"
+}
+]
+}
+]
+}
+]
+},
+{
+"@id": "#212",
+"@type": [
+"shacl:PropertyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:path": [
+{
+"@id": "http://a.ml/vocabularies/data#totalCount"
+}
+],
+"raml-shapes:range": [
+{
+"@id": "#213",
+"@type": [
+"raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"shacl:name": [
+{
+"@value": "totalCount"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#213/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#213"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(38,12)-(38,31)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"shacl:minCount": [
+{
+"@value": 1
+}
+],
+"shacl:name": [
+{
+"@value": "totalCount"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#212/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#212"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(38,12)-(38,31)]"
 }
 ]
 }
@@ -6874,15 +8473,43 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#187/source-map",
+"@id": "#205/source-map",
 "@type": [
 "sourcemaps:SourceMap"
+],
+"sourcemaps:auto-generated-name": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#205"
+}
+],
+"sourcemaps:value": [
+{
+"@value": ""
+}
+]
+}
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#205"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(172,8)-(176,0)]"
+}
+]
+}
 ],
 "sourcemaps:type-property-lexical-info": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#187"
+"@value": "amf://id#205"
 }
 ],
 "sourcemaps:value": [
@@ -6891,12 +8518,22 @@
 }
 ]
 }
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#204/source-map",
+"@type": [
+"sourcemaps:SourceMap"
 ],
 "sourcemaps:lexical": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#187"
+"@value": "amf://id#204"
 }
 ],
 "sourcemaps:value": [
@@ -6912,7 +8549,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#186/source-map",
+"@id": "#203/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6920,31 +8557,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#186"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(172,8)-(176,0)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#185/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#185"
+"@value": "amf://id#203"
 }
 ],
 "sourcemaps:value": [
@@ -6960,7 +8573,7 @@
 ],
 "security:security": [
 {
-"@id": "#112",
+"@id": "#118",
 "@type": [
 "security:ParametrizedSecurityScheme",
 "doc:DomainElement"
@@ -7177,7 +8790,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#112/source-map",
+"@id": "#118/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7185,7 +8798,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#112"
+"@value": "amf://id#118"
 }
 ],
 "sourcemaps:value": [
@@ -7201,7 +8814,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#184/source-map",
+"@id": "#202/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7221,7 +8834,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#184"
+"@value": "amf://id#202"
 }
 ],
 "sourcemaps:value": [
@@ -7237,7 +8850,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#183/source-map",
+"@id": "#201/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7245,7 +8858,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#183"
+"@value": "amf://id#201"
 }
 ],
 "sourcemaps:value": [
@@ -7259,7 +8872,7 @@
 ]
 },
 {
-"@id": "#197",
+"@id": "#221",
 "@type": [
 "raml-http:EndPoint",
 "doc:DomainElement"
@@ -7271,7 +8884,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#197/source-map",
+"@id": "#221/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7279,7 +8892,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#197"
+"@value": "amf://id#221"
 }
 ],
 "sourcemaps:value": [
@@ -7293,7 +8906,7 @@
 ]
 },
 {
-"@id": "#198",
+"@id": "#222",
 "@type": [
 "raml-http:EndPoint",
 "doc:DomainElement"
@@ -7305,7 +8918,7 @@
 ],
 "hydra:supportedOperation": [
 {
-"@id": "#199",
+"@id": "#223",
 "@type": [
 "hydra:Operation",
 "doc:DomainElement"
@@ -7317,7 +8930,7 @@
 ],
 "hydra:returns": [
 {
-"@id": "#200",
+"@id": "#224",
 "@type": [
 "raml-http:Response",
 "doc:DomainElement"
@@ -7334,7 +8947,7 @@
 ],
 "raml-http:payload": [
 {
-"@id": "#201",
+"@id": "#225",
 "@type": [
 "raml-http:Payload",
 "doc:DomainElement"
@@ -7346,9 +8959,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#202",
+"@id": "#226",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -7360,11 +8974,12 @@
 ],
 "shacl:property": [
 {
-"@id": "#203",
+"@id": "#227",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -7376,6 +8991,7 @@
 "@id": "#50/linked_11",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -7404,7 +9020,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#203/source-map",
+"@id": "#227/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7412,7 +9028,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#203"
+"@value": "amf://id#227"
 }
 ],
 "sourcemaps:value": [
@@ -7433,15 +9049,43 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#202/source-map",
+"@id": "#226/source-map",
 "@type": [
 "sourcemaps:SourceMap"
+],
+"sourcemaps:auto-generated-name": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#226"
+}
+],
+"sourcemaps:value": [
+{
+"@value": ""
+}
+]
+}
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#226"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(181,10)-(184,24)]"
+}
+]
+}
 ],
 "sourcemaps:type-property-lexical-info": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#202"
+"@value": "amf://id#226"
 }
 ],
 "sourcemaps:value": [
@@ -7450,12 +9094,22 @@
 }
 ]
 }
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#225/source-map",
+"@type": [
+"sourcemaps:SourceMap"
 ],
 "sourcemaps:lexical": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#202"
+"@value": "amf://id#225"
 }
 ],
 "sourcemaps:value": [
@@ -7471,7 +9125,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#201/source-map",
+"@id": "#224/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7479,31 +9133,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#201"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(181,10)-(184,24)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#200/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#200"
+"@value": "amf://id#224"
 }
 ],
 "sourcemaps:value": [
@@ -7519,7 +9149,7 @@
 ],
 "security:security": [
 {
-"@id": "#112",
+"@id": "#118",
 "@type": [
 "security:ParametrizedSecurityScheme",
 "doc:DomainElement"
@@ -7736,7 +9366,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#112/source-map",
+"@id": "#118/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7744,7 +9374,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#112"
+"@value": "amf://id#118"
 }
 ],
 "sourcemaps:value": [
@@ -7760,7 +9390,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#199/source-map",
+"@id": "#223/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7780,7 +9410,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#199"
+"@value": "amf://id#223"
 }
 ],
 "sourcemaps:value": [
@@ -7796,7 +9426,7 @@
 ],
 "raml-http:parameter": [
 {
-"@id": "#204",
+"@id": "#228",
 "@type": [
 "raml-http:Parameter",
 "doc:DomainElement"
@@ -7823,9 +9453,10 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#205",
+"@id": "#229",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -7844,7 +9475,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#204/source-map",
+"@id": "#228/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7852,7 +9483,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#204"
+"@value": "amf://id#228"
 }
 ],
 "sourcemaps:value": [
@@ -7868,7 +9499,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#198/source-map",
+"@id": "#222/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7876,7 +9507,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#198"
+"@value": "amf://id#222"
 }
 ],
 "sourcemaps:value": [
@@ -7890,7 +9521,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#198"
+"@value": "amf://id#222"
 }
 ],
 "sourcemaps:value": [
@@ -7910,16 +9541,28 @@
 "@type": [
 "sourcemaps:SourceMap"
 ],
-"sourcemaps:source-vendor": [
+"sourcemaps:single-value-array": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#97"
+"@value": "raml-http:contentType"
 }
 ],
 "sourcemaps:value": [
 {
-"@value": "RAML 1.0"
+"@value": ""
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "raml-http:accepts"
+}
+],
+"sourcemaps:value": [
+{
+"@value": ""
 }
 ]
 }
@@ -7934,6 +9577,18 @@
 "sourcemaps:value": [
 {
 "@value": "[(3,0)-(4,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "raml-http:accepts"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(5,0)-(6,0)]"
 }
 ]
 },
@@ -7972,6 +9627,32 @@
 "@value": "[(4,0)-(5,0)]"
 }
 ]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "raml-http:contentType"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(5,0)-(6,0)]"
+}
+]
+}
+],
+"sourcemaps:source-vendor": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#97"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "RAML 1.0"
+}
+]
 }
 ]
 }
@@ -7983,6 +9664,7 @@
 "@id": "#1",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -7998,7 +9680,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -8010,6 +9693,7 @@
 "@id": "#3",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -8086,7 +9770,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -8098,6 +9783,7 @@
 "@id": "#5",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -8174,7 +9860,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -8186,6 +9873,7 @@
 "@id": "#7",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -8262,7 +9950,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -8274,6 +9963,7 @@
 "@id": "#9",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -8350,7 +10040,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -8362,6 +10053,7 @@
 "@id": "#11",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -8438,7 +10130,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -8450,6 +10143,7 @@
 "@id": "#13",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -8465,7 +10159,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -8477,6 +10172,7 @@
 "@id": "#15",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -8553,7 +10249,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -8565,6 +10262,7 @@
 "@id": "#17",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -8641,7 +10339,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -8653,6 +10352,7 @@
 "@id": "#19",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -8862,6 +10562,7 @@
 "@id": "#20",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -8877,7 +10578,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -8889,6 +10591,7 @@
 "@id": "#22",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -8965,7 +10668,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -8977,6 +10681,7 @@
 "@id": "#24",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -9053,7 +10758,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -9065,6 +10771,7 @@
 "@id": "#26",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -9141,7 +10848,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -9153,6 +10861,7 @@
 "@id": "#28",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -9229,7 +10938,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -9241,6 +10951,7 @@
 "@id": "#30",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -9317,7 +11028,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -9329,6 +11041,7 @@
 "@id": "#32",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -9405,7 +11118,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -9417,6 +11131,7 @@
 "@id": "#34",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -9493,7 +11208,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -9505,6 +11221,7 @@
 "@id": "#36",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -9581,7 +11298,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -9593,6 +11311,7 @@
 "@id": "#38",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -9608,7 +11327,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -9620,6 +11340,7 @@
 "@id": "#40",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -9696,7 +11417,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -9708,6 +11430,7 @@
 "@id": "#42",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -9917,22 +11640,24 @@
 "@id": "#43",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
 ],
 "shacl:closed": [
 {
-"@value": true
+"@value": false
 }
 ],
 "shacl:property": [
 {
-"@id": "#44",
+"@id": "#48",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -9941,11 +11666,12 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#45",
+"@id": "#49",
 "@type": [
 "raml-shapes:AnyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:name": [
 {
@@ -9954,7 +11680,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#45/source-map",
+"@id": "#49/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -9962,7 +11688,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#45"
+"@value": "amf://id#49"
 }
 ],
 "sourcemaps:value": [
@@ -9993,7 +11719,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#44/source-map",
+"@id": "#48/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -10001,7 +11727,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#44"
+"@value": "amf://id#48"
 }
 ],
 "sourcemaps:value": [
@@ -10022,7 +11748,7 @@
 ],
 "doc:examples": [
 {
-"@id": "#46",
+"@id": "#44",
 "@type": [
 "doc:Example",
 "doc:DomainElement"
@@ -10034,25 +11760,38 @@
 ],
 "doc:structuredValue": [
 {
-"@id": "#46",
+"@id": "#44",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:processVar1": [
 {
-"@id": "#47",
+"@id": "#45",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "value1",
-"@type": "xsd:string"
+"@value": "value1"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#string"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_2"
 }
 ],
 "sourcemaps:sources": [
 {
-"@id": "#47/source-map",
+"@id": "#45/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -10060,7 +11799,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#47"
+"@value": "amf://id#45"
 }
 ],
 "sourcemaps:value": [
@@ -10076,19 +11815,30 @@
 ],
 "data:processVar2": [
 {
-"@id": "#48",
+"@id": "#46",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "value2",
-"@type": "xsd:string"
+"@value": "value2"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#string"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_3"
 }
 ],
 "sourcemaps:sources": [
 {
-"@id": "#48/source-map",
+"@id": "#46/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -10096,7 +11846,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#48"
+"@value": "amf://id#46"
 }
 ],
 "sourcemaps:value": [
@@ -10110,9 +11860,14 @@
 ]
 }
 ],
+"schema-org:name": [
+{
+"@value": "object_1"
+}
+],
 "sourcemaps:sources": [
 {
-"@id": "#46/source-map",
+"@id": "#44/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -10120,7 +11875,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#46"
+"@value": "amf://id#44"
 }
 ],
 "sourcemaps:value": [
@@ -10130,30 +11885,40 @@
 ]
 }
 ],
-"sourcemaps:data-node-properties": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#46"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "processVar2->[(118,22)-(118,37)]#processVar1->[(117,22)-(117,37)]"
-}
-]
-}
-],
 "sourcemaps:lexical": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#46"
+"@value": "data:processVar2"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(118,22)-(118,45)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#44"
 }
 ],
 "sourcemaps:value": [
 {
 "@value": "[(116,20)-(119,21)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:processVar1"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(117,22)-(117,45)]"
 }
 ]
 }
@@ -10169,7 +11934,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#46/source-map",
+"@id": "#44/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -10203,7 +11968,19 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#46"
+"@value": "amf://id#44"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(115,20)-(120,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "doc:structuredValue"
 }
 ],
 "sourcemaps:value": [
@@ -10217,7 +11994,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#46"
+"@value": "amf://id#44"
 }
 ],
 "sourcemaps:value": [
@@ -10231,12 +12008,12 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#46"
+"@value": "amf://id#44"
 }
 ],
 "sourcemaps:value": [
 {
-"@value": "amf://id#49"
+"@value": "amf://id#47"
 }
 ]
 }
@@ -10300,6 +12077,7 @@
 "@id": "#50",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -10315,7 +12093,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -10327,6 +12106,7 @@
 "@id": "#52",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -10403,7 +12183,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -10415,6 +12196,7 @@
 "@id": "#54",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -10491,7 +12273,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -10503,6 +12286,7 @@
 "@id": "#56",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -10579,7 +12363,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -10591,6 +12376,7 @@
 "@id": "#58",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -10667,7 +12453,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -10679,6 +12466,7 @@
 "@id": "#60",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -10755,7 +12543,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -10767,6 +12556,7 @@
 "@id": "#62",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -10843,7 +12633,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -10855,6 +12646,7 @@
 "@id": "#64",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -10931,7 +12723,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -10943,6 +12736,7 @@
 "@id": "#66",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -11019,7 +12813,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -11031,6 +12826,7 @@
 "@id": "#68",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -11046,7 +12842,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -11058,6 +12855,7 @@
 "@id": "#70",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -11134,7 +12932,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -11146,6 +12945,7 @@
 "@id": "#72",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -11367,30 +13167,47 @@
 {
 "@id": "#74",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:queryParameters": [
 {
 "@id": "#75",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
-"data:batchSize": [
+"data:startIndex": [
 {
 "@id": "#76",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
-"data:default": [
+"data:description": [
 {
 "@id": "#77",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "25",
-"@type": "xsd:integer"
+"@value": "Index where the current page begins. It must be greater than zero."
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#string"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_4"
 }
 ],
 "sourcemaps:sources": [
@@ -11408,7 +13225,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(28,17)-(28,19)]"
+"@value": "[(22,21)-(22,89)]"
 }
 ]
 }
@@ -11417,16 +13234,27 @@
 ]
 }
 ],
-"data:description": [
+"data:default": [
 {
 "@id": "#78",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "Number of items to return. It must be -1 (indicating all items) or greater.",
-"@type": "xsd:string"
+"@value": "1"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_5"
 }
 ],
 "sourcemaps:sources": [
@@ -11444,7 +13272,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(27,21)-(27,98)]"
+"@value": "[(23,17)-(23,18)]"
 }
 ]
 }
@@ -11457,12 +13285,23 @@
 {
 "@id": "#79",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "false",
-"@type": "xsd:boolean"
+"@value": "false"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#boolean"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_6"
 }
 ],
 "sourcemaps:sources": [
@@ -11480,7 +13319,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(29,18)-(29,23)]"
+"@value": "[(24,18)-(24,23)]"
 }
 ]
 }
@@ -11493,12 +13332,23 @@
 {
 "@id": "#80",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "integer",
-"@type": "xsd:string"
+"@value": "integer"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#string"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_7"
 }
 ],
 "sourcemaps:sources": [
@@ -11516,13 +13366,18 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(30,14)-(30,21)]"
+"@value": "[(25,14)-(25,21)]"
 }
 ]
 }
 ]
 }
 ]
+}
+],
+"schema-org:name": [
+{
+"@value": "object_3"
 }
 ],
 "sourcemaps:sources": [
@@ -11531,30 +13386,64 @@
 "@type": [
 "sourcemaps:SourceMap"
 ],
-"sourcemaps:data-node-properties": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#76"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "required->[(29,8)-(30,0)]#type->[(30,8)-(31,0)]#default->[(28,8)-(29,0)]#description->[(27,8)-(28,0)]"
-}
-]
-}
-],
 "sourcemaps:lexical": [
 {
 "sourcemaps:element": [
 {
+"@value": "data:type"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(25,8)-(26,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:default"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(23,8)-(24,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
 "@value": "amf://id#76"
 }
 ],
 "sourcemaps:value": [
 {
-"@value": "[(27,0)-(31,0)]"
+"@value": "[(22,0)-(26,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:description"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(22,8)-(23,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:required"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(24,8)-(25,0)]"
 }
 ]
 }
@@ -11563,22 +13452,35 @@
 ]
 }
 ],
-"data:startIndex": [
+"data:batchSize": [
 {
 "@id": "#81",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
-"data:default": [
+"data:description": [
 {
 "@id": "#82",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "1",
-"@type": "xsd:integer"
+"@value": "Number of items to return. It must be -1 (indicating all items) or greater."
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#string"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_9"
 }
 ],
 "sourcemaps:sources": [
@@ -11596,7 +13498,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(23,17)-(23,18)]"
+"@value": "[(27,21)-(27,98)]"
 }
 ]
 }
@@ -11605,16 +13507,27 @@
 ]
 }
 ],
-"data:description": [
+"data:default": [
 {
 "@id": "#83",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "Index where the current page begins. It must be greater than zero.",
-"@type": "xsd:string"
+"@value": "25"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_10"
 }
 ],
 "sourcemaps:sources": [
@@ -11632,7 +13545,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(22,21)-(22,89)]"
+"@value": "[(28,17)-(28,19)]"
 }
 ]
 }
@@ -11645,12 +13558,23 @@
 {
 "@id": "#84",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "false",
-"@type": "xsd:boolean"
+"@value": "false"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#boolean"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_11"
 }
 ],
 "sourcemaps:sources": [
@@ -11668,7 +13592,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(24,18)-(24,23)]"
+"@value": "[(29,18)-(29,23)]"
 }
 ]
 }
@@ -11681,12 +13605,23 @@
 {
 "@id": "#85",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "integer",
-"@type": "xsd:string"
+"@value": "integer"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#string"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_12"
 }
 ],
 "sourcemaps:sources": [
@@ -11704,13 +13639,18 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(25,14)-(25,21)]"
+"@value": "[(30,14)-(30,21)]"
 }
 ]
 }
 ]
 }
 ]
+}
+],
+"schema-org:name": [
+{
+"@value": "object_8"
 }
 ],
 "sourcemaps:sources": [
@@ -11719,36 +13659,75 @@
 "@type": [
 "sourcemaps:SourceMap"
 ],
-"sourcemaps:data-node-properties": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#81"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "required->[(24,8)-(25,0)]#type->[(25,8)-(26,0)]#default->[(23,8)-(24,0)]#description->[(22,8)-(23,0)]"
-}
-]
-}
-],
 "sourcemaps:lexical": [
 {
 "sourcemaps:element": [
 {
+"@value": "data:type"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(30,8)-(31,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:default"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(28,8)-(29,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
 "@value": "amf://id#81"
 }
 ],
 "sourcemaps:value": [
 {
-"@value": "[(22,0)-(26,0)]"
+"@value": "[(27,0)-(31,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:description"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(27,8)-(28,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:required"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(29,8)-(30,0)]"
 }
 ]
 }
 ]
 }
 ]
+}
+],
+"schema-org:name": [
+{
+"@value": "object_2"
 }
 ],
 "sourcemaps:sources": [
@@ -11757,21 +13736,19 @@
 "@type": [
 "sourcemaps:SourceMap"
 ],
-"sourcemaps:data-node-properties": [
+"sourcemaps:lexical": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#75"
+"@value": "data:batchSize"
 }
 ],
 "sourcemaps:value": [
 {
-"@value": "startIndex->[(21,6)-(26,0)]#batchSize->[(26,6)-(31,0)]"
+"@value": "[(26,6)-(31,0)]"
 }
 ]
-}
-],
-"sourcemaps:lexical": [
+},
 {
 "sourcemaps:element": [
 {
@@ -11781,6 +13758,18 @@
 "sourcemaps:value": [
 {
 "@value": "[(21,0)-(31,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:startIndex"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(21,6)-(26,0)]"
 }
 ]
 }
@@ -11793,41 +13782,52 @@
 {
 "@id": "#86",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:200": [
 {
 "@id": "#87",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:body": [
 {
 "@id": "#88",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
-"data:properties": [
+"data:type": [
 {
 "@id": "#89",
 "@type": [
-"data:Object"
-],
-"data:batchSize": [
-{
-"@id": "#90",
-"@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "integer",
-"@type": "xsd:string"
+"@value": "object"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#string"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_16"
 }
 ],
 "sourcemaps:sources": [
 {
-"@id": "#90/source-map",
+"@id": "#89/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -11835,12 +13835,12 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#90"
+"@value": "amf://id#89"
 }
 ],
 "sourcemaps:value": [
 {
-"@value": "[(37,23)-(37,30)]"
+"@value": "[(34,16)-(34,22)]"
 }
 ]
 }
@@ -11848,17 +13848,36 @@
 }
 ]
 }
+],
+"data:properties": [
+{
+"@id": "#90",
+"@type": [
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:startIndex": [
 {
 "@id": "#91",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "integer",
-"@type": "xsd:string"
+"@value": "integer"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#string"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_18"
 }
 ],
 "sourcemaps:sources": [
@@ -11885,16 +13904,27 @@
 ]
 }
 ],
-"data:totalCount": [
+"data:batchSize": [
 {
 "@id": "#92",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "integer",
-"@type": "xsd:string"
+"@value": "integer"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#string"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_19"
 }
 ],
 "sourcemaps:sources": [
@@ -11912,7 +13942,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(38,24)-(38,31)]"
+"@value": "[(37,23)-(37,30)]"
 }
 ]
 }
@@ -11921,54 +13951,27 @@
 ]
 }
 ],
-"sourcemaps:sources": [
-{
-"@id": "#89/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:data-node-properties": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#89"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "totalCount->[(38,12)-(40,0)]#startIndex->[(36,12)-(37,0)]#batchSize->[(37,12)-(38,0)]"
-}
-]
-}
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#89"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(36,0)-(40,0)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:type": [
+"data:totalCount": [
 {
 "@id": "#93",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "object",
-"@type": "xsd:string"
+"@value": "integer"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#string"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_20"
 }
 ],
 "sourcemaps:sources": [
@@ -11986,13 +13989,83 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(34,16)-(34,22)]"
+"@value": "[(38,24)-(38,31)]"
 }
 ]
 }
 ]
 }
 ]
+}
+],
+"schema-org:name": [
+{
+"@value": "object_17"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#90/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "data:totalCount"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(38,12)-(40,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:startIndex"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(36,12)-(37,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#90"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(36,0)-(40,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:batchSize"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(37,12)-(38,0)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"schema-org:name": [
+{
+"@value": "object_15"
 }
 ],
 "sourcemaps:sources": [
@@ -12001,21 +14074,19 @@
 "@type": [
 "sourcemaps:SourceMap"
 ],
-"sourcemaps:data-node-properties": [
+"sourcemaps:lexical": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#88"
+"@value": "data:properties"
 }
 ],
 "sourcemaps:value": [
 {
-"@value": "type->[(34,10)-(35,0)]#properties->[(35,10)-(40,0)]"
+"@value": "[(35,10)-(40,0)]"
 }
 ]
-}
-],
-"sourcemaps:lexical": [
+},
 {
 "sourcemaps:element": [
 {
@@ -12027,10 +14098,27 @@
 "@value": "[(34,0)-(40,0)]"
 }
 ]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:type"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(34,10)-(35,0)]"
 }
 ]
 }
 ]
+}
+]
+}
+],
+"schema-org:name": [
+{
+"@value": "object_14"
 }
 ],
 "sourcemaps:sources": [
@@ -12039,21 +14127,19 @@
 "@type": [
 "sourcemaps:SourceMap"
 ],
-"sourcemaps:data-node-properties": [
+"sourcemaps:lexical": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#87"
+"@value": "data:body"
 }
 ],
 "sourcemaps:value": [
 {
-"@value": "body->[(33,8)-(40,0)]"
+"@value": "[(33,8)-(40,0)]"
 }
 ]
-}
-],
-"sourcemaps:lexical": [
+},
 {
 "sourcemaps:element": [
 {
@@ -12071,27 +14157,30 @@
 ]
 }
 ],
+"schema-org:name": [
+{
+"@value": "object_13"
+}
+],
 "sourcemaps:sources": [
 {
 "@id": "#86/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
-"sourcemaps:data-node-properties": [
+"sourcemaps:lexical": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#86"
+"@value": "data:200"
 }
 ],
 "sourcemaps:value": [
 {
-"@value": "200->[(32,6)-(40,0)]"
+"@value": "[(32,6)-(40,0)]"
 }
 ]
-}
-],
-"sourcemaps:lexical": [
+},
 {
 "sourcemaps:element": [
 {
@@ -12109,27 +14198,30 @@
 ]
 }
 ],
+"schema-org:name": [
+{
+"@value": "object_1"
+}
+],
 "sourcemaps:sources": [
 {
 "@id": "#74/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
-"sourcemaps:data-node-properties": [
+"sourcemaps:lexical": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#74"
+"@value": "data:responses"
 }
 ],
 "sourcemaps:value": [
 {
-"@value": "queryParameters->[(20,4)-(31,0)]#responses->[(31,4)-(40,0)]"
+"@value": "[(31,4)-(40,0)]"
 }
 ]
-}
-],
-"sourcemaps:lexical": [
+},
 {
 "sourcemaps:element": [
 {
@@ -12139,6 +14231,18 @@
 "sourcemaps:value": [
 {
 "@value": "[(20,4)-(40,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:queryParameters"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(20,4)-(31,0)]"
 }
 ]
 }
@@ -12384,7 +14488,6 @@
 "doc": "http://a.ml/vocabularies/document#",
 "sourcemaps": "http://a.ml/vocabularies/document-source-maps#",
 "schema-org": "http://schema.org/",
-"xsd": "http://www.w3.org/2001/XMLSchema#",
 "hydra": "http://www.w3.org/ns/hydra/core#"
 }
 }

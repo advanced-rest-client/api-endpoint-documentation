@@ -12,13 +12,9 @@
 // tslint:disable:variable-name Describing an API that's defined elsewhere.
 // tslint:disable:no-any describes the API as best we are able today
 
-import {PolymerElement} from '@polymer/polymer/polymer-element.js';
+import {html, css, LitElement} from 'lit-element';
 
 import {AmfHelperMixin} from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
-
-import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
-
-import {html} from '@polymer/polymer/lib/utils/html-tag.js';
 
 declare namespace ApiElements {
 
@@ -31,7 +27,7 @@ declare namespace ApiElements {
    * To properly compute all the information relevant to endpoint documentation
    * set the following properties:
    *
-   * - amfModel - as AMF's WebApi data model
+   * - amf - as AMF's WebApi data model
    * - endpoint - As AMF's EndPoint data model
    *
    * When set, this will automatically populate the wiew with data.
@@ -56,7 +52,7 @@ declare namespace ApiElements {
    * - else if `iron-meta` with key `ApiBaseUri` exists and contains a value
    * it uses it uses this value as a base uri for the endpoin
    *  t
-   * - else if `amfModel` is set then it computes base uri value from main
+   * - else if `amf` is set then it computes base uri value from main
    * model document
    * Then it concatenates computed base URI with `endpoint`'s path property.
    *
@@ -72,7 +68,7 @@ declare namespace ApiElements {
    * ```
    *
    * Note: The element will not get notified about the change in `iron-meta`.
-   * The change will be reflected whehn `amfModel` or `endpoint` property chnage.
+   * The change will be reflected whehn `amf` or `endpoint` property chnage.
    *
    * ## Inline methods layout
    *
@@ -110,163 +106,13 @@ declare namespace ApiElements {
   class ApiEndpointDocumentation extends
     AmfHelperMixin(
     Object) {
-
-    /**
-     * Generated AMF json/ld model form the API spec.
-     * The element assumes the object of the first array item to be a
-     * type of `"http://raml.org/vocabularies/document#Document`
-     * on AMF vocabulary.
-     *
-     * It is only usefult for the element to resolve references.
-     */
-    amfModel: object|any[]|null;
-
-    /**
-     * `raml-aware` scope property to use.
-     */
-    aware: string|null|undefined;
-
-    /**
-     * Method's endpoint definition as a
-     * `http://raml.org/vocabularies/http#endpoint` of AMF model.
-     */
-    endpoint: object|null|undefined;
-
-    /**
-     * The ID in `amfModel` of current selection. It can be this endpoint
-     * or any of methods
-     */
-    selected: string|null|undefined;
+    readonly _exampleGenerator: any;
 
     /**
      * A property to set to override AMF's model base URI information.
      * When this property is set, the `endpointUri` property is recalculated.
      */
     baseUri: string|null|undefined;
-
-    /**
-     * Computed value, API version name
-     */
-    readonly apiVersion: string|null|undefined;
-
-    /**
-     * Endpoint URI to display in main URL field.
-     * This value is computed when `amfModel`, `endpoint` or `baseUri` change.
-     */
-    readonly endpointUri: string|null|undefined;
-
-    /**
-     * Computed value of the `http://raml.org/vocabularies/http#server`
-     * from `amfModel`
-     */
-    readonly server: object|null|undefined;
-
-    /**
-     * Endpoint name.
-     * It should be either a "displayName" or endpoint's relative
-     * path.
-     */
-    readonly endpointName: string|null|undefined;
-
-    /**
-     * Computed value, `true` if the endpoint has display name.
-     */
-    readonly hasName: boolean|null|undefined;
-
-    /**
-     * Computed value of method description from `method` property.
-     */
-    readonly description: string|null|undefined;
-
-    /**
-     * Computed value of endpoint's path.
-     */
-    readonly path: string|null|undefined;
-
-    /**
-     * Computed value from current `method`. True if the model containsPATCH
-     * custom properties (annotations in RAML).
-     */
-    readonly hasCustomProperties: boolean|null|undefined;
-
-    /**
-     * Computed value of AMF security definition from `method`
-     * property.
-     */
-    readonly security: object|null|undefined;
-
-    /**
-     * Computed value, true if `security` has values.
-     */
-    readonly hasSecurity: boolean|null|undefined;
-
-    /**
-     * If set it will renders the view in the narrow layout.
-     */
-    narrow: boolean|null|undefined;
-
-    /**
-     * List of traits and resource types, if any.
-     */
-    readonly extendsTypes: Array<object|null>|null;
-
-    /**
-     * Computed value of a parent type.
-     * In RAML it is resource type that can be applied to a resource.
-     */
-    readonly parentType: object|null|undefined;
-
-    /**
-     * Computed value, true if `parentType` has a value.
-     */
-    readonly hasParentType: boolean|null|undefined;
-
-    /**
-     * Computed value for parent type name.
-     */
-    readonly parentTypeName: string|null|undefined;
-
-    /**
-     * List of traits appied to this endpoint
-     */
-    readonly traits: Array<object|null>|null;
-
-    /**
-     * Computed value, true if the endpoint has traits.
-     */
-    readonly hasTraits: boolean|null|undefined;
-
-    /**
-     * True if the endpoint is extended by either traits or resource type.
-     */
-    readonly hasExtension: boolean|null|undefined;
-
-    /**
-     * Model to generate a link to previous HTTP endpoint.
-     * It should contain `id` and `label` properties
-     */
-    previous: object|null|undefined;
-
-    /**
-     * Computed value, true if `previous` is set
-     */
-    readonly hasPreviousLink: boolean|null|undefined;
-
-    /**
-     * Model to generate a link to next HTTP endpoint.
-     * It should contain `id` and `label` properties
-     */
-    next: object|null|undefined;
-
-    /**
-     * Computed value, true if `next` is set
-     */
-    readonly hasNextLink: boolean|null|undefined;
-
-    /**
-     * Computed value, true to render bottom navigation
-     */
-    readonly hasPagination: boolean|null|undefined;
 
     /**
      * Scroll target used to observe `scroll` event.
@@ -279,28 +125,123 @@ declare namespace ApiElements {
     scrollTarget: object|null|undefined;
 
     /**
-     * Passing value of `noTryIt` to the method documentation.
-     * Hiddes "Try it" button from the view.
-     */
-    noTryIt: boolean|null|undefined;
-
-    /**
-     * Computed list of operations to render in the operations list.
-     */
-    readonly operations: object|null;
-
-    /**
-     * Computed value if the endpoint contains operations.
-     */
-    readonly hasOperations: boolean|null|undefined;
-
-    /**
      * If set then it renders methods documentation inline with
      * the endpoint documentation.
      * When it's not set (or value is `false`, default) then it renders
      * just a list of methods with links.
      */
     inlineMethods: boolean|null|undefined;
+
+    /**
+     * Computed list of operations to render in the operations list.
+     */
+    operations: object|null;
+
+    /**
+     * Method's endpoint definition as a
+     * `http://raml.org/vocabularies/http#endpoint` of AMF model.
+     */
+    endpoint: object|null|undefined;
+
+    /**
+     * The ID in `amf` of current selection. It can be this endpoint
+     * or any of methods
+     */
+    selected: string|null|undefined;
+
+    /**
+     * `raml-aware` scope property to use.
+     */
+    aware: string|null|undefined;
+
+    /**
+     * Computed value, API version name
+     */
+    apiVersion: string|null|undefined;
+
+    /**
+     * Endpoint URI to display in main URL field.
+     * This value is computed when `amf`, `endpoint` or `baseUri` change.
+     */
+    endpointUri: string|null|undefined;
+
+    /**
+     * Computed value of the `http://raml.org/vocabularies/http#server`
+     * from `amf`
+     */
+    server: object|null|undefined;
+
+    /**
+     * Endpoint name.
+     * It should be either a "displayName" or endpoint's relative
+     * path.
+     */
+    endpointName: string|null|undefined;
+
+    /**
+     * Computed value of method description from `method` property.
+     */
+    description: string|null|undefined;
+
+    /**
+     * Computed value of endpoint's path.
+     */
+    path: string|null|undefined;
+
+    /**
+     * Computed value from current `method`. True if the model containsPATCH
+     * custom properties (annotations in RAML).
+     */
+    hasCustomProperties: boolean|null|undefined;
+
+    /**
+     * If set it will renders the view in the narrow layout.
+     */
+    narrow: boolean|null|undefined;
+
+    /**
+     * List of traits and resource types, if any.
+     */
+    extendsTypes: Array<object|null>|null;
+
+    /**
+     * Computed value of a parent type.
+     * In RAML it is resource type that can be applied to a resource.
+     */
+    parentType: object|null|undefined;
+
+    /**
+     * Computed value for parent type name.
+     */
+    parentTypeName: string|null|undefined;
+
+    /**
+     * List of traits appied to this endpoint
+     */
+    traits: Array<object|null>|null;
+
+    /**
+     * Model to generate a link to previous HTTP endpoint.
+     * It should contain `id` and `label` properties
+     */
+    previous: object|null|undefined;
+
+    /**
+     * Model to generate a link to next HTTP endpoint.
+     * It should contain `id` and `label` properties
+     */
+    next: object|null|undefined;
+
+    /**
+     * Passing value of `noTryIt` to the method documentation.
+     * Hiddes "Try it" button from the view.
+     */
+    noTryIt: boolean|null|undefined;
+
+    /**
+     * Computed value if the endpoint contains operations.
+     */
+    hasOperations: boolean|null|undefined;
 
     /**
      * In inline mode, passes the `noUrlEditor` value on the
@@ -314,7 +255,17 @@ declare namespace ApiElements {
      * This is only required in inline mode (`inlineMethods`).
      */
     redirectUri: string|null|undefined;
-    readonly _editorEventTarget: object|null|undefined;
+
+    /**
+     * When set it enables Anypoint compatibility theme
+     */
+    legacy: boolean|null|undefined;
+
+    /**
+     * Applied outlined theme to the try it panel
+     */
+    outlined: boolean|null|undefined;
+    _editorEventTarget: object|null|undefined;
 
     /**
      * Tries to find an example value (whether it's default value or from an
@@ -330,6 +281,9 @@ declare namespace ApiElements {
      * @param endpoint Endpoint model.
      */
     _computeOperations(endpoint: object|null, inlineMethods: Boolean|null): Array<object|null>|null;
+    _endpointChanged(): void;
+    _processModelChange(): void;
+    _processEndpointChange(): void;
 
     /**
      * Computes method's endpoint name.
@@ -363,13 +317,6 @@ declare namespace ApiElements {
     _computeParentType(types: Array<object|null>|null): object|null|undefined;
 
     /**
-     * Computes value for `hasParentType` property
-     *
-     * @param type Parent resource type.
-     */
-    _computeHasParentType(type: object|null): Boolean|null;
-
-    /**
      * Computes vaolue for `parentTypeName`
      *
      * @param type Parent type shape
@@ -392,16 +339,6 @@ declare namespace ApiElements {
     _computeTraitNames(traits: Array<object|null>|null): String|null|undefined;
 
     /**
-     * Computes value for `hasExtension` property
-     */
-    _computeHasExtension(hasTraits: Boolean|null, hasParentType: Boolean|null): Boolean|null;
-
-    /**
-     * Computes value for `hasPagination` property
-     */
-    _computeHasNavigation(previous: Boolean|null, next: Boolean|null): Boolean|null;
-
-    /**
      * Navigates to next method. Calls `_navigate` with id of previous item.
      */
     _navigatePrevious(): void;
@@ -416,7 +353,6 @@ declare namespace ApiElements {
      * can update their state.
      */
     _navigate(id: String|null, type: String|null): void;
-    _copyPathClipboard(e: any): void;
     _methodNavigate(e: any): void;
 
     /**
@@ -463,10 +399,8 @@ declare namespace ApiElements {
      * Hadnler for either `selected` or `endpoint proerty change`
      *
      * @param selected Currently selected shape ID in AMF model
-     * @param endpoint AMF model for the endpoint.
-     * @param inlineMethods True if methods documentation is included
      */
-    _selectedChanged(selected: String|null, endpoint: object|null, inlineMethods: Boolean|null): void;
+    _selectedChanged(selected: String|null): void;
 
     /**
      * Positions the method (operation) or endpoint (main title).
@@ -521,43 +455,25 @@ declare namespace ApiElements {
     _inlineMethodsChanged(value: Boolean|null): void;
 
     /**
-     * The try it panel is not rendered at start time when the user initializes
-     * the endpoint documentation to reduce number of computations happening
-     * at the same time. When `dom-repeat` renders all documentation
-     * panels it calls this function which initializes requests panels one
-     * by one in the tasks scheduler.
-     */
-    _operationRendered(): void;
-
-    /**
-     * Renders next try it panel from the NodeList
-     *
-     * @param queue Node list of `dom-if`'s with the panel
-     * @param index Currently iterated item.
-     */
-    _renderTryItQueue(queue: NodeList|null, index: Number|null): void;
-
-    /**
-     * Request editor handles events when it's state changes. But the change
-     * may influence other editors visible on the same page (eg URL change).
-     * When the request panel is rendered it sets events target of the panel
-     * to the panel so it won't listen for changes in other editors.
-     */
-    _tryItRendered(e: CustomEvent|null): void;
-
-    /**
-     * Sets `false` on try it condition templae.
-     */
-    _clearRequestPanels(): void;
-
-    /**
      * Computes special class names for the method container.
      * It adds `first`, and `last` names to corresponding
      * containers.
      */
     _computeTryItColumClass(index: Number|null, operations: any[]|null): String|null;
     _computeTryItSelected(item: any): any;
-    _endpointChnaged(): void;
+    _apiChanged(e: any): void;
+    render(): any;
+    _getDescriptionTemplate(): any;
+    _getTitleTemplate(): any;
+    _getUrlTemplate(): any;
+    _getExtensionsTemplate(): any;
+    _getOperationsTemplate(): any;
+    _getInlineMethodsTemplate(): any;
+    _inlineMethodTemplate(item: any, index: any, operations: any): any;
+    _getRequestPanelTemplate(item: any, index: any): any;
+    _getSnippetsTemplate(item: any, index: any): any;
+    _getMethodsListTemplate(): any;
+    _getNavigationTemplate(): any;
   }
 }
 
