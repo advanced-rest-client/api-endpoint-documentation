@@ -14,10 +14,6 @@ A component to generate documentation for an API resource from AMF model.
 <api-endpoint-documentation></api-endpoint-documentation>
 ```
 
-### API components
-
-This components is a part of [API components ecosystem](https://elements.advancedrestclient.com/)
-
 ## Usage
 
 ### Installation
@@ -82,8 +78,6 @@ npm install
 
 ### Running the demo locally
 
-### Running the demo locally
-
 ```sh
 npm start
 ```
@@ -95,9 +89,9 @@ npm test
 
 ## Breaking Changes in v3
 
-When using `inlinemethods` property you should not this breaking changes.
+When using `inlinemethods` property you should note this breaking changes.
 
-### popup location
+### OAuth popup location
 
 The `bower-location` attribute becomes `auth-popup-location`.
 It is a path to `node_modules` directory. It can be both relative or absolute location. For example `/static/console/node_modules` will produce OAuth Redirect URI `/static/console/node_modules/@advanced-rest-client/oauth-authorization/oauth-popup.html`.
