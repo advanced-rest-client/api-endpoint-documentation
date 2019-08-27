@@ -2,5 +2,6 @@
   "demo-api/demo-api.raml": "RAML 1.0",
   "appian-api/appian-api.raml": "RAML 1.0",
   "nexmo-sms-api/nexmo-sms-api.raml": "RAML 1.0",
-  "exchange-experience-api/exchange-experience-api.raml": "RAML 0.8"
+  "exchange-experience-api/exchange-experience-api.raml": "RAML 0.8",
+  "google-drive-api/google-drive-api.raml": "RAML 1.0"
 }
