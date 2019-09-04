@@ -463,16 +463,32 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
        */
       redirectUri: { type: String },
       /**
-       * When set it enables Anypoint compatibility theme
+       * @deprecated Use `compatibility` instead
        */
       legacy: { type: Boolean },
+      /**
+       * Enables compatibility with Anypoint components.
+       */
+      compatibility: { type: Boolean },
       /**
        * Applied outlined theme to the try it panel
        */
       outlined: { type: Boolean },
+      /**
+       * Passed to `api-type-document`. Enables internal links rendering for types.
+       */
+      graph: { type: Boolean },
 
       _editorEventTarget: { type: Object }
     };
+  }
+
+  get legacy() {
+    return this.compatibility;
+  }
+
+  set legacy(value) {
+    this.compatibility = value;
   }
 
   get _exampleGenerator() {
@@ -1229,7 +1245,8 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       narrow,
       baseUri,
       noTryIt,
-      legacy
+      compatibility,
+      graph
     } = this;
     const klas = this._computeTryItColumClass(index, operations);
     return html`
@@ -1242,7 +1259,8 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
         .narrow="${narrow}"
         .baseUri="${baseUri}"
         .noTryIt="${noTryIt}"
-        .legacy="${legacy}"
+        .compatibility="${compatibility}"
+        ?graph="${graph}"
         rendersecurity></api-method-documentation>
       <div class="try-it-column">
         ${this._getRequestPanelTemplate(item, index)}
@@ -1266,7 +1284,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
         title="Toogle code example details">
         <div class="heading3 table-title" role="heading" aria-level="2">Try the API</div>
         <div class="title-area-actions">
-          <anypoint-button class="toggle-button" ?legacy="${this.legacy}">
+          <anypoint-button class="toggle-button" ?compatibility="${this.compatibility}">
             ${label}
             <iron-icon icon="arc:expand-more" class="${iconClass}"></iron-icon>
           </anypoint-button>
@@ -1280,7 +1298,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
           .noUrlEditor="${this.noUrlEditor}"
           .baseUri="${this.baseUri}"
           .redirectUri="${this.redirectUri}"
-          .legacy="${this.legacy}"
+          .legacy="${this.compatibility}"
           .outlined="${this.outlined}"
           nodocs></api-request-panel>
       </iron-collapse>
@@ -1297,7 +1315,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
         @click="${this._toggleSnippets}" title="Toogle code example details">
         <div class="heading3 table-title" role="heading" aria-level="2">Code examples</div>
         <div class="title-area-actions">
-          <anypoint-button class="toggle-button" ?legacy="${this.legacy}">
+          <anypoint-button class="toggle-button" ?compatibility="${this.compatibility}">
             ${label}
             <iron-icon icon="arc:expand-more" class="${iconClass}"></iron-icon>
           </anypoint-button>
@@ -1336,10 +1354,10 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     if (!next && !previous) {
       return;
     }
-    const { legacy } = this;
+    const { compatibility } = this;
     return html`<section class="bottom-nav">
       ${previous ? html`<div class="bottom-link previous" @click="${this._navigatePrevious}">
-        <anypoint-icon-button title="${previous.label}" ?legacy="${legacy}">
+        <anypoint-icon-button title="${previous.label}" ?compatibility="${compatibility}">
           <iron-icon icon="arc:chevron-left"></iron-icon>
         </anypoint-icon-button>
         <span class="nav-label">${previous.label}</span>
@@ -1347,7 +1365,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       <div class="nav-separator"></div>
       ${next ? html`<div class="bottom-link next" @click="${this._navigateNext}">
         <span class="nav-label">${next.label}</span>
-        <anypoint-icon-button title="${next.label}" ?legacy="${legacy}">
+        <anypoint-icon-button title="${next.label}" ?compatibility="${compatibility}">
           <iron-icon icon="arc:chevron-right"></iron-icon>
         </anypoint-icon-button>
       </div>` : ''}
