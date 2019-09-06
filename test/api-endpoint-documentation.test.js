@@ -257,6 +257,23 @@ describe('<api-endpoint-documentation>', function() {
         });
       });
 
+      describe('Method description rendering', () => {
+        let amf;
+        before(async () => {
+          amf = await AmfLoader.load(demoApi, compact);
+        });
+
+        it('renders title when display name', async () => {
+          const endpoint = AmfLoader.lookupEndpoint(amf, '/people');
+          const element = await modelFixture(amf, endpoint);
+          await aTimeout();
+          const desc = element.shadowRoot.querySelector('.methods .method arc-marked');
+          assert.ok(desc);
+          assert.typeOf(desc.markdown, 'string');
+        });
+
+      });
+
       describe('Basic computations', () => {
         let amf;
         before(async () => {

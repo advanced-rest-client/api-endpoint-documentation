@@ -111,13 +111,49 @@ securitySchemes:
 
     You can create, update, read or delete a person resource from the
     system.
+
+    This is example markdown:
+    ```
+    {
+      "status": "FAILURE",
+      "error": {
+        "reason": "",
+        "message": "Database exception."
+      }
+    }
+    ```
+
+    If the API call fails in any error scenario, the following are the expected error messages in the response:
+
+    | Error Code | Message | Description |
+    | ---------- | ------- | ----------- |
+    | | Database exception. | Returned if the Facet Rules cannot be retrieved from the data store. |
+
   securedBy: oauth_2_0
   is: [Adminable, Testable]
   type: ResourceNotFound
   get:
     (deprecated): This method will be replace in next version of this API with search API.
     displayName: List people
-    description: Use this method to list all people in the system.
+    description: |
+      Use this method to list all people in the system.
+
+      This is example markdown:
+      ```
+      {
+        "status": "FAILURE",
+        "error": {
+          "reason": "",
+          "message": "Database exception."
+        }
+      }
+      ```
+
+      If the API call fails in any error scenario, the following are the expected error messages in the response:
+
+      | Error Code | Message | Description |
+      | ---------- | ------- | ----------- |
+      | | Database exception. | Returned if the Facet Rules cannot be retrieved from the data store. |
     is: [Paginated: {resourceType: AppPerson}]
 
     headers:

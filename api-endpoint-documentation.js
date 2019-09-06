@@ -1159,7 +1159,8 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       aware,
       hasCustomProperties,
       endpoint,
-      hasOperations
+      hasOperations,
+      description
     } = this;
     return html`
     ${aware ? html`<raml-aware
@@ -1169,7 +1170,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     ${this._getUrlTemplate()}
     ${this._getExtensionsTemplate()}
     ${hasCustomProperties ? html`<api-annotation-document .shape="${endpoint}"></api-annotation-document>` : ''}
-    ${this._getDescriptionTemplate()}
+    ${this._getDescriptionTemplate(description)}
     <div class="heading2 table-title" role="heading" aria-level="2">Methods</div>
     ${hasOperations ?
       this._getOperationsTemplate() :
@@ -1177,8 +1178,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     ${this._getNavigationTemplate()}`;
   }
 
-  _getDescriptionTemplate() {
-    const { description } = this;
+  _getDescriptionTemplate(description) {
     if (!description) {
       return html``;
     }
@@ -1344,7 +1344,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
             <span class="method-value" data-method="${item.name}">${item.name}</span>
           </a>
         </div>
-        ${item.desc ? html`<p>${item.desc}</p>` : ''}
+        ${this._getDescriptionTemplate(item.desc)}
       </div>`)}
     </section>`;
   }
