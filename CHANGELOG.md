@@ -498,3 +498,12 @@
 
 
 
+## 3.0.2 (2019-09-06)
+
+
+### Features
+
+* addig `compatibility` and `graph` proeprties ([ecd284d](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/ecd284d))
+
+
+
