@@ -2,6 +2,7 @@ import { html, css, LitElement } from 'lit-element';
 import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
 import markdownStyles from '@advanced-rest-client/markdown-styles/markdown-styles.js';
 import httpMethodStyles from '@api-components/http-method-label/http-method-label-common-styles.js';
+import { expandMore, chevronLeft, chevronRight } from '@advanced-rest-client/arc-icons/ArcIcons.js';
 import '@api-components/raml-aware/raml-aware.js';
 import '@api-components/api-annotation-document/api-annotation-document.js';
 import '@api-components/api-parameters-document/api-parameters-document.js';
@@ -12,8 +13,6 @@ import '@api-components/api-request-panel/api-request-panel.js';
 import '@polymer/iron-collapse/iron-collapse.js';
 import '@advanced-rest-client/http-code-snippets/http-code-snippets.js';
 import '@api-components/api-example-generator/api-example-generator.js';
-import '@advanced-rest-client/arc-icons/arc-icons.js';
-import '@polymer/iron-icon/iron-icon.js';
 /**
  * `api-endpoint-documentation`
  *
@@ -327,6 +326,13 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
         font-style: var(--no-info-message-font-style, italic);
         font-size: var(--no-info-message-font-size, 16px);
         color: var(--no-info-message-color, rgba(0, 0, 0, 0.74));
+      }
+
+      .icon {
+        display: block;
+        width: 24px;
+        height: 24px;
+        fill: currentColor;
       }
       `
     ];
@@ -1286,7 +1292,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
         <div class="title-area-actions">
           <anypoint-button class="toggle-button" ?compatibility="${this.compatibility}">
             ${label}
-            <iron-icon icon="arc:expand-more" class="${iconClass}"></iron-icon>
+            <span class="icon ${iconClass}">${expandMore}</span>
           </anypoint-button>
         </div>
       </div>
@@ -1317,7 +1323,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
         <div class="title-area-actions">
           <anypoint-button class="toggle-button" ?compatibility="${this.compatibility}">
             ${label}
-            <iron-icon icon="arc:expand-more" class="${iconClass}"></iron-icon>
+            <span class="icon ${iconClass}">${expandMore}</span>
           </anypoint-button>
         </div>
       </div>
@@ -1358,7 +1364,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     return html`<section class="bottom-nav">
       ${previous ? html`<div class="bottom-link previous" @click="${this._navigatePrevious}">
         <anypoint-icon-button title="${previous.label}" ?compatibility="${compatibility}">
-          <iron-icon icon="arc:chevron-left"></iron-icon>
+          <span class="icon">${chevronLeft}</span>
         </anypoint-icon-button>
         <span class="nav-label">${previous.label}</span>
       </div>` : ''}
@@ -1366,7 +1372,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       ${next ? html`<div class="bottom-link next" @click="${this._navigateNext}">
         <span class="nav-label">${next.label}</span>
         <anypoint-icon-button title="${next.label}" ?compatibility="${compatibility}">
-          <iron-icon icon="arc:chevron-right"></iron-icon>
+          <span class="icon">${chevronRight}</span>
         </anypoint-icon-button>
       </div>` : ''}
     </section>`;
