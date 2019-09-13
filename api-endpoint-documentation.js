@@ -1329,6 +1329,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       </div>
       <iron-collapse .opened="${item._snippetsOpened}">
         <http-code-snippets
+          scrollable
           .url="${this.endpointUri}"
           .method="${this._computeHttpMethod(item)}"
           .headers="${this._computeSnippetsHeaders(item)}"
