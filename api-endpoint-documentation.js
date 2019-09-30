@@ -1188,7 +1188,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     if (!description) {
       return html``;
     }
-    return html`<arc-marked .markdown="${description}">
+    return html`<arc-marked .markdown="${description}" sanitize>
       <div slot="markdown-html" class="markdown-body"></div>
     </arc-marked>`;
   }
