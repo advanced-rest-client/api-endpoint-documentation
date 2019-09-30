@@ -517,3 +517,13 @@
 
 
 
+## 3.0.4 (2019-09-30)
+
+
+### Features
+
+* addig `compatibility` and `graph` proeprties ([ecd284d](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/ecd284d))
+* making code snippets "scrollable" ([fc21ecf](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/fc21ecf))
+
+
+
