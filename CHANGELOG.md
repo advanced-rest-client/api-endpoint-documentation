@@ -527,3 +527,14 @@
 
 
 
+## 3.0.5 (2019-10-03)
+
+
+### Features
+
+* addig `compatibility` and `graph` proeprties ([ecd284d](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/ecd284d))
+* adding `noNavigation` option ([1229577](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/1229577))
+* making code snippets "scrollable" ([fc21ecf](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/fc21ecf))
+
+
+
