@@ -33,6 +33,13 @@ describe('<api-endpoint-documentation>', function() {
       inlinemethods></api-endpoint-documentation>`));
   }
 
+  async function noNavigationFixture(amf, endpoint) {
+    return (await fixture(html`<api-endpoint-documentation
+      .amf="${amf}"
+      .endpoint="${endpoint}"
+      noNavigation></api-endpoint-documentation>`));
+  }
+
   async function scrollTargetFixture(amf, endpoint) {
     const target = (await fixture(html`
       <div style="overflow: auto; height: 100px;">
@@ -437,6 +444,21 @@ describe('<api-endpoint-documentation>', function() {
         it('Renders code snippets', () => {
           const node = element.shadowRoot.querySelector('api-request-panel');
           assert.ok(node);
+        });
+      });
+
+      describe('No navigation', () => {
+        let amf;
+        let element;
+        before(async () => {
+          amf = await AmfLoader.load(demoApi, compact);
+          const endpoint = AmfLoader.lookupEndpoint(amf, '/people');
+          element = await noNavigationFixture(amf, endpoint);
+        });
+
+        it('does not render navigation', () => {
+          const node = element.shadowRoot.querySelector('.bottom-nav');
+          assert.notOk(node);
         });
       });
     });

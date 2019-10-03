@@ -485,7 +485,11 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
        */
       graph: { type: Boolean },
 
-      _editorEventTarget: { type: Object }
+      _editorEventTarget: { type: Object },
+      /**
+       * When set it hiddes bottom navigation links
+       */
+      noNavigation: { type: Boolean }
     };
   }
 
@@ -1357,8 +1361,8 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
   }
 
   _getNavigationTemplate() {
-    const { next, previous } = this;
-    if (!next && !previous) {
+    const { next, previous, noNavigation } = this;
+    if (!next && !previous || noNavigation) {
       return;
     }
     const { compatibility } = this;
