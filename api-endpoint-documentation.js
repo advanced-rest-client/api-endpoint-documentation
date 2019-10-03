@@ -110,9 +110,6 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       httpMethodStyles,
       css`:host {
         display: block;
-        font-size: var(--arc-font-body1-font-size, inherit);
-        font-weight: var(--arc-font-body1-font-weight, inherit);
-        line-height: var(--arc-font-body1-line-height, inherit);
       }
 
       .title {
@@ -139,12 +136,16 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       }
 
       :host([narrow]) .title {
-        font-size: 20px;
+        font-size: var(--arc-font-headline-narrow-font-size, 20px);
         margin: 0;
       }
 
       :host([narrow]) .heading2 {
-        font-size: 18px;
+        font-size: var(--arc-font-title-narrow-font-size, 18px);
+      }
+
+      :host([narrow]) .heading3 {
+        font-size: var(--arc-font-subhead-narrow-font-size, 17px);
       }
 
       arc-marked {
@@ -173,13 +174,13 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
         padding: 32px 0;
         margin: 16px 0;
         color: var(--api-endpoint-documentation-bottom-navigation-color, #000);
-        font-size: 18px;
       }
 
       .bottom-link {
         cursor: pointer;
         max-width: 50%;
         word-break: break-all;
+        text-decoration: underline;
       }
 
       .bottom-link.previous {
@@ -200,7 +201,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
         flex-direction: row;
         align-items: center;
         font-family: var(--arc-font-code-family);
-        font-size: var(--api-endpoint-documentation-url-font-size, 16px);
+        font-size: var(--api-endpoint-documentation-url-font-size, 1.07rem);
         margin-bottom: 40px;
         margin-top: 20px;
         background-color: var(--code-background-color);
@@ -225,10 +226,6 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       .method-anchor {
         text-decoration: none;
         color: inherit;
-        font-size: var(--arc-font-body1-font-size, inherit);
-        font-weight: var(--arc-font-body1-font-weight, inherit);
-        line-height: var(--arc-font-body1-line-height, inherit);
-        font-size: 16px;
       }
 
       .method-anchor:hover {
@@ -805,7 +802,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
   _methodNavigate(e) {
     e.stopPropagation();
     e.preventDefault();
-    const target = e.composedPath().find((node) => node.nodeName === 'A');
+    const target = (e.path || e.composedPath()).find((node) => node.nodeName === 'A');
     const id = target.dataset.apiId;
     this._navigate(id, 'method');
   }
