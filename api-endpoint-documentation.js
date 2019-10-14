@@ -466,10 +466,6 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
        */
       redirectUri: { type: String },
       /**
-       * @deprecated Use `compatibility` instead
-       */
-      legacy: { type: Boolean },
-      /**
        * Enables compatibility with Anypoint components.
        */
       compatibility: { type: Boolean },
@@ -655,7 +651,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
    * @return {String} Endpoint name.
    */
   _computeEndpointName(endpoint) {
-    const name = this._getValue(endpoint, this.ns.schema.schemaName);
+    const name = this._getValue(endpoint, this.ns.aml.vocabularies.core.name);
     // if (!name) {
     //   name = this._computePath(endpoint);
     // }
@@ -668,7 +664,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
    * @return {String}
    */
   _computePath(endpoint) {
-    return this._getValue(endpoint, this.ns.raml.vocabularies.http + 'path');
+    return this._getValue(endpoint, this.ns.aml.vocabularies.apiContract.path);
   }
   /**
    * Computes `extendsTypes`
@@ -677,7 +673,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
    * @return {Array<Object>|undefined}
    */
   _computeExtendsTypes(shape) {
-    const key = this._getAmfKey(this.ns.raml.vocabularies.document + 'extends');
+    const key = this._getAmfKey(this.ns.aml.vocabularies.document.extends);
     return shape && this._ensureArray(shape[key]);
   }
   /**
@@ -691,7 +687,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       return;
     }
     return types.find((item) =>
-      this._hasType(item, this.ns.raml.vocabularies.document + 'ParametrizedResourceType'));
+      this._hasType(item, this.ns.aml.vocabularies.apiContract.ParametrizedResourceType));
   }
   /**
    * Computes vaolue for `parentTypeName`
@@ -700,7 +696,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
    * @return {String|undefined}
    */
   _computeParentTypeName(type) {
-    return this._getValue(type, this.ns.schema.schemaName);
+    return this._getValue(type, this.ns.aml.vocabularies.core.name);
   }
   /**
    * Computes value for `traits` property
@@ -713,7 +709,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       return;
     }
     const data = types.filter((item) =>
-      this._hasType(item, this.ns.raml.vocabularies.document + 'ParametrizedTrait'));
+      this._hasType(item, this.ns.aml.vocabularies.apiContract.ParametrizedTrait));
     return data.length ? data : undefined;
   }
   /**
@@ -726,7 +722,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     if (!traits || !traits.length) {
       return;
     }
-    const names = traits.map((trait) => this._getValue(trait, this.ns.schema.schemaName));
+    const names = traits.map((trait) => this._getValue(trait, this.ns.aml.vocabularies.core.name));
     if (names.length === 2) {
       return names.join(' and ');
     }
@@ -772,7 +768,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     if (!endpoint) {
       return;
     }
-    const key = this._getAmfKey(this.ns.w3.hydra.supportedOperation);
+    const key = this._getAmfKey(this.ns.aml.vocabularies.apiContract.supportedOperation);
     const ops = this._ensureArray(endpoint[key]);
     if (!ops || !ops.length) {
       return;
@@ -786,9 +782,9 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     const result = [];
     for (let i = 0, len = ops.length; i < len; i++) {
       const op = ops[i];
-      const method = this._getValue(op, this.ns.w3.hydra.core + 'method');
-      const name = this._getValue(op, this.ns.schema.schemaName);
-      const desc = this._getValue(op, this.ns.schema.desc);
+      const method = this._getValue(op, this.ns.aml.vocabularies.apiContract.method);
+      const name = this._getValue(op, this.ns.aml.vocabularies.core.name);
+      const desc = this._getValue(op, this.ns.aml.vocabularies.core.description);
       result[result.length] = {
         method,
         name,
@@ -1022,7 +1018,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     if (headers && headers.length) {
       result = '';
       headers.forEach((item) => {
-        const name = this._getValue(item, this.ns.schema.schemaName);
+        const name = this._getValue(item, this.ns.aml.vocabularies.core.name);
         const value = this._computePropertyValue(item) || '';
         result += `${name}: ${value}\n`;
       });
@@ -1038,7 +1034,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     if (payload && payload instanceof Array) {
       payload = payload[0];
     }
-    if (this._hasType(payload, this.ns.w3.hydra.core + 'Operation')) {
+    if (this._hasType(payload, this.ns.aml.vocabularies.apiContract.Operation)) {
       const expects = this._computeExpects(payload);
       payload = this._computePayload(expects);
     }
@@ -1049,7 +1045,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       return;
     }
 
-    let mt = this._getValue(payload, this.ns.raml.vocabularies.http + 'mediaType');
+    let mt = this._getValue(payload, this.ns.aml.vocabularies.core.mediaType);
     if (!mt) {
       mt = 'application/json';
     }
@@ -1067,7 +1063,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
    * @return {String|undefined}
    */
   _computePropertyValue(item) {
-    const key = this._getAmfKey(this.ns.raml.vocabularies.http + 'schema');
+    const key = this._getAmfKey(this.ns.aml.vocabularies.shapes.schema);
     let schema = item && item[key];
     if (!schema) {
       return;
@@ -1075,15 +1071,15 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     if (schema instanceof Array) {
       schema = schema[0];
     }
-    let value = this._getValue(item, this.ns.w3.shacl.name + 'defaultValue');
+    let value = this._getValue(item, this.ns.w3.shacl.defaultValue);
     if (!value) {
-      const examplesKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
+      const examplesKey = this._getAmfKey(this.ns.aml.vocabularies.apiContract.examples);
       let example = item[examplesKey];
       if (example) {
         if (example instanceof Array) {
           example = example[0];
         }
-        value = this._getValue(item, this.ns.raml.vocabularies.document + 'value');
+        value = this._getValue(item, this.ns.aml.vocabularies.document.value);
       }
     }
     return value;
@@ -1096,7 +1092,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
    * @return {String|undefined} HTTP method name
    */
   _computeHttpMethod(method) {
-    let name = this._getValue(method, this.ns.w3.hydra.core + 'method');
+    let name = this._getValue(method, this.ns.aml.vocabularies.apiContract.method);
     if (name) {
       name = name.toUpperCase();
     }
@@ -1301,12 +1297,12 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
         <api-request-panel
           .amf="${this.amf}"
           .selected="${item['@id']}"
-          .narrow="${this.narrow}"
-          .noUrlEditor="${this.noUrlEditor}"
+          ?narrow="${this.narrow}"
+          ?noUrlEditor="${this.noUrlEditor}"
           .baseUri="${this.baseUri}"
           .redirectUri="${this.redirectUri}"
-          .legacy="${this.compatibility}"
-          .outlined="${this.outlined}"
+          ?compatibility="${this.compatibility}"
+          ?outlined="${this.outlined}"
           nodocs></api-request-panel>
       </iron-collapse>
     </section>`;

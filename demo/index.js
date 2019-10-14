@@ -23,7 +23,7 @@ class ComponentDemo extends ApiDemoPageBase {
     this._componentName = 'api-method-documentation';
 
     this.initObservableProperties([
-      'legacy',
+      'compatibility',
       'narrow',
       'noTryit',
       'endpoint',
@@ -50,13 +50,13 @@ class ComponentDemo extends ApiDemoPageBase {
     const state = e.detail.value;
     switch (state) {
       case 0:
-        this.legacy = false;
+        this.compatibility = false;
         break;
       case 1:
-        this.legacy = true;
+        this.compatibility = true;
         break;
     }
-    if (this.legacy) {
+    if (this.compatibility) {
       document.body.classList.add('anypoint');
     } else {
       document.body.classList.remove('anypoint');
@@ -130,9 +130,9 @@ class ComponentDemo extends ApiDemoPageBase {
       return;
     }
     const helper = this.helper;
-    let name = helper._getValue(item, helper.ns.schema.schemaName);
+    let name = helper._getValue(item, helper.ns.aml.vocabularies.core.name);
     if (!name) {
-      name = helper._getValue(item, helper.ns.raml.vocabularies.http + 'path');
+      name = helper._getValue(item, helper.ns.aml.vocabularies.apiContract.path);
     }
     this.previous = {
       id: item['@id'],
@@ -146,9 +146,9 @@ class ComponentDemo extends ApiDemoPageBase {
       return;
     }
     const helper = this.helper;
-    let name = helper._getValue(item, helper.ns.schema.schemaName);
+    let name = helper._getValue(item, helper.ns.aml.vocabularies.core.name);
     if (!name) {
-      name = helper._getValue(item, helper.ns.raml.vocabularies.http + 'path');
+      name = helper._getValue(item, helper.ns.aml.vocabularies.apiContract.path);
     }
     this.next = {
       id: item['@id'],
@@ -178,7 +178,7 @@ class ComponentDemo extends ApiDemoPageBase {
     const {
       demoStates,
       darkThemeActive,
-      legacy,
+      compatibility,
       amf,
       narrow,
       endpoint,
@@ -194,7 +194,7 @@ class ComponentDemo extends ApiDemoPageBase {
     <section class="documentation-section">
       <h3>Interactive demo</h3>
       <p>
-        This demo lets you preview the API method documentation element with various
+        This demo lets you preview the API endpoint documentation element with various
         configuration options.
       </p>
 
@@ -217,7 +217,7 @@ class ComponentDemo extends ApiDemoPageBase {
             .inlineMethods="${inlineMethods}"
             .noTryIt="${noTryit}"
             ?narrow="${narrow}"
-            ?legacy="${legacy}"
+            ?compatibility="${compatibility}"
             @tryit-requested="${this._tryitRequested}"></api-endpoint-documentation>
         </div>
         <label slot="options" id="mainOptionsLabel">Options</label>
@@ -267,8 +267,8 @@ class ComponentDemo extends ApiDemoPageBase {
         <ul>
           <li><b>Material Design</b> (default)</li>
           <li>
-            <b>Legacy</b> - To provide compatibility with legacy Anypoint design, use
-            <code>legacy</code> property
+            <b>Compatibility</b> - To provide compatibility with Anypoint design, use
+            <code>compatibility</code> property
           </li>
         </ul>
       </section>`;

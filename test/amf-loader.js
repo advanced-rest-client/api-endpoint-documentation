@@ -44,9 +44,9 @@ AmfLoader.lookupEndpoint = function(model, endpoint) {
 
 AmfLoader.lookupOperation = function(model, endpoint, operation) {
   const endPoint = AmfLoader.lookupEndpoint(model, endpoint, operation);
-  const opKey = helper._getAmfKey(helper.ns.w3.hydra.supportedOperation);
+  const opKey = helper._getAmfKey(helper.ns.aml.vocabularies.apiContract.supportedOperation);
   const ops = helper._ensureArray(endPoint[opKey]);
-  return ops.find((item) => helper._getValue(item, helper.ns.w3.hydra.core + 'method') === operation);
+  return ops.find((item) => helper._getValue(item, helper.ns.aml.vocabularies.apiContract.method) === operation);
 };
 
 AmfLoader.lookupPayload = function(model, endpoint, operation) {
@@ -57,8 +57,8 @@ AmfLoader.lookupPayload = function(model, endpoint, operation) {
 
 AmfLoader.lookupEndpointOperation = function(model, endpoint, operation) {
   const endPoint = AmfLoader.lookupEndpoint(model, endpoint, operation);
-  const opKey = helper._getAmfKey(helper.ns.w3.hydra.supportedOperation);
+  const opKey = helper._getAmfKey(helper.ns.aml.vocabularies.apiContract.supportedOperation);
   const ops = helper._ensureArray(endPoint[opKey]);
-  const op = ops.find((item) => helper._getValue(item, helper.ns.w3.hydra.core + 'method') === operation);
+  const op = ops.find((item) => helper._getValue(item, helper.ns.aml.vocabularies.apiContract.method) === operation);
   return [endPoint, op];
 };

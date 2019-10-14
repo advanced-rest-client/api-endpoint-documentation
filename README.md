@@ -10,9 +10,10 @@ A component to generate documentation for an API resource from AMF model.
 
 **See breaking changes and list of required dependencies at the bottom of this document**
 
-```html
-<api-endpoint-documentation></api-endpoint-documentation>
-```
+## Version compatibility
+
+This version only works with AMF model version 2 (AMF parser >= 4.0.0).
+For compatibility with previous model version use `3.x.x` version of the component.
 
 ## Usage
 
