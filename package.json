@@ -35,7 +35,7 @@
     "@api-components/api-example-generator": "^4.0.2",
     "@api-components/api-parameters-document": "git://github.com/advanced-rest-client/api-parameters-document#embed-css-style",
     "@api-components/api-method-documentation": "git://github.com/advanced-rest-client/api-method-documentation#embed-css-style",
-    "@api-components/api-request-panel": "^4.0.0",
+    "@api-components/api-request-panel": "git://github.com/advanced-rest-client/api-request-panel#embed-css-style",
     "@api-components/http-method-label": "^3.0.1",
     "@api-components/raml-aware": "^3.0.0",
     "@polymer/iron-collapse": "^3.0.0",
