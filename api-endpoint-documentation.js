@@ -1234,7 +1234,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
   _getInlineMethodsTemplate() {
     const { operations } = this;
     if (!operations || !operations.length) {
-      return;
+      return html``;
     }
     return html`<section class="methods">
       ${operations.map((item, index) => this._inlineMethodTemplate(item, index, operations))}
@@ -1268,7 +1268,6 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       <div class="try-it-column">
         ${this._getRequestPanelTemplate(item, index)}
         ${this._getSnippetsTemplate(item, index)}
-
       </div>
     </div>`;
   }
@@ -1338,7 +1337,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
   _getMethodsListTemplate() {
     const { operations } = this;
     if (!operations || !operations.length) {
-      return;
+      return html``;
     }
     return html`<section class="methods">
       ${operations.map((item) => html`<div class="method">
@@ -1356,7 +1355,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
   _getNavigationTemplate() {
     const { next, previous, noNavigation } = this;
     if (!next && !previous || noNavigation) {
-      return;
+      return html``;
     }
     const { compatibility } = this;
     return html`<section class="bottom-nav">
