@@ -33,8 +33,8 @@
     "@api-components/amf-helper-mixin": "^4.0.14",
     "@api-components/api-annotation-document": "^4.0.1",
     "@api-components/api-example-generator": "^4.0.4",
-    "@api-components/api-method-documentation": "^4.0.5",
-    "@api-components/api-parameters-document": "^4.0.3",
+    "@api-components/api-method-documentation": "^4.0.6",
+    "@api-components/api-parameters-document": "^4.0.4",
     "@api-components/api-request-panel": "^4.0.1",
     "@api-components/http-method-label": "^3.0.2",
     "@api-components/raml-aware": "^3.0.0",
@@ -50,12 +50,13 @@
     "@advanced-rest-client/testing-karma-sl": "^1.1.0",
     "@advanced-rest-client/xhr-simple-request": "^3.0.1",
     "@anypoint-web-components/anypoint-checkbox": "^1.0.2",
-    "@anypoint-web-components/anypoint-input": "^0.2.11",
+    "@anypoint-web-components/anypoint-input": "^0.2.12",
     "@anypoint-web-components/anypoint-styles": "^1.0.1",
     "@api-components/api-model-generator": "^0.2.0-rc.2",
     "@api-components/api-navigation": "^4.0.2",
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
+    "@open-wc/building-rollup": "^0.14.8",
     "@open-wc/testing": "^2.4.1",
     "@open-wc/testing-karma": "^3.2.9",
     "@polymer/gen-typescript-declarations": "^1.6.2",
@@ -67,15 +68,16 @@
     "husky": "^3.1.0",
     "karma": "^4.4.1",
     "lint-staged": "^9.5.0",
+    "rimraf": "^3.0.0",
+    "rollup-plugin-cpy": "^2.0.1",
     "sinon": "^7.5.0",
-    "uglify-js": "^3.7.1",
-    "web-animations-js": "^2.3.2"
+    "uglify-js": "^3.7.1"
   },
   "scripts": {
     "update-types": "gen-typescript-declarations --deleteExisting --outDir .",
     "generate-model": "node demo/model.js",
     "start": "node demo/server/index.js",
-    "start:compatibility": "es-dev-server --app-index demo/index.html --compatibility all --node-resolve --open --watch",
+    "start:compatibility": "es-dev-server --app-index demo/index.html --compatibility auto --node-resolve --open --watch",
     "lint:eslint": "eslint --ext .js,.html . --ignore-path .gitignore",
     "format:eslint": "eslint --ext .js,.html . --fix --ignore-path .gitignore",
     "lint:prettier": "prettier \"**/*.js\" --check --ignore-path .gitignore",
@@ -89,7 +91,8 @@
     "test:compatibility": "karma start --compatibility auto --coverage",
     "test:compatibility:watch": "karma start --compatibility auto --auto-watch=true --single-run=false",
     "test:sl": "karma start karma.sl.config.js --compatibility auto --coverage",
-    "prepare": "node demo/prepare.js"
+    "prepare": "node demo/prepare.js",
+    "build": "rimraf dist && rollup -c rollup.config.js"
   },
   "lint-staged": {
     "*.js": [

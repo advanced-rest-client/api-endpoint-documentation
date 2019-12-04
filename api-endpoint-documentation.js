@@ -1183,7 +1183,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
 
   _getDescriptionTemplate(description) {
     if (!description) {
-      return html``;
+      return '';
     }
     return html`<arc-marked .markdown="${description}" sanitize>
       <div slot="markdown-html" class="markdown-body"></div>
@@ -1193,7 +1193,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
   _getTitleTemplate() {
     const { endpointName } = this;
     if (!endpointName) {
-      return html``;
+      return '';
     }
     return html`
     <div role="heading" aria-level="1" class="title">${endpointName}</div>
@@ -1202,7 +1202,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
 
   _getUrlTemplate() {
     if (this.inlineMethods) {
-      return html``;
+      return '';
     }
     const { endpointUri, endpointName } = this;
     return html`<section class="url-area" ?extra-margin="${!endpointName}">
@@ -1214,7 +1214,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     const { parentTypeName, traits } = this;
     const hasTraits = !!(traits && traits.length);
     if (!hasTraits && !parentTypeName) {
-      return html``;
+      return '';
     }
     const traitsLabel = hasTraits && this._computeTraitNames(traits);
     return html`<section class="extensions">
@@ -1234,7 +1234,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
   _getInlineMethodsTemplate() {
     const { operations } = this;
     if (!operations || !operations.length) {
-      return html``;
+      return '';
     }
     return html`<section class="methods">
       ${operations.map((item, index) => this._inlineMethodTemplate(item, index, operations))}
@@ -1337,7 +1337,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
   _getMethodsListTemplate() {
     const { operations } = this;
     if (!operations || !operations.length) {
-      return html``;
+      return '';
     }
     return html`<section class="methods">
       ${operations.map((item) => html`<div class="method">
@@ -1355,7 +1355,7 @@ class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
   _getNavigationTemplate() {
     const { next, previous, noNavigation } = this;
     if (!next && !previous || noNavigation) {
-      return html``;
+      return '';
     }
     const { compatibility } = this;
     return html`<section class="bottom-nav">

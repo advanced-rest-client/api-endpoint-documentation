@@ -12,3 +12,4 @@ commitlint.*
 .*
 *.config.*
 prettier.config.js
+dist/
