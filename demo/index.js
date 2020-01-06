@@ -20,7 +20,7 @@ window.customElements.define('demo-element', DemoElement);
 class ComponentDemo extends ApiDemoPageBase {
   constructor() {
     super();
-    this._componentName = 'api-method-documentation';
+    this._componentName = 'api-endpoint-documentation';
 
     this.initObservableProperties([
       'compatibility',
