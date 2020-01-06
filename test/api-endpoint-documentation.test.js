@@ -429,7 +429,7 @@ describe('<api-endpoint-documentation>', function() {
         });
         // (Pawel): Note, methods docs rendering is async. This won't check for every
         // method rendering as the time of element rendering is unknown.
-        // There's an (fair) assumption that is one panel is redered then other
+        // There's an (fair) assumption that when one panel is redered then other
         // are rendered as well.
         it('Renders method documentations', () => {
           const node = element.shadowRoot.querySelector('api-method-documentation');
@@ -459,6 +459,32 @@ describe('<api-endpoint-documentation>', function() {
         it('does not render navigation', () => {
           const node = element.shadowRoot.querySelector('.bottom-nav');
           assert.notOk(node);
+        });
+      });
+
+      describe('Annotation rendering', () => {
+        let amf;
+        before(async () => {
+          amf = await AmfLoader.load(demoApi, compact);
+        });
+
+        it('does not render annotation when not available', async () => {
+          const endpoint = AmfLoader.lookupEndpoint(amf, '/people/{personId}');
+          const element = await modelFixture(amf, endpoint);
+          await aTimeout();
+          const node = element.shadowRoot.querySelector('api-annotation-document');
+          assert.notOk(node, 'annotation is not rendered');
+        });
+
+        it('renders annotation when available', async () => {
+          const endpoint = AmfLoader.lookupEndpoint(amf, '/people');
+          const element = await modelFixture(amf, endpoint);
+          await aTimeout();
+          const node = element.shadowRoot.querySelector('api-annotation-document');
+          assert.ok(node, 'annotation is rendered');
+          // The annotation document sets `hidden` attribute when there's nothing
+          // to render (the shape has no annotations).
+          assert.isFalse(node.hasAttribute('hidden'), 'node is not hidden');
         });
       });
     });

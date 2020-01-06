@@ -1160,8 +1160,6 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
   render() {
     const {
       aware,
-      hasCustomProperties,
-      endpoint,
       hasOperations,
       description
     } = this;
@@ -1172,13 +1170,24 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     ${this._getTitleTemplate()}
     ${this._getUrlTemplate()}
     ${this._getExtensionsTemplate()}
-    ${hasCustomProperties ? html`<api-annotation-document .shape="${endpoint}"></api-annotation-document>` : ''}
+    ${this._annotationTemplate()}
     ${this._getDescriptionTemplate(description)}
     <div class="heading2 table-title" role="heading" aria-level="2">Methods</div>
     ${hasOperations ?
       this._getOperationsTemplate() :
       html`<p class="noinfo">This enpoint doesn't have HTTP methods defined in the API specification file.</p>`}
     ${this._getNavigationTemplate()}`;
+  }
+
+  _annotationTemplate() {
+    if (!this.hasCustomProperties) {
+      return '';
+    }
+    const { endpoint, amf } = this;
+    return html`<api-annotation-document
+      .amf="${amf}"
+      .shape="${endpoint}"
+    ></api-annotation-document>`
   }
 
   _getDescriptionTemplate(description) {
