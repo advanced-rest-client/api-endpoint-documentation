@@ -4,6 +4,7 @@
   "version": "4.0.3",
   "license": "Apache-2.0",
   "main": "api-endpoint-documentation.js",
+  "module": "index.js",
   "keywords": [
     "api-components",
     "api-console",

@@ -16,37 +16,7 @@ module.exports = (config) => {
           type: 'module'
         },
         {
-          pattern: require.resolve('chai/chai.js')
-        },
-        {
-          pattern: require.resolve('axe-core/axe.min.js')
-        },
-        {
-          pattern: config.grep ? config.grep : 'test/**/*.test.js',
-          type: 'module'
-        },
-        {
-          pattern: 'node_modules/cryptojslib/components/core.js',
-          type: 'js'
-        },
-        {
-          pattern: 'node_modules/cryptojslib/rollups/sha1.js',
-          type: 'js'
-        },
-        {
-          pattern: 'node_modules/cryptojslib/components/enc-base64-min.js',
-          type: 'js'
-        },
-        {
           pattern: 'node_modules/cryptojslib/rollups/md5.js',
-          type: 'js'
-        },
-        {
-          pattern: 'node_modules/cryptojslib/rollups/hmac-sha1.js',
-          type: 'js'
-        },
-        {
-          pattern: 'node_modules/jsrsasign/lib/jsrsasign-rsa-min.js',
           type: 'js'
         },
         {
