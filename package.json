@@ -57,7 +57,6 @@
     "@api-components/api-navigation": "^4.0.2",
     "@commitlint/cli": "^8.3.4",
     "@commitlint/config-conventional": "^8.3.4",
-    "@open-wc/building-rollup": "^0.17.5",
     "@open-wc/testing": "^2.4.2",
     "@open-wc/testing-karma": "^3.2.25",
     "@polymer/gen-typescript-declarations": "^1.6.2",
@@ -69,8 +68,6 @@
     "husky": "^3.1.0",
     "karma": "^4.4.1",
     "lint-staged": "^9.5.0",
-    "rimraf": "^3.0.0",
-    "rollup-plugin-cpy": "^2.0.1",
     "sinon": "^8.0.4",
     "typescript-lit-html-plugin": "^0.9.0",
     "uglify-js": "^3.7.3"
