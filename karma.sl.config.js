@@ -8,11 +8,11 @@ module.exports = (config) => {
     sauceLabs: {
       testName: 'api-endpoint-documentation',
     },
-    // client: {
-    //   mocha: {
-    //     timeout : 6000
-    //   }
-    // }
+    client: {
+      mocha: {
+        timeout : 15000
+      }
+    }
   });
   // if you want to change default browsers
   slConfig.browsers = [
@@ -22,7 +22,7 @@ module.exports = (config) => {
     'SL_Firefox-1',
     'SL_Safari',
     'SL_Safari-1',
-    // 'SL_EDGE'
+    'SL_EDGE'
   ];
   config.set(merge(createBaseConfig(config), slConfig));
   return config;
