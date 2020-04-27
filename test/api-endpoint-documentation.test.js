@@ -1,7 +1,6 @@
 import { fixture, assert, html, aTimeout, nextFrame } from '@open-wc/testing';
-import * as sinon from 'sinon/pkg/sinon-esm.js';
+import * as sinon from 'sinon';
 import { AmfLoader } from './amf-loader.js';
-import { IronMeta } from '@polymer/iron-meta/iron-meta.js';
 import '../api-endpoint-documentation.js';
 
 describe('<api-endpoint-documentation>', function() {
@@ -165,14 +164,14 @@ describe('<api-endpoint-documentation>', function() {
     beforeEach(async () => {
       const endpoint = AmfLoader.lookupEndpoint(amf, '/people/{personId}');
       [target, element] = await scrollTargetFixture(amf, endpoint);
-      await aTimeout();
+      await aTimeout(0);
     });
 
     it('calls _checkMethodsPosition() when target is scrolling', async () => {
       const spy = sinon.spy(element, '_checkMethodsPosition');
       target.scrollTop = 200;
       target.dispatchEvent(new CustomEvent('scroll'));
-      await aTimeout();
+      await aTimeout(0);
       assert.isTrue(spy.called);
     });
 
@@ -389,25 +388,13 @@ describe('<api-endpoint-documentation>', function() {
           endpoint = AmfLoader.lookupEndpoint(amf, '/people/{personId}');
         });
 
-        afterEach(() => {
-          new IronMeta({ key: 'ApiBaseUri' }).value = undefined;
-        });
-
         it('sets URL from base uri', async () => {
           const element = await baseUriFixture(amf, endpoint);
           await aTimeout();
           assert.equal(element.endpointUri, 'https://domain.com/people/{personId}');
         });
 
-        it('sets URL from iron meta', async () => {
-          new IronMeta({ key: 'ApiBaseUri' }).value = 'https://meta.com/base';
-          const element = await modelFixture(amf, endpoint);
-          await aTimeout();
-          assert.equal(element.endpointUri, 'https://meta.com/base/people/{personId}');
-        });
-
-        it('sets URL from base uri even when iron meta', async () => {
-          new IronMeta({ key: 'ApiBaseUri' }).value = 'https://meta.com/base';
+        it('sets URL from base uri', async () => {
           const element = await baseUriFixture(amf, endpoint);
           await aTimeout();
           assert.equal(element.endpointUri, 'https://domain.com/people/{personId}');

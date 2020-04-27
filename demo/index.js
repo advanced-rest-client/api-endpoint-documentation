@@ -1,7 +1,5 @@
-import { html, render } from 'lit-html';
-import { LitElement } from 'lit-element';
-import { ApiDemoPageBase } from '@advanced-rest-client/arc-demo-helper/ApiDemoPage.js';
-import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+import { html } from 'lit-html';
+import { ApiDemoPage } from '@advanced-rest-client/arc-demo-helper';
 import '@anypoint-web-components/anypoint-checkbox/anypoint-checkbox.js';
 import '@advanced-rest-client/arc-demo-helper/arc-demo-helper.js';
 import '@advanced-rest-client/arc-demo-helper/arc-interactive-demo.js';
@@ -12,15 +10,12 @@ import '@anypoint-web-components/anypoint-styles/typography.js';
 import '@advanced-rest-client/oauth-authorization/oauth2-authorization.js';
 import '@advanced-rest-client/oauth-authorization/oauth1-authorization.js';
 import '@advanced-rest-client/xhr-simple-request/xhr-simple-request.js';
+import '@api-components/api-server-selector/api-server-selector.js';
 import '../api-endpoint-documentation.js';
 
-class DemoElement extends AmfHelperMixin(LitElement) {}
-window.customElements.define('demo-element', DemoElement);
-
-class ComponentDemo extends ApiDemoPageBase {
+class ComponentDemo extends ApiDemoPage {
   constructor() {
     super();
-    this._componentName = 'api-endpoint-documentation';
 
     this.initObservableProperties([
       'compatibility',
@@ -31,11 +26,23 @@ class ComponentDemo extends ApiDemoPageBase {
       'next',
       'inlineMethods',
       'selectedShape',
-      'scrollTarget'
+      'scrollTarget',
+      'renderCustomServer',
+      'allowCustomBaseUri',
+      'noServerSelector',
+      'urlLabel',
+      'serverType',
+      'serverValue',
     ]);
+    this.componentName = 'api-endpoint-documentation';
     this.noTryit = false;
+    this.inlineMethods = false;
     this.codeSnippets = true;
     this.renderSecurity = true;
+    this.renderCustomServer = false;
+    this.allowCustomBaseUri = false;
+    this.noServerSelector = false;
+    this.urlLabel = false;
 
     this.redirectUri = 'https://auth.advancedrestclient.com/oauth-popup.html';
     this.scrollTarget = window;
@@ -44,35 +51,46 @@ class ComponentDemo extends ApiDemoPageBase {
     this._demoStateHandler = this._demoStateHandler.bind(this);
     this._toggleMainOption = this._toggleMainOption.bind(this);
     this._tryitRequested = this._tryitRequested.bind(this);
+    this._serverHandler = this._serverHandler.bind(this);
+  }
+
+  get server() {
+    const { serverValue, serverType, endpointId, methodId } = this;
+    if (serverType && serverType !== 'server') {
+      return null;
+    }
+    const servers = this._getServers({ endpointId, methodId });
+    if (!servers || !servers.length) {
+      return null;
+    }
+    if (!serverValue && servers.length) {
+      return servers[0];
+    }
+    return servers.find((server) => this._getServerUri(server) === serverValue);
+  }
+
+  get baseUri() {
+    const { serverValue, serverType } = this;
+    if (['custom', 'uri'].indexOf(serverType) !== -1) {
+      return serverValue;
+    }
+    return null;
+  }
+
+  /**
+   * @param {Object} server Server definition.
+   * @return {String|undefined} Value for server's base URI
+   */
+  _getServerUri(server) {
+    const key = this._getAmfKey(this.ns.aml.vocabularies.core.urlTemplate);
+    return /** @type string */ (this._getValue(server, key));
   }
 
   _demoStateHandler(e) {
     const state = e.detail.value;
-    switch (state) {
-      case 0:
-        this.compatibility = false;
-        break;
-      case 1:
-        this.compatibility = true;
-        break;
-    }
-    if (this.compatibility) {
-      document.body.classList.add('anypoint');
-    } else {
-      document.body.classList.remove('anypoint');
-    }
-  }
-
-  _toggleMainOption(e) {
-    const { name, checked } = e.target;
-    this[name] = checked;
-  }
-
-  get helper() {
-    if (!this.__helper) {
-      this.__helper = document.getElementById('helper');
-    }
-    return this.__helper;
+    this.outlined = state === 1;
+    this.compatibility = state === 2;
+    this._updateCompatibility();
   }
 
   _navChanged(e) {
@@ -96,7 +114,13 @@ class ComponentDemo extends ApiDemoPageBase {
   }
 
   setData(id, type, endpointId) {
-    const helper = this.helper;
+    if (type === 'method') {
+      this.endpointId = endpointId;
+      this.methodId = id;
+    } else {
+      this.endpointId = id;
+      this.methodId = null;
+    }
     const eId = type === 'method' ? endpointId : id;
     if (this.endpoint) {
       const currentId = this.endpoint['@id'];
@@ -105,8 +129,8 @@ class ComponentDemo extends ApiDemoPageBase {
         return;
       }
     }
-    const webApi = helper._computeWebApi(this.amf);
-    const endpoint = helper._computeEndpointModel(webApi, eId);
+    const webApi = this._computeWebApi(this.amf);
+    const endpoint = this._computeEndpointModel(webApi, eId);
     if (!endpoint) {
       this.endpoint = undefined;
       this.selectedShape = undefined;
@@ -114,7 +138,7 @@ class ComponentDemo extends ApiDemoPageBase {
     }
     this.endpoint = endpoint;
     this.selectedShape = id;
-    const endpoints = helper._computeEndpoints(webApi);
+    const endpoints = this._computeEndpoints(webApi);
     for (let i = 0, len = endpoints.length; i < len; i++) {
       if (endpoints[i]['@id'] === eId) {
         this._setPrevious(endpoints[i - 1]);
@@ -129,10 +153,9 @@ class ComponentDemo extends ApiDemoPageBase {
       this.previous = undefined;
       return;
     }
-    const helper = this.helper;
-    let name = helper._getValue(item, helper.ns.aml.vocabularies.core.name);
+    let name = this._getValue(item, this.ns.aml.vocabularies.core.name);
     if (!name) {
-      name = helper._getValue(item, helper.ns.aml.vocabularies.apiContract.path);
+      name = this._getValue(item, this.ns.aml.vocabularies.apiContract.path);
     }
     this.previous = {
       id: item['@id'],
@@ -145,10 +168,9 @@ class ComponentDemo extends ApiDemoPageBase {
       this.next = undefined;
       return;
     }
-    const helper = this.helper;
-    let name = helper._getValue(item, helper.ns.aml.vocabularies.core.name);
+    let name = this._getValue(item, this.ns.aml.vocabularies.core.name);
     if (!name) {
-      name = helper._getValue(item, helper.ns.aml.vocabularies.apiContract.path);
+      name = this._getValue(item, this.ns.aml.vocabularies.apiContract.path);
     }
     this.next = {
       id: item['@id'],
@@ -159,19 +181,26 @@ class ComponentDemo extends ApiDemoPageBase {
   _apiListTemplate() {
     return [
       ['google-drive-api', 'Google Drive'],
+      ['multi-server', 'Multiple servers'],
       ['exchange-experience-api', 'Exchange xAPI'],
       ['demo-api', 'Demo API'],
       ['appian-api', 'Applian API'],
-      ['nexmo-sms-api', 'Nexmo SMS API']
+      ['nexmo-sms-api', 'Nexmo SMS API'],
     ].map(([file, label]) => html`
-      <paper-item data-src="${file}-compact.json">${label} - compact model</paper-item>
-      <paper-item data-src="${file}.json">${label}</paper-item>
+      <anypoint-item data-src="${file}-compact.json">${label} - compact model</anypoint-item>
+      <anypoint-item data-src="${file}.json">${label}</anypoint-item>
       `);
   }
 
   _tryitRequested() {
     const toast = document.getElementById('tryItToast');
     toast.opened = true;
+  }
+
+  _serverHandler(e) {
+    const { value, type } = e.detail;
+    this.serverType = type;
+    this.serverValue = value;
   }
 
   _demoTemplate() {
@@ -188,7 +217,14 @@ class ComponentDemo extends ApiDemoPageBase {
       redirectUri,
       inlineMethods,
       next,
-      noTryit
+      noTryit,
+      serverType,
+      serverValue,
+      urlLabel,
+      noServerSelector,
+      allowCustomBaseUri,
+      server,
+      baseUri,
     } = this;
     return html `
     <section class="documentation-section">
@@ -198,28 +234,39 @@ class ComponentDemo extends ApiDemoPageBase {
         configuration options.
       </p>
 
+      ${this._serverSelectorTemplate()}
+
       <arc-interactive-demo
         .states="${demoStates}"
         @state-chanegd="${this._demoStateHandler}"
         ?dark="${darkThemeActive}"
       >
+        <api-endpoint-documentation
+          slot="content"
+          .amf="${amf}"
+          .endpoint="${endpoint}"
+          .selected="${selectedShape}"
+          .server="${server}"
+          .baseUri="${baseUri}"
+          .scrollTarget="${scrollTarget}"
+          .redirect-uri="${redirectUri}"
+          .previous="${previous}"
+          .next="${next}"
+          .inlineMethods="${inlineMethods}"
+          .noTryIt="${noTryit}"
+          .serverType="${serverType}"
+          .serverValue="${serverValue}"
+          ?urlLabel="${urlLabel}"
+          ?noServerSelector="${noServerSelector}"
+          ?allowCustomBaseUri="${allowCustomBaseUri}"
+          ?narrow="${narrow}"
+          ?compatibility="${compatibility}"
+          @tryit-requested="${this._tryitRequested}"
+          @apiserverchanged="${this._serverHandler}"
+        >
+          ${this._addCustomServers()}
+        </api-endpoint-documentation>
 
-        <div slot="content" class="doc-container">
-          ${this._apiNavigationTemplate()}
-          <api-endpoint-documentation
-            .amf="${amf}"
-            .endpoint="${endpoint}"
-            .selected="${selectedShape}"
-            .scrollTarget="${scrollTarget}"
-            .redirect-uri="${redirectUri}"
-            .previous="${previous}"
-            .next="${next}"
-            .inlineMethods="${inlineMethods}"
-            .noTryIt="${noTryit}"
-            ?narrow="${narrow}"
-            ?compatibility="${compatibility}"
-            @tryit-requested="${this._tryitRequested}"></api-endpoint-documentation>
-        </div>
         <label slot="options" id="mainOptionsLabel">Options</label>
 
         <anypoint-checkbox
@@ -243,8 +290,77 @@ class ComponentDemo extends ApiDemoPageBase {
           @change="${this._toggleMainOption}"
           >Render methods</anypoint-checkbox
         >
+        <anypoint-checkbox
+          aria-describedby="mainOptionsLabel"
+          slot="options"
+          name="urlLabel"
+          @change="${this._toggleMainOption}"
+          >URL label</anypoint-checkbox
+        >
+        <anypoint-checkbox
+          aria-describedby="mainOptionsLabel"
+          slot="options"
+          name="renderCustomServer"
+          @change="${this._toggleMainOption}"
+          >Custom servers</anypoint-checkbox
+        >
+        <anypoint-checkbox
+          aria-describedby="mainOptionsLabel"
+          slot="options"
+          name="allowCustomBaseUri"
+          @change="${this._toggleMainOption}"
+          >Custom Base Uri</anypoint-checkbox
+        >
+        <anypoint-checkbox
+          aria-describedby="mainOptionsLabel"
+          slot="options"
+          name="noServerSelector"
+          @change="${this._toggleMainOption}"
+          >Remove Server Selector</anypoint-checkbox
+        >
       </arc-interactive-demo>
     </section>`;
+  }
+
+  _addCustomServers() {
+    if (!this.renderCustomServer) {
+      return;
+    }
+    const { compatibility } = this;
+    return html`
+    <div class="other-section" slot="custom-base-uri">Other options</div>
+    <anypoint-item
+      slot="custom-base-uri"
+      value="http://mocking.com"
+      ?compatibility="${compatibility}"
+    >Mocking service</anypoint-item>
+    <anypoint-item
+      slot="custom-base-uri"
+      value="http://customServer.com2"
+      ?compatibility="${compatibility}"
+    >Custom instance</anypoint-item>`;
+  }
+
+  /**
+   * @return {object} A template for the server selector
+   */
+  _serverSelectorTemplate() {
+    const {
+      amf,
+      serverType,
+      serverValue,
+      compatibility,
+    } = this;
+    return html`
+    <api-server-selector
+      .amf="${amf}"
+      .value="${serverValue}"
+      .type="${serverType}"
+      autoselect
+      allowCustom
+      ?compatibility="${compatibility}"
+      @apiserverchanged="${this._serverHandler}"
+    >${this._addCustomServers()}</api-server-selector>`;
   }
 
   _introductionTemplate() {
@@ -274,26 +390,19 @@ class ComponentDemo extends ApiDemoPageBase {
       </section>`;
   }
 
-  _render() {
-    const { amf } = this;
-    render(html`
-      ${this.headerTemplate()}
+  contentTemplate() {
+    return html`
+    <xhr-simple-request></xhr-simple-request>
+    <oauth2-authorization></oauth2-authorization>
+    <oauth1-authorization></oauth1-authorization>
+    <paper-toast id="navToast"></paper-toast>
 
-      <demo-element id="helper" .amf="${amf}"></demo-element>
-      <xhr-simple-request></xhr-simple-request>
-      <oauth2-authorization></oauth2-authorization>
-      <oauth1-authorization></oauth1-authorization>
-      <paper-toast id="navToast"></paper-toast>
-
-      <div role="main">
-        <h2 class="centered main">API endpoint documentation</h2>
-        ${this._demoTemplate()}
-        ${this._introductionTemplate()}
-        ${this._usageTemplate()}
-      </div>
-      `, document.querySelector('#demo'));
+    <h2 class="centered main">API endpoint documentation</h2>
+    ${this._demoTemplate()}
+    ${this._introductionTemplate()}
+    ${this._usageTemplate()}
+    `;
   }
 }
 const instance = new ComponentDemo();
 instance.render();
-window.demo = instance;

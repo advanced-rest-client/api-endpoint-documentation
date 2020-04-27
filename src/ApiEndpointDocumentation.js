@@ -1,4 +1,4 @@
-import { html, css, LitElement } from 'lit-element';
+import { html, LitElement } from 'lit-element';
 import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
 import markdownStyles from '@advanced-rest-client/markdown-styles/markdown-styles.js';
 import httpMethodStyles from '@api-components/http-method-label/http-method-label-common-styles.js';
@@ -12,326 +12,23 @@ import '@anypoint-web-components/anypoint-button/anypoint-icon-button.js';
 import '@api-components/api-request-panel/api-request-panel.js';
 import '@polymer/iron-collapse/iron-collapse.js';
 import '@advanced-rest-client/http-code-snippets/http-code-snippets.js';
-import '@api-components/api-example-generator/api-example-generator.js';
+import { ExampleGenerator } from '@api-components/api-example-generator';
+import styles from './Styles.js';
+
 /**
  * `api-endpoint-documentation`
  *
- * A component to generate documentation for an endpoint from AMF model
+ * A component to generate documentation for an endpoint from the AMF model.
  *
- * This element works with [AMF](https://github.com/mulesoft/amf) data model.
- * To properly compute all the information relevant to endpoint documentation
- * set the following properties:
- *
- * - amf - as AMF's WebApi data model
- * - endpoint - As AMF's EndPoint data model
- *
- * When set, this will automatically populate the wiew with data.
- *
- * ## Updating API's base URI
- *
- * By default the component render the documentation as it is defined
- * in the AMF model. Sometimes, however, you may need to replace the base URI
- * of the API with something else. It is useful when the API does not
- * have base URI property defined (therefore this component render relative
- * paths instead of URIs) or when you want to manage different environments.
- *
- * To update base URI value either update `baseUri` property or use
- * `iron-meta` with key `ApiBaseUri`. First method is easier but the second
- * gives much more flexibility since it use a
- * [monostate pattern](http://wiki.c2.com/?MonostatePattern)
- * to manage base URI property.
- *
- * When the component constructs the funal URI for the endpoint it does the
- * following:
- * - if `baseUri` is set it uses this value as a base uri for the endpoint
- * - else if `iron-meta` with key `ApiBaseUri` exists and contains a value
- * it uses it uses this value as a base uri for the endpoin
- t
- * - else if `amf` is set then it computes base uri value from main
- * model document
- * Then it concatenates computed base URI with `endpoint`'s path property.
- *
- * ### Example
- *
- * ```html
- * <iron-meta key="ApiBaseUri" value="https://domain.com"></iron-meta>
- * ```
- *
- * To update value of the `iron-meta`:
- * ```javascript
- * new Polymer.IronMeta({key: 'ApiBaseUri'}).value = 'https://other.domain';
- * ```
- *
- * Note: The element will not get notified about the change in `iron-meta`.
- * The change will be reflected whehn `amf` or `endpoint` property chnage.
- *
- * ## Inline methods layout
- *
- * When `inlineMethods` is set then methods (api-method-document) is rendered
- * instead of list of links to methods.
- * Deep linking is still supported. The page scrolls when navigation event
- * changes.
- *
- * In this layout the try it panel is rendered next to method documentation
- * (normal layout) or below method documentation (narrow layout).
- *
- * ## Styling
- *
- * `<api-endpoint-documentation>` provides the following custom properties
- * and mixins for styling:
- *
- * Custom property | Description | Default
- * ----------------|-------------|----------
- * `--api-endpoint-documentation` | Mixin applied to this elment | `{}`
- * `--arc-font-headline` | Theme mixin, Applied to h1 element (title) | `{}`
- * `--arc-font-code1` | Theme mixin, applied to the URL area | `{}`
- * `--api-endpoint-documentation-url-font-size` | Font size of endpoin URL | `16px`
- * `--api-endpoint-documentation-url-background-color` | Background color of the URL section | `#424242`
- * `--api-endpoint-documentation-url-font-color` | Font color of the URL area | `#fff`
- * `--api-endpoint-documentation-bottom-navigation-color` | Color of of the bottom navigartion (icon + text) | `#000`
- * `--api-endpoint-documentation-tryit-background-color` | Background color of inlined "try it" panel | `#ECEFF1`
- * `--api-endpoint-documentation-method-doc-border-top-color` | Method doc top border color |  `#E5E5E5`
- * `--api-endpoint-documentation-method-doc-border-top-style` | Method doc top border style | `dashed`
- * `--api-endpoint-documentation-tryit-panels-background-color` | Bg color of try it panels | `#fff`
- * `--api-endpoint-documentation-tryit-panels-border-radius` | Try it panels border radius | `3px`
- * `--api-endpoint-documentation-tryit-panels-border-color` | Try it panels border color | `#EEEEEE`
- * `--api-endpoint-documentation-tryit-panels-border-style` | Try it panels border style | `solid`
- * `--api-endpoint-documentation-tryit-section-title`
- *
- * @customElement
- * @demo demo/index.html
- * @memberof ApiElements
- * @appliesMixin AmfHelperMixin
+ * @mixes AmfHelperMixin
+ * @extends LitElement
  */
 export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
   get styles() {
     return [
       markdownStyles,
       httpMethodStyles,
-      css`:host {
-        display: block;
-      }
-
-      .title {
-        font-size: var(--arc-font-headline-font-size);
-        letter-spacing: var(--arc-font-headline-letter-spacing);
-        line-height: var(--arc-font-headline-line-height);
-        font-weight: var(--api-method-documentation-title-method-font-weight,
-          var(--arc-font-headline-font-weight, 500));
-        text-transform: capitalize;
-      }
-
-      .heading2 {
-        font-size: var(--arc-font-title-font-size);
-        font-weight: var(--arc-font-title-font-weight);
-        line-height: var(--arc-font-title-line-height);
-        margin: 0.84em 0;
-      }
-
-      .heading3 {
-        flex: 1;
-        font-size: var(--arc-font-subhead-font-size);
-        font-weight: var(--arc-font-subhead-font-weight);
-        line-height: var(--arc-font-subhead-line-height);
-      }
-
-      :host([narrow]) .title {
-        font-size: var(--arc-font-headline-narrow-font-size, 20px);
-        margin: 0;
-      }
-
-      :host([narrow]) .heading2 {
-        font-size: var(--arc-font-title-narrow-font-size, 18px);
-      }
-
-      :host([narrow]) .heading3 {
-        font-size: var(--arc-font-subhead-narrow-font-size, 17px);
-      }
-
-      arc-marked {
-        margin: 8px 0;
-        padding: 0px;
-      }
-
-      .markdown-body {
-        margin-bottom: 28px;
-        color: var(--api-endpoint-documentation-description-color, rgba(0, 0, 0, 0.74));
-      }
-
-      .extensions {
-        font-style: italic;
-        margin: 12px 0;
-      }
-
-      .bottom-nav,
-      .bottom-link {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-      }
-
-      .bottom-nav {
-        padding: 32px 0;
-        margin: 16px 0;
-        color: var(--api-endpoint-documentation-bottom-navigation-color, #000);
-      }
-
-      .bottom-link {
-        cursor: pointer;
-        max-width: 50%;
-        word-break: break-all;
-        text-decoration: underline;
-      }
-
-      .bottom-link.previous {
-        margin-right: 12px;
-      }
-
-      .bottom-link.next {
-        margin-left: 12px;
-      }
-
-      .nav-separator {
-        flex: 1;
-      }
-
-      .url-area {
-        flex: 1;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        font-family: var(--arc-font-code-family);
-        font-size: var(--api-endpoint-documentation-url-font-size, 1.07rem);
-        margin-bottom: 40px;
-        margin-top: 20px;
-        background-color: var(--code-background-color);
-        color: var(--code-color);
-        padding: 8px;
-        border-radius: var(--api-endpoint-documentation-url-border-radius, 4px);
-      }
-
-      .url-area[extra-margin] {
-        margin-top: 20px;
-      }
-
-      .url-value {
-        flex: 1;
-        word-break: break-all;
-      }
-
-      .method-label {
-        margin-bottom: 0px;
-      }
-
-      .method-anchor {
-        text-decoration: none;
-        color: inherit;
-      }
-
-      .method-anchor:hover {
-        text-decoration: underline;
-      }
-
-      .method {
-        margin: 0.83em 0;
-      }
-
-      .method p {
-        margin: 0;
-      }
-
-      .method-name + p {
-        margin-top: 0.83em;
-      }
-
-      .method-container {
-        display: flex;
-        flex-direction: row;
-        padding: 24px 0;
-        box-sizing: border-box;
-        border-top-width: 2px;
-        border-top-color: var(--api-endpoint-documentation-method-doc-border-top-color, #E5E5E5);
-        border-top-style: var(--api-endpoint-documentation-method-doc-border-top-style, dashed);
-      }
-
-      :host([narrow]) .method-container {
-        flex-direction: column;
-      }
-
-      .method-container api-method-documentation {
-        width: var(--api-endpoint-documentation-method-doc-width, 60%);
-        max-width: var(--api-endpoint-documentation-method-doc-max-width);
-        padding-right: 12px;
-        box-sizing: border-box;
-      }
-
-      .method-container .try-it-column {
-        width: var(--api-endpoint-documentation-tryit-width, 40%);
-        max-width: var(--api-endpoint-documentation-tryit-max-width);
-        background-color: var(--api-endpoint-documentation-tryit-background-color, #ECEFF1);
-      }
-
-      :host([narrow]) .method-container api-method-documentation,
-      :host([narrow]) .method-container .try-it-column {
-        border: none !important;
-        max-width: 900px;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-      }
-
-      .try-it-column api-request-panel,
-      .try-it-column http-code-snippets {
-        padding: 4px 4px 12px 4px;
-        margin: 4px;
-        background-color: var(--api-endpoint-documentation-tryit-panels-background-color, #fff);
-        box-sizing: border-box;
-        border-radius: var(--api-endpoint-documentation-tryit-panels-border-radius, 3px);
-        border-width: 1px;
-        border-color: var(--api-endpoint-documentation-tryit-panels-border-color, #EEEEEE);
-        border-style: var(--api-endpoint-documentation-tryit-panels-border-style, solid);
-      }
-
-      .try-it-column .heading3 {
-        padding-left: 12px;
-        padding-right: 12px;
-        flex: 1;
-      }
-
-      .section-title-area {
-        flex-direction: row;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        user-select: none;
-        border-bottom-width: 1px;
-        border-bottom-color: var(--api-endpoint-documentation-tryit-title-border-bottom-color, #bac6cb);
-        border-bottom-style: var(--api-endpoint-documentation-tryit-title-border-bottom-style, solid);
-      }
-
-      .toggle-icon {
-        margin-left: 8px;
-        transform: rotateZ(0deg);
-        transition: transform 0.3s ease-in-out;
-      }
-
-      .toggle-icon.opened {
-        transform: rotateZ(-180deg);
-      }
-
-      .noinfo {
-        font-style: var(--no-info-message-font-style, italic);
-        font-size: var(--no-info-message-font-size, 16px);
-        color: var(--no-info-message-color, rgba(0, 0, 0, 0.74));
-      }
-
-      .icon {
-        display: block;
-        width: 24px;
-        height: 24px;
-        fill: currentColor;
-      }
-      `
+      styles,
     ];
   }
 
@@ -395,8 +92,6 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       narrow: { type: Boolean, reflect: true },
       /**
        * List of traits and resource types, if any.
-       *
-       * @type {Array<Object>}
        */
       extendsTypes: { type: Array },
       /**
@@ -410,8 +105,6 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       parentTypeName: { type: String },
       /**
        * List of traits appied to this endpoint
-       *
-       * @type {Array<Object>}
        */
       traits: { type: Array },
       /**
@@ -440,7 +133,6 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       noTryIt: { type: Boolean },
       /**
        * Computed list of operations to render in the operations list.
-       * @type {Object}
        */
       operations: { type: Array },
       /**
@@ -482,7 +174,27 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       /**
        * When set it hiddes bottom navigation links
        */
-      noNavigation: { type: Boolean }
+      noNavigation: { type: Boolean },
+      /**
+       * Holds the value of the currently selected server
+       * Data type: URI
+       */
+      serverValue: { type: String },
+      /**
+       * Holds the type of the currently selected server
+       * Values: `server` | `uri` | `custom`
+       */
+      serverType: { type: String },
+      /**
+       * Optional property to set
+       * If true, the server selector is not rendered
+       */
+      noServerSelector: { type: Boolean },
+      /**
+       * Optional property to set
+       * If true, the server selector custom base URI option is rendered
+       */
+      allowCustomBaseUri: { type: Boolean },
     };
   }
 
@@ -492,14 +204,6 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
 
   set legacy(value) {
     this.compatibility = value;
-  }
-
-  get _exampleGenerator() {
-    if (!this.__exampleGenerator) {
-      this.__exampleGenerator = document.createElement('api-example-generator');
-    }
-    this.__exampleGenerator.amf = this.amf;
-    return this.__exampleGenerator;
   }
 
   get baseUri() {
@@ -513,7 +217,7 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       return;
     }
     this._baseUri = value;
-    this.endpointUri = this._computeEndpointUri(this.server, this.endpoint, value, this.apiVersion);
+    this.endpointUri = this._computeEndpointUri();
   }
 
   get scrollTarget() {
@@ -542,7 +246,7 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     }
     this._inlineMethods = value;
     this._inlineMethodsChanged(value);
-    this.operations = this._computeOperations(this.endpoint, value, this.amf);
+    this.operations = this._computeOperations(this.endpoint, value);
     this.requestUpdate('inlineMethods', old);
   }
 
@@ -586,7 +290,27 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       return;
     }
     this._selected = value;
+    this.endpointUri = this._computeEndpointUri();
     this._selectedChanged(value);
+  }
+
+  get server() {
+    return this._server;
+  }
+
+  set server(value) {
+    const old = this._server;
+    /* istanbul ignore if */
+    if (old === value) {
+      return;
+    }
+    this._server = value;
+    const oldUri = this.endpointUri;
+    const newUri = this._computeEndpointUri();
+    if (oldUri !== newUri) {
+      this.endpointUri = newUri;
+      this.requestUpdate('server', old);
+    }
   }
 
   constructor() {
@@ -618,10 +342,9 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     if (!amf) {
       return;
     }
-    const apiVersion = this.apiVersion = this._computeApiVersion(amf);
-    const server = this.server = this._computeServer(amf);
-    this.endpointUri = this._computeEndpointUri(server, this.endpoint, this.baseUri, apiVersion);
-    this.operations = this._computeOperations(this.endpoint, this.inlineMethods, amf);
+    this.apiVersion = this._computeApiVersion(amf);
+    this.endpointUri = this._computeEndpointUri();
+    this.operations = this._computeOperations(this.endpoint, this.inlineMethods);
   }
 
   _processEndpointChange() {
@@ -634,12 +357,17 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     this.description = this._computeDescription(endpoint);
     this.path = this._computePath(endpoint);
     this.hasCustomProperties = this._computeHasCustomProperties(endpoint);
-    this.endpointUri = this._computeEndpointUri(this.server, endpoint, this.baseUri, this.apiVersion);
+    this.endpointUri = this._computeEndpointUri();
     const types = this.extendsTypes = this._computeExtendsTypes(endpoint);
     this.traits = this._computeTraits(types);
     const parent = this.parentType = this._computeParentType(types);
     this.parentTypeName = this._computeParentTypeName(parent);
-    this.operations = this._computeOperations(endpoint, this.inlineMethods, this.amf);
+    this.operations = this._computeOperations(endpoint, this.inlineMethods);
+  }
+
+  _computeEndpointUri() {
+    const { server, baseUri, apiVersion: version, endpoint } = this;
+    return this._computeUri(endpoint, { server, baseUri, version });
   }
 
   /**
@@ -1003,7 +731,7 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
   /**
    * Computes example headers string for code snippets.
    * @param {Array} method Method (operation) model
-   * @return {String|undefind} Computed example value for headers
+   * @return {String|undefined} Computed example value for headers
    */
   _computeSnippetsHeaders(method) {
     if (!method) {
@@ -1028,7 +756,7 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
   /**
    * Computes example payload string for code snippets.
    * @param {Array} payload Payload model from AMF
-   * @return {String|undefind} Computed example value for payload
+   * @return {String|undefined} Computed example value for payload
    */
   _computeSnippetsPayload(payload) {
     if (payload && payload instanceof Array) {
@@ -1045,11 +773,12 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       return;
     }
 
-    let mt = this._getValue(payload, this.ns.aml.vocabularies.core.mediaType);
+    let mt = /** @type string */ (this._getValue(payload, this.ns.aml.vocabularies.core.mediaType));
     if (!mt) {
       mt = 'application/json';
     }
-    const examples = this._exampleGenerator.generatePayloadExamples(payload, mt, {});
+    const gen = new ExampleGenerator(this.amf);
+    const examples = gen.generatePayloadExamples(payload, mt, {});
     if (!examples || !examples[0]) {
       return;
     }
@@ -1258,7 +987,8 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       baseUri,
       noTryIt,
       compatibility,
-      graph
+      graph,
+      server,
     } = this;
     const klas = this._computeTryItColumClass(index, operations);
     return html`
@@ -1266,6 +996,7 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       <api-method-documentation
         data-operation-id="${item['@id']}"
         .amf="${amf}"
+        .server="${server}"
         .endpoint="${endpoint}"
         .method="${item}"
         .narrow="${narrow}"
@@ -1305,6 +1036,10 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
         <api-request-panel
           .amf="${this.amf}"
           .selected="${item['@id']}"
+          ?noServerSelector="${this.noServerSelector}"
+          ?allowCustomBaseUri="${this.allowCustomBaseUri}"
+          .serverValue="${this.serverValue}"
+          .serverType="${this.serverType}"
           ?narrow="${this.narrow}"
           ?noUrlEditor="${this.noUrlEditor}"
           .baseUri="${this.baseUri}"
