@@ -1075,3 +1075,51 @@
  [901edae](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/901edaee2412e3d577f861614f7c8e82731672ba) by Pawel Psztyc
 
 
+<a name="5.0.0"></a>
+# [5.0.0](https://github.com/advanced-rest-client/api-endpoint-documentation/compare/4.0.3...5.0.0) (2020-04-27)
+
+## Build
+
+* bumping version [aa5334c](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/aa5334c1e35db3ba9627d5f5ed381600a10d255d) by Pawel Psztyc
+
+
+## Continuous integration
+
+* fixing travis configuration [0530faa](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/0530faac076b4fc71e7d41080a36524a5cdf9e14) by Pawel
+
+
+## Update
+
+* upgrading dependencies [3e8fe64](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/3e8fe649e7add479fd6a6d3b778881b966d62908) by Pawel
+* upgrading travis badge [1da8d6d](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/1da8d6d8f420ab7be91450e9916b9b7feb8a7ece) by Pawel
+* removing rollup build [0f15f85](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/0f15f85038905cd399421b4cfa713750286a2d4f) by Pawel
+* adding types support [2582680](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/25826802f4b934c7af966aafb366c846867f7d67) by Pawel
+* [ci skip] automated merge master->stage. syncing main branches [f5fef88](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/f5fef88659a29787c502ade1d5db25e671b53322) by Ci agent
+* updating dependencies [afe3c63](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/afe3c637e575c4975655391ac3381b1e78c64e3e) by Pawel Psztyc
+
+
+## Documentation
+
+* updating demo models [de6c74a](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/de6c74a9810195b1a0be613c117e4d630bdc6a1f) by Pawel Psztyc
+
+
+## Features
+
+* adding support for OAS 3 servers [7221fcf](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/7221fcff6067508b74ab970bba99978e5edaa863) by Pawel
+
+
+## Bug Fixes
+
+* fixing annotation rendering in compact model [36566ba](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/36566ba7272dd3df8640aa037316303a2245a552) by Pawel Psztyc
+
+
+## Refactor
+
+* upgrading to latest ARC standard [d2f9312](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/d2f93123bc8221995cdc308b5b5dfb6142b97446) by Pawel Psztyc
+
+
+## Testing
+
+* updating SL configuration [c79105a](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/c79105a55e96105f1048d7dd3b3caa608c98d23b) by Pawel
+
+
