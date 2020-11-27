@@ -1123,3 +1123,31 @@
 * updating SL configuration [c79105a](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/c79105a55e96105f1048d7dd3b3caa608c98d23b) by Pawel
 
 
+<a name="5.1.0"></a>
+## [5.1.0](https://github.com/advanced-rest-client/api-endpoint-documentation/compare/4.0.4...5.1.0) (2020-11-27)
+
+### Continuous integration
+
+* fixing travis configuration [0530faa](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/0530faac076b4fc71e7d41080a36524a5cdf9e14) by Pawel
+
+
+### Update
+
+* [ci skip] automated merge master->stage. syncing main branches [b7c65d8](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/b7c65d8479685770cfc6185f63e0523efb82c2b9) by Ci agent
+* upgrading dependencies [3e8fe64](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/3e8fe649e7add479fd6a6d3b778881b966d62908) by Pawel
+* upgrading travis badge [1da8d6d](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/1da8d6d8f420ab7be91450e9916b9b7feb8a7ece) by Pawel
+* removing rollup build [0f15f85](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/0f15f85038905cd399421b4cfa713750286a2d4f) by Pawel
+* adding types support [2582680](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/25826802f4b934c7af966aafb366c846867f7d67) by Pawel
+* [ci skip] automated merge master->stage. syncing main branches [f5fef88](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/f5fef88659a29787c502ade1d5db25e671b53322) by Ci agent
+
+
+### Features
+
+* adding support for OAS 3 servers [7221fcf](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/7221fcff6067508b74ab970bba99978e5edaa863) by Pawel
+
+
+### Testing
+
+* updating SL configuration [c79105a](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/c79105a55e96105f1048d7dd3b3caa608c98d23b) by Pawel
+
+
