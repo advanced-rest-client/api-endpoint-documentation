@@ -10,7 +10,6 @@ import '@anypoint-web-components/anypoint-styles/typography.js';
 import '@advanced-rest-client/oauth-authorization/oauth2-authorization.js';
 import '@advanced-rest-client/oauth-authorization/oauth1-authorization.js';
 import '@advanced-rest-client/xhr-simple-request/xhr-simple-request.js';
-import '@api-components/api-server-selector/api-server-selector.js';
 import '../api-endpoint-documentation.js';
 
 class ComponentDemo extends ApiDemoPage {
@@ -186,6 +185,7 @@ class ComponentDemo extends ApiDemoPage {
       ['demo-api', 'Demo API'],
       ['appian-api', 'Applian API'],
       ['nexmo-sms-api', 'Nexmo SMS API'],
+      ['async-api', 'AsyncAPI'],
     ].map(([file, label]) => html`
       <anypoint-item data-src="${file}-compact.json">${label} - compact model</anypoint-item>
       <anypoint-item data-src="${file}.json">${label}</anypoint-item>
