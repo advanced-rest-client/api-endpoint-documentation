@@ -38,7 +38,7 @@ AmfLoader.load = async function(fileName, compact) {
 
 AmfLoader.lookupEndpoint = function(model, endpoint) {
   helper.amf = model;
-  const webApi = helper._computeWebApi(model);
+  const webApi = helper._computeApi(model);
   return helper._computeEndpointByPath(webApi, endpoint);
 };
 
