@@ -474,6 +474,29 @@ describe('<api-endpoint-documentation>', function() {
           assert.isFalse(node.hasAttribute('hidden'), 'node is not hidden');
         });
       });
+
+      describe('AsyncAPI', () => {
+        let element;
+        const asyncApi = 'async-api'
+        let asyncAmf;
+
+        before(async () => {
+          asyncAmf = await AmfLoader.load(asyncApi, compact);
+        });
+
+        it('should have endpoint uri set', async () => {
+          const endpoint = AmfLoader.lookupEndpoint(asyncAmf, 'hello');
+          element = await modelFixture(asyncAmf, endpoint);
+          await nextFrame();
+          const servers = element._getServers({});
+          const server = servers[0];
+          element.server = server;
+          await nextFrame();
+          assert.isDefined(element.server);
+          assert.isNotNull(element.server);
+          assert.equal(element.endpointUri, 'amqp://broker.mycompany.com');
+        });
+      });
     });
   });
 });
