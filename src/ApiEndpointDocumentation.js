@@ -942,10 +942,21 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     if (this.inlineMethods) {
       return '';
     }
-    const { endpointUri, endpointName } = this;
+    const { endpointName } = this;
     return html`<section class="url-area" ?extra-margin="${!endpointName}">
-      <div class="url-value">${endpointUri}</div>
+      <api-url
+        .amf="${this.amf}"
+        .server="${this.server}"
+        .endpoint="${this.endpoint}"
+        .apiVersion="${this.apiVersion}"
+        .baseUri="${this.baseUri}"
+        @onchange="${this._handleUrlChange}"
+      ></api-url>
     </section>`;
+  }
+
+  _handleUrlChange(event) {
+    this.endpointUri = event.detail.url;
   }
 
   _getExtensionsTemplate() {

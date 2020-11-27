@@ -87,30 +87,6 @@ arc-marked {
   flex: 1;
 }
 
-.url-area {
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-family: var(--arc-font-code-family);
-  font-size: var(--api-endpoint-documentation-url-font-size, 1.07rem);
-  margin-bottom: 40px;
-  margin-top: 20px;
-  background-color: var(--code-background-color);
-  color: var(--code-color);
-  padding: 8px;
-  border-radius: var(--api-endpoint-documentation-url-border-radius, 4px);
-}
-
-.url-area[extra-margin] {
-  margin-top: 20px;
-}
-
-.url-value {
-  flex: 1;
-  word-break: break-all;
-}
-
 .method-label {
   margin-bottom: 0px;
 }
