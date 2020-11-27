@@ -4,5 +4,6 @@
   "nexmo-sms-api/nexmo-sms-api.raml": "RAML 1.0",
   "exchange-experience-api/exchange-experience-api.raml": "RAML 0.8",
   "google-drive-api/google-drive-api.raml": "RAML 1.0",
-  "multi-server/multi-server.yaml": { "type": "OAS 3.0", "mime": "application/yaml" }
+  "multi-server/multi-server.yaml": { "type": "OAS 3.0", "mime": "application/yaml" },
+  "async-api/async-api.yaml": "ASYNC 2.0"
 }

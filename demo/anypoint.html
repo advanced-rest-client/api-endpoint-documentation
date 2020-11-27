@@ -228,7 +228,7 @@
             return;
           }
         }
-        const webApi = app.$.helper._computeWebApi(app.amfModel);
+        const webApi = app.$.helper._computeApi(app.amfModel);
         const endpoint = app.$.helper._computeEndpointModel(webApi, eId);
         app.endpoint = endpoint;
         app.selectedShape = id;

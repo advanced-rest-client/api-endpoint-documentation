@@ -305,12 +305,7 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       return;
     }
     this._server = value;
-    const oldUri = this.endpointUri;
-    const newUri = this._computeEndpointUri();
-    if (oldUri !== newUri) {
-      this.endpointUri = newUri;
-      this.requestUpdate('server', old);
-    }
+    this.requestUpdate('server', old);
   }
 
   constructor() {
@@ -343,7 +338,6 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       return;
     }
     this.apiVersion = this._computeApiVersion(amf);
-    this.endpointUri = this._computeEndpointUri();
     this.operations = this._computeOperations(this.endpoint, this.inlineMethods);
   }
 
@@ -357,17 +351,11 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     this.description = this._computeDescription(endpoint);
     this.path = this._computePath(endpoint);
     this.hasCustomProperties = this._computeHasCustomProperties(endpoint);
-    this.endpointUri = this._computeEndpointUri();
     const types = this.extendsTypes = this._computeExtendsTypes(endpoint);
     this.traits = this._computeTraits(types);
     const parent = this.parentType = this._computeParentType(types);
     this.parentTypeName = this._computeParentTypeName(parent);
     this.operations = this._computeOperations(endpoint, this.inlineMethods);
-  }
-
-  _computeEndpointUri() {
-    const { server, baseUri, apiVersion: version, endpoint } = this;
-    return this._computeUri(endpoint, { server, baseUri, version });
   }
 
   /**
@@ -942,10 +930,21 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     if (this.inlineMethods) {
       return '';
     }
-    const { endpointUri, endpointName } = this;
+    const { endpointName } = this;
     return html`<section class="url-area" ?extra-margin="${!endpointName}">
-      <div class="url-value">${endpointUri}</div>
+      <api-url
+        .amf="${this.amf}"
+        .server="${this.server}"
+        .endpoint="${this.endpoint}"
+        .apiVersion="${this.apiVersion}"
+        .baseUri="${this.baseUri}"
+        @onchange="${this._handleUrlChange}"
+      ></api-url>
     </section>`;
+  }
+
+  _handleUrlChange(event) {
+    this.endpointUri = event.detail.url;
   }
 
   _getExtensionsTemplate() {
