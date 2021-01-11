@@ -1,6 +1,7 @@
 import { html } from 'lit-html';
 import { ApiDemoPage } from '@advanced-rest-client/arc-demo-helper';
 import '@anypoint-web-components/anypoint-checkbox/anypoint-checkbox.js';
+import '@anypoint-web-components/anypoint-item/anypoint-item.js';
 import '@advanced-rest-client/arc-demo-helper/arc-demo-helper.js';
 import '@advanced-rest-client/arc-demo-helper/arc-interactive-demo.js';
 import '@api-components/api-navigation/api-navigation.js';
@@ -9,7 +10,8 @@ import '@anypoint-web-components/anypoint-styles/colors.js';
 import '@anypoint-web-components/anypoint-styles/typography.js';
 import '@advanced-rest-client/oauth-authorization/oauth2-authorization.js';
 import '@advanced-rest-client/oauth-authorization/oauth1-authorization.js';
-import '@advanced-rest-client/xhr-simple-request/xhr-simple-request.js';
+import '@api-components/api-request/xhr-simple-request.js';
+import '@api-components/api-server-selector/api-server-selector.js';
 import '../api-endpoint-documentation.js';
 
 class ComponentDemo extends ApiDemoPage {
@@ -29,7 +31,6 @@ class ComponentDemo extends ApiDemoPage {
       'renderCustomServer',
       'allowCustomBaseUri',
       'noServerSelector',
-      'urlLabel',
       'serverType',
       'serverValue',
     ]);
@@ -41,14 +42,11 @@ class ComponentDemo extends ApiDemoPage {
     this.renderCustomServer = false;
     this.allowCustomBaseUri = false;
     this.noServerSelector = false;
-    this.urlLabel = false;
 
     this.redirectUri = 'https://auth.advancedrestclient.com/oauth-popup.html';
     this.scrollTarget = window;
 
     this.demoStates = ['Material', 'Anypoint'];
-    this._demoStateHandler = this._demoStateHandler.bind(this);
-    this._toggleMainOption = this._toggleMainOption.bind(this);
     this._tryitRequested = this._tryitRequested.bind(this);
     this._serverHandler = this._serverHandler.bind(this);
   }
@@ -96,7 +94,9 @@ class ComponentDemo extends ApiDemoPage {
     const { selected, type, passive, endpointId } = e.detail;
     if (passive) {
       const toast = document.getElementById('navToast');
-      toast.text = 'Passive navigation to: ' + selected;
+      // @ts-ignore
+      toast.text = `Passive navigation to: ${  selected}`;
+      // @ts-ignore
       toast.opened = true;
       return;
     }
@@ -194,6 +194,7 @@ class ComponentDemo extends ApiDemoPage {
 
   _tryitRequested() {
     const toast = document.getElementById('tryItToast');
+    // @ts-ignore
     toast.opened = true;
   }
 
@@ -220,7 +221,6 @@ class ComponentDemo extends ApiDemoPage {
       noTryit,
       serverType,
       serverValue,
-      urlLabel,
       noServerSelector,
       allowCustomBaseUri,
       server,
@@ -238,7 +238,7 @@ class ComponentDemo extends ApiDemoPage {
 
       <arc-interactive-demo
         .states="${demoStates}"
-        @state-chanegd="${this._demoStateHandler}"
+        @state-changed="${this._demoStateHandler}"
         ?dark="${darkThemeActive}"
       >
         <api-endpoint-documentation
@@ -249,14 +249,13 @@ class ComponentDemo extends ApiDemoPage {
           .server="${server}"
           .baseUri="${baseUri}"
           .scrollTarget="${scrollTarget}"
-          .redirect-uri="${redirectUri}"
+          .redirectUri="${redirectUri}"
           .previous="${previous}"
           .next="${next}"
           .inlineMethods="${inlineMethods}"
           .noTryIt="${noTryit}"
           .serverType="${serverType}"
           .serverValue="${serverValue}"
-          ?urlLabel="${urlLabel}"
           ?noServerSelector="${noServerSelector}"
           ?allowCustomBaseUri="${allowCustomBaseUri}"
           ?narrow="${narrow}"
@@ -293,13 +292,6 @@ class ComponentDemo extends ApiDemoPage {
         <anypoint-checkbox
           aria-describedby="mainOptionsLabel"
           slot="options"
-          name="urlLabel"
-          @change="${this._toggleMainOption}"
-          >URL label</anypoint-checkbox
-        >
-        <anypoint-checkbox
-          aria-describedby="mainOptionsLabel"
-          slot="options"
           name="renderCustomServer"
           @change="${this._toggleMainOption}"
           >Custom servers</anypoint-checkbox
@@ -324,7 +316,7 @@ class ComponentDemo extends ApiDemoPage {
 
   _addCustomServers() {
     if (!this.renderCustomServer) {
-      return;
+      return '';
     }
     const { compatibility } = this;
     return html`
@@ -356,7 +348,7 @@ class ComponentDemo extends ApiDemoPage {
       .amf="${amf}"
       .value="${serverValue}"
       .type="${serverType}"
-      autoselect
+      autoSelect
       allowCustom
       ?compatibility="${compatibility}"
       @apiserverchanged="${this._serverHandler}"
@@ -379,7 +371,7 @@ class ComponentDemo extends ApiDemoPage {
     return html `
       <section class="documentation-section">
         <h2>Usage</h2>
-        <p>API request editor comes with 2 predefied styles:</p>
+        <p>API request editor comes with 2 predefined styles:</p>
         <ul>
           <li><b>Material Design</b> (default)</li>
           <li>

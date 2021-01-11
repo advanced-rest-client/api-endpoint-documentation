@@ -1,51 +1,68 @@
+/* eslint-disable prefer-destructuring */
 import { fixture, assert, html, aTimeout, nextFrame } from '@open-wc/testing';
 import * as sinon from 'sinon';
 import { AmfLoader } from './amf-loader.js';
 import '../api-endpoint-documentation.js';
 
-describe('<api-endpoint-documentation>', function() {
+/** @typedef {import('../index').ApiEndpointDocumentationElement} ApiEndpointDocumentationElement */
+
+describe('ApiEndpointDocumentationElement', () => {
+  /**
+   * @returns {Promise<ApiEndpointDocumentationElement>}
+   */
   async function basicFixture() {
-    return (await fixture(`<api-endpoint-documentation></api-endpoint-documentation>`));
+    return (fixture(html`<api-endpoint-documentation></api-endpoint-documentation>`));
   }
 
-  async function awareFixture() {
-    return (await fixture(`<api-endpoint-documentation aware="test"></api-endpoint-documentation>`));
-  }
-
+  /**
+   * @returns {Promise<ApiEndpointDocumentationElement>}
+   */
   async function baseUriFixture(amf, endpoint) {
-    return (await fixture(html`<api-endpoint-documentation
-      baseuri="https://domain.com"
+    return (fixture(html`<api-endpoint-documentation
+      baseUri="https://domain.com"
       .amf="${amf}"
       .endpoint="${endpoint}"></api-endpoint-documentation>`));
   }
 
+  /**
+   * @returns {Promise<ApiEndpointDocumentationElement>}
+   */
   async function modelFixture(amf, endpoint) {
-    return (await fixture(html`<api-endpoint-documentation
+    return (fixture(html`<api-endpoint-documentation
       .amf="${amf}"
       .endpoint="${endpoint}"></api-endpoint-documentation>`));
   }
 
+  /**
+   * @returns {Promise<ApiEndpointDocumentationElement>}
+   */
   async function inlineMethodsFixture(amf, endpoint) {
-    return (await fixture(html`<api-endpoint-documentation
+    return (fixture(html`<api-endpoint-documentation
       .amf="${amf}"
       .endpoint="${endpoint}"
-      inlinemethods></api-endpoint-documentation>`));
+      inlineMethods></api-endpoint-documentation>`));
   }
 
+  /**
+   * @returns {Promise<ApiEndpointDocumentationElement>}
+   */
   async function noNavigationFixture(amf, endpoint) {
-    return (await fixture(html`<api-endpoint-documentation
+    return (fixture(html`<api-endpoint-documentation
       .amf="${amf}"
       .endpoint="${endpoint}"
       noNavigation></api-endpoint-documentation>`));
   }
 
+  /**
+   * @returns {Promise<(HTMLElement|ApiEndpointDocumentationElement)[]>}
+   */
   async function scrollTargetFixture(amf, endpoint) {
-    const target = (await fixture(html`
+    const target = /** @type HTMLDivElement */ (await fixture(html`
       <div style="overflow: auto; height: 100px;">
       <api-endpoint-documentation
       .amf="${amf}"
       .endpoint="${endpoint}"
-      inlinemethods></api-endpoint-documentation>
+      inlineMethods></api-endpoint-documentation>
       </div>`));
     const element = target.querySelector('api-endpoint-documentation');
     element.scrollTarget = target;
@@ -55,26 +72,6 @@ describe('<api-endpoint-documentation>', function() {
   const demoApi = 'demo-api';
 
   describe('Basic tests', () => {
-    it('Adds raml-aware to the DOM if aware is set', async () => {
-      const element = await awareFixture();
-      const node = element.shadowRoot.querySelector('raml-aware');
-      assert.ok(node);
-    });
-
-    it('passes AMF model', async () => {
-      const element = await awareFixture();
-      const aware = document.createElement('raml-aware');
-      aware.scope = 'test';
-      aware.api = [{}];
-      assert.deepEqual(element.amf, [{}]);
-    });
-
-    it('raml-aware is not in the DOM by default', async () => {
-      const element = await basicFixture();
-      const node = element.shadowRoot.querySelector('raml-aware');
-      assert.notOk(node);
-    });
-
     it('arc-marked is not in the DOM by default', async () => {
       const element = await basicFixture();
       const node = element.shadowRoot.querySelector('arc-marked');
@@ -86,7 +83,7 @@ describe('<api-endpoint-documentation>', function() {
     const prev = { 'label': 'p', 'id': 'pp' };
     const next = { 'label': 'n', 'id': 'nn' };
 
-    let element;
+    let element = /** @type ApiEndpointDocumentationElement */ (null);
     beforeEach(async () => {
       element = await basicFixture();
     });
@@ -155,7 +152,7 @@ describe('<api-endpoint-documentation>', function() {
 
   describe('scroll target', () => {
     let amf;
-    let element;
+    let element = /** @type ApiEndpointDocumentationElement */ (null);
     let target;
     before(async () => {
       amf = await AmfLoader.load(demoApi, true);
@@ -163,6 +160,7 @@ describe('<api-endpoint-documentation>', function() {
 
     beforeEach(async () => {
       const endpoint = AmfLoader.lookupEndpoint(amf, '/people/{personId}');
+      // @ts-ignore
       [target, element] = await scrollTargetFixture(amf, endpoint);
       await aTimeout(0);
     });
@@ -178,7 +176,7 @@ describe('<api-endpoint-documentation>', function() {
     it('calls _notifyPassiveNavigation() when scrolling to a next method', async () => {
       element._checkMethodsPosition();
       const spy = sinon.spy(element, '_notifyPassiveNavigation');
-      const lastNode = element.shadowRoot.querySelector('.method-container.last');
+      const lastNode = /** @type HTMLElement */ (element.shadowRoot.querySelector('.method-container.last'));
       target.scrollTop = lastNode.offsetTop;
       element._checkMethodsPosition();
       assert.isTrue(spy.called);
@@ -187,7 +185,7 @@ describe('<api-endpoint-documentation>', function() {
     it('calls _notifyPassiveNavigation() when scrolling to a previous method', async () => {
       element._checkMethodsPosition();
       const spy = sinon.spy(element, '_notifyPassiveNavigation');
-      const lastNode = element.shadowRoot.querySelector('.method-container.last');
+      const lastNode = /** @type HTMLElement */ (element.shadowRoot.querySelector('.method-container.last'));
       target.scrollTop = lastNode.offsetTop;
       element._checkMethodsPosition();
       target.scrollTop = element._methodsList[1].offsetTop;
@@ -198,37 +196,23 @@ describe('<api-endpoint-documentation>', function() {
 
   describe('selection change', () => {
     let amf;
-    let element;
+    let element = /** @type ApiEndpointDocumentationElement */ (null);
     before(async () => {
       amf = await AmfLoader.load(demoApi, true);
       const endpoint = AmfLoader.lookupEndpoint(amf, '/people/{personId}');
       const nodes = await scrollTargetFixture(amf, endpoint);
+      // @ts-ignore
       element = nodes[1];
       element.selected = endpoint['@id'];
-      await aTimeout();
+      await aTimeout(0);
     });
 
     it('calls _repositionVerb()', async () => {
       const spy = sinon.spy(element, '_repositionVerb');
       const method = AmfLoader.lookupOperation(amf, '/people/{personId}', 'put');
       element.selected = method['@id'];
-      await aTimeout();
+      await aTimeout(0);
       assert.isTrue(spy.called);
-    });
-  });
-
-  describe('compatibility mode', () => {
-    it('sets compatibility on item when setting legacy', async () => {
-      const element = await basicFixture();
-      element.legacy = true;
-      assert.isTrue(element.legacy, 'legacy is set');
-      assert.isTrue(element.compatibility, 'compatibility is set');
-    });
-
-    it('returns compatibility value from item when getting legacy', async () => {
-      const element = await basicFixture();
-      element.compatibility = true;
-      assert.isTrue(element.legacy, 'legacy is set');
     });
   });
 
@@ -236,18 +220,18 @@ describe('<api-endpoint-documentation>', function() {
     ['Compact model', true],
     ['Full model', false]
   ].forEach(([label, compact]) => {
-    describe(label, () => {
+    describe(String(label), () => {
       describe('Title rendering', () => {
         let amf;
         before(async () => {
-          amf = await AmfLoader.load(demoApi, compact);
+          amf = await AmfLoader.load(demoApi, Boolean(compact));
         });
 
         it('renders title when display name', async () => {
           const endpoint = AmfLoader.lookupEndpoint(amf, '/people');
           const element = await modelFixture(amf, endpoint);
           // model change debouncer
-          await aTimeout();
+          await aTimeout(0);
           const title = element.shadowRoot.querySelector('.title');
           assert.ok(title);
           assert.equal(title.textContent.trim(), 'People');
@@ -257,7 +241,7 @@ describe('<api-endpoint-documentation>', function() {
           const endpoint = AmfLoader.lookupEndpoint(amf, '/notypes');
           const element = await modelFixture(amf, endpoint);
           // model change debouncer
-          await aTimeout();
+          await aTimeout(0);
           const title = element.shadowRoot.querySelector('.title');
           assert.notOk(title);
         });
@@ -266,15 +250,16 @@ describe('<api-endpoint-documentation>', function() {
       describe('Method description rendering', () => {
         let amf;
         before(async () => {
-          amf = await AmfLoader.load(demoApi, compact);
+          amf = await AmfLoader.load(demoApi, Boolean(compact));
         });
 
         it('renders title when display name', async () => {
           const endpoint = AmfLoader.lookupEndpoint(amf, '/people');
           const element = await modelFixture(amf, endpoint);
-          await aTimeout();
+          await aTimeout(0);
           const desc = element.shadowRoot.querySelector('.methods .method arc-marked');
           assert.ok(desc);
+          // @ts-ignore
           assert.typeOf(desc.markdown, 'string');
         });
 
@@ -283,10 +268,10 @@ describe('<api-endpoint-documentation>', function() {
       describe('Basic computations', () => {
         let amf;
         before(async () => {
-          amf = await AmfLoader.load(demoApi, compact);
+          amf = await AmfLoader.load(demoApi, Boolean(compact));
         });
 
-        let element;
+        let element = /** @type ApiEndpointDocumentationElement */ (null);
         beforeEach(async () => {
           const endpoint = AmfLoader.lookupEndpoint(amf, '/notypes');
           element = await modelFixture(amf, endpoint);
@@ -305,14 +290,14 @@ describe('<api-endpoint-documentation>', function() {
       describe.skip('Resource type computations', () => {
         let amf;
         before(async () => {
-          amf = await AmfLoader.load(demoApi, compact);
+          amf = await AmfLoader.load(demoApi, Boolean(compact));
         });
 
-        let element;
+        let element = /** @type ApiEndpointDocumentationElement */ (null);
         beforeEach(async () => {
           const endpoint = AmfLoader.lookupEndpoint(amf, '/people/{personId}');
           element = await modelFixture(amf, endpoint);
-          await aTimeout();
+          await aTimeout(0);
         });
 
         it('traits is not computed', () => {
@@ -338,14 +323,14 @@ describe('<api-endpoint-documentation>', function() {
       describe.skip('Traits type computations', () => {
         let amf;
         before(async () => {
-          amf = await AmfLoader.load(demoApi, compact);
+          amf = await AmfLoader.load(demoApi, Boolean(compact));
         });
 
-        let element;
+        let element = /** @type ApiEndpointDocumentationElement */ (null);
         beforeEach(async () => {
           const endpoint = AmfLoader.lookupEndpoint(amf, '/products');
           element = await modelFixture(amf, endpoint);
-          await aTimeout();
+          await aTimeout(0);
         });
 
         it('parentType is not computed', () => {
@@ -380,7 +365,7 @@ describe('<api-endpoint-documentation>', function() {
       describe('Base URI property', () => {
         let amf;
         before(async () => {
-          amf = await AmfLoader.load(demoApi, compact);
+          amf = await AmfLoader.load(demoApi, Boolean(compact));
         });
 
         let endpoint;
@@ -390,22 +375,22 @@ describe('<api-endpoint-documentation>', function() {
 
         it('sets URL from base uri', async () => {
           const element = await baseUriFixture(amf, endpoint);
-          await aTimeout();
+          await aTimeout(0);
           assert.equal(element.endpointUri, 'https://domain.com/people/{personId}');
         });
 
         it('sets URL from base uri', async () => {
           const element = await baseUriFixture(amf, endpoint);
-          await aTimeout();
+          await aTimeout(0);
           assert.equal(element.endpointUri, 'https://domain.com/people/{personId}');
         });
       });
 
       describe('inline methods', () => {
         let amf;
-        let element;
+        let element = /** @type ApiEndpointDocumentationElement */ (null);
         before(async () => {
-          amf = await AmfLoader.load(demoApi, compact);
+          amf = await AmfLoader.load(demoApi, Boolean(compact));
           const endpoint = AmfLoader.lookupEndpoint(amf, '/people/{personId}');
           element = await inlineMethodsFixture(amf, endpoint);
         });
@@ -416,7 +401,7 @@ describe('<api-endpoint-documentation>', function() {
         });
         // (Pawel): Note, methods docs rendering is async. This won't check for every
         // method rendering as the time of element rendering is unknown.
-        // There's an (fair) assumption that when one panel is redered then other
+        // There's an (fair) assumption that when one panel is rendered then other
         // are rendered as well.
         it('Renders method documentations', () => {
           const node = element.shadowRoot.querySelector('api-method-documentation');
@@ -436,9 +421,9 @@ describe('<api-endpoint-documentation>', function() {
 
       describe('No navigation', () => {
         let amf;
-        let element;
+        let element = /** @type ApiEndpointDocumentationElement */ (null);
         before(async () => {
-          amf = await AmfLoader.load(demoApi, compact);
+          amf = await AmfLoader.load(demoApi, Boolean(compact));
           const endpoint = AmfLoader.lookupEndpoint(amf, '/people');
           element = await noNavigationFixture(amf, endpoint);
         });
@@ -452,13 +437,13 @@ describe('<api-endpoint-documentation>', function() {
       describe('Annotation rendering', () => {
         let amf;
         before(async () => {
-          amf = await AmfLoader.load(demoApi, compact);
+          amf = await AmfLoader.load(demoApi, Boolean(compact));
         });
 
         it('does not render annotation when not available', async () => {
           const endpoint = AmfLoader.lookupEndpoint(amf, '/people/{personId}');
           const element = await modelFixture(amf, endpoint);
-          await aTimeout();
+          await aTimeout(0);
           const node = element.shadowRoot.querySelector('api-annotation-document');
           assert.notOk(node, 'annotation is not rendered');
         });
@@ -466,22 +451,23 @@ describe('<api-endpoint-documentation>', function() {
         it('renders annotation when available', async () => {
           const endpoint = AmfLoader.lookupEndpoint(amf, '/people');
           const element = await modelFixture(amf, endpoint);
-          await aTimeout();
+          await aTimeout(0);
           const node = element.shadowRoot.querySelector('api-annotation-document');
           assert.ok(node, 'annotation is rendered');
           // The annotation document sets `hidden` attribute when there's nothing
           // to render (the shape has no annotations).
+          // @ts-ignore
           assert.isFalse(node.hasAttribute('hidden'), 'node is not hidden');
         });
       });
 
       describe('AsyncAPI', () => {
-        let element;
+        let element = /** @type ApiEndpointDocumentationElement */ (null);
         const asyncApi = 'async-api'
         let asyncAmf;
 
         before(async () => {
-          asyncAmf = await AmfLoader.load(asyncApi, compact);
+          asyncAmf = await AmfLoader.load(asyncApi, Boolean(compact));
         });
 
         it('should have endpoint uri set', async () => {

@@ -1,1 +1,1 @@
-export { ApiEndpointDocumentation } from './src/ApiEndpointDocumentation.js';
+export { ApiEndpointDocumentationElement } from './src/ApiEndpointDocumentationElement.js';
