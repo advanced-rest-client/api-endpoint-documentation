@@ -1,0 +1,332 @@
+{
+  "version": "experimental",
+  "tags": [
+    {
+      "name": "api-endpoint-documentation",
+      "path": "./api-endpoint-documentation.js",
+      "description": "`api-endpoint-documentation`\n\nA component to generate documentation for an endpoint from the AMF model.",
+      "attributes": [
+        {
+          "name": "selected",
+          "description": "The ID in `amf` of current selection. It can be this endpoint\nor any of methods",
+          "type": "string"
+        },
+        {
+          "name": "baseUri",
+          "description": "A property to set to override AMF's model base URI information.\nWhen this property is set, the `endpointUri` property is recalculated.",
+          "type": "string"
+        },
+        {
+          "name": "apiVersion",
+          "description": "Computed value, API version name",
+          "type": "string"
+        },
+        {
+          "name": "endpointUri",
+          "description": "Endpoint URI to display in main URL field.\nThis value is computed when `amf`, `endpoint` or `baseUri` change.",
+          "type": "string"
+        },
+        {
+          "name": "endpointName",
+          "description": "Endpoint name.\nIt should be either a \"displayName\" or endpoint's relative\npath.",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "description": "Computed value of method description from `method` property.",
+          "type": "string"
+        },
+        {
+          "name": "path",
+          "description": "Computed value of endpoint's path.",
+          "type": "string"
+        },
+        {
+          "name": "hasCustomProperties",
+          "description": "Computed value from current `method`. True if the model containsPATCH\ncustom properties (annotations in RAML).",
+          "type": "boolean"
+        },
+        {
+          "name": "narrow",
+          "description": "If set it will renders the view in the narrow layout.",
+          "type": "boolean"
+        },
+        {
+          "name": "parentTypeName",
+          "description": "Computed value for parent type name.",
+          "type": "string"
+        },
+        {
+          "name": "noTryIt",
+          "description": "Passing value of `noTryIt` to the method documentation.\nHides the \"Try it\" button from the view.",
+          "type": "boolean"
+        },
+        {
+          "name": "hasOperations",
+          "description": "Computed value if the endpoint contains operations.",
+          "type": "boolean"
+        },
+        {
+          "name": "inlineMethods",
+          "description": "If set then it renders methods documentation inline with\nthe endpoint documentation.\nWhen it's not set (or value is `false`, default) then it renders\njust a list of methods with links.",
+          "type": "boolean"
+        },
+        {
+          "name": "noUrlEditor",
+          "description": "In inline mode, passes the `noUrlEditor` value on the\n`api-request-panel`",
+          "type": "boolean"
+        },
+        {
+          "name": "redirectUri",
+          "description": "OAuth2 redirect URI.\nThis value **must** be set in order for OAuth 1/2 to work properly.\nThis is only required in inline mode (`inlineMethods`).",
+          "type": "string"
+        },
+        {
+          "name": "compatibility",
+          "description": "Enables compatibility with Anypoint components.",
+          "type": "boolean"
+        },
+        {
+          "name": "outlined",
+          "description": "Applied outlined theme to the try it panel",
+          "type": "boolean"
+        },
+        {
+          "name": "graph",
+          "description": "Passed to `api-type-document`. Enables internal links rendering for types.",
+          "type": "boolean"
+        },
+        {
+          "name": "noNavigation",
+          "description": "When set it hides bottom navigation links",
+          "type": "boolean"
+        },
+        {
+          "name": "serverValue",
+          "description": "Holds the value of the currently selected server\nData type: URI",
+          "type": "string"
+        },
+        {
+          "name": "serverType",
+          "description": "Holds the type of the currently selected server\nValues: `server` | `uri` | `custom`",
+          "type": "string"
+        },
+        {
+          "name": "noServerSelector",
+          "description": "Optional property to set\nIf true, the server selector is not rendered",
+          "type": "boolean"
+        },
+        {
+          "name": "allowCustomBaseUri",
+          "description": "Optional property to set\nIf true, the server selector custom base URI option is rendered",
+          "type": "boolean"
+        }
+      ],
+      "properties": [
+        {
+          "name": "styles",
+          "type": "CSSResult"
+        },
+        {
+          "name": "endpoint",
+          "description": "Method's endpoint definition as a\n`http://raml.org/vocabularies/http#endpoint` of AMF model."
+        },
+        {
+          "name": "selected",
+          "attribute": "selected",
+          "description": "The ID in `amf` of current selection. It can be this endpoint\nor any of methods",
+          "type": "string"
+        },
+        {
+          "name": "baseUri",
+          "attribute": "baseUri",
+          "description": "A property to set to override AMF's model base URI information.\nWhen this property is set, the `endpointUri` property is recalculated.",
+          "type": "string"
+        },
+        {
+          "name": "apiVersion",
+          "attribute": "apiVersion",
+          "description": "Computed value, API version name",
+          "type": "string"
+        },
+        {
+          "name": "endpointUri",
+          "attribute": "endpointUri",
+          "description": "Endpoint URI to display in main URL field.\nThis value is computed when `amf`, `endpoint` or `baseUri` change.",
+          "type": "string"
+        },
+        {
+          "name": "server",
+          "description": "Computed value of the `http://raml.org/vocabularies/http#server`\nfrom `amf`"
+        },
+        {
+          "name": "endpointName",
+          "attribute": "endpointName",
+          "description": "Endpoint name.\nIt should be either a \"displayName\" or endpoint's relative\npath.",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "attribute": "description",
+          "description": "Computed value of method description from `method` property.",
+          "type": "string"
+        },
+        {
+          "name": "path",
+          "attribute": "path",
+          "description": "Computed value of endpoint's path.",
+          "type": "string"
+        },
+        {
+          "name": "hasCustomProperties",
+          "attribute": "hasCustomProperties",
+          "description": "Computed value from current `method`. True if the model containsPATCH\ncustom properties (annotations in RAML).",
+          "type": "boolean"
+        },
+        {
+          "name": "narrow",
+          "attribute": "narrow",
+          "description": "If set it will renders the view in the narrow layout.",
+          "type": "boolean"
+        },
+        {
+          "name": "extendsTypes",
+          "description": "List of traits and resource types, if any.",
+          "type": "array"
+        },
+        {
+          "name": "parentType",
+          "description": "Computed value of a parent type.\nIn RAML it is resource type that can be applied to a resource."
+        },
+        {
+          "name": "parentTypeName",
+          "attribute": "parentTypeName",
+          "description": "Computed value for parent type name.",
+          "type": "string"
+        },
+        {
+          "name": "traits",
+          "description": "List of traits applied to this endpoint",
+          "type": "array"
+        },
+        {
+          "name": "previous",
+          "description": "Model to generate a link to previous HTTP endpoint.\nIt should contain `id` and `label` properties"
+        },
+        {
+          "name": "next",
+          "description": "Model to generate a link to next HTTP endpoint.\nIt should contain `id` and `label` properties"
+        },
+        {
+          "name": "scrollTarget",
+          "description": "Scroll target used to observe `scroll` event.\nWhen set the element will observe scroll and inform other components\nabout changes in navigation while scrolling through methods list.\nThe navigation event contains `passive: true` property that\ndetermines that it's not user triggered navigation but rather\ncontext enforced.",
+          "type": "Window | HTMLElement"
+        },
+        {
+          "name": "noTryIt",
+          "attribute": "noTryIt",
+          "description": "Passing value of `noTryIt` to the method documentation.\nHides the \"Try it\" button from the view.",
+          "type": "boolean"
+        },
+        {
+          "name": "operations",
+          "description": "Computed list of operations to render in the operations list.",
+          "type": "array"
+        },
+        {
+          "name": "hasOperations",
+          "attribute": "hasOperations",
+          "description": "Computed value if the endpoint contains operations.",
+          "type": "boolean"
+        },
+        {
+          "name": "inlineMethods",
+          "attribute": "inlineMethods",
+          "description": "If set then it renders methods documentation inline with\nthe endpoint documentation.\nWhen it's not set (or value is `false`, default) then it renders\njust a list of methods with links.",
+          "type": "boolean"
+        },
+        {
+          "name": "noUrlEditor",
+          "attribute": "noUrlEditor",
+          "description": "In inline mode, passes the `noUrlEditor` value on the\n`api-request-panel`",
+          "type": "boolean"
+        },
+        {
+          "name": "redirectUri",
+          "attribute": "redirectUri",
+          "description": "OAuth2 redirect URI.\nThis value **must** be set in order for OAuth 1/2 to work properly.\nThis is only required in inline mode (`inlineMethods`).",
+          "type": "string"
+        },
+        {
+          "name": "compatibility",
+          "attribute": "compatibility",
+          "description": "Enables compatibility with Anypoint components.",
+          "type": "boolean"
+        },
+        {
+          "name": "outlined",
+          "attribute": "outlined",
+          "description": "Applied outlined theme to the try it panel",
+          "type": "boolean"
+        },
+        {
+          "name": "graph",
+          "attribute": "graph",
+          "description": "Passed to `api-type-document`. Enables internal links rendering for types.",
+          "type": "boolean"
+        },
+        {
+          "name": "noNavigation",
+          "attribute": "noNavigation",
+          "description": "When set it hides bottom navigation links",
+          "type": "boolean"
+        },
+        {
+          "name": "serverValue",
+          "attribute": "serverValue",
+          "description": "Holds the value of the currently selected server\nData type: URI",
+          "type": "string"
+        },
+        {
+          "name": "serverType",
+          "attribute": "serverType",
+          "description": "Holds the type of the currently selected server\nValues: `server` | `uri` | `custom`",
+          "type": "string"
+        },
+        {
+          "name": "noServerSelector",
+          "attribute": "noServerSelector",
+          "description": "Optional property to set\nIf true, the server selector is not rendered",
+          "type": "boolean"
+        },
+        {
+          "name": "allowCustomBaseUri",
+          "attribute": "allowCustomBaseUri",
+          "description": "Optional property to set\nIf true, the server selector custom base URI option is rendered",
+          "type": "boolean"
+        },
+        {
+          "name": "ns",
+          "description": "A namespace for AMF model.",
+          "type": "Namespace"
+        },
+        {
+          "name": "amf",
+          "description": "Generated AMF json/ld model form the API spec.\nThe element assumes the object of the first array item to be a\ntype of `\"http://raml.org/vocabularies/document#Document`\non AMF vocabulary.\n\nIt is only useful for the element to resolve references.",
+          "type": "object | object[] | undefined"
+        }
+      ],
+      "events": [
+        {
+          "name": "api-navigation-selection-changed"
+        },
+        {
+          "name": "tryit-requested"
+        },
+        {
+          "name": "apiserverchanged"
+        }
+      ]
+    }
+  ]
+}

@@ -1,16 +1,22 @@
+/* eslint-disable lit-a11y/click-events-have-key-events */
+/* eslint-disable no-continue */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-param-reassign */
+/* eslint-disable class-methods-use-this */
 import { html, LitElement } from 'lit-element';
-import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+import { AmfHelperMixin } from '@api-components/amf-helper-mixin';
 import markdownStyles from '@advanced-rest-client/markdown-styles/markdown-styles.js';
 import httpMethodStyles from '@api-components/http-method-label/http-method-label-common-styles.js';
-import { expandMore, chevronLeft, chevronRight } from '@advanced-rest-client/arc-icons/ArcIcons.js';
-import '@api-components/raml-aware/raml-aware.js';
+import '@advanced-rest-client/arc-icons/arc-icon.js';
 import '@api-components/api-annotation-document/api-annotation-document.js';
 import '@api-components/api-parameters-document/api-parameters-document.js';
 import '@api-components/api-method-documentation/api-method-documentation.js';
+import '@api-components/api-method-documentation/api-url.js';
 import '@advanced-rest-client/arc-marked/arc-marked.js';
 import '@anypoint-web-components/anypoint-button/anypoint-icon-button.js';
-import '@api-components/api-request-panel/api-request-panel.js';
-import '@polymer/iron-collapse/iron-collapse.js';
+import '@anypoint-web-components/anypoint-button/anypoint-button.js';
+import '@api-components/api-request/api-request-panel.js';
+import '@anypoint-web-components/anypoint-collapse/anypoint-collapse.js';
 import '@advanced-rest-client/http-code-snippets/http-code-snippets.js';
 import { ExampleGenerator } from '@api-components/api-example-generator';
 import styles from './Styles.js';
@@ -19,11 +25,8 @@ import styles from './Styles.js';
  * `api-endpoint-documentation`
  *
  * A component to generate documentation for an endpoint from the AMF model.
- *
- * @mixes AmfHelperMixin
- * @extends LitElement
  */
-export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
+export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) {
   get styles() {
     return [
       markdownStyles,
@@ -34,10 +37,6 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
 
   static get properties() {
     return {
-      /**
-       * `raml-aware` scope property to use.
-       */
-      aware: { type: String },
       /**
        * Method's endpoint definition as a
        * `http://raml.org/vocabularies/http#endpoint` of AMF model.
@@ -104,7 +103,7 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
        */
       parentTypeName: { type: String },
       /**
-       * List of traits appied to this endpoint
+       * List of traits applied to this endpoint
        */
       traits: { type: Array },
       /**
@@ -128,7 +127,7 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       scrollTarget: { type: Object },
       /**
        * Passing value of `noTryIt` to the method documentation.
-       * Hiddes "Try it" button from the view.
+       * Hides the "Try it" button from the view.
        */
       noTryIt: { type: Boolean },
       /**
@@ -148,7 +147,7 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       inlineMethods: { type: Boolean },
       /**
        * In inline mode, passes the `noUrlEditor` value on the
-       * `api-request-paqnel`
+       * `api-request-panel`
        */
       noUrlEditor: { type: Boolean },
       /**
@@ -172,7 +171,7 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
 
       _editorEventTarget: { type: Object },
       /**
-       * When set it hiddes bottom navigation links
+       * When set it hides bottom navigation links
        */
       noNavigation: { type: Boolean },
       /**
@@ -196,14 +195,6 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
        */
       allowCustomBaseUri: { type: Boolean },
     };
-  }
-
-  get legacy() {
-    return this.compatibility;
-  }
-
-  set legacy(value) {
-    this.compatibility = value;
   }
 
   get baseUri() {
@@ -246,7 +237,7 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     }
     this._inlineMethods = value;
     this._inlineMethodsChanged(value);
-    this.operations = this._computeOperations(this.endpoint, value);
+    this.operations = this._computeEndpointOperations(this.endpoint, value);
     this.requestUpdate('inlineMethods', old);
   }
 
@@ -313,6 +304,28 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     this._scrollHandler = this._scrollHandler.bind(this);
 
     this._editorEventTarget = this;
+    this.compatibility = false;
+    this.narrow = false;
+    this.graph = false;
+    this.noServerSelector = false;
+    this.allowCustomBaseUri = false;
+    this.noUrlEditor = false;
+    this.outlined = false;
+    this.noNavigation = false;
+    /**
+     * @type {string}
+     */
+    this.serverValue = undefined;
+    /**
+     * @type {string}
+     */
+    this.serverType = undefined;
+    /**
+     * @type {string}
+     */
+    this.redirectUri = undefined;
+    this.next = undefined;
+    this.previous = undefined;
   }
 
   __amfChanged() {
@@ -338,7 +351,7 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       return;
     }
     this.apiVersion = this._computeApiVersion(amf);
-    this.operations = this._computeOperations(this.endpoint, this.inlineMethods);
+    this.operations = this._computeEndpointOperations(this.endpoint, this.inlineMethods);
   }
 
   _processEndpointChange() {
@@ -351,11 +364,13 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     this.description = this._computeDescription(endpoint);
     this.path = this._computePath(endpoint);
     this.hasCustomProperties = this._computeHasCustomProperties(endpoint);
-    const types = this.extendsTypes = this._computeExtendsTypes(endpoint);
+    const types = this._computeExtendsTypes(endpoint);
+    this.extendsTypes = types;
     this.traits = this._computeTraits(types);
-    const parent = this.parentType = this._computeParentType(types);
+    const parent = this._computeParentType(types);
+    this.parentType = parent;
     this.parentTypeName = this._computeParentTypeName(parent);
-    this.operations = this._computeOperations(endpoint, this.inlineMethods);
+    this.operations = this._computeEndpointOperations(endpoint, this.inlineMethods);
   }
 
   /**
@@ -363,80 +378,86 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
    * It looks for `http://schema.org/name` in the endpoint definition and
    * if not found it uses path as name.
    *
-   * @param {Object} endpoint Endpoint model.
-   * @return {String} Endpoint name.
+   * @param {any} endpoint Endpoint model.
+   * @return {string} Endpoint name.
    */
   _computeEndpointName(endpoint) {
-    const name = this._getValue(endpoint, this.ns.aml.vocabularies.core.name);
+    const name = /** @type string */ (this._getValue(endpoint, this.ns.aml.vocabularies.core.name));
     // if (!name) {
     //   name = this._computePath(endpoint);
     // }
     return name;
   }
+
   /**
    * Computes value of `path` property
    *
-   * @param {Object} endpoint Endpoint model.
-   * @return {String}
+   * @param {any} endpoint Endpoint model.
+   * @return {string}
    */
   _computePath(endpoint) {
-    return this._getValue(endpoint, this.ns.aml.vocabularies.apiContract.path);
+    return /** @type string */ (this._getValue(endpoint, this.ns.aml.vocabularies.apiContract.path));
   }
+
   /**
    * Computes `extendsTypes`
    *
-   * @param {Object} shape AMF shape to get `#extends` model
-   * @return {Array<Object>|undefined}
+   * @param {any} shape AMF shape to get `#extends` model
+   * @return {any[]|undefined}
    */
   _computeExtendsTypes(shape) {
     const key = this._getAmfKey(this.ns.aml.vocabularies.document.extends);
     return shape && this._ensureArray(shape[key]);
   }
+
   /**
    * Computes parent type as RAML's resource type.
    *
-   * @param {Array<Object>} types Current value of `extendsTypes`
-   * @return {Object|undefined}
+   * @param {any[]} types Current value of `extendsTypes`
+   * @return {any|undefined}
    */
   _computeParentType(types) {
     if (!types || !types.length) {
-      return;
+      return undefined;
     }
     return types.find((item) =>
       this._hasType(item, this.ns.aml.vocabularies.apiContract.ParametrizedResourceType));
   }
+
   /**
-   * Computes vaolue for `parentTypeName`
+   * Computes value for the `parentTypeName`
    *
-   * @param {?Object} type Parent type shape
-   * @return {String|undefined}
+   * @param {any} type Parent type shape
+   * @return {string|undefined}
    */
   _computeParentTypeName(type) {
-    return this._getValue(type, this.ns.aml.vocabularies.core.name);
+    return /** @type string */ (this._getValue(type, this.ns.aml.vocabularies.core.name));
   }
+
   /**
    * Computes value for `traits` property
    *
-   * @param {Array<Object>} types Current value of `extendsTypes`
-   * @return {Array<Object>|undefined}
+   * @param {any[]} types Current value of `extendsTypes`
+   * @return {any[]|undefined}
    */
   _computeTraits(types) {
     if (!types || !types.length) {
-      return;
+      return undefined;
     }
     const data = types.filter((item) =>
       this._hasType(item, this.ns.aml.vocabularies.apiContract.ParametrizedTrait));
     return data.length ? data : undefined;
   }
+  
   /**
    * Computes list of trait names to render it in the doc.
    *
-   * @param {Array<Object>} traits AMF trait definition
+   * @param {any[]} traits AMF trait definition
    * @return {String|undefined} Trait name if defined.
    */
   _computeTraitNames(traits) {
     if (!traits || !traits.length) {
-      return;
+      return undefined;
     }
     const names = traits.map((trait) => this._getValue(trait, this.ns.aml.vocabularies.core.name));
     if (names.length === 2) {
@@ -444,18 +465,21 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     }
     return names.join(', ');
   }
+
   /**
    * Navigates to next method. Calls `_navigate` with id of previous item.
    */
   _navigatePrevious() {
     this._navigate(this.previous.id, 'endpoint');
   }
+
   /**
    * Navigates to next method. Calls `_navigate` with id of next item.
    */
   _navigateNext() {
     this._navigate(this.next.id, 'endpoint');
   }
+
   /**
    * Dispatches `api-navigation-selection-changed` so other components
    * can update their state.
@@ -469,25 +493,26 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       composed: true,
       detail: {
         selected: id,
-        type: type
+        type,
       }
     });
     this.dispatchEvent(e);
   }
+
   /**
    * Computes value for `operations` property.
-   * @param {Object} endpoint Endpoint model.
-   * @param {Boolean} inlineMethods
-   * @return {Array<Object>}
+   * @param {any} endpoint Endpoint model.
+   * @param {boolean} inlineMethods
+   * @return {any[]}
    */
-  _computeOperations(endpoint, inlineMethods) {
+  _computeEndpointOperations(endpoint, inlineMethods) {
     if (!endpoint) {
-      return;
+      return undefined;
     }
     const key = this._getAmfKey(this.ns.aml.vocabularies.apiContract.supportedOperation);
     const ops = this._ensureArray(endpoint[key]);
     if (!ops || !ops.length) {
-      return;
+      return undefined;
     }
     if (inlineMethods) {
       return ops.map((item) => {
@@ -496,8 +521,7 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       });
     }
     const result = [];
-    for (let i = 0, len = ops.length; i < len; i++) {
-      const op = ops[i];
+    ops.forEach((op) => {
       const method = this._getValue(op, this.ns.aml.vocabularies.apiContract.method);
       const name = this._getValue(op, this.ns.aml.vocabularies.core.name);
       const desc = this._getValue(op, this.ns.aml.vocabularies.core.description);
@@ -507,7 +531,7 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
         desc,
         id: op['@id']
       };
-    }
+    });
     return result;
   }
 
@@ -520,9 +544,9 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
   }
 
   /**
-   * Handles scroll target chane and adds scroll event.
+   * Handles scroll target change and adds scroll event.
    *
-   * @param {Node} st The scroll target.
+   * @param {HTMLElement|Window} st The scroll target.
    */
   _scrollTargetChanged(st) {
     if (this._oldScrollTarget) {
@@ -534,9 +558,10 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       this._oldScrollTarget = st;
     }
   }
+
   /**
    * Scroll handler for `scrollTarget`.
-   * It does not stall main thred by executing the action after nex render.
+   * It does not stall the main thread by executing the action after nex render.
    */
   _scrollHandler() {
     if (!this.inlineMethods) {
@@ -544,6 +569,7 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     }
     setTimeout(() => this._checkMethodsPosition());
   }
+
   /**
    * I hope this won't be required in final version :(
    */
@@ -553,6 +579,7 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       return;
     }
     // Window object has `scrollY` but HTML element has `scrollTop`
+    // @ts-ignore
     const scroll = st.scrollY || st.scrollTop;
     if (scroll === undefined) {
       return;
@@ -563,8 +590,10 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     }
     this._lastScrollPos = scroll;
     const dir = diff < 0 ? 'down' : 'up';
-    const scrollHeigth = st.scrollHeight || st.innerHeight;
-    const targetHeigth = st.offsetHeight || st.innerHeight;
+    // @ts-ignore
+    const scrollHeight = st.scrollHeight || st.innerHeight;
+    // @ts-ignore
+    const targetHeight = st.offsetHeight || st.innerHeight;
     if (!this._methodsList) {
       const section = this.shadowRoot.querySelector('section.methods');
       // This list is a live node list so the reference has to be made
@@ -576,39 +605,42 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       if (node.nodeName !== 'DIV') {
         continue;
       }
-      if (this._occupiesMainScrollArea(targetHeigth, scrollHeigth, dir, node)) {
-        const doc = node.querySelector('api-method-documentation');
+      const div = /** @type HTMLDivElement */ (node);
+      if (this._occupiesMainScrollArea(targetHeight, scrollHeight, dir, div)) {
+        const doc = div.querySelector('api-method-documentation');
+        // @ts-ignore
         this._notifyPassiveNavigation(doc.method['@id']);
         return;
       }
     }
   }
+
   /**
    * Function that checks if an `element` is in the main scrolling area.
    *
-   * @param {Number} targetHeigth Height (visible) of the scroll target
-   * @param {Number} scrollHeigth Height of the scroll target
-   * @param {String} dir Direction where the scroll is going (up or down)
-   * @param {Node} element The node to test
-   * @return {Boolean} True when it determines that the element is in the main
+   * @param {number} targetHeight Height (visible) of the scroll target
+   * @param {number} scrollHeight Height of the scroll target
+   * @param {string} dir Direction where the scroll is going (up or down)
+   * @param {Element} element The node to test
+   * @return {boolean} True when it determines that the element is in the main
    * scroll area,
    */
-  _occupiesMainScrollArea(targetHeigth, scrollHeigth, dir, element) {
+  _occupiesMainScrollArea(targetHeight, scrollHeight, dir, element) {
     const rect = element.getBoundingClientRect();
-    if (rect.top < 0 && rect.bottom > targetHeigth) {
+    if (rect.top < 0 && rect.bottom > targetHeight) {
       // Occupies whole area
       return true;
     }
-    if (rect.bottom < 0 || targetHeigth < rect.top ||
+    if (rect.bottom < 0 || targetHeight < rect.top ||
       (rect.top < 0 && rect.top + rect.height <= 0)) {
       // Completely out of screen
       return false;
     }
-    if (rect.top < 0 && dir === 'down' && rect.top + rect.height < targetHeigth / 2) {
+    if (rect.top < 0 && dir === 'down' && rect.top + rect.height < targetHeight / 2) {
       // less than half screen
       return false;
     }
-    if (dir === 'down' && (rect.top + rect.height) > targetHeigth / 2) {
+    if (dir === 'down' && (rect.top + rect.height) > targetHeight / 2) {
       return true;
     }
     const padding = 60;
@@ -618,7 +650,7 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       }
       return true;
     }
-    if (dir === 'up' && (rect.bottom + padding) > scrollHeigth && rect.bottom < targetHeigth) {
+    if (dir === 'up' && (rect.bottom + padding) > scrollHeight && rect.bottom < targetHeight) {
       return true;
     }
     return false;
@@ -630,17 +662,17 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
    * Listeners should not react on this event except for the ones that
    * should reflect passive navigation change.
    *
-   * @param {String} selected Id of selected method as in AMF model.
+   * @param {string} selected Id of selected method as in AMF model.
    */
   _notifyPassiveNavigation(selected) {
-    if (this.__notyfyingChange || this.__latestNotified === selected ||
+    if (this.__notifyingChange || this.__latestNotified === selected ||
       this.selected === selected) {
       return;
     }
     this.__latestNotified = selected;
-    this.__notyfyingChange = true;
+    this.__notifyingChange = true;
     setTimeout(() => {
-      this.__notyfyingChange = false;
+      this.__notifyingChange = false;
       this.dispatchEvent(new CustomEvent('api-navigation-selection-changed', {
         composed: true,
         bubbles: true,
@@ -654,10 +686,8 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
   }
 
   /**
-   * Hadnler for either `selected` or `endpoint proerty change`
-   * @param {String} selected Currently selected shape ID in AMF model
-   * @param {Object} endpoint AMF model for the endpoint.
-   * @param {Boolean} inlineMethods True if methods documentation is included
+   * Handler for either `selected` or `endpoint property change`
+   * @param {string} selected Currently selected shape ID in AMF model
    */
   _selectedChanged(selected) {
     if (!selected) {
@@ -669,18 +699,19 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     }
     setTimeout(() => this._repositionVerb(selected));
   }
+
   /**
    * Positions the method (operation) or endpoint (main title).
    *
-   * @param {String} id Selected AMF id.
+   * @param {string} id Selected AMF id.
    */
   _repositionVerb(id) {
     let options;
     if ('scrollBehavior' in document.documentElement.style) {
-      options = {
+      options = /** @type ScrollIntoViewOptions */ ({
         block: 'start',
-        inline: 'nearest'
-      };
+        inline: 'nearest',
+      });
     } else {
       options = true;
     }
@@ -703,34 +734,36 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
   _computeOperationId(item) {
     return item && item['@id'];
   }
+
   // Computes a label for the section toggle buttons.
   _computeToggleActionLabel(opened) {
     return opened ? 'Hide' : 'Show';
   }
+
   // Computes class for the toggle's button icon.
   _computeToggleIconClass(opened) {
-    let clazz = 'toggle-icon';
+    let classes = 'toggle-icon';
     if (opened) {
-      clazz += ' opened';
+      classes += ' opened';
     }
-    return clazz;
+    return classes;
   }
 
   /**
    * Computes example headers string for code snippets.
-   * @param {Array} method Method (operation) model
-   * @return {String|undefined} Computed example value for headers
+   * @param {any} method Method (operation) model
+   * @return {string|undefined} Computed example value for headers
    */
   _computeSnippetsHeaders(method) {
     if (!method) {
-      return;
+      return undefined;
     }
     const expects = this._computeExpects(method);
     if (!expects) {
-      return;
+      return undefined;
     }
     let result;
-    const headers = this._computeHeaders(expects);
+    const headers = /** @type any[] */ (this._computeHeaders(expects));
     if (headers && headers.length) {
       result = '';
       headers.forEach((item) => {
@@ -741,24 +774,25 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     }
     return result;
   }
+
   /**
    * Computes example payload string for code snippets.
-   * @param {Array} payload Payload model from AMF
-   * @return {String|undefined} Computed example value for payload
+   * @param {any[]} payload Payload model from AMF
+   * @return {string|undefined} Computed example value for payload
    */
   _computeSnippetsPayload(payload) {
-    if (payload && payload instanceof Array) {
-      payload = payload[0];
+    if (payload && Array.isArray(payload)) {
+      [payload] = payload;
     }
     if (this._hasType(payload, this.ns.aml.vocabularies.apiContract.Operation)) {
       const expects = this._computeExpects(payload);
       payload = this._computePayload(expects);
     }
-    if (payload && payload instanceof Array) {
-      payload = payload[0];
+    if (payload && Array.isArray(payload)) {
+      [payload] = payload;
     }
     if (!payload) {
-      return;
+      return undefined;
     }
 
     let mt = /** @type string */ (this._getValue(payload, this.ns.aml.vocabularies.core.mediaType));
@@ -768,35 +802,36 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     const gen = new ExampleGenerator(this.amf);
     const examples = gen.generatePayloadExamples(payload, mt, {});
     if (!examples || !examples[0]) {
-      return;
+      return undefined;
     }
     return examples[0].value;
   }
+
   /**
    * Tries to find an example value (whether it's default value or from an
    * example) to put it into snippet's values.
    *
-   * @param {Object} item A http://raml.org/vocabularies/http#Parameter property
-   * @return {String|undefined}
+   * @param {any} item A http://raml.org/vocabularies/http#Parameter property
+   * @return {string|undefined}
    */
   _computePropertyValue(item) {
     const key = this._getAmfKey(this.ns.aml.vocabularies.shapes.schema);
     let schema = item && item[key];
     if (!schema) {
-      return;
+      return undefined;
     }
-    if (schema instanceof Array) {
-      schema = schema[0];
+    if (Array.isArray(schema)) {
+      [schema] = schema;
     }
-    let value = this._getValue(item, this.ns.w3.shacl.defaultValue);
+    let value = /** @type string */ (this._getValue(item, this.ns.w3.shacl.defaultValue));
     if (!value) {
       const examplesKey = this._getAmfKey(this.ns.aml.vocabularies.apiContract.examples);
       let example = item[examplesKey];
       if (example) {
-        if (example instanceof Array) {
-          example = example[0];
+        if (Array.isArray(example)) {
+          [example] = example;
         }
-        value = this._getValue(item, this.ns.aml.vocabularies.document.value);
+        value = /** @type string */ (this._getValue(item, this.ns.aml.vocabularies.document.value));
       }
     }
     return value;
@@ -805,11 +840,11 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
   /**
    * Computes value for `httpMethod` property.
    *
-   * @param {Object} method AMF `supportedOperation` model
-   * @return {String|undefined} HTTP method name
+   * @param {any} method AMF `supportedOperation` model
+   * @return {string|undefined} HTTP method name
    */
   _computeHttpMethod(method) {
-    let name = this._getValue(method, this.ns.aml.vocabularies.apiContract.method);
+    let name = /** @type string */ (this._getValue(method, this.ns.aml.vocabularies.apiContract.method));
     if (name) {
       name = name.toUpperCase();
     }
@@ -829,25 +864,27 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     this.operations[index]._tryitOpened = newState;
     this.requestUpdate();
   }
+
   /**
    * A handler for the `inlineMethods` property change.
    * When set it automatically disables the try it button.
    *
-   * @param {Boolean} value Current value of `inlineMethods`
+   * @param {boolean} value Current value of `inlineMethods`
    */
   _inlineMethodsChanged(value) {
     if (value && !this.noTryIt) {
       this.noTryIt = true;
     }
   }
+
   /**
    * Computes special class names for the method container.
    * It adds `first`, and `last` names to corresponding
    * containers.
    *
-   * @param {Number} index
-   * @param {Array} operations
-   * @return {String}
+   * @param {number} index
+   * @param {any[]} operations
+   * @return {string}
    */
   _computeTryItColumClass(index, operations) {
     if (!operations || !operations.length || index === undefined) {
@@ -865,25 +902,14 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
 
   _computeTryItSelected(item) {
     if (!item) {
-      return;
+      return undefined;
     }
     return item['@id'];
   }
 
-  _apiChanged(e) {
-    this.amf = e.detail.value;
-  }
-
   render() {
-    const {
-      aware,
-      hasOperations,
-      description
-    } = this;
+    const { hasOperations, description } = this;
     return html`<style>${this.styles}</style>
-    ${aware ? html`<raml-aware
-      .scope="${aware}"
-      @api-changed="${this._apiChanged}"></raml-aware>` : ''}
     ${this._getTitleTemplate()}
     ${this._getUrlTemplate()}
     ${this._getExtensionsTemplate()}
@@ -892,7 +918,7 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     <div class="heading2 table-title" role="heading" aria-level="2">Methods</div>
     ${hasOperations ?
       this._getOperationsTemplate() :
-      html`<p class="noinfo">This enpoint doesn't have HTTP methods defined in the API specification file.</p>`}
+      html`<p class="noinfo">This endpoint doesn't have HTTP methods defined in the API specification file.</p>`}
     ${this._getNavigationTemplate()}`;
   }
 
@@ -930,15 +956,15 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     if (this.inlineMethods) {
       return '';
     }
-    const { endpointName } = this;
-    return html`<section class="url-area" ?extra-margin="${!endpointName}">
+    return html`
+    <section class="url-area">
       <api-url
         .amf="${this.amf}"
         .server="${this.server}"
         .endpoint="${this.endpoint}"
         .apiVersion="${this.apiVersion}"
         .baseUri="${this.baseUri}"
-        @onchange="${this._handleUrlChange}"
+        @change="${this._handleUrlChange}"
       ></api-url>
     </section>`;
   }
@@ -989,9 +1015,9 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       graph,
       server,
     } = this;
-    const klas = this._computeTryItColumClass(index, operations);
+    const klass = this._computeTryItColumClass(index, operations);
     return html`
-    <div class="method-container ${klas}">
+    <div class="method-container ${klass}">
       <api-method-documentation
         data-operation-id="${item['@id']}"
         .amf="${amf}"
@@ -1003,7 +1029,8 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
         .noTryIt="${noTryIt}"
         .compatibility="${compatibility}"
         ?graph="${graph}"
-        rendersecurity></api-method-documentation>
+        renderSecurity
+      ></api-method-documentation>
       <div class="try-it-column">
         ${this._getRequestPanelTemplate(item, index)}
         ${this._getSnippetsTemplate(item, index)}
@@ -1012,26 +1039,28 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
   }
 
   _getRequestPanelTemplate(item, index) {
-    // TODO(pawel): maybe to use a directive that renders content asyncronously to
+    // TODO(pawel): maybe to use a directive that renders content asynchronously to
     // avoid cost of loading the try it panel with the method, especially when the try it panel
-    // is not rendered immidietly ith the method.
+    // is not rendered immediately ith the method.
     const label = this._computeToggleActionLabel(item._tryitOpened);
     const iconClass = this._computeToggleIconClass(item._tryitOpened);
-    return html`<section class="request-panel">
+    return html`
+    <section class="request-panel">
       <div
         class="section-title-area"
         data-index="${index}"
         @click="${this._toggleRequestPanel}"
-        title="Toogle code example details">
+        title="Toggle code example details"
+      >
         <div class="heading3 table-title" role="heading" aria-level="2">Try the API</div>
         <div class="title-area-actions">
           <anypoint-button class="toggle-button" ?compatibility="${this.compatibility}">
             ${label}
-            <span class="icon ${iconClass}">${expandMore}</span>
+            <arc-icon icon="expandMore" class="${iconClass}"></arc-icon>
           </anypoint-button>
         </div>
       </div>
-      <iron-collapse .opened="${item._tryitOpened}">
+      <anypoint-collapse .opened="${item._tryitOpened}">
         <api-request-panel
           .amf="${this.amf}"
           .selected="${item['@id']}"
@@ -1039,14 +1068,13 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
           ?allowCustomBaseUri="${this.allowCustomBaseUri}"
           .serverValue="${this.serverValue}"
           .serverType="${this.serverType}"
-          ?narrow="${this.narrow}"
           ?noUrlEditor="${this.noUrlEditor}"
           .baseUri="${this.baseUri}"
           .redirectUri="${this.redirectUri}"
           ?compatibility="${this.compatibility}"
           ?outlined="${this.outlined}"
-          nodocs></api-request-panel>
-      </iron-collapse>
+        ></api-request-panel>
+      </anypoint-collapse>
     </section>`;
   }
 
@@ -1057,23 +1085,23 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
       <div
         class="section-title-area"
         data-index="${index}"
-        @click="${this._toggleSnippets}" title="Toogle code example details">
+        @click="${this._toggleSnippets}" title="Toggle code example details">
         <div class="heading3 table-title" role="heading" aria-level="2">Code examples</div>
         <div class="title-area-actions">
           <anypoint-button class="toggle-button" ?compatibility="${this.compatibility}">
             ${label}
-            <span class="icon ${iconClass}">${expandMore}</span>
+            <arc-icon icon="expandMore" class="${iconClass}"></arc-icon>
           </anypoint-button>
         </div>
       </div>
-      <iron-collapse .opened="${item._snippetsOpened}">
+      <anypoint-collapse .opened="${item._snippetsOpened}">
         <http-code-snippets
           scrollable
           .url="${this.endpointUri}"
           .method="${this._computeHttpMethod(item)}"
           .headers="${this._computeSnippetsHeaders(item)}"
           .payload="${this._computeSnippetsPayload(item)}"></http-code-snippets>
-      </iron-collapse>
+      </anypoint-collapse>
     </section>`;
   }
 
@@ -1100,19 +1128,18 @@ export class ApiEndpointDocumentation extends AmfHelperMixin(LitElement) {
     if (!next && !previous || noNavigation) {
       return '';
     }
-    const { compatibility } = this;
     return html`<section class="bottom-nav">
       ${previous ? html`<div class="bottom-link previous" @click="${this._navigatePrevious}">
-        <anypoint-icon-button title="${previous.label}" ?compatibility="${compatibility}">
-          <span class="icon">${chevronLeft}</span>
+        <anypoint-icon-button title="${previous.label}">
+          <arc-icon icon="chevronLeft"></arc-icon>
         </anypoint-icon-button>
         <span class="nav-label">${previous.label}</span>
       </div>` : ''}
       <div class="nav-separator"></div>
       ${next ? html`<div class="bottom-link next" @click="${this._navigateNext}">
         <span class="nav-label">${next.label}</span>
-        <anypoint-icon-button title="${next.label}" ?compatibility="${compatibility}">
-          <span class="icon">${chevronRight}</span>
+        <anypoint-icon-button title="${next.label}">
+          <arc-icon icon="chevronRight"></arc-icon>
         </anypoint-icon-button>
       </div>` : ''}
     </section>`;

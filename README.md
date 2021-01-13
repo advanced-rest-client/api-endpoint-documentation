@@ -8,8 +8,6 @@
 
 A component to generate documentation for an API resource from AMF model.
 
-**See breaking changes and list of required dependencies at the bottom of this document**
-
 ## Version compatibility
 
 This version only works with AMF model version 2 (AMF parser >= 4.0.0).
@@ -18,7 +16,8 @@ For compatibility with previous model version use `3.x.x` version of the compone
 ## Usage
 
 ### Installation
-```
+
+```sh
 npm install --save @api-components/api-endpoint-documentation
 ```
 
@@ -84,13 +83,14 @@ npm start
 ```
 
 ### Running the tests
+
 ```sh
 npm test
 ```
 
 ## Breaking Changes in v3
 
-When using `inlinemethods` property you should note this breaking changes.
+When using `inlineMethods` property you should note this breaking changes.
 
 ### OAuth popup location
 

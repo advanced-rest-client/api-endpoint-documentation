@@ -17,9 +17,6 @@
       }
     ]
   },
-  "include": [
-    "**/*.js",
-    "node_modules/@open-wc/**/*.js"
-  ],
+  "include": [ "**/*.js", "node_modules/@open-wc/**/*.js", "src/ApiEndpointDocumentation.d.ts", "index.d.ts" ],
   "exclude": ["node_modules/!(@open-wc)"]
 }
