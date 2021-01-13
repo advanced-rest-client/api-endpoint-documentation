@@ -4,7 +4,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable class-methods-use-this */
 import { html, LitElement } from 'lit-element';
-import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+import { AmfHelperMixin } from '@api-components/amf-helper-mixin';
 import markdownStyles from '@advanced-rest-client/markdown-styles/markdown-styles.js';
 import httpMethodStyles from '@api-components/http-method-label/http-method-label-common-styles.js';
 import '@advanced-rest-client/arc-icons/arc-icon.js';
@@ -956,16 +956,15 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
     if (this.inlineMethods) {
       return '';
     }
-    const { endpointName } = this;
     return html`
-    <section class="url-area" ?extra-margin="${!endpointName}">
+    <section class="url-area">
       <api-url
         .amf="${this.amf}"
         .server="${this.server}"
         .endpoint="${this.endpoint}"
         .apiVersion="${this.apiVersion}"
         .baseUri="${this.baseUri}"
-        @onchange="${this._handleUrlChange}"
+        @change="${this._handleUrlChange}"
       ></api-url>
     </section>`;
   }
