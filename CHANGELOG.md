@@ -1151,3 +1151,20 @@
 * updating SL configuration [c79105a](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/c79105a55e96105f1048d7dd3b3caa608c98d23b) by Pawel
 
 
+<a name="6.0.0"></a>
+# [6.0.0](https://github.com/advanced-rest-client/api-endpoint-documentation/compare/5.0.0...6.0.0) (2021-01-13)
+
+## Build
+
+* bumping version [2653354](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/2653354d40784e6d7861ed3a84e40646da39dcda) by Pawel Psztyc
+
+
+## Update
+
+* updating dependencies [5e6b5d3](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/5e6b5d36f817270d255b9c7b361925344733d96f) by Pawel Psztyc
+* updating event handler [99f9610](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/99f96102aea37abeeee081e456477de807d2e823) by Pawel Psztyc
+* upgrading dependencies [bb46f55](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/bb46f5565d06ff4197247cdeae3cfb9af27ecec9) by Pawel Psztyc
+* [ci skip] automated merge master->stage. syncing main branches [5e95ba1](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/5e95ba10b05589f0698232d6dad34a3b834df5c4) by Ci agent
+* [ci skip] automated merge master->stage. syncing main branches [b7c65d8](https://github.com/advanced-rest-client/api-endpoint-documentation/commit/b7c65d8479685770cfc6185f63e0523efb82c2b9) by Ci agent
+
+
