@@ -1,12 +1,10 @@
-[![Published on NPM](https://img.shields.io/npm/v/@api-components/api-endpoint-documentation.svg)](https://www.npmjs.com/package/@api-components/api-endpoint-documentation)
-
-[![Build Status](https://travis-ci.com/advanced-rest-client/api-endpoint-documentation.svg)](https://travis-ci.org/advanced-rest-client/api-endpoint-documentation)
-
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/advanced-rest-client/api-endpoint-documentation)
-
-## &lt;api-endpoint-documentation&gt;
+# api-endpoint-documentation
 
 A component to generate documentation for an API resource from AMF model.
+
+[![Tests and publishing](https://github.com/advanced-rest-client/api-endpoint-documentation/actions/workflows/deployment.yml/badge.svg)](https://github.com/advanced-rest-client/api-endpoint-documentation/actions/workflows/deployment.yml)
+
+[![Published on NPM](https://img.shields.io/npm/v/@api-components/api-endpoint-documentation.svg)](https://www.npmjs.com/package/@api-components/api-endpoint-documentation)
 
 ## Version compatibility
 
