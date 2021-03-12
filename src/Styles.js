@@ -5,6 +5,7 @@ export default css`:host {
 }
 
 .title {
+  color: var(--arc-font-headline-color);
   font-size: var(--arc-font-headline-font-size);
   letter-spacing: var(--arc-font-headline-letter-spacing);
   line-height: var(--arc-font-headline-line-height);
@@ -14,6 +15,7 @@ export default css`:host {
 }
 
 .heading2 {
+  color: var(--arc-font-title-color);
   font-size: var(--arc-font-title-font-size);
   font-weight: var(--arc-font-title-font-weight);
   line-height: var(--arc-font-title-line-height);
@@ -22,6 +24,7 @@ export default css`:host {
 
 .heading3 {
   flex: 1;
+  color: var(--arc-font-subhead-color);
   font-size: var(--arc-font-subhead-font-size);
   font-weight: var(--arc-font-subhead-font-weight);
   line-height: var(--arc-font-subhead-line-height);

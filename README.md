@@ -13,6 +13,42 @@ A component to generate documentation for an API resource from AMF model.
 This version only works with AMF model version 2 (AMF parser >= 4.0.0).
 For compatibility with previous model version use `3.x.x` version of the component.
 
+## Styling
+
+`<api-endpoint-documentation>` provides the following custom properties and mixins for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--arc-font-headline-color` | Color of the method title | ``
+`--arc-font-headline-font-size` | Font size of the method title | ``
+`--arc-font-headline-letter-spacing` | Letter spacing of the method title | ``
+`--arc-font-headline-line-height` | Line height of the method title | ``
+`--arc-font-headline-narrow-font-size` | Font size of the method title in mobile-friendly view | ``
+`--arc-font-title-color` | Color of the overview section title | ``
+`--arc-font-title-font-size` | Font size of the overview section title | ``
+`--arc-font-title-line-height` | Line height of the overview section title | ``
+`--arc-font-title-narrow-font-size` | Font size of the overview section title in mobile-friendly view | ``
+`--arc-font-subhead-color` | Color of the collapsible section title | ``
+`--arc-font-subhead-font-size` | Font size of the collapsible section title | ``
+`--arc-font-subhead-line-height` | Line height of the collapsible section title | ``
+`--arc-font-subhead-narrow-font-size` | Font size of the collapsible section title in mobile-friendly view | ``
+`--api-endpoint-documentation-description-color` |  | `rgba(0, 0, 0, 0.74)`
+`--api-endpoint-documentation-bottom-navigation-color` |  | `#000`
+`--api-endpoint-documentation-method-doc-border-top-color` |  | `#E5E5E5`
+`--api-endpoint-documentation-method-doc-border-top-style` |  | `dashed`
+`--api-endpoint-documentation-tryit-width` |  | `40%`
+`--api-endpoint-documentation-tryit-max-width` |  | ``
+`--api-endpoint-documentation-tryit-background-color` |  | `#ECEFF1`
+`--api-endpoint-documentation-tryit-panels-background-color` |  | `#fff`
+`--api-endpoint-documentation-tryit-panels-border-radius` |  | `3px`
+`--api-endpoint-documentation-tryit-panels-border-color` |  | `#EEEEEE`
+`--api-endpoint-documentation-tryit-panels-border-style` |  | `solid`
+`--api-endpoint-documentation-tryit-title-border-bottom-color` |  | `#bac6cb`
+`--api-endpoint-documentation-tryit-title-border-bottom-style` |  | `solid`
+`--no-info-message-font-style` |  | `italic`
+`--no-info-message-font-size` |  | `16px`
+`--no-info-message-color` |  | `rgba(0, 0, 0, 0.74)`
+
 ## Usage
 
 ### Installation
