@@ -1,4 +1,6 @@
-export default {
+/** @typedef {import('@web/test-runner').TestRunnerConfig} TestRunnerConfig */
+
+export default /** @type TestRunnerConfig */ ({
   files: 'test/**/*.test.js',
   nodeResolve: true,
   middleware: [
@@ -9,6 +11,11 @@ export default {
       return next();
     }
   ],
+  testFramework: {
+    config: {
+      timeout: 10000,
+    },
+  },
   testRunnerHtml: (testFramework) =>
     `<html>
 		<body>
@@ -16,4 +23,4 @@ export default {
 		  <script type="module" src="${testFramework}"></script>
 		</body>
 	  </html>`
-};
+});
