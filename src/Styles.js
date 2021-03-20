@@ -15,11 +15,30 @@ export default css`:host {
 }
 
 .heading2 {
-  color: var(--arc-font-title-color);
-  font-size: var(--arc-font-title-font-size);
-  font-weight: var(--arc-font-title-font-weight);
-  line-height: var(--arc-font-title-line-height);
-  margin: 0.84em 0;
+  font-family: var(
+    --api-endpoint-documentation-h2-font-family,
+    var(--arc-font-title-font-family)
+  );
+  color: var(
+    --api-endpoint-documentation-h2-font-color,
+    var(--arc-font-title-color)
+  );
+  font-size: var(
+    --api-endpoint-documentation-h2-font-size,
+    var(--arc-font-title-font-size)
+  );
+  font-weight: var(
+    --api-endpoint-documentation-h2-font-weight,
+    var(--arc-font-title-font-weight)
+  );
+  line-height: var(
+    --api-endpoint-documentation-h2-line-height,
+    var(--arc-font-title-line-height)
+  );
+  margin: var(
+    --api-endpoint-documentation-h2-margin,
+    0.84em 0
+  );
 }
 
 .heading3 {
@@ -92,6 +111,33 @@ arc-marked {
 
 .method-label {
   margin-bottom: 0px;
+  font-family: var(
+    --api-endpoint-documentation-method-label-font-family
+  );
+  font-size: var(
+    --api-endpoint-documentation-method-label-font-size
+  );
+  font-weight: var(
+    --api-endpoint-documentation-method-label-font-weight
+  );
+}
+
+.method-value {
+  font-family: var(
+    --api-endpoint-documentation-method-value-font-family
+  );
+  color: var(
+    --api-endpoint-documentation-method-value-font-color
+  );
+  font-size: var(
+    --api-endpoint-documentation-method-value-font-size
+  );
+  font-weight: var(
+    --api-endpoint-documentation-method-value-font-weight
+  );
+  line-height: var(
+    --api-endpoint-documentation-method-value-line-height
+  );
 }
 
 .method-anchor {
