@@ -1,7 +1,7 @@
 {
   "name": "@api-components/api-endpoint-documentation",
   "description": "A component to generate documentation for a resource from AMF model",
-  "version": "6.0.3",
+  "version": "6.0.2",
   "license": "Apache-2.0",
   "main": "index.js",
   "module": "index.js",
