@@ -37,7 +37,7 @@
     "@api-components/api-example-generator": "^4.4.7",
     "@api-components/api-method-documentation": "^5.1.10",
     "@api-components/api-parameters-document": "^4.0.5",
-    "@api-components/api-request": "^0.1.8",
+    "@api-components/api-request": "^0.2.1",
     "@api-components/http-method-label": "^3.1.3",
     "lit-element": "^2.3.1",
     "lit-html": "^1.2.1"
