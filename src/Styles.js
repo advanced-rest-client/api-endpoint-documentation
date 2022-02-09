@@ -158,7 +158,7 @@ arc-marked {
 }
 
 method p {
-  margin-bottom: var(--api-method-documentation-summary-spacing,0)
+  margin-bottom: var(--api-method-documentation-summary-p-margin-bottom,0)
 }
 
 .method-name + p {
