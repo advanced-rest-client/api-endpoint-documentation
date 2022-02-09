@@ -157,6 +157,10 @@ arc-marked {
   margin: 0;
 }
 
+method p {
+  margin-bottom: var(--api-method-documentation-summary-spacing,0)
+}
+
 .method-name + p {
   margin-top: 0.83em;
 }
