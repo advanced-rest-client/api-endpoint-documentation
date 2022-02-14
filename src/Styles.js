@@ -155,9 +155,6 @@ arc-marked {
 
 .method p {
   margin: 0;
-}
-
-method p {
   margin-bottom: var(--api-method-documentation-summary-p-margin-bottom,0)
 }
 
