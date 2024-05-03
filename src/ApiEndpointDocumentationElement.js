@@ -194,6 +194,14 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
        * If true, the server selector custom base URI option is rendered
        */
       allowCustomBaseUri: { type: Boolean },
+      /**
+       * Adds a servers to async API
+       *
+       * @param {string} url - The URL of the server.
+       * @param {object} [description] - An object containing a string `description` property.
+       */
+      servers: {type:Array},
+      _servers: {type:Array},
     };
   }
 
@@ -297,6 +305,20 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
     }
     this._server = value;
     this.requestUpdate('server', old);
+  }
+
+  get servers() {
+    return this._servers;
+  }
+
+  set servers(value) {
+    const old = this._servers;
+    /* istanbul ignore if */
+    if (old === value) {
+      return;
+    }
+    this._servers = value;
+    this.requestUpdate('servers', old);
   }
 
   constructor() {
@@ -961,6 +983,7 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
       <api-url
         .amf="${this.amf}"
         .server="${this.server}"
+        .servers="${this.servers}"
         .endpoint="${this.endpoint}"
         .apiVersion="${this.apiVersion}"
         .baseUri="${this.baseUri}"
@@ -1022,6 +1045,7 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
         data-operation-id="${item['@id']}"
         .amf="${amf}"
         .server="${server}"
+        .servers="${this.servers}"
         .endpoint="${endpoint}"
         .method="${item}"
         .narrow="${narrow}"
