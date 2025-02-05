@@ -193,7 +193,7 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
        * Optional property to set
        * If true, the server selector custom base URI option is rendered
        */
-      allowCustomBaseUri: { type: Boolean },
+      allowCustomBaseUri: { type: Boolean }
     };
   }
 
