@@ -25,10 +25,15 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 18
+      - name: Configure npm registry
+        run: |
+          npm config set registry https://registry.npmjs.org/
+          npm config delete @mulesoft:registry || true
+          npm config delete @salesforce:registry || true
       - name: Clean npm cache
         run: npm cache clean --force
       - name: Install dependencies
-        run: npm install --prefer-offline --no-audit --no-fund --legacy-peer-deps
+        run: npm install --prefer-offline --no-audit --no-fund --legacy-peer-deps --registry=https://registry.npmjs.org/
         timeout-minutes: 10
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium firefox webkit
