@@ -7,23 +7,25 @@ on:
       - master
       - main
       - develop
+    
   pull_request:
     branches:
       - master
       - main
 jobs:
-  test_linux:
+  tests:
     name: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04]
+        os: [ubuntu-22.04, windows-2022]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: 18
+      - uses: microsoft/playwright-github-action@v1
       - uses: actions/cache@v3
         with:
           path: ~/.npm
@@ -31,34 +33,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
-      - name: Run tests
-        run: npm test
-  test_win:
-    name: "Windows"
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 18
-      - uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: npm ci
       - name: Run tests
         run: npm test
   tag:
     name: "Publishing release"
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    if: github.event_name != 'pull_request'
     needs:
-      - test_linux
-      - test_win
-    runs-on: ubuntu-latest
+      - tests
+    runs-on: mulesoft-ubuntu
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -74,7 +57,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - run: npm install
+      - run: npm ci
       - name: Read version from package.json
         uses: culshaw/read-package-node-version-actions@v1
         id: package-node-version
