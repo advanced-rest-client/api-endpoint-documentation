@@ -62,3 +62,6 @@ dist/
 # AMF models
 /demo/*.json
 !demo/apis.json
+
+# gRPC test files
+!/demo/grpc-test.json

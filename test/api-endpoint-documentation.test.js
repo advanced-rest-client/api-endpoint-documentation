@@ -490,7 +490,7 @@ describe('ApiEndpointDocumentationElement', () => {
         let grpcAmf;
 
         before(async () => {
-          grpcAmf = await AmfLoader.load(grpcApi, Boolean(compact));
+          grpcAmf = await AmfLoader.load(grpcApi, false);
         });
 
         it('sets isGrpcEndpoint to true for gRPC endpoints', async () => {
