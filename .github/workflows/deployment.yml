@@ -26,7 +26,13 @@ jobs:
         with:
           node-version: 18
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install
+          npx playwright install --with-deps chromium firefox webkit
+      - name: Verify installation
+        run: |
+          ls -la node_modules/.bin/ | grep web-test-runner || echo "web-test-runner not found"
+          npm list @web/test-runner || echo "@web/test-runner not installed"
       - name: Run tests
         run: npm test
   tag:
