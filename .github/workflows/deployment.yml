@@ -34,8 +34,20 @@ jobs:
         run: |
           rm -f package-lock.json
           npm install
+      - name: Debug Playwright version
+        run: |
+          echo "Playwright version in node_modules:"
+          npm list playwright
+          echo "Checking playwright executable:"
+          ls -la node_modules/.bin/ | grep playwright || echo "No playwright in bin"
+          echo "Checking @web/test-runner-playwright version:"
+          npm list @web/test-runner-playwright
       - name: Install Playwright browsers
-        run: ./node_modules/.bin/playwright install --with-deps
+        run: |
+          echo "Installing Playwright browsers..."
+          ./node_modules/.bin/playwright install --with-deps || echo "Install failed with exit code $?"
+          echo "Checking installed browsers:"
+          ls -la ~/.cache/ms-playwright/ || echo "No browsers installed"
       - name: Run tests
         run: npm test
   test_win:
