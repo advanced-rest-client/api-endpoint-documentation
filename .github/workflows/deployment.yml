@@ -35,7 +35,7 @@ jobs:
           rm -f package-lock.json
           npm install
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps
+        run: ./node_modules/.bin/playwright install --with-deps
       - name: Run tests
         run: npm test
   test_win:
@@ -62,7 +62,8 @@ jobs:
           npm install
         shell: pwsh
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps
+        run: .\node_modules\.bin\playwright install --with-deps
+        shell: pwsh
       - name: Run tests
         run: npm test
   tag:
