@@ -25,10 +25,13 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 18
+      - name: Clean npm cache
+        run: npm cache clean --force
       - name: Install dependencies
-        run: |
-          npm install
-          npx playwright install --with-deps chromium firefox webkit
+        run: npm install --prefer-offline --no-audit --no-fund --legacy-peer-deps
+        timeout-minutes: 10
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium firefox webkit
       - name: Verify installation
         run: |
           ls -la node_modules/.bin/ | grep web-test-runner || echo "web-test-runner not found"
