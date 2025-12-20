@@ -31,7 +31,7 @@ jobs:
         id: playwright-cache
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-1.40.1
+          key: ${{ runner.os }}-playwright-1.57.0
           restore-keys: |
             ${{ runner.os }}-playwright-
       - name: Verify npm cache
@@ -63,7 +63,7 @@ jobs:
         id: playwright-cache
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-1.40.1
+          key: ${{ runner.os }}-playwright-1.57.0
           restore-keys: |
             ${{ runner.os }}-playwright-
       - name: Verify npm cache
