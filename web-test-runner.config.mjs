@@ -1,6 +1,24 @@
 export default {
   files: "test/**/*.test.js",
   nodeResolve: true,
+  // Load CodeMirror files in the correct order before running tests
+  testRunnerHtml: (testFramework) =>
+    `<html>
+      <head>
+        <script src="/node_modules/codemirror/lib/codemirror.js"></script>
+        <script src="/node_modules/codemirror/addon/mode/loadmode.js"></script>
+        <script src="/node_modules/codemirror/mode/meta.js"></script>
+        <script src="/node_modules/codemirror/mode/javascript/javascript.js"></script>
+        <script src="/node_modules/codemirror/mode/xml/xml.js"></script>
+        <script src="/node_modules/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+        <script src="/node_modules/codemirror/mode/markdown/markdown.js"></script>
+        <script src="/node_modules/codemirror/addon/lint/lint.js"></script>
+        <script src="/node_modules/codemirror/addon/lint/json-lint.js"></script>
+      </head>
+      <body>
+        <script type="module" src="${testFramework}"></script>
+      </body>
+    </html>`,
   middleware: [
     function rewriteBase(context, next) {
       if (context.url.indexOf("/base") === 0) {
