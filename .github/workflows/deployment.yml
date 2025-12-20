@@ -1,7 +1,6 @@
 name: Tests and publishing
 env:
   FORCE_COLOR: 1
-  PLAYWRIGHT_BROWSERS_PATH: 0
 on:
   push:
     branches:
@@ -31,9 +30,7 @@ jobs:
         uses: actions/cache@v3
         id: playwright-cache
         with:
-          path: |
-            ~/.cache/ms-playwright
-            node_modules/.cache/ms-playwright
+          path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-1.40.1
           restore-keys: |
             ${{ runner.os }}-playwright-
@@ -43,6 +40,8 @@ jobs:
         run: npm ci
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
+      - name: Verify Playwright browsers installation
+        run: ls -la ~/.cache/ms-playwright/ || echo "No playwright cache found"
       - name: Run tests
         run: npm test
   test_win:
@@ -63,9 +62,7 @@ jobs:
         uses: actions/cache@v3
         id: playwright-cache
         with:
-          path: |
-            ~/.cache/ms-playwright
-            node_modules/.cache/ms-playwright
+          path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-1.40.1
           restore-keys: |
             ${{ runner.os }}-playwright-
