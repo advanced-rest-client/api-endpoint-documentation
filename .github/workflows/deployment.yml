@@ -34,15 +34,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Install dependencies
-        run: |
-          rm -f package-lock.json
-          npm install
+        run: npm ci
       - name: Install Playwright browsers
-        run: |
-          echo "Installing Playwright browsers..."
-          npx playwright@1.40.1 install --with-deps
-          echo "Verifying installation..."
-          ls -la node_modules/.cache/ms-playwright/ || echo "No playwright cache found in node_modules"
+        run: npx playwright install --with-deps
       - name: Run tests
         run: npm test
   test_win:
@@ -66,12 +60,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Install dependencies
-        run: |
-          if (Test-Path package-lock.json) { del package-lock.json }
-          npm install
+        run: npm ci
         shell: pwsh
       - name: Install Playwright browsers
-        run: npx playwright@1.40.1 install --with-deps
+        run: npx playwright install --with-deps
       - name: Run tests
         run: npm test
   tag:
