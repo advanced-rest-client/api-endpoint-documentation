@@ -14,6 +14,7 @@ on:
 jobs:
   test_linux:
     name: ${{ matrix.os }}
+    timeout-minutes: 20
     strategy:
       fail-fast: false
       matrix:
@@ -46,6 +47,7 @@ jobs:
         run: npm test
   test_win:
     name: "Windows"
+    timeout-minutes: 20
     strategy:
       fail-fast: false
       matrix:
@@ -73,9 +75,11 @@ jobs:
         run: npm ci
         shell: pwsh
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install
+        shell: pwsh
       - name: Run tests
         run: npm test
+        shell: pwsh
   tag:
     name: "Publishing release"
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
