@@ -21,58 +21,38 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v1
         with:
-          node-version: '18'
-          cache: 'npm'
-      - name: Cache Playwright browsers
-        uses: actions/cache@v3
-        id: playwright-cache
+          node-version: 18
+      - uses: actions/cache@v3
         with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-1.57.0
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-playwright-
-      - name: Verify npm cache
-        run: npm cache verify || npm cache clean --force
+            ${{ runner.os }}-node-
       - name: Install dependencies
-        run: npm ci
-      - name: Install Playwright browsers
+        run: npm install
+      - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      - name: Verify Playwright browsers installation
-        run: ls -la ~/.cache/ms-playwright/ || echo "No playwright cache found"
       - name: Run tests
         run: npm test
   test_win:
     name: "Windows"
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [windows-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v1
         with:
-          node-version: '18'
-          cache: 'npm'
-      - name: Cache Playwright browsers
-        uses: actions/cache@v3
-        id: playwright-cache
+          node-version: 18
+      - uses: actions/cache@v3
         with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-1.57.0
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-playwright-
-      - name: Verify npm cache
-        run: npm cache verify || npm cache clean --force
-        shell: pwsh
+            ${{ runner.os }}-node-
       - name: Install dependencies
-        run: npm ci
-        shell: pwsh
-      - name: Install Playwright browsers
+        run: npm install
+      - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run tests
         run: npm test
@@ -83,21 +63,24 @@ jobs:
       - test_linux
       - test_win
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
-      - name: Verify npm cache
-        run: npm cache verify || npm cache clean --force
-      - name: Install dependencies
-        run: npm ci
+      - uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - run: npm install
       - name: Read version from package.json
         uses: culshaw/read-package-node-version-actions@v1
         id: package-node-version
