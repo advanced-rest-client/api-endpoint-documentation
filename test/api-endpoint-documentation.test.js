@@ -483,6 +483,99 @@ describe('ApiEndpointDocumentationElement', () => {
           assert.equal(element.endpointUri, 'amqp://broker.mycompany.com');
         });
       });
+
+      describe('gRPC API', () => {
+        let element = /** @type ApiEndpointDocumentationElement */ (null);
+        const grpcApi = 'grpc-test';
+        let grpcAmf;
+
+        before(async () => {
+          grpcAmf = await AmfLoader.load(grpcApi, false);
+        });
+
+        it('sets isGrpcEndpoint to true for gRPC endpoints', async () => {
+          const service = AmfLoader.lookupGrpcService(grpcAmf, 0);
+          element = await modelFixture(grpcAmf, service);
+          await aTimeout(0);
+          assert.isTrue(element.isGrpcEndpoint, 'isGrpcEndpoint should be true');
+        });
+
+        it('does not render URL section for gRPC endpoints', async () => {
+          const service = AmfLoader.lookupGrpcService(grpcAmf, 0);
+          element = await modelFixture(grpcAmf, service);
+          await aTimeout(0);
+          const urlSection = element.shadowRoot.querySelector('.url-area');
+          assert.notOk(urlSection, 'URL section should not be rendered');
+        });
+
+        it('computes operations with gRPC stream type information', async () => {
+          const service = AmfLoader.lookupGrpcService(grpcAmf, 0);
+          element = await modelFixture(grpcAmf, service);
+          await aTimeout(0);
+          const { operations } = element;
+          assert.isArray(operations, 'operations should be an array');
+          assert.isAbove(operations.length, 0, 'should have at least one operation');
+          
+          const firstOp = operations[0];
+          assert.isTrue(firstOp.isGrpc, 'operation should be marked as gRPC');
+          assert.isDefined(firstOp.grpcStreamType, 'should have grpcStreamType');
+          assert.isDefined(firstOp.grpcStreamTypeDisplay, 'should have grpcStreamTypeDisplay');
+          assert.isDefined(firstOp.methodForColor, 'should have methodForColor for styling');
+        });
+
+        it('renders gRPC stream type badges instead of HTTP methods', async () => {
+          const service = AmfLoader.lookupGrpcService(grpcAmf, 0);
+          element = await modelFixture(grpcAmf, service);
+          await aTimeout(0);
+          const methodLabels = element.shadowRoot.querySelectorAll('.method-label');
+          assert.isAbove(methodLabels.length, 0, 'should have method labels');
+          
+          const firstLabel = methodLabels[0];
+          const labelText = firstLabel.textContent.trim();
+          // The display name from AmfHelperMixin returns capitalized format (e.g., "Unary", "Client Streaming")
+          const validGrpcTypes = ['Unary', 'Client Streaming', 'Server Streaming', 'Bidirectional'];
+          const isValidGrpcType = validGrpcTypes.some(type => labelText.includes(type));
+          assert.isTrue(isValidGrpcType, `should display a valid gRPC stream type, got: ${labelText}`);
+        });
+
+        it('maps gRPC stream types to correct HTTP method colors', async () => {
+          const service = AmfLoader.lookupGrpcService(grpcAmf, 0);
+          element = await modelFixture(grpcAmf, service);
+          await aTimeout(0);
+          const { operations } = element;
+          
+          const unaryOp = operations.find(op => op.grpcStreamType === 'unary');
+          if (unaryOp) {
+            assert.equal(unaryOp.methodForColor, 'patch', 'unary should map to patch (violet)');
+          }
+          
+          const clientStreamOp = operations.find(op => op.grpcStreamType === 'client_streaming');
+          if (clientStreamOp) {
+            assert.equal(clientStreamOp.methodForColor, 'publish', 'client_streaming should map to publish (green)');
+          }
+          
+          const serverStreamOp = operations.find(op => op.grpcStreamType === 'server_streaming');
+          if (serverStreamOp) {
+            assert.equal(serverStreamOp.methodForColor, 'subscribe', 'server_streaming should map to subscribe (blue)');
+          }
+          
+          const bidiStreamOp = operations.find(op => op.grpcStreamType === 'bidi_streaming');
+          if (bidiStreamOp) {
+            assert.equal(bidiStreamOp.methodForColor, 'options', 'bidi_streaming should map to options (gray)');
+          }
+        });
+
+        it('renders methods list template with gRPC operations', async () => {
+          const service = AmfLoader.lookupGrpcService(grpcAmf, 0);
+          element = await modelFixture(grpcAmf, service);
+          await aTimeout(0);
+          const methodsSection = element.shadowRoot.querySelector('.methods');
+          assert.ok(methodsSection, 'methods section should be rendered');
+          
+          const methodElements = methodsSection.querySelectorAll('.method');
+          assert.isAbove(methodElements.length, 0, 'should have method elements');
+        });
+      });
     });
   });
 });

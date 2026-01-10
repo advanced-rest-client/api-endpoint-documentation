@@ -45,3 +45,22 @@ AmfLoader.lookupEndpointOperation = (model, endpoint, operation) => {
   const op = ops.find((item) => helper._getValue(item, helper.ns.aml.vocabularies.apiContract.method) === operation);
   return [endPoint, op];
 };
+
+AmfLoader.lookupGrpcService = (model, index = 0) => {
+  helper.amf = model;
+  const webApi = helper._computeApi(model);
+  const services = typeof helper._computeGrpcServices === 'function'
+    ? helper._computeGrpcServices(webApi)
+    : helper._computeEndpoints(webApi);
+  return services && services[index];
+};
+
+AmfLoader.lookupGrpcMethod = (model, serviceIndex = 0, methodIndex = 0) => {
+  const service = AmfLoader.lookupGrpcService(model, serviceIndex);
+  if (!service) {
+    return undefined;
+  }
+  const opKey = helper._getAmfKey(helper.ns.aml.vocabularies.apiContract.supportedOperation);
+  const ops = helper._ensureArray(service[opKey]);
+  return ops && ops[methodIndex];
+};

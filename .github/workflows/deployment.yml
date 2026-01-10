@@ -17,23 +17,23 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04]
-        # os: [ubuntu-18.04, ubuntu-20.04]
+        os: [ubuntu-22.04]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 14
-      - uses: microsoft/playwright-github-action@v1
-      - uses: actions/cache@v1
+          node-version: 18
+      - uses: actions/cache@v3
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Install dependencies
-        run: npm ci
+        run: npm install
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
       - name: Run tests
         run: npm test
   test_win:
@@ -43,35 +43,38 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 14
-      - uses: microsoft/playwright-github-action@v1
-      - uses: actions/cache@v1
+          node-version: 18
+      - uses: actions/cache@v3
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Install dependencies
-        run: npm ci
+        run: npm install
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
       - name: Run tests
         run: npm test
   tag:
     name: "Publishing release"
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-    needs: 
+    needs:
       - test_linux
       - test_win
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
-          node-version: '14.x'
+          node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
-      - uses: actions/cache@v1
+      - uses: actions/cache@v3
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}

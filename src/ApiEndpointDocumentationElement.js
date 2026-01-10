@@ -193,7 +193,11 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
        * Optional property to set
        * If true, the server selector custom base URI option is rendered
        */
-      allowCustomBaseUri: { type: Boolean }
+      allowCustomBaseUri: { type: Boolean },
+      /**
+       * Computed value that indicates if the current endpoint is a gRPC service
+       */
+      isGrpcEndpoint: { type: Boolean }
     };
   }
 
@@ -267,7 +271,14 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
       return;
     }
     this._endpoint = value;
+    // Detect if the endpoint is gRPC
+    const wasGrpc = this.isGrpcEndpoint;
+    this.isGrpcEndpoint = typeof this._isGrpcService === 'function' ? !!this._isGrpcService(this._endpoint) : false;
     this._endpointChanged();
+    // Force re-render if gRPC state changed
+    if (wasGrpc !== this.isGrpcEndpoint) {
+      this.requestUpdate('isGrpcEndpoint', wasGrpc);
+    }
   }
 
   get selected() {
@@ -326,6 +337,7 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
     this.redirectUri = undefined;
     this.next = undefined;
     this.previous = undefined;
+    this.isGrpcEndpoint = false;
   }
 
   __amfChanged() {
@@ -360,6 +372,8 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
     if (!endpoint) {
       return;
     }
+    // Detect if the endpoint is gRPC
+    this.isGrpcEndpoint = typeof this._isGrpcService === 'function' ? !!this._isGrpcService(endpoint) : false;
     this.endpointName = this._computeEndpointName(endpoint);
     this.description = this._computeDescription(endpoint);
     this.path = this._computePath(endpoint);
@@ -511,6 +525,7 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
     }
     const key = this._getAmfKey(this.ns.aml.vocabularies.apiContract.supportedOperation);
     const ops = this._ensureArray(endpoint[key]);
+    
     if (!ops || !ops.length) {
       return undefined;
     }
@@ -520,17 +535,41 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
         return item;
       });
     }
+    // Detect if it's gRPC
+    const isGrpc = typeof this._isGrpcService === 'function' ? !!this._isGrpcService(endpoint) : false;
+    
     const result = [];
     ops.forEach((op) => {
       const method = this._getValue(op, this.ns.aml.vocabularies.apiContract.method);
       const name = this._getValue(op, this.ns.aml.vocabularies.core.name);
       const desc = this._getValue(op, this.ns.aml.vocabularies.core.description);
-      result[result.length] = {
+      
+      const operationData = {
         method,
         name,
         desc,
-        id: op['@id']
+        id: op['@id'],
+        isGrpc
       };
+      
+      // If it's gRPC, add stream type information
+      if (isGrpc && typeof this._getGrpcStreamType === 'function') {
+        operationData.grpcStreamType = this._getGrpcStreamType(op);
+        operationData.grpcStreamTypeDisplay = typeof this._getGrpcStreamTypeDisplayName === 'function' 
+          ? this._getGrpcStreamTypeDisplayName(operationData.grpcStreamType)
+          : operationData.grpcStreamType;
+        
+        // Map stream type to HTTP method for consistent colors
+        const colorMethodMap = {
+          'unary': 'patch',
+          'client_streaming': 'publish',
+          'server_streaming': 'subscribe',
+          'bidi_streaming': 'options'
+        };
+        operationData.methodForColor = colorMethodMap[operationData.grpcStreamType] || 'patch';
+      }
+      
+      result[result.length] = operationData;
     });
     return result;
   }
@@ -956,6 +995,10 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
     if (this.inlineMethods) {
       return '';
     }
+    // Do not show the URL section for gRPC endpoints
+    if (this.isGrpcEndpoint) {
+      return '';
+    }
     return html`
     <section class="url-area">
       <api-url
@@ -1114,7 +1157,9 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
       ${operations.map((item) => html`<div class="method">
         <div class="method-name">
           <a href="#" @click="${this._methodNavigate}" class="method-anchor" data-api-id="${item.id}">
-            <span class="method-label" data-method="${item.method}">${item.method}</span>
+            <span class="method-label" data-method="${item.methodForColor || item.method}">
+              ${item.isGrpc ? item.grpcStreamTypeDisplay : item.method}
+            </span>
             <span class="method-value" data-method="${item.name}">${item.name}</span>
           </a>
         </div>

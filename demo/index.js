@@ -4,6 +4,8 @@ import '@anypoint-web-components/anypoint-checkbox/anypoint-checkbox.js';
 import '@anypoint-web-components/anypoint-item/anypoint-item.js';
 import '@advanced-rest-client/arc-demo-helper/arc-demo-helper.js';
 import '@advanced-rest-client/arc-demo-helper/arc-interactive-demo.js';
+// TODO: Update to api-navigation version with gRPC support once published (currently blocked by npm-token expiration)
+// Current version (^4.2.7) doesn't support gRPC, causing workarounds in _autoSelectGrpcEndpoint() and __amfChanged()
 import '@api-components/api-navigation/api-navigation.js';
 import '@polymer/paper-toast/paper-toast.js';
 import '@anypoint-web-components/anypoint-styles/colors.js';
@@ -49,6 +51,79 @@ class ComponentDemo extends ApiDemoPage {
     this.demoStates = ['Material', 'Anypoint'];
     this._tryitRequested = this._tryitRequested.bind(this);
     this._serverHandler = this._serverHandler.bind(this);
+  }
+
+  /**
+   * TEMPORARY WORKAROUND: Auto-select first endpoint for gRPC APIs
+   * 
+   * This method exists because the current published version of api-navigation
+   * doesn't support gRPC APIs and crashes when processing them.
+   * 
+   * TODO: Remove this method once api-navigation is updated with gRPC support.
+   * The gRPC support has already been implemented in api-navigation but is pending
+   * publication due to npm-token expiration issues.
+   * 
+   * Once api-navigation with gRPC support is published:
+   * 1. Remove this method
+   * 2. Remove the __amfChanged override below
+   * 3. Update package.json to use the new api-navigation version
+   * 4. The normal auto-selection flow will work for gRPC APIs
+   */
+  _autoSelectGrpcEndpoint() {
+    if (!this.amf) {
+      return;
+    }
+    const webApi = this._computeWebApi(this.amf);
+    if (!webApi) {
+      return;
+    }
+    
+    // Try multiple detection methods
+    const isGrpcMethod1 = typeof this._isGrpcApi === 'function' ? this._isGrpcApi(webApi) : false;
+    const isGrpcMethod2 = typeof this._isGrpcApi === 'function' ? this._isGrpcApi(this.amf) : false;
+    
+    // Manual check: Look for endpoints and check if they have gRPC operations
+    const endpoints = this._computeEndpoints(webApi);
+    
+    let isGrpcManual = false;
+    if (endpoints && endpoints.length > 0) {
+      const firstEndpoint = endpoints[0];
+      if (typeof this._isGrpcService === 'function') {
+        isGrpcManual = this._isGrpcService(firstEndpoint);
+      }
+    }
+      
+      const isGrpc = isGrpcMethod1 || isGrpcMethod2 || isGrpcManual;
+      
+      if (isGrpc) {
+        // Get gRPC services using the mixin's helper
+        let services = typeof this._computeGrpcServices === 'function' 
+          ? this._computeGrpcServices(webApi) 
+          : null;
+        
+        // Fallback to regular endpoints if gRPC services method doesn't work
+        if (!services || !services.length) {
+          services = endpoints;
+        }
+        
+        if (services && services.length) {
+          const firstService = services[0];
+          // Auto-select the first service
+          this.setData(firstService['@id'], 'endpoint');
+          this.hasData = true;
+        }
+      }
+  }
+
+  /**
+   * TEMPORARY WORKAROUND: Override to trigger gRPC auto-selection
+   * TODO: Remove this override once api-navigation with gRPC support is published
+   */
+  __amfChanged(amf) {
+    // @ts-ignore
+    super.__amfChanged(amf);
+    // Auto-select first endpoint for gRPC APIs
+    setTimeout(() => this._autoSelectGrpcEndpoint(), 100);
   }
 
   get server() {
@@ -179,6 +254,7 @@ class ComponentDemo extends ApiDemoPage {
 
   _apiListTemplate() {
     return [
+      ['grpc-test', 'GRPC Test'],
       ['google-drive-api', 'Google Drive'],
       ['multi-server', 'Multiple servers'],
       ['exchange-experience-api', 'Exchange xAPI'],
