@@ -555,9 +555,15 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
       // If it's gRPC, add stream type information
       if (isGrpc && typeof this._getGrpcStreamType === 'function') {
         operationData.grpcStreamType = this._getGrpcStreamType(op);
-        operationData.grpcStreamTypeDisplay = typeof this._getGrpcStreamTypeDisplayName === 'function' 
-          ? this._getGrpcStreamTypeDisplayName(operationData.grpcStreamType)
-          : operationData.grpcStreamType;
+        
+        // Map stream type to simplified display labels (without "streaming")
+        const labelMap = {
+          'unary': 'UNARY',
+          'client_streaming': 'CLIENT',
+          'server_streaming': 'SERVER',
+          'bidi_streaming': 'BIDIRECTIONAL'
+        };
+        operationData.grpcStreamTypeDisplay = labelMap[operationData.grpcStreamType] || 'UNARY';
         
         // Map stream type to HTTP method for consistent colors
         const colorMethodMap = {

@@ -532,8 +532,8 @@ describe('ApiEndpointDocumentationElement', () => {
           
           const firstLabel = methodLabels[0];
           const labelText = firstLabel.textContent.trim();
-          // The display name from AmfHelperMixin returns capitalized format (e.g., "Unary", "Client Streaming")
-          const validGrpcTypes = ['Unary', 'Client Streaming', 'Server Streaming', 'Bidirectional'];
+          // Simplified labels without "streaming" keyword
+          const validGrpcTypes = ['UNARY', 'CLIENT', 'SERVER', 'BIDIRECTIONAL'];
           const isValidGrpcType = validGrpcTypes.some(type => labelText.includes(type));
           assert.isTrue(isValidGrpcType, `should display a valid gRPC stream type, got: ${labelText}`);
         });
