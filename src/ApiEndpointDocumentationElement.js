@@ -1158,7 +1158,7 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
   _groupOpsByKind(ops) {
     const buckets = { standard: [], query: [], additionalOperation: [] };
     (ops || []).forEach((op) => {
-      const k = buckets[op.kind] ? op.kind : 'standard';
+      const k = Object.prototype.hasOwnProperty.call(buckets, op.kind) ? op.kind : 'standard';
       buckets[k].push(op);
     });
     const order = [
@@ -1166,7 +1166,9 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
       { key: 'query', label: 'Query' },
       { key: 'additionalOperation', label: 'Additional operations' },
     ];
-    return order.filter((g) => buckets[g.key].length).map((g) => ({ label: g.label, ops: buckets[g.key] }));
+    return order
+      .filter((g) => buckets[g.key].length)
+      .map((g) => ({ key: g.key, label: g.label, ops: buckets[g.key] }));
   }
 
   _methodItemTemplate(item) {
@@ -1189,7 +1191,7 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
       return '';
     }
     const groups = this._groupOpsByKind(operations);
-    const hasNonStandard = groups.some((g) => g.label !== 'Operations');
+    const hasNonStandard = groups.some((g) => g.key !== 'standard');
     if (!hasNonStandard) {
       return html`<section class="methods">
         ${operations.map((item) => this._methodItemTemplate(item))}
