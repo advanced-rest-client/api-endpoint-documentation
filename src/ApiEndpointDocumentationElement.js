@@ -548,6 +548,7 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
         method,
         name,
         desc,
+        kind: this._computeOperationKind(op),
         id: op['@id'],
         isGrpc
       };
@@ -1154,22 +1155,50 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
     </section>`;
   }
 
+  _groupOpsByKind(ops) {
+    const buckets = { standard: [], query: [], additionalOperation: [] };
+    (ops || []).forEach((op) => {
+      const k = buckets[op.kind] ? op.kind : 'standard';
+      buckets[k].push(op);
+    });
+    const order = [
+      { key: 'standard', label: 'Operations' },
+      { key: 'query', label: 'Query' },
+      { key: 'additionalOperation', label: 'Additional operations' },
+    ];
+    return order.filter((g) => buckets[g.key].length).map((g) => ({ label: g.label, ops: buckets[g.key] }));
+  }
+
+  _methodItemTemplate(item) {
+    return html`<div class="method">
+      <div class="method-name">
+        <a href="#" @click="${this._methodNavigate}" class="method-anchor" data-api-id="${item.id}">
+          <span class="method-label" data-method="${item.methodForColor || item.method}">
+            ${item.isGrpc ? item.grpcStreamTypeDisplay : item.method}
+          </span>
+          <span class="method-value" data-method="${item.name}">${item.name}</span>
+        </a>
+      </div>
+      ${this._getDescriptionTemplate(item.desc)}
+    </div>`;
+  }
+
   _getMethodsListTemplate() {
     const { operations } = this;
     if (!operations || !operations.length) {
       return '';
     }
+    const groups = this._groupOpsByKind(operations);
+    const hasNonStandard = groups.some((g) => g.label !== 'Operations');
+    if (!hasNonStandard) {
+      return html`<section class="methods">
+        ${operations.map((item) => this._methodItemTemplate(item))}
+      </section>`;
+    }
     return html`<section class="methods">
-      ${operations.map((item) => html`<div class="method">
-        <div class="method-name">
-          <a href="#" @click="${this._methodNavigate}" class="method-anchor" data-api-id="${item.id}">
-            <span class="method-label" data-method="${item.methodForColor || item.method}">
-              ${item.isGrpc ? item.grpcStreamTypeDisplay : item.method}
-            </span>
-            <span class="method-value" data-method="${item.name}">${item.name}</span>
-          </a>
-        </div>
-        ${this._getDescriptionTemplate(item.desc)}
+      ${groups.map((g) => html`<div class="op-group">
+        <span class="op-group-label">${g.label}</span>
+        ${g.ops.map((item) => this._methodItemTemplate(item))}
       </div>`)}
     </section>`;
   }
