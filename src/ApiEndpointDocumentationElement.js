@@ -540,12 +540,13 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
     
     const result = [];
     ops.forEach((op) => {
-      const method = this._getValue(op, this.ns.aml.vocabularies.apiContract.method);
+      const method = this._computeOperationMethod(op);
       const name = this._getValue(op, this.ns.aml.vocabularies.core.name);
       const desc = this._getValue(op, this.ns.aml.vocabularies.core.description);
-      
+
       const operationData = {
         method,
+        methodForColor: this._operationColorMethod(method),
         name,
         desc,
         kind: this._computeOperationKind(op),
@@ -890,7 +891,7 @@ export class ApiEndpointDocumentationElement extends AmfHelperMixin(LitElement) 
    * @return {string|undefined} HTTP method name
    */
   _computeHttpMethod(method) {
-    let name = /** @type string */ (this._getValue(method, this.ns.aml.vocabularies.apiContract.method));
+    let name = /** @type string */ (this._computeOperationMethod(method));
     if (name) {
       name = name.toUpperCase();
     }
