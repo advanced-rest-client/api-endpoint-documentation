@@ -255,6 +255,7 @@ class ComponentDemo extends ApiDemoPage {
   _apiListTemplate() {
     return [
       ['grpc-test', 'GRPC Test'],
+      ['oas32-query', 'OAS 3.2 QUERY method'],
       ['google-drive-api', 'Google Drive'],
       ['multi-server', 'Multiple servers'],
       ['exchange-experience-api', 'Exchange xAPI'],
