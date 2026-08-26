@@ -571,9 +571,38 @@ describe('ApiEndpointDocumentationElement', () => {
           await aTimeout(0);
           const methodsSection = element.shadowRoot.querySelector('.methods');
           assert.ok(methodsSection, 'methods section should be rendered');
-          
+
           const methodElements = methodsSection.querySelectorAll('.method');
           assert.isAbove(methodElements.length, 0, 'should have method elements');
+        });
+      });
+
+      describe('OAS 3.2 QUERY method', () => {
+        let element = /** @type ApiEndpointDocumentationElement */ (null);
+        const queryApi = 'oas32-query';
+        let queryAmf;
+
+        before(async () => {
+          queryAmf = await AmfLoader.load(queryApi, Boolean(compact));
+        });
+
+        it('renders the QUERY method label with a lowercase or uppercase data-method value', async () => {
+          const endpoint = AmfLoader.lookupEndpoint(queryAmf, '/pets');
+          element = await modelFixture(queryAmf, endpoint);
+          await aTimeout(0);
+          const methodLabels = Array.from(element.shadowRoot.querySelectorAll('.method-label'));
+          const queryLabel = methodLabels.find((item) => item.dataset.method.toLowerCase() === 'query');
+          assert.ok(queryLabel, 'a method-label for the QUERY operation should be rendered');
+        });
+
+        it('renders the QUERY method label with its own teal color, not the default gray', async () => {
+          const endpoint = AmfLoader.lookupEndpoint(queryAmf, '/pets');
+          element = await modelFixture(queryAmf, endpoint);
+          await aTimeout(0);
+          const methodLabels = Array.from(element.shadowRoot.querySelectorAll('.method-label'));
+          const queryLabel = methodLabels.find((item) => item.dataset.method.toLowerCase() === 'query');
+          const { color } = getComputedStyle(queryLabel);
+          assert.equal(color, 'rgb(15, 157, 157)', 'QUERY should render in teal (#0f9d9d), not the default gray');
         });
       });
     });

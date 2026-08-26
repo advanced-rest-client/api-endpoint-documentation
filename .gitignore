@@ -65,3 +65,9 @@ dist/
 
 # gRPC test files
 !/demo/grpc-test.json
+
+# OAS 3.2 QUERY method test files (api-model-generator@0.2.8 cannot parse
+# the OAS 3.2 `query:` path-item field, so this model is hand-generated
+# with a newer generator and committed statically, same as grpc-test.json)
+!/demo/oas32-query.json
+!/demo/oas32-query-compact.json

@@ -122,6 +122,33 @@ arc-marked {
   );
 }
 
+.method-label[data-method='query'],
+.method-label[data-method='QUERY'] {
+  background-color: var(
+    --http-method-label-query-background-color,
+    rgba(15, 157, 157, 0.12)
+  );
+  color: var(--http-method-label-query-color, #0f9d9d);
+}
+
+.method-label[data-method='copy'],
+.method-label[data-method='COPY'] {
+  background-color: var(
+    --http-method-label-copy-background-color,
+    rgba(92, 107, 192, 0.12)
+  );
+  color: var(--http-method-label-copy-color, #5c6bc0);
+}
+
+.method-label[data-method='move'],
+.method-label[data-method='MOVE'] {
+  background-color: var(
+    --http-method-label-move-background-color,
+    rgba(184, 134, 11, 0.12)
+  );
+  color: var(--http-method-label-move-color, #b8860b);
+}
+
 .method-value {
   font-family: var(
     --api-endpoint-documentation-method-value-font-family
