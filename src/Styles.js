@@ -109,6 +109,17 @@ arc-marked {
   flex: 1;
 }
 
+.op-group {
+  margin-bottom: 12px;
+}
+
+.op-group-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin: 8px 0 4px 0;
+}
+
 .method-label {
   margin-bottom: 0px;
   font-family: var(
